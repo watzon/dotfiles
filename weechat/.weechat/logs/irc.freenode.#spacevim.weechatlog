@@ -1,0 +1,64 @@
+2019-12-15 22:41:32	-->	watzon (~watzon@2601:681:5180:f4e0::2b79) has joined #spacevim
+2019-12-15 22:41:32	--	Topic for #spacevim is "A community-driven Vim distribution | https://spacevim.org | https://github.com/SpaceVim/SpaceVim"
+2019-12-15 22:41:32	--	Topic set by wsdjeg on Fri, 24 Mar 2017 09:38:03
+2019-12-15 22:41:32	--	Channel #spacevim: 14 nicks (1 op, 0 voices, 13 normals)
+2019-12-15 22:41:35	--	Channel created on Wed, 15 Mar 2017 07:06:00
+2019-12-15 23:03:15	convergence	Thanks!  I think that I might have figured it out with your help.  The broken spacevim install failed the python checks.  I'll see if I can figure out how to fix that.  I definitely have python installed
+2019-12-15 23:03:50	convergence	At least, you might have helped me diagnose the problem
+2019-12-15 23:07:45	SpaceVimBot	<jyscao> You might need to install pynvim (or something along this, don't quite remember), which is needed to support plugins that use python in one way or another.
+2019-12-15 23:07:46	SpaceVimBot	<jyscao> I recall having to do that myself way back (re @SpaceVimBot: convergence: Thanks!  I think that I might have figured it out with your help.  The broken spacevim install failed the python checks.  I'll see if I can figure out how to fix that.  I definitely have python installed)
+2019-12-15 23:14:28	convergence	I'm also getting that +python failed, and that I need to run pip2 install neovim.  I don't like the idea of having multiple package managers running, and I already have neovim installed (I don't have normal vim).
+2019-12-15 23:14:47	convergence	I'll do it if I have to, but it feels like I'm misinterpreting something
+2019-12-15 23:15:04	convergence	BTW, installing pynwin did something good.
+2019-12-15 23:15:14	convergence	let me check indentation
+2019-12-15 23:16:39	convergence	nope, indentation still isn't working
+2019-12-15 23:16:41	convergence	:)
+2019-12-15 23:19:51	convergence	I wonder if my nvim was compiled without +python support, or something like that
+2019-12-15 23:25:17	SpaceVimBot	<jyscao> Actually do try pip2 install neovim. Quite sure that was what I had ran before. It's not actually asking you to install neovim again, but rather some python package which supports neovim proper (re @SpaceVimBot: convergence: I'm also getting that +python failed, and that I need to run pip2 install neovim.  I don't like the idea of having multiple package managers running, and I already have neovim installed (I don't have normal
+2019-12-15 23:30:05	convergence	Installing pip2 now.  I might actually have to reboot, I couldn't install it without doing a full system update
+2019-12-15 23:30:33	convergence	Well, I could have, but it's dangerous to do that with pacman
+2019-12-15 23:32:22	SpaceVimBot	<jyscao> If you don't havepip2 already, I'd first try just using pip3. Responsible package authors should have ported important packages to python3 at this point
+2019-12-15 23:33:27	SpaceVimBot	<jyscao> And I don't actually remember if it was pip2 or pip3 that I used before
+2019-12-15 23:34:20	SpaceVimBot	<jyscao> In general, I really dislike having to use pip to manage python packages; conda is much better
+2019-12-15 23:36:49	convergence	I didn't know about Conda, I'll look into that.
+2019-12-15 23:37:36	convergence	anyway, I used the --user option in pip2, and now all the health checks pass in spacevim.  But.. indentation still doesn't work.  :D
+2019-12-15 23:38:31	convergence	I'm going to call it a night.  Sometimes things are clearer after a night of sleep
+2019-12-15 23:38:35	convergence	thanks
+2019-12-15 23:40:13	SpaceVimBot	<jyscao> Alright np, good luck
+2019-12-15 23:52:02	<--	convergence (convergenc@gateway/vpn/privateinternetaccess/convergence) has quit (Quit: WeeChat 2.6)
+2019-12-16 02:25:49	-->	adds68 (~adds68@78.40.148.177) has joined #spacevim
+2019-12-16 03:05:20	-->	Tycale (~Tycale@tycale.be) has joined #spacevim
+2019-12-16 03:05:25	-->	wilrnh (~wilrnh@pool-108-29-201-244.nycmny.fios.verizon.net) has joined #spacevim
+2019-12-16 03:05:28	<--	wilrnh (~wilrnh@pool-108-29-201-244.nycmny.fios.verizon.net) has quit (Changing host)
+2019-12-16 03:05:28	-->	wilrnh (~wilrnh@unaffiliated/wilrnh) has joined #spacevim
+2019-12-16 10:28:08	-->	arup_r (~arup_r@117.194.105.17) has joined #spacevim
+2019-12-16 11:35:39	<--	arup_r (~arup_r@117.194.105.17) has quit
+2019-12-16 22:06:46	SpaceVimBot	<JoanM1lev> Hey does anyone know why  spacevim fails to build plugins
+2019-12-16 22:13:17	SpaceVimBot	<jyscao> file an issue on github, specifying the details of your system and problem, and provide screenshots (re @SpaceVimBot: JoanM1lev: Hey does anyone know why  spacevim fails to build plugins)
+2019-12-17 02:04:02	-->	MachinShin_ (sid243317@gateway/web/irccloud.com/x-kskssjtkxesmfgjg) has joined #spacevim
+2019-12-17 02:05:57	-->	Tycale_ (~Tycale@tycale.be) has joined #spacevim
+2019-12-17 02:10:11	-->	slashfocus1 (~no@2604:a880:800:10::800:b001) has joined #spacevim
+2019-12-17 02:10:46	<--	Tycale (~Tycale@tycale.be) has quit (*.net *.split)
+2019-12-17 02:10:50	<--	Akulen (~Akulen@sas.eleves.ens.fr) has quit (*.net *.split)
+2019-12-17 02:10:51	<--	slashfocus (~no@104.131.21.114) has quit (*.net *.split)
+2019-12-17 02:10:52	<--	MachinShin (sid243317@gateway/web/irccloud.com/x-zvyosdtfbdysvvvb) has quit (*.net *.split)
+2019-12-17 02:11:18	--	MachinShin_ is now known as MachinShin
+2019-12-17 02:17:04	-->	Akulen (~Akulen@sas.eleves.ens.fr) has joined #spacevim
+2019-12-17 06:22:49	-->	sierkov (~sierkov@109.206.36.112) has joined #spacevim
+2019-12-17 07:55:30	<--	sierkov (~sierkov@109.206.36.112) has quit (Ping timeout: 252 seconds)
+2019-12-17 08:25:51	-->	sierkov (~sierkov@109.206.36.112) has joined #spacevim
+2019-12-17 10:56:42	SpaceVimBot	<jisaacstone> yo does anyone know how to turn off the autocomplete of parens in spacevim? I am having no luck finding out even what layer it is in
+2019-12-17 10:57:26	SpaceVimBot	<Joan> Idk
+2019-12-17 12:48:13	<--	sierkov (~sierkov@109.206.36.112) has quit (Ping timeout: 245 seconds)
+2019-12-17 13:15:28	--	irc: disconnected from server
+2019-12-17 17:47:32	-->	watzon (~watzon@2601:681:5180:f4e0::2b79) has joined #spacevim
+2019-12-17 17:47:32	--	Topic for #spacevim is "A community-driven Vim distribution | https://spacevim.org | https://github.com/SpaceVim/SpaceVim"
+2019-12-17 17:47:32	--	Topic set by wsdjeg on Fri, 24 Mar 2017 09:38:03
+2019-12-17 17:47:32	--	Channel #spacevim: 16 nicks (1 op, 0 voices, 15 normals)
+2019-12-17 17:47:34	--	Channel created on Wed, 15 Mar 2017 07:06:00
+2019-12-17 17:58:58	--	irc: disconnected from server
+2019-12-17 18:05:06	-->	watzon (~watzon@2601:681:5180:f4e0::2b79) has joined #spacevim
+2019-12-17 18:05:06	--	Topic for #spacevim is "A community-driven Vim distribution | https://spacevim.org | https://github.com/SpaceVim/SpaceVim"
+2019-12-17 18:05:06	--	Topic set by wsdjeg on Fri, 24 Mar 2017 09:38:03
+2019-12-17 18:05:06	--	Channel #spacevim: 16 nicks (1 op, 0 voices, 15 normals)
+2019-12-17 18:05:08	--	Channel created on Wed, 15 Mar 2017 07:06:00

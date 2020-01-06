@@ -1,0 +1,16 @@
+2019-12-17 19:47:02	free+##furry	 * furrywolf tries sitting on watzon to see if that makes them stay in the channel
+2019-12-18 13:48:06	free+#crystal-lang	<FromGitter> <watzon> I like YAML personally. It's concise and supports a lot of things that JSON doesn't, like multiline strings for instance
+2019-12-19 19:11:59	free+#nim	<russellb> watzon: that's interesting and inspiring to hear
+2019-12-20 14:00:05	free+#crystal-lang	<FromGitter> <watzon> @jemc do you happen to be in here?
+2019-12-20 14:11:44	free+#crystal-lang	<FromGitter> <jemc> @watzon ^
+2019-12-20 14:12:04	free+#crystal-lang	<FromGitter> <watzon> Awesome haha. I'll send you a PM.
+2019-12-20 14:30:05	free+#crystal-lang	<FromGitter> <watzon> I don't believe so because it's not constant unless you explicitly define what type the block is returning
+2019-12-20 14:47:20	free+#crystal-lang	<FromGitter> <watzon> @randiaz95 you could just do `File.write("example.txt", "")`
+2019-12-20 14:47:33	free+#crystal-lang	<FromGitter> <watzon> `#write` sets the mode automatically
+2019-12-20 14:49:58	free+#crystal-lang	<FromGitter> <wontruefree> @watzon that is a bummer because it limits some methods
+2019-12-20 14:50:26	free+#crystal-lang	<FromGitter> <watzon> Yeah it's the type system at work
+2019-12-20 15:07:34	free+#crystal-lang	<FromGitter> <watzon> Ahhh you know what might work @wontruefree? ⏎  ⏎ ```def foo(&block : Array(T) -> U) forall U ⏎   x = Array(typeof(U)).new ⏎ end``` [https://gitter.im/crystal-lang/crystal?at=5dfd4626c5a23938b4545a2f]
+2019-12-20 15:07:43	free+#crystal-lang	<FromGitter> <watzon> I can't say for sure, but it might
+2019-12-20 15:08:56	free+#crystal-lang	<FromGitter> <watzon> You're right, it would be haha
+2019-12-20 15:09:10	free+#crystal-lang	<FromGitter> <watzon> Fixed
+2019-12-20 15:10:12	free+#crystal-lang	<FromGitter> <watzon> I've had some cases where `forall` doesn't work as expected, so I can't guarantee results here. But it's the only way I can see it being possible right now.

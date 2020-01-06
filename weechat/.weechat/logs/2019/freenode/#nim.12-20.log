@@ -1,0 +1,1244 @@
+2019-12-20 00:00:31	-->	narimiran (~miran@unaffiliated/miran) has joined #nim
+2019-12-20 00:08:53	-->	disbot (~disbot@c-73-233-65-168.hsd1.pa.comcast.net) has joined #nim
+2019-12-20 00:09:23	-->	disruptek (~disruptek@c-73-233-65-168.hsd1.pa.comcast.net) has joined #nim
+2019-12-20 00:21:00	<--	marmotin_ (~marmotini@41.80.94.97) has quit (Read error: No route to host)
+2019-12-20 00:21:11	-->	marmotini_ (~marmotini@41.80.94.97) has joined #nim
+2019-12-20 00:28:03	-->	PMunch (~PMunch@vpn.dualog.com) has joined #nim
+2019-12-20 01:00:00	<--	gmpreussner_ (~j3rky@107-200-244-113.lightspeed.wlfrct.sbcglobal.net) has quit (Quit: kthxbye)
+2019-12-20 01:04:48	-->	gmpreussner (~j3rky@107-200-244-113.lightspeed.wlfrct.sbcglobal.net) has joined #nim
+2019-12-20 01:16:55	<--	Zevv (~Zevvvvv@unaffiliated/zevv) has quit (Ping timeout: 265 seconds)
+2019-12-20 01:37:36	Araq	ping mratsim
+2019-12-20 01:38:27	-->	Zevv (~Zevvvvv@unaffiliated/zevv) has joined #nim
+2019-12-20 01:38:45	Araq	interesting how things are done in Swift land, https://gist.github.com/lattner/429b9070918248274f25b714dcfc7619
+2019-12-20 01:40:28	Araq	they did without the Future abstraction
+2019-12-20 01:41:14	Araq	not sure if it's a big difference in practice, the closures still need to allocate anyway
+2019-12-20 01:41:50	FromDiscord	<Milerius> Hey i'm learning threads with nim i have a question about threadpool
+2019-12-20 01:42:15	FromDiscord	<Milerius> I have a variable that is global inside of my package, but i know this variable will be thread safe, how can i specify it ?
+2019-12-20 01:42:42	FromDiscord	<Milerius> (i get a Error: 'mm2_init_thread' is not GC-safe as it accesses 'mm2_instance' which is a global using GC'ed memory)
+2019-12-20 01:43:12	Araq	it never is threadsafe IME
+2019-12-20 01:43:23	Araq	when the compiler tells you that it isn't
+2019-12-20 01:43:48	Araq	can't outsmart the system. well, you can easily do
+2019-12-20 01:43:54	Araq	{.gcsafe.}:
+2019-12-20 01:44:06	Araq	  use global here # I know what I'm doing
+2019-12-20 01:44:15	FromDiscord	<Milerius> Yeah i tried that
+2019-12-20 01:44:59	FromDiscord	<Milerius> Ah nice that compile now
+2019-12-20 01:45:00	FromDiscord	<Milerius> thanks !
+2019-12-20 01:45:14	Araq	but keep in mind that it's unsafe, the memory backing up refs/strings/seqs is thread-local and "it's immutable" doesn't count either as the GC introduces write barriers
+2019-12-20 01:45:20	Araq	which are not threadsafe either
+2019-12-20 01:45:24	FromDiscord	<Milerius> It's because this variable is accessed once at the beginning of my program
+2019-12-20 01:45:28	FromDiscord	<Milerius> and once at the end of my program
+2019-12-20 01:45:34	FromDiscord	<Milerius> (It's an osproc.Process)
+2019-12-20 01:45:44	FromDiscord	<Milerius> I want to create the process in an async way
+2019-12-20 01:45:50	FromDiscord	<Milerius> And close it at the end of the program
+2019-12-20 01:46:28	FromDiscord	<Milerius> So far i got: https://gist.github.com/Milerius/4dbdad26e6021b3b6a0074225e110607
+2019-12-20 01:46:33	FromDiscord	<Milerius> Not sure it's the good way to do that
+2019-12-20 01:47:58	FromDiscord	<Milerius> I think Since i access this variable only Twice in the program it's "safe"
+2019-12-20 01:48:02	FromDiscord	<Milerius> Not sure too.
+2019-12-20 01:49:03	FromDiscord	<Milerius> i use it in the main like: initProcess()
+2019-12-20 01:49:03	FromDiscord	<Milerius> and then: defer closeProcess()
+2019-12-20 01:52:37	Araq	sounds ok to me too
+2019-12-20 01:52:49	Araq	there is also an async osproc package somewhere
+2019-12-20 01:53:46	FromDiscord	<Milerius> 😮
+2019-12-20 01:54:19	FromDiscord	<Milerius> Also, another question
+2019-12-20 01:54:20	FromDiscord	<Milerius>
+2019-12-20 01:54:20	FromDiscord	<Milerius> Is the equivalent of std::atomic_bool from c++ create a regular integer and nim and use atomicInc/atomicDec ?
+2019-12-20 01:54:25	FromDiscord	<Milerius> Or we have an atomic boolean ?
+2019-12-20 01:54:44	FromDiscord	<mratsim> @Araq I've been thinking on coroutine based multithreading. This one is a very efficient, very concise and also performant multithreading library based on whaat looks like coroutines: https://github.com/chaoran/fibril
+2019-12-20 01:54:57	FromDiscord	<mratsim> import std/atomics and use Atomic[bool]
+2019-12-20 01:55:14	FromDiscord	<Milerius> :OOOO
+2019-12-20 01:55:16	FromDiscord	<Milerius> Perfect
+2019-12-20 01:55:20	FromDiscord	<Milerius> thanks ratsim
+2019-12-20 01:55:23	FromDiscord	<mratsim> Actually it's the only library that is more efficient than mine on fibonacci 😉
+2019-12-20 01:56:04	FromDiscord	<mratsim> it would be easier as well to mix async/await with spawn/sync
+2019-12-20 01:56:35	FromDiscord	<mratsim> but AFAIK the current design of weave still allows to switch to coroutines-based tasks
+2019-12-20 01:56:39	FromDiscord	<Milerius> @mratsim Where is the doc for atomics ?
+2019-12-20 01:57:37	-->	clyybber (~clyybber@ipbcc24ae1.dynamic.kabel-deutschland.de) has joined #nim
+2019-12-20 01:57:39	FromDiscord	<mratsim> no docs, but C++ reference would work
+2019-12-20 01:58:01	FromDiscord	<mratsim> there are 2 competing atomics package and no final API was chosen
+2019-12-20 01:58:04	FromDiscord	<mratsim> you can read here: https://github.com/nim-lang/Nim/blob/devel/lib/pure/concurrency/atomics.nim
+2019-12-20 01:58:20	FromDiscord	<Milerius> I read but
+2019-12-20 01:58:25	FromDiscord	<Milerius> i don't understand how we set a value
+2019-12-20 01:58:31	FromDiscord	<Milerius> when i set = true it's not workin
+2019-12-20 01:58:32	FromDiscord	<Milerius> when i set = true it's not working
+2019-12-20 01:58:42	FromDiscord	<mratsim> foo.store(true, moRelaxed)
+2019-12-20 01:58:52	FromDiscord	<mratsim> if you want relaxed memory semantics
+2019-12-20 01:59:21	narimiran	Nim Community Survey 2019 is here! https://nim-lang.org/blog/2019/12/20/community-survey-2019.html
+2019-12-20 01:59:36	FromDiscord	<Milerius> ah nice
+2019-12-20 01:59:41	FromDiscord	<mratsim> here is a simple example of Atomic bool on SPSC channel: https://github.com/mratsim/weave/blob/master/unused/channels/channels_spsc_single_object.nim#L45
+2019-12-20 02:01:16	Araq	the C++ memory model is quite good but the names are terrible
+2019-12-20 02:01:36	FromDiscord	<mratsim> fetchAdd and AddFetch 😛
+2019-12-20 02:01:41	FromDiscord	<mratsim> and no fetchXor
+2019-12-20 02:01:51	FromDiscord	<mratsim> sorry fetchNeg
+2019-12-20 02:03:36	FromDiscord	<mratsim> btw, I started to use formal verification, I think a backend to a formal verification language 'maybe spin?) would be helpful
+2019-12-20 02:04:12	FromDiscord	<mratsim> I used TLA+ but it's higher level, both supports goto though
+2019-12-20 02:04:46	Araq	I planned to nimZ3
+2019-12-20 02:05:21	FromDiscord	<mratsim> ah right
+2019-12-20 02:05:50	Araq	Z3 supports separation logic iirc and everything that lacks separation logic isn't future proof :P
+2019-12-20 02:06:10	FromDiscord	<mratsim> TLA+ can use isabelle or Z3 for proofs as well
+2019-12-20 02:06:52	FromDiscord	<mratsim> i.e. it does model checking (exhaustively check all states your application can be in and ensure no deadlock, livelocks or any other constraint you don't want violated)
+2019-12-20 02:07:16	FromDiscord	<mratsim> or it does proofs by deferring to a SMT like Z3 or a proof assistant like Isabelle
+2019-12-20 02:07:37	FromDiscord	<Milerius> @mratsim Are you using Thread Sanitize with nim?
+2019-12-20 02:07:42	FromDiscord	<Milerius> To verify that you are thread safe
+2019-12-20 02:07:52	FromDiscord	<mratsim> planned but not yet
+2019-12-20 02:08:20	FromDiscord	<mratsim> probably will be my own tool, I was thinking of the name "Lage Nim COllider" :p
+2019-12-20 02:08:23	FromDiscord	<Milerius> I'm supposing i can just link to check
+2019-12-20 02:08:30	FromDiscord	<mratsim> See: https://github.com/mratsim/weave/issues/18
+2019-12-20 02:08:31	disbot	➥ [Testing] Concurrency: Race detection / Model Checking / Formal Verification
+2019-12-20 02:08:58	Araq	so ... as I also asked on the forum, what does 'spawn' use ideally?
+2019-12-20 02:09:04	FromDiscord	<mratsim> for now I've used Valgrind/Helgrind but it's very noisy the output is not usable
+2019-12-20 02:09:19	FromDiscord	<mratsim> what do you mean by "what"?
+2019-12-20 02:09:47	FromDiscord	<mratsim> ah
+2019-12-20 02:09:51	FromDiscord	<mratsim> sink move or deepCopy
+2019-12-20 02:12:17	FromDiscord	<mratsim> It does like this "spawn fnCall(x, y, z)"
+2019-12-20 02:12:18	FromDiscord	<mratsim> x, y, z will be serialized into a task
+2019-12-20 02:12:18	FromDiscord	<mratsim> I create an "async_fnCall" function that is also referenced in the task and is just in charge of passing a pointer to the serialized x,y,z and returning the future: https://github.com/mratsim/weave/blob/master/weave/parallel_tasks.nim#L125-L150
+2019-12-20 02:13:53	Araq	yeah I'm familiar with this idea
+2019-12-20 02:15:21	Araq	you use pointers for everything, right? thread local heaps are dead
+2019-12-20 02:16:06	FromDiscord	<mratsim> I have a thread-local context and a custom threadsafe memory pool
+2019-12-20 02:16:53	FromDiscord	<mratsim> when I refactor the thing in an explicit state machine I will reduce the context
+2019-12-20 02:17:03	FromDiscord	<mratsim> it's there: https://github.com/mratsim/weave/blob/master/weave/datatypes/context_thread_local.nim
+2019-12-20 02:17:05	FromDiscord	<Milerius> How we add a default flags when using nimble build ?
+2019-12-20 02:17:15	FromDiscord	<Milerius> i want to compile with --threads by default
+2019-12-20 02:17:33	FromDiscord	<mratsim> either you use a .cfg: https://github.com/mratsim/weave/blob/master/weave.cfg
+2019-12-20 02:17:40	FromDiscord	<mratsim> which will work with both nimble and nim
+2019-12-20 02:17:49	FromDiscord	<Milerius> Nice !!
+2019-12-20 02:18:00	FromDiscord	<mratsim> or you configure nimble with flags like this: https://github.com/mratsim/weave/blob/master/weave.nimble#L26
+2019-12-20 02:18:18	FromDiscord	<mratsim> that would only apply to nimble commands
+2019-12-20 02:18:55	FromDiscord	<Milerius> i like cfg
+2019-12-20 02:19:40	FromDiscord	<Milerius> you need to specify the cfg to nimble ?
+2019-12-20 02:19:57	<--	theelous3 (~theelous3@unaffiliated/theelous3) has quit (Ping timeout: 265 seconds)
+2019-12-20 02:20:04	FromDiscord	<mratsim> no
+2019-12-20 02:20:06	-->	Vladar (~Vladar@46.162.2.53) has joined #nim
+2019-12-20 02:20:11	FromDiscord	<mratsim> the nim compiler picks it up automatically
+2019-12-20 02:20:20	FromDiscord	<Milerius> It's not working for me 😢
+2019-12-20 02:21:14	FromDiscord	<Milerius> (i mean nimble doesn't pickup the flags inside my cfg)
+2019-12-20 02:21:17	Araq	mratsim: what's on your opinion on this design: 'new' uses a shared memory heap but the RC ops are *non*atomic
+2019-12-20 02:21:36	FromDiscord	<mratsim> My memory management scheme is explained here: https://github.com/mratsim/weave/tree/master/weave/memory
+2019-12-20 02:21:36	FromDiscord	<mratsim> And the issues with cactus stacks and such here: https://github.com/mratsim/weave/blob/master/weave/memory/multithreaded_memory_management.md
+2019-12-20 02:21:36	FromDiscord	<mratsim> And the memory access patterns of the runtime here: https://github.com/mratsim/weave/blob/master/weave/memory/memory_access_patterns.md
+2019-12-20 02:21:36	FromDiscord	<mratsim>
+2019-12-20 02:21:37	FromDiscord	<mratsim> But in short my memory pool covers all my needs and its pointers all the way down.
+2019-12-20 02:22:14	FromDiscord	<mratsim> can't we have type FooShared {.atomic.} = ref object
+2019-12-20 02:22:25	FromDiscord	<mratsim> for non atomic ref counting
+2019-12-20 02:22:35	FromDiscord	<mratsim> and type FooTL = ref object
+2019-12-20 02:22:50	FromDiscord	<mratsim> for thread local ref counting so non-atomic?
+2019-12-20 02:23:14	Araq	we can do everything C++ can but we're getting into composability problems
+2019-12-20 02:23:39	FromDiscord	<mratsim> @milerius, it must be called with the same name as your nim file that imports everything
+2019-12-20 02:23:49	Araq	yes, ok so now I have  shared_ref[T], can I put JSON inside it?
+2019-12-20 02:24:39	FromDiscord	<mratsim> I think it would be less likely to miss a use-case by listing use cases we want to support
+2019-12-20 02:24:54	Araq	(JSON is my favorite example because it's so common)
+2019-12-20 02:25:15	clyybber	Araq: You mean because json itself doesn't return shared_refs?
+2019-12-20 02:25:17	FromDiscord	<mratsim> I don't mind having non-atomic by default, atomic is costly
+2019-12-20 02:26:32	Araq	indeed it is
+2019-12-20 02:33:01	-->	watzon (~watzon@2601:681:5180:f4e0::ad92) has joined #nim
+2019-12-20 02:33:01	--	Topic for #nim is "👑 Nim programming language - http://nim-lang.org/ | https://github.com/nim-lang/Nim/wiki/IRC-guidelines | Latest version: 1.0.0 - https://nim-lang.org/install.html | Forum: http://forum.nim-lang.org/ | IRC logs: http://irclogs.nim-lang.org/ | See also #nim-offtopic #nim-nologs | git.io/gHZGCg"
+2019-12-20 02:33:01	--	Topic set by dom96 (~dom96@unaffiliated/dom96) on Mon, 23 Sep 2019 14:13:13
+2019-12-20 02:33:01	--	Channel #nim: 168 nicks (0 ops, 0 voices, 168 normals)
+2019-12-20 02:33:03	Araq	clyybber: yes, we can traverse the subgraph and set a flag ("now shared!")
+2019-12-20 02:33:08	clyybber	Ok
+2019-12-20 02:33:20	clyybber	We can move normal refs around threads safely though
+2019-12-20 02:33:22	clyybber	Right?
+2019-12-20 02:33:25	--	Channel created on Fri, 29 Jan 2010 22:58:29
+2019-12-20 02:33:30	clyybber	But only move
+2019-12-20 02:33:35	Araq	right
+2019-12-20 02:33:48	FromDiscord	<mratsim> concurrent collections need dedicated maintenance
+2019-12-20 02:34:16	FromDiscord	<mratsim> a data race detector would be nice as well
+2019-12-20 02:34:19	FromDiscord	<mratsim> (Go has one)
+2019-12-20 02:34:29	Araq	(I know)
+2019-12-20 02:34:47	Araq	race detection is far worse than race prevention though
+2019-12-20 02:35:07	clyybber	Araq: So with respect to threads a normal ref is like an owned ref and an shared ref like a normal ref
+2019-12-20 02:35:16	clyybber	weird analogy I know
+2019-12-20 02:35:41	Araq	clyybber: you can also   assert ref.refcount == 1   before passing it to a thread
+2019-12-20 02:36:11	clyybber	Yeah
+2019-12-20 02:37:00	FromDiscord	<mratsim> I've noted race detection techniques here: https://github.com/mratsim/weave/issues/18#issuecomment-565858939
+2019-12-20 02:37:00	FromDiscord	<mratsim>
+2019-12-20 02:37:00	FromDiscord	<mratsim> I'm pretty sure Go race detector is based on this: https://github.com/dvyukov/relacy as Dmitry Vyukov wrote the Go scheduling runtime as well (and also Tensorflow/Eigen scheduler)
+2019-12-20 02:37:01	disbot	➥ [Testing] Concurrency: Race detection / Model Checking / Formal Verification
+2019-12-20 02:37:49	FromDiscord	<mratsim> there are links to writeups
+2019-12-20 02:38:45	clyybber	Araq: We need something like lent/sink for threads
+2019-12-20 02:38:52	FromDiscord	<mratsim> and Rust has this one which uses some techniques from a paper to limit state explosion: https://github.com/tokio-rs/loom
+2019-12-20 02:39:13	FromDiscord	<mratsim> @Clyybber, like Send/Sync?
+2019-12-20 02:39:37	clyybber	yeah
+2019-12-20 02:39:48	clyybber	I'm coming more from pony though, but its the same
+2019-12-20 02:39:59	FromDiscord	<mratsim> oh you did Pony?
+2019-12-20 02:40:09	clyybber	yeah
+2019-12-20 02:40:14	FromDiscord	<mratsim> but the behaviour: isolate and stuff are a bit to numerous
+2019-12-20 02:40:45	FromGitter	<alehander92> i think they were mostly a combination
+2019-12-20 02:40:52	FromGitter	<alehander92> of 2-3 orthogonal things
+2019-12-20 02:41:35	FromDiscord	<mratsim> ah I see
+2019-12-20 02:43:05	FromDiscord	<mratsim> @Clyybber: https://forum.nim-lang.org/t/5692#35488
+2019-12-20 02:43:37	Araq	mratsim: I think I nailed this problem a couple of years ago with the .guard annotation for when you need locking/atomics and analysable array slices for true parallelism
+2019-12-20 02:43:52	FromGitter	<alehander92> https://tutorial.ponylang.io/reference-capabilities/capability-matrix.html
+2019-12-20 02:44:08	Araq	and nothing else comes close because it's a static mechanism
+2019-12-20 02:44:13	FromGitter	<alehander92> so it seems to me one could do it with less primitives
+2019-12-20 02:44:21	FromGitter	<alehander92> but yeah its still relatively many
+2019-12-20 02:44:34	FromGitter	<alehander92> but its more obvious why
+2019-12-20 02:44:58	Araq	the "disjoint check" is exactly what I want in reality and Z3 should give it us
+2019-12-20 02:45:32	Araq	*to us
+2019-12-20 02:46:48	Araq	clyybber: what do you mean by that?
+2019-12-20 02:46:51	Zevv	so did you ever get started with Z3?
+2019-12-20 02:46:58	Araq	"sink" and "lent" for threads?
+2019-12-20 02:47:09	clyybber	ownership basically
+2019-12-20 02:47:10	Araq	Zevv: I managed to build it...
+2019-12-20 02:47:36	Zevv	that's something
+2019-12-20 02:48:24	FromGitter	<alehander92> so is z3 in 2020 program
+2019-12-20 02:48:28	FromGitter	<alehander92> or 2021
+2019-12-20 02:49:35	clyybber	Araq: Owned ref is equivalent to ponys iso. When we send it to another thread/actor nothing should point to it. It must also behave like a sink arg
+2019-12-20 02:50:10	clyybber	so we can't use it until it is returned to us again
+2019-12-20 02:51:23	Araq	in 2020 program because we're insane
+2019-12-20 02:51:26	-->	fanta1 (~fanta1@p200300F76BC3F80089342FE7F18AA820.dip0.t-ipconnect.de) has joined #nim
+2019-12-20 02:51:47	Araq	clyybber: same as unique_ptr, you can write it as a library in about 30 lines
+2019-12-20 02:51:49	FromDiscord	<mratsim> replied to detail task packaging: https://forum.nim-lang.org/t/5692#35490
+2019-12-20 02:52:09	clyybber	Araq: Yeah
+2019-12-20 02:53:44	clyybber	I just had an idea for an optimization for atomic ref counting.
+2019-12-20 02:54:31	clyybber	Each thread stores its own non atomic thread local refcount along it, and the atomic refcount only gets decremented when the thread local refcount is 0
+2019-12-20 02:54:40	-->	Trustable (~Trustable@dslb-002-201-031-007.002.201.pools.vodafone-ip.de) has joined #nim
+2019-12-20 02:55:29	Araq	yeah, known to me
+2019-12-20 02:55:30	FromDiscord	<mratsim> that means that all threads need to keep a hashtable though
+2019-12-20 02:57:20	Araq	problem with optimizing RC ops is that I'm naive and believe in hardware. eventually atomicInc will have the cost as inc if there no contention
+2019-12-20 02:58:01	Araq	so far this doesn't happen though for reasons I don't know, plenty of runtimes are betting on refcounting
+2019-12-20 02:58:23	Araq	Python, PHP, Perl, Swift, C++, Rust, ...
+2019-12-20 02:59:05	<--	narimiran (~miran@unaffiliated/miran) has quit (Quit: leaving)
+2019-12-20 02:59:26	FromDiscord	<mratsim> on x86 atomicInc relaxed is the same cost of inc
+2019-12-20 02:59:44	Araq	not on my benchmarks, it was significantly slower
+2019-12-20 02:59:46	FromDiscord	<mratsim> the high cost is because you need to flush and reload the cache
+2019-12-20 03:00:05	Araq	no, the cache is ok, it's the write buffer that gets flushed
+2019-12-20 03:03:59	Araq	mratsim: anyhow, the real underlying issues are:
+2019-12-20 03:04:10	Araq	- how can I use weave with async?
+2019-12-20 03:04:47	Araq	- can weave replace async?
+2019-12-20 03:05:20	Araq	- how to make it work well with Nim's strings/seqs, maybe refs
+2019-12-20 03:07:34	Araq	- how to use it with openArray
+2019-12-20 03:09:00	FromDiscord	<mratsim> I don't know (for all of those)
+2019-12-20 03:09:38	FromDiscord	<mratsim> 1. Async is a complex beast as well and i'd rather have cheatfate work on it or someone who deals with it on a day to day basis
+2019-12-20 03:09:53	FromDiscord	<mratsim> I can only make sure we work well by providing good channels primitives
+2019-12-20 03:10:04	FromDiscord	<mratsim> and allow event loop in threads or spawning threads from event loops
+2019-12-20 03:10:44	FromDiscord	<mratsim> strings/seq/refs: depends on the GC: that's probably the hardest. I looked into the nim channels implementation and I was completely lost
+2019-12-20 03:11:05	FromDiscord	<mratsim> openarray should work as long as we can have them as values
+2019-12-20 03:11:49	FromDiscord	<mratsim> however, the escape analysis is a bit harder and you would need a "sync" before returning
+2019-12-20 03:11:59	FromDiscord	<mratsim> to ensure there is no escape of the pointer
+2019-12-20 03:12:31	Araq	I know, that's why there is 'parallel' + 'spawn' in Nim, spawn alone doesn't cut it
+2019-12-20 03:13:24	Araq	it's also where concurrency and parallelism diverge, parallelism is like "structured programming" for me, in the end there is a 'join'
+2019-12-20 03:13:56	FromDiscord	<mratsim> in the end, I started without those answers and by avoiding to requiring them because it's too hard
+2019-12-20 03:14:02	FromGitter	<alehander92> https://plg.uwaterloo.ca/~migod/papers/2019/scam19.pdf might be interesting
+2019-12-20 03:15:45	clyybber	looks like a scammy link :p
+2019-12-20 03:18:46	FromGitter	<alehander92> A Study on the Effects of Exception Usagein Open-Source C++ Systems
+2019-12-20 03:18:51	FromGitter	<alehander92> yeah, its strange :P
+2019-12-20 03:21:21	Araq	skimmed it, but doesn't look that interesting, sorry
+2019-12-20 03:21:46	Araq	also, once again: I don't even like exceptions anyway, it's just that the proposed alternatives are worse
+2019-12-20 03:22:26	FromGitter	<alehander92> yeah, i mostly like the methodology, its useful to build more tools enabling some kind of metrics on corpuses of code
+2019-12-20 03:23:00	Araq	and the points brought up against them are often *objectively* wrong.
+2019-12-20 03:23:41	FromGitter	<alehander92> lang design can use some more "data" in decisions, but its very hard to measure it
+2019-12-20 03:27:12	Araq	maybe some day I'll finish my "quirky exceptions", the C backend seriously needs it
+2019-12-20 03:28:00	Araq	mratsim: maybe 'spawn f(args)' is the wrong idea too, the args have marshalling semantics in
+2019-12-20 03:28:05	Araq	- your implementation
+2019-12-20 03:28:08	Araq	- my implementation
+2019-12-20 03:28:30	Araq	- for async too (cannot use a 'var T' over there either)
+2019-12-20 03:29:17	Araq	it's cute syntax but maybe we are better off with an explicit task type that programmers are responsible for
+2019-12-20 03:29:39	Araq	easier to implement, clearer cost model
+2019-12-20 03:31:43	FromDiscord	<mratsim> or both
+2019-12-20 03:32:39	clyybber	disruptek: 10 now https://github.com/nim-lang/packages/pull/1280/files :p
+2019-12-20 03:32:40	disbot	➥ Fix vcs protocol for diff
+2019-12-20 03:32:47	FromDiscord	<mratsim> I have both implemented in TBB, the closure approach takes 600ms on my machine on fib(40) and 1000ms with the task approach:
+2019-12-20 03:32:47	FromDiscord	<mratsim>
+2019-12-20 03:32:47	FromDiscord	<mratsim> https://github.com/mratsim/weave/blob/master/benchmarks/fibonacci/tbb_class_fib.cpp
+2019-12-20 03:32:47	FromDiscord	<mratsim>
+2019-12-20 03:32:47	FromDiscord	<mratsim> https://github.com/mratsim/weave/blob/master/benchmarks/fibonacci/tbb_closure_fib.cpp
+2019-12-20 03:32:57	FromDiscord	<mratsim> the task approach is also very verbose
+2019-12-20 03:33:24	Araq	verbosity is where Nim shines, you can always hide it via macros
+2019-12-20 03:33:49	FromGitter	<alehander92> but those macros might end up looking as spawn f(args) :P
+2019-12-20 03:33:49	FromDiscord	<mratsim> also var T on multithreading is bad anyway
+2019-12-20 03:34:21	Araq	alehander92: yes but then the underlying task structure remains exposed
+2019-12-20 03:34:31	FromDiscord	<mratsim> go disables it, you have to use channels
+2019-12-20 03:34:49	FromDiscord	<mratsim> it's not composable also, if you want to do "andThen"
+2019-12-20 03:34:54	Araq	what? Go doesn't have references anyway, only pointers
+2019-12-20 03:37:10	FromGitter	<alehander92> the task thing does sound interesting
+2019-12-20 03:37:31	FromGitter	<alehander92> if its easy to sugar-ize it for the simple usecases
+2019-12-20 03:41:34	<--	endragor (~endragor@212.164.228.99) has quit (Read error: Connection reset by peer)
+2019-12-20 03:41:34	-->	endragor_ (~endragor@212.164.228.99) has joined #nim
+2019-12-20 03:42:37	Araq	also what sometimes bothers me:  f(a, b, c)  is itself not composable, in stack based languages it's  push a; push b; push c; call f
+2019-12-20 03:43:13	Araq	and it's rather easy to push to somewhere else (a channel?)
+2019-12-20 03:44:02	Araq	assembler is much more flexible than C code, calling C a "portable assembler" means you have no clue about assembler
+2019-12-20 03:44:34	FromGitter	<alehander92> hm, but how do you want to compose
+2019-12-20 03:45:04	Araq	for example, I wrote a VM, it needs to support calling into native code
+2019-12-20 03:45:31	Araq	the calling convention is known. at runtime. enjoy doing that with C (or C++, Nim, D...)
+2019-12-20 03:46:28	FromDiscord	<mratsim> The whole  point of weave was to be usable from JIT code
+2019-12-20 03:46:40	PMunch	Hmm, why doesn't this work? https://play.nim-lang.org/#ix=24Vb
+2019-12-20 03:46:43	FromDiscord	<mratsim> because I want to JIT some linear algebra kernels
+2019-12-20 03:46:45	PMunch	Sure x is static..
+2019-12-20 03:47:51	PMunch	s/(Sure)/\1ly/
+2019-12-20 03:50:13	Araq	PMunch: it's not static enough
+2019-12-20 03:50:26	Araq	  const x = 100  should work
+2019-12-20 03:50:56	PMunch	Not static enough?
+2019-12-20 03:56:51	clyybber	Araq: How would I prepend an element in your owned ref doubly-linked list?
+2019-12-20 03:57:39	Araq	via proc prepend. what's the problem?
+2019-12-20 03:59:59	clyybber	If we do `head = Node(value: newValue, next: head)` that wont work
+2019-12-20 04:01:17	Araq	alehander92:
+2019-12-20 04:01:24	Araq	however, popular async frameworks for the Rust programming language, such as tokio.rs, have also chosen to incorporate error handling directly into their Future constructs, because doing so was found to be more practical and ergonomic than trying to compose theoretically-orthogonal Future<T> and Result<T> constructs."
+2019-12-20 04:01:31	Araq	from https://gist.github.com/lattner/429b9070918248274f25b714dcfc7619
+2019-12-20 04:01:53	Araq	in other words, Result<T> is junk that doesn't really work... ;-)
+2019-12-20 04:02:31	FromGitter	<sheerluck> hi all. I stumbled upon funny thing. I have working code with `template until(cond: typed): typed = if cond: break` from https://forum.nim-lang.org/t/1970 ⏎ But as soon as I add the line `import strutils` nim says "Error: invalid control flow: break"
+2019-12-20 04:03:03	Araq	sheerluck:  import struilts except until
+2019-12-20 04:03:11	FromGitter	<sheerluck> oh.  Thank you
+2019-12-20 04:03:15	Araq	but don't use 'until', write real Nim code please
+2019-12-20 04:03:49	Araq	templates and macros don't exist just because you cannot let go of Rubyisms
+2019-12-20 04:04:21	Araq	or of Pascal (do we have people coming from Pascal?)
+2019-12-20 04:04:52	Araq	clyybber: well 'head' is the last read
+2019-12-20 04:05:09	Araq	as it gets overwritten just after that
+2019-12-20 04:05:18	Araq	there is some support for this in the DFA
+2019-12-20 04:05:34	FromGitter	<sheerluck> @Araq You've convinced me. I will fix my code immediately.
+2019-12-20 04:06:02	Araq	wow, Christmas is near
+2019-12-20 04:06:10	Araq	gotta buy a tree, bbl
+2019-12-20 04:11:48	FromGitter	<alehander92> yeeey
+2019-12-20 04:12:03	FromGitter	<alehander92> otherwise Araq, interesting link ill read more of it later
+2019-12-20 04:12:06	FromGitter	<alehander92> thanks
+2019-12-20 04:12:52	-->	sealmove (~sealmove@2a02:587:7d0f:8500:feaa:14ff:fe22:5dd) has joined #nim
+2019-12-20 04:16:55	FromDiscord	<Milerius> Hello, i'm discovering thread in nim:
+2019-12-20 04:16:55	FromDiscord	<Milerius>
+2019-12-20 04:16:55	FromDiscord	<Milerius> https://gist.github.com/Milerius/bf2884fba202c911c2a32e02b4565447
+2019-12-20 04:16:55	FromDiscord	<Milerius>
+2019-12-20 04:16:55	FromDiscord	<Milerius> I know i'm doing something wrong, (i'm trying to execute a task every 30s in my background thread)
+2019-12-20 04:16:56	FromDiscord	<Milerius>
+2019-12-20 04:16:58	FromDiscord	<Milerius> What is the idiomatic way according to my code snippet ?
+2019-12-20 04:19:13	dom96	https://nim-lang.org/blog/2019/12/20/community-survey-2019.html
+2019-12-20 04:19:24	dom96	Has narimiran created this from scratch?
+2019-12-20 04:29:50	federico3	one response per row for the tools? odd
+2019-12-20 04:36:44	-->	marmotin_ (~marmotini@41.80.94.97) has joined #nim
+2019-12-20 04:37:25	FromDiscord	<mratsim> is there an issue for the templates eating stacktraces? That's so annoying
+2019-12-20 04:37:26	<--	marmotini_ (~marmotini@41.80.94.97) has quit (Read error: No route to host)
+2019-12-20 04:41:31	<--	jonafato (~jonafato@162.209.103.217) has quit (Quit: ZNC - http://znc.in)
+2019-12-20 04:42:55	-->	jonafato (~jonafato@162.209.103.217) has joined #nim
+2019-12-20 04:46:55	FromGitter	<alehander92> mratsim i have that "runtime stacktrace including macro expansion points" idea started in a branch somewhere
+2019-12-20 04:47:19	FromGitter	<alehander92> but for now it mostly generates info that i use in gdb
+2019-12-20 04:54:17	clyybber	Araq: It fails to compile though.
+2019-12-20 04:56:25	clyybber	seems like a dumb bug though
+2019-12-20 05:00:06	<--	marmotin_ (~marmotini@41.80.94.97) has quit (Read error: Connection reset by peer)
+2019-12-20 05:00:48	-->	marmotini_ (~marmotini@41.80.94.97) has joined #nim
+2019-12-20 05:01:58	-->	luis_ (~luis@179.97.229.45) has joined #nim
+2019-12-20 05:06:26	clyybber	Araq: See #12941
+2019-12-20 05:06:28	disbot	https://github.com/nim-lang/Nim/issues/12941 -- Newruntime last read analysis broken ; snippet at https://play.nim-lang.org/#ix=24VA
+2019-12-20 05:12:14	FromGitter	<bung87> how to handle this `"en1�\x13\b\x06�@“`
+2019-12-20 05:12:48	FromGitter	<bung87> when echo a string converted from a cstring
+2019-12-20 05:15:04	FromDiscord	<mratsim> @dom96 wasn't that fixed in nimble 0.11? https://github.com/fragcolor-xyz/nimtorch/issues/18#issuecomment-565824215
+2019-12-20 05:15:05	disbot	➥ Nimble installation fails
+2019-12-20 05:16:22	<--	luis_ (~luis@179.97.229.45) has quit (Ping timeout: 265 seconds)
+2019-12-20 05:18:46	FromDiscord	<niv> hello. where could i go for some sample code and/or guidance to make a C-imported function awaitable?
+2019-12-20 05:19:18	<--	Vladar (~Vladar@46.162.2.53) has quit (Quit: Leaving)
+2019-12-20 05:20:09	FromGitter	<sheerluck> I have completed my toy project https://github.com/sheerluck/Toy-Nim-Project-with-Kaitai ⏎ I would like to thank ⏎  ⏎ 1) @sealmove (Stefanos Mandalas) for KaitaiStruct Runtime Library for Nim ⏎ 2) @solitudesf for letting me print inside pure functions with debug_echo ... [https://gitter.im/nim-lang/Nim?at=5dfcbc7944e1fb33f6fb46e2]
+2019-12-20 05:20:57	sealmove	wow sheerluck, what does it do?
+2019-12-20 05:21:11	FromDiscord	<mratsim> you should rename it to video downloader or what you are doing with it
+2019-12-20 05:21:54	sealmove	how did you parse ksy?
+2019-12-20 05:22:04	FromDiscord	<mratsim> one day I'll write a video processing tool in Nim. The current tools are meh
+2019-12-20 05:22:49	clyybber	mratsim: How do you reference repo code from an issue?
+2019-12-20 05:23:01	FromGitter	<sheerluck> @sealmove it just walks path and prints top10 longest movies (mkv+webm+mp4)
+2019-12-20 05:23:10	clyybber	I pasted the link with #L123-#L456 but it just appears as a link
+2019-12-20 05:23:32	sealmove	how did you parse ksy?
+2019-12-20 05:23:40	FromDiscord	<mratsim> right click on the line and get permalink or highlight lines, press Y and copy the URL
+2019-12-20 05:23:55	FromGitter	<sheerluck> @sealmove I cheated I just ported generated code from c++ :(
+2019-12-20 05:23:55	clyybber	thanks
+2019-12-20 05:23:56	FromDiscord	<mratsim> you need a precise commit or tags for github to inline the code
+2019-12-20 05:24:01	clyybber	ah, ok
+2019-12-20 05:24:07	FromDiscord	<mratsim> master:devel won't work
+2019-12-20 05:24:11	FromDiscord	<mratsim> v1.0.4 would
+2019-12-20 05:24:40	-->	luis_ (~luis@179.97.229.45) has joined #nim
+2019-12-20 05:25:12	sealmove	sheerluck: ah, ok, hope you can use nimitai soon
+2019-12-20 05:25:20	sealmove	i am making progress
+2019-12-20 05:25:34	sealmove	~10/132 pass right now
+2019-12-20 05:25:39	clyybber	mratsim: Doesn't seem to work: https://github.com/nim-lang/Nim/issues/12941
+2019-12-20 05:25:41	disbot	➥ Newruntime last read analysis broken ; snippet at https://play.nim-lang.org/#ix=24VA
+2019-12-20 05:26:14	<--	luis_ (~luis@179.97.229.45) has quit (Client Quit)
+2019-12-20 05:26:33	clyybber	oh
+2019-12-20 05:26:34	FromDiscord	<mratsim> edited in
+2019-12-20 05:26:35	clyybber	now it works
+2019-12-20 05:26:39	clyybber	ah, thanks!
+2019-12-20 05:27:02	clyybber	ah, so it was one hashtag too many
+2019-12-20 05:27:35	Araq	clyybber: we don't try to analyse global vars
+2019-12-20 05:28:00	clyybber	Hmm
+2019-12-20 05:28:09	clyybber	I think I can reproduce it without a global var, let me see.
+2019-12-20 05:28:24	-->	luis_ (~luis@179.97.229.45) has joined #nim
+2019-12-20 05:29:17	<--	luis_ (~luis@179.97.229.45) has quit (Client Quit)
+2019-12-20 05:29:20	clyybber	ah, nevermind
+2019-12-20 05:36:47	<--	nsf (~nsf@jiss.convex.ru) has quit (Quit: WeeChat 2.6)
+2019-12-20 05:37:18	clyybber	Araq: Btw, your append proc in your RFC is broken
+2019-12-20 05:41:02	Araq	why?
+2019-12-20 05:41:30	clyybber	It doesn't compile
+2019-12-20 05:41:32	clyybber	dangling refs
+2019-12-20 05:41:43	clyybber	I can correct it if you want
+2019-12-20 05:42:01	clyybber	or send the correct variant
+2019-12-20 05:42:44	clyybber	Araq: This is how it should look I think: https://hastebin.com/fomexaciso.php
+2019-12-20 05:42:52	clyybber	oh
+2019-12-20 05:43:00	clyybber	nevermind, wrong paste
+2019-12-20 05:45:14	clyybber	Araq: Here it is: http://ix.io/24VK
+2019-12-20 05:46:07	FromGitter	<iffy> @zacharycarter what's that you're making?
+2019-12-20 05:48:20	<--	xet7 (~xet7@91-158-54-124.elisa-laajakaista.fi) has quit (Quit: Leaving)
+2019-12-20 05:50:06	FromDiscord	<mratsim> @iffy, I'm looking into keyring, nice. THis might be relevant for you: https://github.com/status-im/nim-beacon-chain/issues/545 though we don't have a solution for secure heap management
+2019-12-20 05:50:08	disbot	➥ Protection of users private keys
+2019-12-20 05:50:12	-->	xet7 (~xet7@91-158-54-124.elisa-laajakaista.fi) has joined #nim
+2019-12-20 05:51:52	FromDiscord	<mratsim> Go is adding macros: https://github.com/dave/jennifer
+2019-12-20 05:52:52	lqdev[m]	no, it's not :) it's a separate generator. I'd be surprised if they actually merged it into mainstream, but I know they won't.
+2019-12-20 05:53:04	FromDiscord	<mratsim> of course I was joking 😉
+2019-12-20 05:53:20	FromDiscord	<Milerius> PMunch are you around ? :p
+2019-12-20 05:55:59	PMunch	Yup
+2019-12-20 05:56:07	PMunch	Always :P
+2019-12-20 05:56:16	FromDiscord	<Milerius> according to: https://gist.github.com/Milerius/6a72ca18eace612ea5d27ace7f20b74e
+2019-12-20 05:56:16	FromDiscord	<Milerius>
+2019-12-20 05:56:16	FromDiscord	<Milerius> is possible to represent correctly the json using jsonschema ?
+2019-12-20 05:56:40	FromDiscord	<Milerius> my json can be success.json or error.json
+2019-12-20 05:57:54	PMunch	What is ElectrumAnswer supposed to be?
+2019-12-20 05:58:09	FromDiscord	<Milerius> Either success.json or error.json
+2019-12-20 05:58:12	FromDiscord	<Milerius> may be i did it wrong
+2019-12-20 05:58:34	PMunch	Yeah.. You can't have an object that's either one kind or another
+2019-12-20 05:58:41	FromDiscord	<Milerius> When i receive success.json i would like to have ElectrumAnswerSuccess, otherwise ElectrumAnswerError
+2019-12-20 05:58:53	PMunch	But you can do answer: ElectrumAnswerSuccess or ElectrumAnswerError
+2019-12-20 05:59:03	FromDiscord	<Milerius> yeah but i don't have field answer
+2019-12-20 05:59:10	FromDiscord	<Milerius> The rpc is not from me :/
+2019-12-20 05:59:24	PMunch	Then you need to create the types and use isValid to check which one it is
+2019-12-20 05:59:43	FromDiscord	<Milerius> ok !
+2019-12-20 05:59:51	FromDiscord	<Milerius> Thank's for explanation !
+2019-12-20 06:00:29	PMunch	Note that isValid takes a paremeter "allowExtra" which dictates if extra fields is an error or not
+2019-12-20 06:00:55	FromDiscord	<Milerius> Oh this is cool
+2019-12-20 06:02:00	PMunch	I guess the extends mechanism could be expanded to include `or` functionality
+2019-12-20 06:02:12	FromDiscord	<Milerius> It's will be insane !
+2019-12-20 06:02:23	FromDiscord	<Milerius> For one specific reason
+2019-12-20 06:02:33	FromDiscord	<Milerius> If i want to store it in a container for Example
+2019-12-20 06:02:43	FromDiscord	<Milerius> It's will allow me to do: container[ElectrumAnswer]
+2019-12-20 06:02:56	PMunch	Ah, true
+2019-12-20 06:04:53	FromDiscord	<Milerius> I would love to help you integrate the functionnality, but i'm really a beginner in nim, i read all your code already
+2019-12-20 06:04:57	FromDiscord	<Milerius> But it's really advanced ^^'
+2019-12-20 06:05:12	PMunch	Haha, yeah the jsonschema module is quite messy..
+2019-12-20 06:05:15	FromDiscord	<Milerius> (bit magic for mec)
+2019-12-20 06:05:18	FromDiscord	<Milerius> (bit magic for me)
+2019-12-20 06:05:29	PMunch	TBH it's a bit magic to me as well..
+2019-12-20 06:06:13	FromDiscord	<Milerius> Yup i understand
+2019-12-20 06:06:20	FromDiscord	<Milerius> Maybe what can i do is
+2019-12-20 06:06:23	FromDiscord	<Milerius> when i receive the json
+2019-12-20 06:06:33	FromDiscord	<Milerius> I can put the whole contents into answer
+2019-12-20 06:06:40	FromDiscord	<Milerius> But it's will be a bit inneficient
+2019-12-20 06:06:50	FromDiscord	<Milerius> Especially for big json
+2019-12-20 06:08:00	PMunch	I mean for putting it in a container you can just cast it back to JsonNode
+2019-12-20 06:08:13	PMunch	That's free (same object in memory)
+2019-12-20 06:08:25	PMunch	And manually cast it when you get it out
+2019-12-20 06:08:33	PMunch	(This can of course be hidden with some templates)
+2019-12-20 06:08:48	FromDiscord	<Milerius> Or i can use the equivalent of std::variant ?
+2019-12-20 06:08:50	FromDiscord	<Milerius> in nim
+2019-12-20 06:09:00	PMunch	Yeah, that is another option
+2019-12-20 06:09:02	FromDiscord	<Milerius> Container = TypeA or TypeB
+2019-12-20 06:09:10	FromDiscord	<Milerius> it's work this way ?
+2019-12-20 06:09:31	PMunch	Depends
+2019-12-20 06:09:38	PMunch	On what you actually want to do
+2019-12-20 06:09:53	FromDiscord	<Milerius> well i really want
+2019-12-20 06:10:10	FromDiscord	<Milerius> electrum["error"].isSome:
+2019-12-20 06:10:54	PMunch	Hmm
+2019-12-20 06:11:01	PMunch	https://nim-lang.org/docs/tut2.html#object-oriented-programming-object-variants
+2019-12-20 06:11:09	PMunch	That is one option, but it's a bit much for this..
+2019-12-20 06:12:47	<--	xet7 (~xet7@91-158-54-124.elisa-laajakaista.fi) has quit (Read error: Connection reset by peer)
+2019-12-20 06:13:19	-->	xet7 (~xet7@91-158-54-124.elisa-laajakaista.fi) has joined #nim
+2019-12-20 06:14:03	FromDiscord	<Milerius> Yup anyway i will consider that is success
+2019-12-20 06:14:08	FromDiscord	<Milerius> :p
+2019-12-20 06:14:20	FromDiscord	<Milerius> But if you implement the include functionnality
+2019-12-20 06:14:21	FromDiscord	<Milerius> let me know
+2019-12-20 06:14:39	PMunch	Will do
+2019-12-20 06:14:56	<--	marmotini_ (~marmotini@41.80.94.97) has quit (Remote host closed the connection)
+2019-12-20 06:14:56	<--	xet7 (~xet7@91-158-54-124.elisa-laajakaista.fi) has quit (Read error: Connection reset by peer)
+2019-12-20 06:15:07	PMunch	Looking at the code now and trying to figure out what that would actually look like
+2019-12-20 06:15:31	-->	xet7 (~xet7@91-158-54-124.elisa-laajakaista.fi) has joined #nim
+2019-12-20 06:15:45	FromGitter	<bung87> `"bridge0�\x13\b\x06�A”` how to handle this? print to console , converted from cstring
+2019-12-20 06:15:46	FromDiscord	<Milerius> (if it's possible without specifying a name field)
+2019-12-20 06:16:23	PMunch	bung87, you ace probably given a length somewhere
+2019-12-20 06:16:30	FromGitter	<Willyboar> sealmove are you greek?
+2019-12-20 06:17:04	sealmove	yup
+2019-12-20 06:17:12	PMunch	Or that string is meant to mean something special
+2019-12-20 06:17:14	FromGitter	<Willyboar> me too
+2019-12-20 06:17:22	sealmove	nice
+2019-12-20 06:18:50	sealmove	there is at least another one, "planetis"
+2019-12-20 06:19:19	FromGitter	<Willyboar> I think i saw one in the forum
+2019-12-20 06:19:21	sealmove	and another one from Cyprus (forgot nickname)
+2019-12-20 06:19:47	FromGitter	<bung87> `name = castcstring (sdl.sdl_data.addr) ` then `$name `
+2019-12-20 06:19:55	FromGitter	<Willyboar> drkameleon
+2019-12-20 06:23:11	lqdev[m]	sealmove, Willyboar: planetis is on irc too. he uses matrix.
+2019-12-20 06:23:30	Araq	oh I just realized it's PR friday
+2019-12-20 06:24:34	clyybber	Araq: I think we'll have to decide between deep-immutability or deep-copy for multithreading
+2019-12-20 06:24:41	clyybber	it accomplishes the same task
+2019-12-20 06:24:58	Araq	Nim v1 says we do deep copies
+2019-12-20 06:25:42	clyybber	I know, what will we do in the future?
+2019-12-20 06:25:53	Araq	I like neither though, I like unique-ness and move semantics
+2019-12-20 06:25:59	clyybber	Me too
+2019-12-20 06:26:30	clyybber	Araq: Btw, pony uses owned refs moving and stuff too
+2019-12-20 06:26:44	clyybber	Like their iso thing is exactly like owned ref
+2019-12-20 06:26:51	clyybber	and their ref, well. Its like ref
+2019-12-20 06:27:13	Araq	can you have a ref inside an iso?
+2019-12-20 06:27:27	clyybber	Lemme see..
+2019-12-20 06:28:46	FromGitter	<zacharycarter> @iffy  - 3d rts
+2019-12-20 06:28:47	clyybber	Araq: Yeah, but you cant read or write to it
+2019-12-20 06:28:55	clyybber	its a "tag" only used for identity
+2019-12-20 06:30:34	Araq	doesn't sound that useful
+2019-12-20 06:30:58	FromGitter	<zacharycarter> I really want to know what disruptek thinks about the improvement
+2019-12-20 06:31:51	clyybber	Araq: You can convert the iso to a ref though
+2019-12-20 06:32:06	clyybber	And then you can access it normally
+2019-12-20 06:32:18	clyybber	afterwards you can recover it as a iso again
+2019-12-20 06:34:13	Araq	how does it do that?
+2019-12-20 06:34:20	clyybber	It has a recover statement
+2019-12-20 06:34:32	clyybber	Its like a block statement
+2019-12-20 06:34:36	clyybber	which returns an owned ref
+2019-12-20 06:35:25	Araq	https://stdlib.ponylang.io/json--index/#sending-json
+2019-12-20 06:35:38	Araq	but how does 'recover' work? runtime check?
+2019-12-20 06:36:02	clyybber	And inside it you can have result be some unowned ref. The ref is not allowed to be referenced by variables from outer scopes though, and this way they can guarantee that it is convertible to owned ref/iso
+2019-12-20 06:36:07	clyybber	Araq: No at compile time
+2019-12-20 06:36:20	clyybber	Its a smart idea.
+2019-12-20 06:36:21	FromGitter	<Willyboar> @narimiran no PHP in the survey? :P
+2019-12-20 06:37:17	Araq	clyybber: for sure, but I don't understand it
+2019-12-20 06:37:43	clyybber	Araq: https://tutorial.ponylang.io/reference-capabilities/recovering-capabilities.html
+2019-12-20 06:37:50	clyybber	This explains it a bit better than I can
+2019-12-20 06:38:28	clyybber	This means that when the recover expression finishes, any aliases to the result of the expression other than iso, val and tag ones won’t exist anymore. That makes it safe to “lift” the reference capability of the result of the expression.
+2019-12-20 06:38:46	clyybber	Quote from that link
+2019-12-20 06:39:30	sealmove	ponylang is still active?
+2019-12-20 06:39:54	FromGitter	<kaushalmodi> Milerius: I just `exec("curl ..")`
+2019-12-20 06:40:20	FromGitter	<kaushalmodi> Milerius: https://github.com/kaushalmodi/nim_config/blob/bda6f591a0cdd1ff2f158882a31dcc921eb103ba/config.nims#L168-L172
+2019-12-20 06:40:47	<--	endragor_ (~endragor@212.164.228.99) has quit (Remote host closed the connection)
+2019-12-20 06:42:01	FromGitter	<Willyboar> @sealmove looks like it is, they have a release few days ago
+2019-12-20 06:42:08	-->	nsf (~nsf@jiss.convex.ru) has joined #nim
+2019-12-20 06:42:40	Araq	clyybber: I think it only works when Pony already knows json.parse returned an iso
+2019-12-20 06:44:13	clyybber	No, it works also when f() would return a ref
+2019-12-20 06:45:57	clyybber	Araq: Inside a recover block you can't use variables from outer scopes to alias the result, that means when the recover block is finished the result can be safely turned into an owned ref
+2019-12-20 06:46:20	Araq	yeah I understand this part but it's not enough
+2019-12-20 06:46:30	Araq	you also need to know the constructors
+2019-12-20 06:46:31	clyybber	Yeah, it works in pony because refs cannot be shared
+2019-12-20 06:46:38	clyybber	Araq: Why?
+2019-12-20 06:47:03	Araq	and it looks like this is known by ^  " A constructor always returns an ephemeral type, because it’s a new object."
+2019-12-20 06:48:29	-->	endragor (~endragor@212.164.228.99) has joined #nim
+2019-12-20 06:50:10	clyybber	Araq: Yeah, if you think about it in nim terms it seems unneccessary, its kind of like a workaround for the fact that their constructors dont return an owned ref
+2019-12-20 06:50:38	Araq	they seem to return the roof though (^)
+2019-12-20 06:52:49	Araq	ah but I think I still misunderstand it
+2019-12-20 06:53:08	<--	endragor (~endragor@212.164.228.99) has quit (Remote host closed the connection)
+2019-12-20 06:53:11	Araq	so ... recover cannot access any location from outside?
+2019-12-20 06:53:17	clyybber	Nope
+2019-12-20 06:53:35	clyybber	No refs
+2019-12-20 06:53:40	Araq	string literals?
+2019-12-20 06:54:05	clyybber	Yeah
+2019-12-20 06:54:09	clyybber	Its not from outside
+2019-12-20 06:54:16	clyybber	Since its created
+2019-12-20 06:54:28	Araq	how can I parse json and recover it to be an iso?
+2019-12-20 06:55:33	clyybber	`recover json.parse`
+2019-12-20 06:55:57	clyybber	Though that doesn't make sense in pony..
+2019-12-20 06:56:10	Araq	// sending an iso doc
+2019-12-20 06:56:10	Araq	let json_string = "{\"array\":[1, true, null]}"
+2019-12-20 06:56:10	Araq	let sendable_doc: JsonDoc iso = recover iso JsonDoc.>parse(json_string)? end
+2019-12-20 06:56:12	Araq	some_actor.send(consume sendable_doc)
+2019-12-20 06:56:23	Araq	https://stdlib.ponylang.io/json--index/#sending-json
+2019-12-20 06:57:04	Araq	problem is that the JSon could be in a file and then you have pray file wasn't modelled as 'ref'
+2019-12-20 06:57:29	clyybber	Yeah
+2019-12-20 06:57:38	clyybber	But you can prove it at compile time
+2019-12-20 06:57:45	clyybber	But yeah thats the gist
+2019-12-20 06:58:03	clyybber	don't use refs from outside and what you'll be left with can be safely turned into an owned ref
+2019-12-20 06:58:41	Araq	definitely a new insight
+2019-12-20 06:58:47	clyybber	yeah
+2019-12-20 06:58:50	clyybber	seems useful
+2019-12-20 06:59:36	clyybber	I think it should be possible to do it transparently implicitly
+2019-12-20 06:59:54	clyybber	In static analysis
+2019-12-20 07:00:16	clyybber	For nim this could mean we could make working with owned ref much simpler
+2019-12-20 07:00:18	clyybber	easier
+2019-12-20 07:00:32	clyybber	By implcitly unowning it and recovering it again
+2019-12-20 07:00:40	-->	akitoshi (uid409338@gateway/web/irccloud.com/x-ndjfpnxqwcqabxhm) has joined #nim
+2019-12-20 07:02:15	clyybber	This is really cool and makes me all excited about newruntime with owned refs again :D
+2019-12-20 07:04:16	<--	fanta1 (~fanta1@p200300F76BC3F80089342FE7F18AA820.dip0.t-ipconnect.de) has quit (Quit: fanta1)
+2019-12-20 07:05:00	Araq	too early. B/D is both simpler and avoids a cycle collector
+2019-12-20 07:05:26	Araq	hard to beat
+2019-12-20 07:07:03	-->	krux02 (~krux02@p54932FA5.dip0.t-ipconnect.de) has joined #nim
+2019-12-20 07:12:49	PMunch	Hmm, interesting: http://ix.io/24VW/
+2019-12-20 07:14:13	FromGitter	<alehander92> sealmove: yes stefanos82 is from cyprus iirc
+2019-12-20 07:14:48	FromGitter	<alehander92> i and several other people are from bulgaria, so we almost can do a meetup :D
+2019-12-20 07:15:19	FromGitter	<alehander92> clyybber, interesting, one thing i wonder is how often is `tag` useful in pony
+2019-12-20 07:15:51	Araq	I don't really understand it so it must be wrong.
+2019-12-20 07:16:00	Araq	(kidding, of course)
+2019-12-20 07:16:09	<--	leorize (~leorize@gateway/tor-sasl/leorize) has quit (Quit: WeeChat 2.6)
+2019-12-20 07:36:29	disruptek	hearts and minds, people; hearts and minds!
+2019-12-20 07:38:59	-->	tane (~tane@dslb-002-201-234-167.002.201.pools.vodafone-ip.de) has joined #nim
+2019-12-20 07:39:18	disruptek	i can't get out of a hardware store without spending $200 and i can't implement any new nimph feature without adding 200 lines.
+2019-12-20 07:40:29	<--	PMunch (~PMunch@vpn.dualog.com) has quit (Quit: Leaving)
+2019-12-20 07:41:37	FromGitter	<zacharycarter> disruptek: did you see the map rendering improvements I shared last night?
+2019-12-20 07:42:09	FromGitter	<zacharycarter> curious about your thoughts on them
+2019-12-20 07:42:36	ldlework	zacharycarter you still working on your game engine?
+2019-12-20 07:42:43	disruptek	no, sorry, irssi reset.  where are they?
+2019-12-20 07:42:52	FromGitter	<zacharycarter> I'll re-post
+2019-12-20 07:43:08	FromGitter	<zacharycarter> https://imgur.com/a/PYEBMNJ
+2019-12-20 07:43:14	FromGitter	<zacharycarter> and here's a short video
+2019-12-20 07:43:33	FromGitter	<zacharycarter> https://imgur.com/a/9vFj0J7
+2019-12-20 07:43:37	FromGitter	<zacharycarter> vs before
+2019-12-20 07:43:50	FromGitter	<zacharycarter> https://i.imgur.com/SC4WiAJ
+2019-12-20 07:44:07	dom96	That's awesome :)
+2019-12-20 07:44:12	FromGitter	<zacharycarter> thanks :D
+2019-12-20 07:45:44	FromGitter	<zacharycarter> ldlework: no, actually working on build a game now :)
+2019-12-20 07:46:07	FromGitter	<zacharycarter> but still writing a lot of the plumbing code myself
+2019-12-20 07:49:40	-->	Vladar (~Vladar@46.162.2.53) has joined #nim
+2019-12-20 07:57:28	disruptek	wow, that's /much/ better.
+2019-12-20 07:57:51	FromGitter	<zacharycarter> thanks!
+2019-12-20 07:58:13	disruptek	i always wondered how they did that. 😁
+2019-12-20 07:58:18	FromGitter	<zacharycarter> those two techniques combined - procedural stochastic texturing and triplanar mapping really worked well together
+2019-12-20 07:58:31	disruptek	yeah, it's night and day.
+2019-12-20 07:59:03	disruptek	one of those things that we noticed right away when it started arriving in games.
+2019-12-20 07:59:15	FromGitter	<zacharycarter> yeah
+2019-12-20 08:02:28	disruptek	thanks for sharing this stuff with us.  it's really inspirational.  👍
+2019-12-20 08:04:15	-->	ng0_ (~ng0@netbsd/developer/ng0) has joined #nim
+2019-12-20 08:04:21	<--	ng0 (~ng0@netbsd/developer/ng0) has quit (Disconnected by services)
+2019-12-20 08:04:23	--	ng0_ is now known as ng0
+2019-12-20 08:06:42	dom96	zacharycarter: what kind of game are you working on? Looks like an RTS to me
+2019-12-20 08:07:47	clyybber	bbl
+2019-12-20 08:07:54	<--	clyybber (~clyybber@ipbcc24ae1.dynamic.kabel-deutschland.de) has quit (Quit: WeeChat 2.7)
+2019-12-20 08:08:50	shashlick	dom96: saw the file name issue, will fix, meanwhile what else needs to be done for a choosenim release?
+2019-12-20 08:09:31	dom96	0.5.0 has technically only just been released, we might want to wait a bit before making another release
+2019-12-20 08:13:40	FromGitter	<zacharycarter> dom96: yup!
+2019-12-20 08:13:54	-->	leorize (~leorize@gateway/tor-sasl/leorize) has joined #nim
+2019-12-20 08:13:56	FromGitter	<zacharycarter> disruptek: haha of course, I appreciate the positive feedback
+2019-12-20 08:14:32	FromGitter	<alehander92> this is too complicated for me
+2019-12-20 08:14:44	FromGitter	<alehander92> you literally said like two unclear words for me in one sentence
+2019-12-20 08:15:10	-->	Hideki (~hideki@fs96f9c5f3.knge002.ap.nuro.jp) has joined #nim
+2019-12-20 08:15:33	--	Hideki is now known as Guest52746
+2019-12-20 08:18:16	FromGitter	<zacharycarter> :P I didn't know about them until yesterday
+2019-12-20 08:18:37	FromGitter	<zacharycarter> https://www.martinpalko.com/triplanar-mapping/
+2019-12-20 08:18:42	FromGitter	<zacharycarter> https://blogs.unity3d.com/2019/02/14/procedural-stochastic-texturing-in-unity/
+2019-12-20 08:18:56	-->	dddddd (~dddddd@unaffiliated/dddddd) has joined #nim
+2019-12-20 08:20:45	dom96	zacharycarter: written in Nim? using any engine or doing everything yourself?
+2019-12-20 08:22:38	FromGitter	<zacharycarter> written in Nim and doing everything myself
+2019-12-20 08:22:53	FromGitter	<zacharycarter> using a few libraries - like bgfx etc
+2019-12-20 08:24:02	dom96	Cool. I'm currently finishing off a Nim game written in SDL2, implementing so many drawing primitives has been a pain.
+2019-12-20 08:24:25	FromGitter	<zacharycarter> nice!
+2019-12-20 08:25:12	FromGitter	<zacharycarter> yeah - this terrain renderer has taken quite a bit of my time, but I think it's worth it - starting to look decent enough to actually use in a game
+2019-12-20 08:25:27	-->	silvernode (~quassel@160-2-241-248.cpe.sparklight.net) has joined #nim
+2019-12-20 08:25:31	FromGitter	<zacharycarter> and if I can get PBR materials in, it will really pop
+2019-12-20 08:27:27	FromDiscord	<mratsim> PBR? is taht the raytracing book?
+2019-12-20 08:27:49	-->	luis_ (~luis@179.97.229.45) has joined #nim
+2019-12-20 08:28:23	FromGitter	<zacharycarter> I think the raytracing book does implement PBR - but it's really just a shading model
+2019-12-20 08:28:46	FromGitter	<zacharycarter> so they're not 1:1 you can have PBR materials and not have raytracing
+2019-12-20 08:34:11	<--	luis_ (~luis@179.97.229.45) has quit (Quit: luis_)
+2019-12-20 08:38:14	madprops	apparently some people find nim's crown creepy lol
+2019-12-20 08:38:20	Yardanico	what
+2019-12-20 08:38:37	madprops	"the crown is creepy and so was the previous name, Nimrod."
+2019-12-20 08:39:20	Araq	well we're getting a new mascot
+2019-12-20 08:39:28	Yardanico	really?
+2019-12-20 08:39:32	Yardanico	or :D
+2019-12-20 08:39:36	Araq	no.
+2019-12-20 08:39:44	madprops	the logo is perfect as it is
+2019-12-20 08:40:11	madprops	with that font
+2019-12-20 08:40:56	federico3	dom96: are you using *GL stuff or plain SDL?
+2019-12-20 08:42:38	leorize	Araq: is there a way to make the current GC no longer requiring NimMain? This would be useful in making LD_PRELOAD libraries, where you hijack symbols in the target binary so NimMain can't be called
+2019-12-20 08:43:04	leorize	or should I just update to devel and use --gc:arc to get away from all that?
+2019-12-20 08:43:04	Araq	leorize: use --gc:arc already
+2019-12-20 08:43:33	FromDiscord	<mratsim> Come, the crown is reasonable, have they seen gopher or Ferris the crab
+2019-12-20 08:43:37	FromDiscord	<mratsim> on*
+2019-12-20 08:44:48	dom96	federico3, plain SDL
+2019-12-20 08:44:50	Yardanico	python's one is literally a snake XD
+2019-12-20 08:44:57	federico3	ouch
+2019-12-20 08:45:02	dom96	Anyone else find this sort of thing incredibly frustrating? https://play.nim-lang.org/#ix=24Wf
+2019-12-20 08:45:14	Yardanico	lenientops ?
+2019-12-20 08:46:02	dom96	ahh yes, I keep forgetting about this module.
+2019-12-20 08:46:14	dom96	Makes me uneasy about what else it allows though
+2019-12-20 08:46:53	federico3	dom96: there's a wrapper for sdl-gpu https://vladar4.github.io/sdl2_nim/sdl_gpu.html
+2019-12-20 08:47:17	dom96	federico3, it's a 2D game, raw SDL2 isn't so bad
+2019-12-20 08:47:29	federico3	:-/
+2019-12-20 08:48:34	dom96	I was tempted to switch to SFML though
+2019-12-20 08:48:43	Yardanico	yeah csfml is kinda nice
+2019-12-20 08:48:51	Yardanico	and there's a nim wrapper for it :P
+2019-12-20 08:49:05	shashlick	dom96: no I was asking about getting choosenim update self to work, and the init script
+2019-12-20 08:49:12	Yardanico	https://github.com/oprypin/nim-csfml
+2019-12-20 08:49:15	shashlick	They still only install 0.4.0
+2019-12-20 08:49:20	Yardanico	"This library consists of class wrappers implemented as ptr object. Because Nim does not allow attaching pointers to the garbage collector, disposal of objects is not implemented and needs to be manual, by calling the destroy methods." right now this can be implemented I think
+2019-12-20 08:49:28	dom96	shashlick, are you sure? I update the `stable` channel for choosenim
+2019-12-20 08:50:07	<--	Guest52746 (~hideki@fs96f9c5f3.knge002.ap.nuro.jp) has quit (Remote host closed the connection)
+2019-12-20 08:50:15	shashlick	Ok it wasn't last night so
+2019-12-20 08:50:24	dom96	Yardanico, I used that package for https://github.com/dom96/ld40/
+2019-12-20 08:51:12	dom96	probably should have stuck to it since I managed to make some sort of game with it in 48 hours
+2019-12-20 08:51:32	dom96	but sunk-cost and all that
+2019-12-20 08:51:48	dom96	shashlick, updated today
+2019-12-20 08:52:34	dom96	Yardanico, I'm also certain that SDL2 can be used with Nim and webasm, not sure about SFML on that
+2019-12-20 08:52:53	Yardanico	yeah, it  seems there's no such support
+2019-12-20 08:53:22	FromGitter	<alehander92> madprops i actually agree with those people, the previous name is not good
+2019-12-20 08:53:51	Yardanico	The previous name was okay for me since I don't really knew or used "Nimrod" in its bad definition :P
+2019-12-20 08:53:57	Yardanico	didn't*
+2019-12-20 08:55:26	FromGitter	<alehander92> madprops interested where you saw that
+2019-12-20 08:56:49	FromDiscord	<Fern & Simula (They/Them)> is there a way to specify that an argument passed to a macro can't be a literal?
+2019-12-20 08:57:17	FromDiscord	<Generic> it can be if you use static
+2019-12-20 08:57:31	FromGitter	<alehander92> you can do a macro which takes a literal with static
+2019-12-20 08:57:33	FromDiscord	<Generic> e.g. macro blarg(x: static[int]): untyped = discard
+2019-12-20 08:57:41	FromGitter	<alehander92> and make it produce an error on compile time
+2019-12-20 08:57:43	FromDiscord	<Fern & Simula (They/Them)> ah, perfect. thanks!
+2019-12-20 08:57:44	FromGitter	<alehander92> and then!
+2019-12-20 08:57:57	FromGitter	<alehander92> make another overload which cant take a literal which will only work
+2019-12-20 08:58:37	FromGitter	<alehander92> Fern, Generic: notice you need this workaround if the wish is that it *can not* be a literal
+2019-12-20 09:00:11	FromDiscord	<Fern & Simula (They/Them)> yes, that's exactly what i want
+2019-12-20 09:00:15	FromDiscord	<Fern & Simula (They/Them)> thank you :)
+2019-12-20 09:08:32	<--	ng0 (~ng0@netbsd/developer/ng0) has quit (Quit: Alexa, when is the end of world?)
+2019-12-20 09:09:53	disruptek	today we make cookies.
+2019-12-20 09:09:57	disruptek	what's a good cookie to make?
+2019-12-20 09:16:37	livcd_	.erlang.cookie
+2019-12-20 09:17:17	disruptek	erlang gives me hives.
+2019-12-20 09:17:58	FromGitter	<matrixbot> `grantmwilliams` don't be jealous of Erlang Gang
+2019-12-20 09:18:39	FromGitter	<matrixbot> `grantmwilliams` Has anyone seen a good implementation of an AMQP library in Nim? I've only seen an implementatin of STOMP so far
+2019-12-20 09:19:53	disruptek	not aware of anything.
+2019-12-20 09:19:56	FromGitter	<bung87> there is zmq
+2019-12-20 09:19:59	-->	icebattle (~wayne@159.153.136.118) has joined #nim
+2019-12-20 09:20:07	disruptek	!repo mqtt
+2019-12-20 09:20:08	disbot	https://github.com/barnybug/nim-mqtt -- nim-mqtt: mqtt wrapper for nim  5⭐ 1🍴  & 4 more...
+2019-12-20 09:20:17	FromDiscord	<mratsim> I can also play this game. As anyone seen a tensor libraries in Erlang? 😛
+2019-12-20 09:20:20	disruptek	!repo zevv/nmqtt
+2019-12-20 09:20:21	disbot	https://github.com/zevv/nmqtt -- nmqtt: Native Nim MQTT client library  5⭐ 0🍴
+2019-12-20 09:30:54	FromDiscord	<Fern & Simula (They/Them)> i have a nimble package split up into multiple files. is there any way to get that to work in just one import statement? should i just use `include`?
+2019-12-20 09:35:11	-->	endragor (~endragor@176.51.228.191) has joined #nim
+2019-12-20 09:35:34	disruptek	you can use commas to separate multiple import targets.
+2019-12-20 09:35:46	-->	Hideki (~hideki@fs96f9c5f3.knge002.ap.nuro.jp) has joined #nim
+2019-12-20 09:36:09	--	Hideki is now known as Guest84791
+2019-12-20 09:36:17	dom96	gotta love that trailing comma being ignored https://play.nim-lang.org/#ix=24Wo
+2019-12-20 09:36:34	disruptek	feature.
+2019-12-20 09:37:40	madprops	weird echo
+2019-12-20 09:38:14	madprops	i always inline it, without parens
+2019-12-20 09:38:47	dom96	It's a repro of a longer piece of code
+2019-12-20 09:39:37	dom96	currently trying to work out why colors.`$` isn't called on my colour but instead the `system` one.
+2019-12-20 09:40:44	dom96	ugh, so annoying to get stuck on such silly things
+2019-12-20 09:42:17	FromDiscord	<Fern & Simula (They/Them)> disruptek: i meant import one module (the "main" one if you will) and have the rest silently come along?
+2019-12-20 09:42:37	<--	Guest84791 (~hideki@fs96f9c5f3.knge002.ap.nuro.jp) has quit (Ping timeout: 268 seconds)
+2019-12-20 09:46:48	dom96	Fern: in the main module use "export moduleA, moduleB" then import that module
+2019-12-20 09:55:56	FromGitter	<bung87> when wrap macos sdk, how to declare a proc return expected result type or a error number ?
+2019-12-20 09:58:00	FromGitter	<bung87> I realize other language wrap c not like the Nim way, clearly declare a type or proc coming from which header file.
+2019-12-20 09:58:04	disruptek	let your wrapping proc set a var argument.  return an error code or zero.
+2019-12-20 09:58:52	FromGitter	<bung87> ` result type or a error number`
+2019-12-20 09:59:13	disruptek	the proc returns a type?
+2019-12-20 09:59:19	FromDiscord	<badassiel> I was wondering if anyone was working on a client sdk for nim?
+2019-12-20 09:59:25	FromGitter	<bung87> a type or number
+2019-12-20 09:59:39	disruptek	client sdk for what serv(er|ice)?
+2019-12-20 09:59:50	FromDiscord	<badassiel> *client matrix sdk
+2019-12-20 09:59:53	<--	silvernode (~quassel@160-2-241-248.cpe.sparklight.net) has quit (Ping timeout: 268 seconds)
+2019-12-20 10:00:01	FromGitter	<bung87> https://developer.apple.com/documentation/iokit/1514741-ioiteratornext?language=occ
+2019-12-20 10:00:20	disruptek	shashlick knows things about matterbridge...  wicked, wicked things.
+2019-12-20 10:00:40	FromGitter	<bung87> yeah,I knew him
+2019-12-20 10:01:30	FromDiscord	<badassiel> oh wow didn't know matterbridge existed
+2019-12-20 10:01:34	oz	disruptek: well matterbridge is wicked to start with. :)
+2019-12-20 10:01:34	disruptek	if you want to wrap that, just make a real iterator that only returns values.
+2019-12-20 10:01:40	FromGitter	<bung87> I know Nim has Option type not sure can be used in wrap
+2019-12-20 10:01:50	disruptek	it can, but to what end?
+2019-12-20 10:02:02	disruptek	iterators are a thing nim programmers like to use.
+2019-12-20 10:03:15	FromGitter	<bung87> I want things to be simple, this task mainly is reading document and source. not like I am programing…..
+2019-12-20 10:04:11	FromGitter	<bung87> almost 1k line during wrap this on macOS...
+2019-12-20 10:04:22	FromGitter	<matrixbot> `grantmwilliams` Are there any ETL libraries in Nim?
+2019-12-20 10:06:03	FromDiscord	<Fern & Simula (They/Them)> disruptek: thanks!
+2019-12-20 10:06:06	FromGitter	<bung87> there are several lib, tools
+2019-12-20 10:06:30	disruptek	what did i do?
+2019-12-20 10:06:57	FromGitter	<bung87> not aware of  all in one ETL project.
+2019-12-20 10:07:22	disruptek	the whole concept of ETL is too vague, honestly.
+2019-12-20 10:08:01	FromGitter	<matrixbot> `grantmwilliams` Interesting. It looks like Nim has a great sql library in the std lib so seems like a nice language for etl
+2019-12-20 10:09:23	FromGitter	<matrixbot> `grantmwilliams` > <@gitter_fromirc:matrix.org> *<disruptek>* the whole concept of ETL is too vague, honestly. ⏎  ⏎ To me ETL libraries end up being a set of connections (with a generic way to create new conneciton types) and some way to pipe data between those connections
+2019-12-20 10:09:40	FromGitter	<bung87> I know there are ,xml,csv,docx libs
+2019-12-20 10:11:02	disruptek	i'm not aware of a framework like that.  i've never even used something like that in another language.
+2019-12-20 10:12:45	disruptek	it does feel like AQMP but i think you'd be better-served by something simpler.
+2019-12-20 10:13:01	FromGitter	<matrixbot> `grantmwilliams` There are a number of different approaches to the problem. You could probably consider spark an ETL library (or maybe something like pandas in python), then you have apache airflow which is more cron based etl approach
+2019-12-20 10:13:08	FromGitter	<alehander92> disruptek ohh cookies
+2019-12-20 10:14:55	FromGitter	<matrixbot> `grantmwilliams` You might consider a stream based library an ETL one too. So I agree that its a very vague concept.
+2019-12-20 10:15:50	disruptek	it's just hard to imagine a glue-like product that seeps into all the specific cracks needed for application.
+2019-12-20 10:16:13	disruptek	usually, you end up needing to customize pretty extensively.
+2019-12-20 10:17:04	solitudesf	disruptek, is it really necessary for nimph to write hints of every nimble package i have installed every time i perform any operation with it? it is the compiler's output, but i think you should silence it.
+2019-12-20 10:17:19	salotz[m]	is this the new nim mascot? https://img.scryfall.com/cards/large/front/c/3/c3a2c39b-b302-4cc3-b507-e4fe00614036.jpg?1562157213
+2019-12-20 10:17:31	disruptek	can i see the output?
+2019-12-20 10:17:31	FromGitter	<matrixbot> `grantmwilliams` I think my ideal solution would give you async backpressure pipelines between connections and you'd be responsible for making the connections yourself and getting data out of them (via query or whatever)
+2019-12-20 10:17:45	disruptek	solitudesf: compile nimph with -d:release and it will be quiet.
+2019-12-20 10:17:56	solitudesf	its compiled with -d:danger
+2019-12-20 10:18:05	disruptek	weird, lemme see.
+2019-12-20 10:18:07	solitudesf	`/home/solitude/.nimble/pkgs/nimes-0.1/nim.cfg(14, 178) Hint: line too long [LineTooLong]` here's sample.
+2019-12-20 10:18:43	disruptek	oh, that's from the compiler's parser?
+2019-12-20 10:18:50	disruptek	i should be able to toggle that hint off.
+2019-12-20 10:18:57	disruptek	what other hints are spamming you?
+2019-12-20 10:19:06	solitudesf	thats the only one
+2019-12-20 10:19:39	disruptek	i will figure that out, or you can try toggling it in config.nim.
+2019-12-20 10:19:50	disruptek	that's where i toggle hinting about conf reads...
+2019-12-20 10:20:19	<--	akitoshi (uid409338@gateway/web/irccloud.com/x-ndjfpnxqwcqabxhm) has quit (Quit: Connection closed for inactivity)
+2019-12-20 10:20:32	disruptek	what does nim consider a "too long" line in a config file, and why?
+2019-12-20 10:20:57	solitudesf	im just gonna uninstall the package. is there a reason for nimph to relay these things to a user?
+2019-12-20 10:21:19	disruptek	it's not in nimph code.  it's code imported from the compiler.
+2019-12-20 10:21:40	disruptek	i don't think users need to see it, but i cannot directly control side-effects of parsing.
+2019-12-20 10:21:53	solitudesf	nice
+2019-12-20 10:22:07	disruptek	i'm pretty sure we can just toggle the hint.
+2019-12-20 10:22:30	disruptek	eg. line 94.
+2019-12-20 10:22:32	solitudesf	well, i only see that because of `verbosity:2`, im pretty sure
+2019-12-20 10:22:35	disruptek	how is nimph working other than that?
+2019-12-20 10:23:34	solitudesf	no clue, i just ran it on bunch of my existing packages and didn't need to do anything. im gonna try using it with a new one.
+2019-12-20 10:24:37	<--	jonafato (~jonafato@162.209.103.217) has quit (Quit: ZNC - http://znc.in)
+2019-12-20 10:24:50	solitudesf	im going to need a name for it. its a program that expands text snippets as you type by *monitoring your input and abusing clipboard*. i couldn't come up with anything other that String EXpander.
+2019-12-20 10:24:51	lqdev[m]	could someone look into this? it's preventing me from continuing my projects. https://github.com/nim-lang/Nim/issues/12942
+2019-12-20 10:24:51	disruptek	nimph 0.5.7 should fix that spam.
+2019-12-20 10:24:53	disbot	➥ Default procedure parameters are untyped ; snippet at https://play.nim-lang.org/#ix=24WF
+2019-12-20 10:25:19	disruptek	disbot: you're terrible.  go back to school.
+2019-12-20 10:25:20	disbot	on it. 👍
+2019-12-20 10:26:59	FromGitter	<matrixbot> `grantmwilliams` i think echo was an interesting choice
+2019-12-20 10:27:06	-->	jonafato (~jonafato@162.209.103.217) has joined #nim
+2019-12-20 10:27:21	lqdev[m]	@grantmwilliams: why?
+2019-12-20 10:27:59	FromGitter	<matrixbot> `grantmwilliams` i just wouldnt expect many languages to choose echo over print or procedure over function
+2019-12-20 10:28:05	FromDiscord	<Milerius> Hello
+2019-12-20 10:28:13	FromGitter	<matrixbot> `grantmwilliams` i dont have any problems with it, but i do think its interesting
+2019-12-20 10:28:17	FromDiscord	<Milerius> Is it normal that the hash of 2 string that have the same content are different ?
+2019-12-20 10:28:57	disruptek	function is a thing; a side-effect-free procedure.
+2019-12-20 10:29:04	disruptek	keyword `func`.
+2019-12-20 10:29:16	Yardanico	FromDiscord: what do you mean by "hash"?
+2019-12-20 10:29:40	FromDiscord	<Milerius> I want to retrieve a unique id from a string in nim, this id should be the same if 2 string have the same word
+2019-12-20 10:29:42	disruptek	solitudesf: how does it abuse the clipboard?
+2019-12-20 10:29:53	FromDiscord	<Milerius> hash("foo") == hash("foo")
+2019-12-20 10:30:06	disruptek	milerius: sounds amazing.
+2019-12-20 10:30:13	FromGitter	<matrixbot> `grantmwilliams` i just think its interesting that the term procedure made it into the language
+2019-12-20 10:30:36	disruptek	what would you use, noting that `function` is taken by functions?
+2019-12-20 10:31:14	FromGitter	<matrixbot> `grantmwilliams` i mean you could have a pure keyword infront of function for ones without side effects
+2019-12-20 10:31:31	FromGitter	<matrixbot> `grantmwilliams` but i dont actually have a problem with proc being in the language. i just said it was interesting not bad in any way
+2019-12-20 10:31:32	solitudesf	disruptek, well, it just copies needed text into it and simulates ctrl-v or whatever. just dont know if there is a better way. and it will going to be X only.
+2019-12-20 10:31:45	Yardanico	!eval echo(hash("foo") == hash("foo"))
+2019-12-20 10:31:48	NimBot	Compile failed: /usercode/in.nim(1, 6) Error: undeclared identifier: 'hash'
+2019-12-20 10:31:55	disruptek	xclip-like, then?
+2019-12-20 10:31:55	FromGitter	<matrixbot> `grantmwilliams` rust's ownership model is interesting too
+2019-12-20 10:31:59	Yardanico	!eval import hashes; echo(hash("foo") == hash("foo"))
+2019-12-20 10:32:03	NimBot	true
+2019-12-20 10:32:21	FromDiscord	<Milerius> This is not working for me
+2019-12-20 10:32:33	Yardanico	!eval import hashes; echo(hash("foo") == hash("foo"))
+2019-12-20 10:32:35	NimBot	true
+2019-12-20 10:32:39	Yardanico	hm
+2019-12-20 10:32:50	FromDiscord	<Milerius> can i show my example ?
+2019-12-20 10:33:10	disruptek	if you use a pastebin.  😁
+2019-12-20 10:33:12	solitudesf	disruptek, it should be like this thing https://github.com/federico-terzi/espanso but not filled with useless garbage, and not dropping to cpp for half the code.
+2019-12-20 10:33:44	disruptek	cool.
+2019-12-20 10:33:57	disruptek	what do you need to do?
+2019-12-20 10:34:41	solitudesf	i need to write it
+2019-12-20 10:34:58	disruptek	to make it work on wayland.  😈
+2019-12-20 10:35:38	solitudesf	is it possible on wayland? its basically a keylogger
+2019-12-20 10:35:43	FromDiscord	<Milerius> ok hash work, my problem come from some thing else
+2019-12-20 10:35:51	disruptek	well, xclip works, somehow.
+2019-12-20 10:35:58	disruptek	i'm using it in my ix paster.
+2019-12-20 10:36:08	federico3	if you give it permissions...
+2019-12-20 10:37:14	disruptek	solitude don't take no shit.  i like that.
+2019-12-20 10:37:38	disruptek	we need more unsatisfied users.
+2019-12-20 10:38:12	FromDiscord	<Milerius> But i have a serious problem understanding what is appening here: https://gist.github.com/Milerius/f12cbd83e727ec788383d7198644b13f
+2019-12-20 10:38:30	disruptek	you uploaded some code to a github gist.
+2019-12-20 10:39:12	FromDiscord	<Milerius> yep
+2019-12-20 10:39:50	disruptek	i do believe that RICK is the tickler.
+2019-12-20 10:40:00	disruptek	at least, it felt like RICK.
+2019-12-20 10:40:41	FromDiscord	<Milerius> Yeah...
+2019-12-20 10:40:43	FromDiscord	<Milerius> hash is the same
+2019-12-20 10:40:48	FromDiscord	<Milerius> string are equal
+2019-12-20 10:40:51	FromDiscord	<Milerius> len is the same
+2019-12-20 10:41:03	FromDiscord	<Milerius> but when use key it's working, when using ticker is crashing
+2019-12-20 10:41:05	FromDiscord	<Milerius> 🤷
+2019-12-20 10:42:39	<--	tane (~tane@dslb-002-201-234-167.002.201.pools.vodafone-ip.de) has quit (Quit: Leaving)
+2019-12-20 10:43:03	disruptek	cm_at has a side-effect?
+2019-12-20 10:43:12	FromDiscord	<Milerius> const
+2019-12-20 10:43:22	Yardanico	where is is_ticker_present defined?
+2019-12-20 10:43:33	FromDiscord	<Milerius> I updated the gist
+2019-12-20 10:44:33	<--	Trustable (~Trustable@dslb-002-201-031-007.002.201.pools.vodafone-ip.de) has quit (Quit: Leaving)
+2019-12-20 10:46:19	disruptek	i'm assuming that it only crashes when you uncomment the earlier cm_at call against ticker.
+2019-12-20 10:46:31	FromDiscord	<Milerius> nop
+2019-12-20 10:46:33	FromDiscord	<Milerius> even in the loop
+2019-12-20 10:46:35	disruptek	is that wrong?  are you changing the second call?
+2019-12-20 10:46:37	FromDiscord	<Milerius> i replace key by ticker
+2019-12-20 10:46:42	FromDiscord	<Milerius> it's not working
+2019-12-20 10:46:45	FromDiscord	<Milerius> in the loop
+2019-12-20 10:46:56	disruptek	what if you compose a new instance of a string?
+2019-12-20 10:47:23	disruptek	i'm thinking that it's the magical cstring semantics.
+2019-12-20 10:48:09	FromDiscord	<Milerius> ok if i use an int as key
+2019-12-20 10:48:11	FromDiscord	<Milerius> it's working
+2019-12-20 10:48:13	FromDiscord	<Milerius> instead of string
+2019-12-20 10:48:17	disruptek	ie. $typeof(key) == "cstring"
+2019-12-20 10:48:17	FromDiscord	<Milerius> i use the hash
+2019-12-20 10:49:00	FromDiscord	<Milerius> Yeah key is a cstring
+2019-12-20 10:49:02	disruptek	let cticker: cstring = ticker ... cm_at(cticker)
+2019-12-20 10:49:27	FromDiscord	<Milerius> i'm checking
+2019-12-20 10:49:37	disruptek	I NEED ANSWERS NOW
+2019-12-20 10:49:45	FromDiscord	<Milerius> second
+2019-12-20 10:49:46	disruptek	omg cookies.  we forgot cookies.
+2019-12-20 10:50:38	-->	Hideki (~hideki@fs96f9c5f3.knge002.ap.nuro.jp) has joined #nim
+2019-12-20 10:50:56	FromDiscord	<Milerius> crashing with cticker
+2019-12-20 10:50:58	FromDiscord	<Milerius> @disruptek
+2019-12-20 10:51:02	--	Hideki is now known as Guest39222
+2019-12-20 10:51:34	disruptek	curiouser and curiouser.
+2019-12-20 10:54:07	disruptek	so the problem here is that your indexer, at(), isn't able to match keys in the hash/ass-array/dict/map.
+2019-12-20 10:54:38	disruptek	why not modify that code to see what input it's receiving?
+2019-12-20 10:54:57	FromDiscord	<Milerius> idk, this class work for sure in C++ i'm using it with strings
+2019-12-20 10:54:59	FromDiscord	<Milerius> i never get problems
+2019-12-20 10:55:03	FromDiscord	<Milerius> i'm switching to nim now
+2019-12-20 10:55:10	FromDiscord	<Milerius> May be it's my fault, probably
+2019-12-20 10:55:17	FromDiscord	<Milerius> but i cannot understand where is my prob
+2019-12-20 10:55:24	FromDiscord	<Milerius> anyway i will move forward with integer as key for now
+2019-12-20 10:55:50	disruptek	well, this will bite you again until we understand it.
+2019-12-20 10:55:58	<--	Guest39222 (~hideki@fs96f9c5f3.knge002.ap.nuro.jp) has quit (Ping timeout: 260 seconds)
+2019-12-20 10:56:17	disruptek	you can look at the code nim generates by investigating the nimcache.
+2019-12-20 10:56:23	FromDiscord	<Milerius> Yup, but i have deadlines for work, so i will move forward and take more time on it latter
+2019-12-20 10:57:17	FromDiscord	<Milerius> PMunch are you around?
+2019-12-20 10:57:43	disruptek	i think your cm_at() is not comparing strings but is instead comparing pointer values.  hence key works because it came right out of the map.
+2019-12-20 10:58:04	disruptek	i'm just guessing as to how it's implemented, though.
+2019-12-20 10:58:10	FromGitter	<alehander92> but let cticker: cstring = ticker
+2019-12-20 10:58:14	FromGitter	<alehander92> isnt really what you want
+2019-12-20 10:58:30	disruptek	no, it's irrelevant.  i was just curious.
+2019-12-20 10:58:44	FromGitter	<alehander92> you want to convert the nim string to c string, and iirc the nim c string starts on ->data
+2019-12-20 10:58:50	FromGitter	<alehander92> which is not the first field
+2019-12-20 10:58:54	FromGitter	<Willyboar> Hello guys
+2019-12-20 10:59:07	disruptek	it doesn't matter; nim converts it all for us.
+2019-12-20 10:59:33	disruptek	hello mr. boar.
+2019-12-20 10:59:48	FromGitter	<alehander92> does it??
+2019-12-20 10:59:50	FromGitter	<Willyboar> hello dis
+2019-12-20 10:59:52	FromGitter	<alehander92> ticker.cstring does
+2019-12-20 11:00:00	FromGitter	<alehander92> but maybe the let thing does also
+2019-12-20 11:01:04	disruptek	yeah, i was thinking maybe it was due to the ephemeral key var but now i'm pretty sure it's just a simple error in cm_at.
+2019-12-20 11:01:33	disruptek	occam's razor.
+2019-12-20 11:02:31	FromDiscord	<Milerius> yeah but my cm_at is just importing the C++ function
+2019-12-20 11:02:32	FromDiscord	<Milerius> as it
+2019-12-20 11:02:49	disruptek	yes, bugs exist in c++, too.
+2019-12-20 11:02:51	disruptek	it is known.
+2019-12-20 11:03:08	FromDiscord	<Milerius> probably
+2019-12-20 11:03:46	disruptek	so.  cookies.
+2019-12-20 11:03:52	disruptek	i'm thinking molasses.
+2019-12-20 11:08:24	-->	opi (~emil@apn-77-114-139-237.dynamic.gprs.plus.pl) has joined #nim
+2019-12-20 11:10:40	FromDiscord	<Milerius> I'm missing PMunch so much my guardian :p
+2019-12-20 11:11:16	<--	qwertfisch (wJV3w3pCQI@gateway/shell/uberspace.de/x-xgtvubfftngniplw) has quit (Quit: ZNC - http://znc.in)
+2019-12-20 11:11:22	opi	hi, I'm trying to build Nim out of source on RPi, it was working before, but now invoking build.sh throws an error, any hints?
+2019-12-20 11:11:23	opi	 typedef int Nim_and_C_compiler_disagree_on_target_architecture[sizeof(NI) == sizeof(void*) && NIM_INTBITS == sizeof(NI)*8 ? 1 : -1];
+2019-12-20 11:12:24	Yardanico	that tells you what's the problem
+2019-12-20 11:14:23	opi	Yardanico: I understand what the problem is, but I don't really know how to solve it, otherwise I wouldn't ask. I have limited knowledge about compiler internals
+2019-12-20 11:14:45	Yardanico	well, what exactly are you running?
+2019-12-20 11:14:48	Yardanico	sh build_all.sh ?
+2019-12-20 11:15:22	opi	I did both cd csources && sh build.sh and build_all up top
+2019-12-20 11:15:35	opi	the kernel is 32 bit but the target says 64
+2019-12-20 11:15:54	Yardanico	well, you don't need to do that manually
+2019-12-20 11:16:03	Yardanico	just clone the nim repo, cd into it and run `sh build_all.sh`
+2019-12-20 11:16:12	FromGitter	<alehander92> Araq
+2019-12-20 11:16:25	Yardanico	opi: maybe your C compiler is 64-bit for some reason?
+2019-12-20 11:16:32	FromGitter	<alehander92> lets have `smellonly` variables, @Willyboar gave me a great idea to model food
+2019-12-20 11:16:39	FromGitter	<alehander92> sorry, vacation mood already
+2019-12-20 11:17:03	opi	Yardanico: that's a possibility, I've been tinkering around on that system without paying much attention
+2019-12-20 11:17:53	FromDiscord	<mratsim> if there is an mismatch between the compiler and the kernel you need to pass ucpu=aarch64 or ucpu=armv7 it's an environment variable
+2019-12-20 11:18:17	FromDiscord	<mratsim> for example this is my build for building 32-bit nim on 64-bit: https://github.com/mratsim/weave/blob/master/azure-pipelines.yml#L43
+2019-12-20 11:18:26	FromDiscord	<mratsim> I get arch mismatch otherwise
+2019-12-20 11:20:58	opi	thank you mratsim, I'm going to look into it
+2019-12-20 11:23:16	opi	yeah, I see the lines that overwrite the CPU in build.sh, that may be it
+2019-12-20 11:23:19	<--	krux02 (~krux02@p54932FA5.dip0.t-ipconnect.de) has quit (Remote host closed the connection)
+2019-12-20 11:24:38	opi	./build.sh --cpu armv7 worked for me, thanks!
+2019-12-20 11:57:21	-->	MarquisdeFalbala (~Marquisde@2a02:2149:8414:9b00:915d:f6e6:447f:d95a) has joined #nim
+2019-12-20 12:00:51	-->	luis_ (~luis@179.97.229.45) has joined #nim
+2019-12-20 12:01:28	shashlick	Some new nimterop cli features cooking: --output to to file, --prefix --suffix to strip symbols without cPlugin, --check to Nim check the generated wrapper, and --stub to stub out undeclared identifier errors as objects automatically
+2019-12-20 12:01:29	<--	NimBot (~NimBot@mail.nim-lang.org) has quit (Remote host closed the connection)
+2019-12-20 12:01:34	shashlick	Who wants to try?
+2019-12-20 12:01:45	-->	NimBot (~NimBot@mail.nim-lang.org) has joined #nim
+2019-12-20 12:03:05	<--	luis_ (~luis@179.97.229.45) has quit (Client Quit)
+2019-12-20 12:03:30	disruptek	how does stub work?
+2019-12-20 12:04:00	disruptek	i mean, will that fix my nimsuggest?
+2019-12-20 12:11:15	shashlick	Nope that's still on the backlog
+2019-12-20 12:11:58	shashlick	If certain symbols are not in the header or nimterop can stub them for you
+2019-12-20 12:12:18	shashlick	Assuming you don't really need them for your use case
+2019-12-20 12:12:36	disruptek	oh, i see.
+2019-12-20 12:13:12	disruptek	so this would let us pull the nimterop requirement out of nimgit, right?
+2019-12-20 12:13:36	disruptek	assuming we lock it to a particular version, etc.
+2019-12-20 12:15:56	<--	icebattle (~wayne@159.153.136.118) has quit (Ping timeout: 265 seconds)
+2019-12-20 12:18:21	shashlick	The cimport stuff maybe, depending on what all needs done
+2019-12-20 12:18:30	shashlick	But not the getHeader stuff though
+2019-12-20 12:19:04	shashlick	You are asking about https://github.com/nimterop/nimterop/issues/125
+2019-12-20 12:19:06	disbot	➥ Provide stand-alone operation
+2019-12-20 12:19:57	disruptek	right.
+2019-12-20 12:20:44	disruptek	when we add staticCurrentDir we'll be able to simplify some of this.
+2019-12-20 12:20:57	disruptek	ie. we can make relativePath work.
+2019-12-20 12:22:14	disruptek	leorize: this would be pretty cool for nim.nvim: https://github.com/ryanluker/vscode-coverage-gutters
+2019-12-20 12:23:15	lqdev[m]	why do tests fail on `--gc:orc`? I just forked and cloned
+2019-12-20 12:23:43	disruptek	it's not yet christmas.
+2019-12-20 12:23:46	Yardanico	arc* :P
+2019-12-20 12:23:52	lqdev[m]	orc.
+2019-12-20 12:24:00	lqdev[m]	I can read logs, mate.
+2019-12-20 12:24:05	Yardanico	xd
+2019-12-20 12:24:29	lqdev[m]	iirc orc was a variation of arc, but I can't really remember what's the difference
+2019-12-20 12:26:10	disruptek	one doesn't work, and the other one is broken.
+2019-12-20 12:26:57	shashlick	disruptek: I don't think we will get there with nimterop
+2019-12-20 12:27:05	disruptek	whaaa
+2019-12-20 12:27:15	disruptek	why not?
+2019-12-20 12:27:20	shashlick	Unlike c2nim which is a dev tool, nimterop is used at build time on the target system
+2019-12-20 12:27:46	disruptek	hmm, fair point.
+2019-12-20 12:27:52	shashlick	So the wrappers you generate are specific to the build system since preprocessor is already run
+2019-12-20 12:28:10	shashlick	I don't see how we can resolve this with this model
+2019-12-20 12:28:15	disruptek	we obviously need another layer of wrappers.
+2019-12-20 12:28:31	disruptek	introducing nimteropterop.
+2019-12-20 12:28:51	shashlick	I don't see the value in managing the cross platform stuff typically done in preprocessor
+2019-12-20 12:28:58	shashlick	Hard enough dealing with C
+2019-12-20 12:29:02	FromDiscord	<mratsim> I think I'll rename one of my library Urukh-Hai to go along gc:orc
+2019-12-20 12:29:21	shashlick	Maybe some day
+2019-12-20 12:29:41	shashlick	I'd rather spend time improving what we have and get to c++
+2019-12-20 12:29:45	shashlick	Open to feedback though
+2019-12-20 12:30:18	FromDiscord	<mratsim> maybe read this: https://github.com/status-im/nim-beacon-chain/issues/640
+2019-12-20 12:30:19	disbot	➥ [RFC] producing more robust wrappers for external C libraries
+2019-12-20 12:31:45	<--	opi (~emil@apn-77-114-139-237.dynamic.gprs.plus.pl) has quit (Quit: WeeChat 1.6)
+2019-12-20 12:31:58	-->	clyybber (~clyybber@ipbcc24ae1.dynamic.kabel-deutschland.de) has joined #nim
+2019-12-20 12:33:37	shashlick	Will do
+2019-12-20 12:36:02	-->	ofelas (~ofelas@ti0071a400-7154.bb.online.no) has joined #nim
+2019-12-20 12:38:29	clyybber	Araq: We can apply this advanced form of static analysis to B/D though, and thats the great thing.
+2019-12-20 12:38:41	clyybber	It is essentially automatically inserting unown
+2019-12-20 12:38:52	clyybber	and *own* into the right places
+2019-12-20 12:38:54	FromDiscord	<mratsim> somehow I read can apply as crappy
+2019-12-20 12:39:54	FromGitter	<bung87> @shashlick what do you think about rust and go have libc wrap?
+2019-12-20 12:41:26	Araq	clyybber: probably
+2019-12-20 12:42:26	shashlick	bung87: will have to research, sori no idea
+2019-12-20 12:44:54	FromGitter	<bung87> ok
+2019-12-20 12:47:14	clyybber	Araq: This could be big, as evident from your wrong prepend proc :p
+2019-12-20 12:47:24	clyybber	s/prepend/append
+2019-12-20 12:47:59	-->	rockcavera (rc@unaffiliated/rockcavera) has joined #nim
+2019-12-20 12:48:49	disruptek	i can emit (key: key, val: value) from a pairs() iterator but only (key, value) from an mpairs().
+2019-12-20 12:49:08	clyybber	hmm
+2019-12-20 12:49:15	clyybber	report it
+2019-12-20 12:53:24	-->	Hideki_ (~hideki@fs96f9c5f3.knge002.ap.nuro.jp) has joined #nim
+2019-12-20 12:58:55	<--	Hideki_ (~hideki@fs96f9c5f3.knge002.ap.nuro.jp) has quit (Ping timeout: 265 seconds)
+2019-12-20 13:00:33	<--	leorize (~leorize@gateway/tor-sasl/leorize) has quit (Remote host closed the connection)
+2019-12-20 13:01:03	-->	leorize (~leorize@gateway/tor-sasl/leorize) has joined #nim
+2019-12-20 13:07:28	disruptek	http://ix.io/24XB
+2019-12-20 13:16:53	clyybber	disbot: You sleepin?
+2019-12-20 13:17:07	clyybber	or is he smart now?
+2019-12-20 13:18:53	shashlick	@mratsim: so he wants to have access to preprocessor macros?
+2019-12-20 13:19:24	shashlick	i do get that info in nimterop, could be converted into templates but the RHS is not trivial since you just get a blob of code which needs to nimmized
+2019-12-20 13:21:24	<--	endragor (~endragor@176.51.228.191) has quit (Remote host closed the connection)
+2019-12-20 13:23:53	disruptek	disbot doesn't share ix links anymore because pmunch.
+2019-12-20 13:24:19	FromGitter	<Willyboar> ???
+2019-12-20 13:26:08	<--	MightyJoe (~joe@189.158.104.159) has quit (Ping timeout: 245 seconds)
+2019-12-20 13:26:25	-->	cyraxjoe (~joe@CableLink152-212.telefonia.InterCable.net) has joined #nim
+2019-12-20 13:30:36	FromDiscord	<Milerius> imariscal in in the chat ?
+2019-12-20 13:38:35	FromGitter	<zetashift> you mean @lmariscal?
+2019-12-20 13:41:24	-->	exelotl (~geckojsc@2001:1c00:f20:4100:5d7e:4cda:274d:a461) has joined #nim
+2019-12-20 13:45:00	<--	pbb (~quassel@2a0f:4ac0::4) has quit (Ping timeout: 246 seconds)
+2019-12-20 13:46:54	-->	pbb (~quassel@2a0f:4ac0::4) has joined #nim
+2019-12-20 13:46:54	FromDiscord	<mratsim> we want to minimize manual intervention in crazy wrappers
+2019-12-20 13:47:23	disruptek	what fun would that be?
+2019-12-20 13:49:11	<--	sagax (~sagax_nb@213.138.71.146) has quit (Ping timeout: 265 seconds)
+2019-12-20 13:49:22	shashlick	that's exactly what i care about
+2019-12-20 13:49:30	shashlick	i don't like anything manual as much as possible
+2019-12-20 13:50:04	shashlick	am replying to that thread, but meanwhile, will also run through ncurses and libbacktrace and see what a nimterop wrapper will look like
+2019-12-20 13:54:06	-->	sagax (~sagax_nb@213.138.71.146) has joined #nim
+2019-12-20 13:54:22	clyybber	disruptek: Oh, why?
+2019-12-20 13:54:40	disruptek	he felt it was spammy.
+2019-12-20 13:55:20	disruptek	i guess he pastes a lot of non-nim stuff to the channel and it was uselessly posting playground links for it.
+2019-12-20 13:55:45	-->	endragor (~endragor@176.51.228.191) has joined #nim
+2019-12-20 13:59:17	clyybber	:9
+2019-12-20 13:59:19	clyybber	:(
+2019-12-20 14:00:39	<--	endragor (~endragor@176.51.228.191) has quit (Ping timeout: 258 seconds)
+2019-12-20 14:05:14	-->	qwertfisch (ETSPxLug6W@crux.uberspace.de) has joined #nim
+2019-12-20 14:10:02	disruptek	`nimph graph` can now dump releases and version-changing commits: https://github.com/disruptek/nimph#graph
+2019-12-20 14:17:54	<--	pbb (~quassel@2a0f:4ac0::4) has quit (Ping timeout: 246 seconds)
+2019-12-20 14:20:50	-->	pbb (~quassel@2a0f:4ac0::4) has joined #nim
+2019-12-20 14:28:33	lqdev[m]	can anyone help me with a workaround for this? https://github.com/nim-lang/Nim/issues/12942
+2019-12-20 14:28:35	disbot	➥ Default procedure parameters are untyped ; snippet at https://play.nim-lang.org/#ix=24WF
+2019-12-20 14:28:54	lqdev[m]	I've been struggling at this for hours now, and I'm simply unable to come up with something reliable.
+2019-12-20 14:31:26	disruptek	can you get the type of the later occurence of thing?
+2019-12-20 14:32:24	disruptek	just discard it so you can fetch the type and then literally discard your discard statement if you wanna be anal.
+2019-12-20 14:32:54	<--	MarquisdeFalbala (~Marquisde@2a02:2149:8414:9b00:915d:f6e6:447f:d95a) has quit (Remote host closed the connection)
+2019-12-20 14:36:03	lqdev[m]	disruptek: not really, because `thing` could be defined in a different module, at least afaict.
+2019-12-20 14:36:21	disruptek	why does that matter?
+2019-12-20 14:36:53	disruptek	1) have a macro put discards in for every param.
+2019-12-20 14:37:03	disruptek	2) have a macro read those discards to get the types.
+2019-12-20 14:37:06	disruptek	3) profit!
+2019-12-20 14:37:39	lqdev[m]	it's not related to `discard`s, take a look at the output I provided in the issue
+2019-12-20 14:38:01	lqdev[m]	the fact that the default parameter is untyped makes it impossible for me to get its type
+2019-12-20 14:38:05	disruptek	i did.  i noticed that you have sym for thing in the discard statement.
+2019-12-20 14:38:06	FromDiscord	<Fern & Simula (They/Them)> is there a way for a macro to traverse a nested data structure?
+2019-12-20 14:38:42	disruptek	fern: sure.
+2019-12-20 14:39:00	disruptek	fern: the ast is one such data structure.
+2019-12-20 14:39:40	FromDiscord	<Fern & Simula (They/Them)> hmmm, trying to figure out how to word this properly
+2019-12-20 14:39:55	lqdev[m]	disruptek: the thing is, once I get to that parameter, I can't really add another semantic pass without introducing large amounts of complexity into my lib
+2019-12-20 14:40:42	FromDiscord	<Fern & Simula (They/Them)> nvm, it was getTypeImpl i was looking for
+2019-12-20 14:40:58	FromDiscord	<Fern & Simula (They/Them)> oh crap, that requires a typed param and i can't do those
+2019-12-20 14:41:20	-->	solitudesf- (~solitudes@195.114.148.15) has joined #nim
+2019-12-20 14:41:36	Yardanico	 an untyped param can't have a type because it's not semchecked by the compiler yet (IIRC)
+2019-12-20 14:41:39	lqdev[m]	fern: defer that to another macro that you `newCall(bindSym"someMacroThatAcceptsTyped")`
+2019-12-20 14:41:52	<--	solitudesf (~solitudes@195.114.148.15) has quit (Ping timeout: 265 seconds)
+2019-12-20 14:42:27	FromDiscord	<Fern & Simula (They/Them)> what does `newCall` do?
+2019-12-20 14:43:09	lqdev[m]	fern: it creates a new call node to the procedure in the first parameter, passing arguments from the rest of the parameters.
+2019-12-20 14:43:23	lqdev[m]	disruptek: take a look at https://github.com/liquid600pgm/euwren/blob/master/src/euwren.nim#L482
+2019-12-20 14:43:54	-->	solitudesf (~solitudes@195.114.148.15) has joined #nim
+2019-12-20 14:44:08	lqdev[m]	this is where the default parameter causes a problem
+2019-12-20 14:44:30	FromDiscord	<Fern & Simula (They/Them)> lqdev[m]: so does that `newCall(bindSym...)` add type information for an untyped macro?
+2019-12-20 14:44:47	-->	endragor (~endragor@176.51.228.191) has joined #nim
+2019-12-20 14:44:49	lqdev[m]	fern: no, it just generates a call like `someProc(a, b, c, …)`
+2019-12-20 14:44:56	<--	livcd_ (mewmew@unaffiliated/livcd) has quit (Quit: Lost terminal)
+2019-12-20 14:45:03	disruptek	i would rewrite it in a lower macro.
+2019-12-20 14:45:25	lqdev[m]	fern: you can output that from your `untyped` macro, and the call can contain the parameters you need as `typed`
+2019-12-20 14:45:33	disruptek	yay, nimph doesn't work with cpp.
+2019-12-20 14:45:37	FromDiscord	<Fern & Simula (They/Them)> not sure that would help me. i think i'll just rewrite the macro as typed and use discard statements
+2019-12-20 14:46:13	<--	solitudesf- (~solitudes@195.114.148.15) has quit (Ping timeout: 265 seconds)
+2019-12-20 14:47:11	lqdev[m]	disruptek: what do you mean, "lower macro"?
+2019-12-20 14:47:36	disruptek	a macro that rewrites the ast prior to L482 in euwren.nim.
+2019-12-20 14:48:39	lqdev[m]	maybe I could implement `getParamList` itself as a macro, and call it somewhere inbetween, or something
+2019-12-20 14:48:43	lqdev[m]	I don't know
+2019-12-20 14:49:36	<--	endragor (~endragor@176.51.228.191) has quit (Ping timeout: 265 seconds)
+2019-12-20 14:53:26	disruptek	that's the idea.
+2019-12-20 14:53:51	disruptek	you have something else consume the proc and annotate it with discards that'll get sym'd for later.
+2019-12-20 14:55:31	lqdev[m]	it doesn't really have to be annotated with discards and stuff, just do anything that'll cause these poor untyped values to get semchecked
+2019-12-20 14:55:38	disruptek	yes.
+2019-12-20 14:55:46	-->	Hideki (~hideki@fs96f9c5f3.knge002.ap.nuro.jp) has joined #nim
+2019-12-20 14:56:10	--	Hideki is now known as Guest12527
+2019-12-20 15:02:42	lqdev[m]	guess something like this https://play.nim-lang.org/#ix=24Yf
+2019-12-20 15:03:09	lqdev[m]	too bad I can't use tuples here, would make for much cleaner code
+2019-12-20 15:04:42	disruptek	i was thinking addProcAux would just rewrite the proc with a discard as the first line of the body.  then anything that operates on it can just read that line to determine types.
+2019-12-20 15:04:54	disruptek	that's what i meant by annotation.
+2019-12-20 15:05:38	<--	Guest12527 (~hideki@fs96f9c5f3.knge002.ap.nuro.jp) has quit (Ping timeout: 260 seconds)
+2019-12-20 15:06:05	shashlick	that took longer than I hoped, but was fun nonetheless - https://github.com/status-im/nim-beacon-chain/issues/640#issuecomment-568105020
+2019-12-20 15:06:05	disbot	➥ [RFC] producing more robust wrappers for external C libraries
+2019-12-20 15:06:46	shashlick	ended up making libbacktrace and libncurses wrappers
+2019-12-20 15:06:50	<--	rockcavera (rc@unaffiliated/rockcavera) has quit (Remote host closed the connection)
+2019-12-20 15:07:10	shashlick	@mratsim - hope it is valuable to your team
+2019-12-20 15:07:19	<--	gangstacat (~gangstaca@unaffiliated/gangstacat) has quit (Quit: Ĝis!)
+2019-12-20 15:09:01	disruptek	shashlick, you are bringing to reality the as-yet merely promised potential of nim.
+2019-12-20 15:10:11	disruptek	the pragmatic point is, if it's too burdensome to create wrappers, it doesn't matter how good the ffi is.
+2019-12-20 15:10:34	<--	nsf (~nsf@jiss.convex.ru) has quit (Quit: WeeChat 2.6)
+2019-12-20 15:16:13	shashlick	yep and i'm still at the `create wrappers` step, there's still the part of making it easy to use the wrappers
+2019-12-20 15:16:52	shashlick	raw C wrappers aren't all that nice
+2019-12-20 15:16:56	disruptek	so much potential.
+2019-12-20 15:17:59	disruptek	so nimph doesn't work with cpp.
+2019-12-20 15:19:57	disruptek	something related to mutable iteration, i think.
+2019-12-20 15:21:10	<--	sagax (~sagax_nb@213.138.71.146) has quit (Ping timeout: 268 seconds)
+2019-12-20 15:30:04	dom96	I'm personally still of the opinion that we can get an awesome experience by creating a macro which generates wrappers at compile-time using libclang
+2019-12-20 15:31:46	disruptek	nimterop will be able to generate wrappers for myriad languages, though, and without the weight of clang.
+2019-12-20 15:34:51	shashlick	dom96 - nimterop is exactly you statement with s/libclang/tree-sitter/
+2019-12-20 15:38:49	dom96	it generates wrappers at nimble install-time though, not compile-time, right?
+2019-12-20 15:39:30	FromDiscord	<mratsim> @clyyber, I finally solved my Glibc bug, and I confirm it's Glibc which has a flaky condition variable implementation
+2019-12-20 15:40:05	disruptek	dom96: nimterop works at project compile-time, just the way you'd expect.
+2019-12-20 15:40:10	FromDiscord	<mratsim> I remimplemented condvar from scratch 😄
+2019-12-20 15:40:45	<--	sealmove (~sealmove@2a02:587:7d0f:8500:feaa:14ff:fe22:5dd) has quit (Quit: WeeChat 2.6)
+2019-12-20 15:48:09	clyybber	mratsim: Damn, good job. I'll have to take a look
+2019-12-20 15:48:26	FromDiscord	<mratsim> it's short: https://github.com/mratsim/weave/pull/58/files
+2019-12-20 15:48:27	disbot	➥ Me 1 - 0 Glibc: replace buggy Glibc condvar by futex
+2019-12-20 15:48:34	Yardanico	did you report it?
+2019-12-20 15:48:39	Yardanico	just curious to see the devs responses
+2019-12-20 15:48:42	FromDiscord	<mratsim> nop
+2019-12-20 15:48:59	FromDiscord	<mratsim> I don't want to deal with their bug tracker from the 2000s
+2019-12-20 15:49:41	FromDiscord	<mratsim> + reproducing a C test case would be too time-consuming
+2019-12-20 15:49:47	FromDiscord	<mratsim> creating a C test case*
+2019-12-20 15:50:02	clyybber	mratsim: Wait, and it made it faster? Or at least more mem efficient?
+2019-12-20 15:51:00	FromDiscord	<mratsim> obviously
+2019-12-20 15:51:09	FromDiscord	<mratsim> everything in pthread is based on futex
+2019-12-20 15:51:16	FromDiscord	<mratsim> mutex, condvar, semaphore
+2019-12-20 15:51:27	FromDiscord	<mratsim> at a low-level it's the unique way to put a thread to sleep
+2019-12-20 15:51:36	shashlick	dom96: you are thinking of nimgen
+2019-12-20 15:51:40	FromDiscord	<mratsim> condvar with timeout, lock with timeout
+2019-12-20 15:51:52	FromDiscord	<mratsim> so it's also faster
+2019-12-20 15:52:08	clyybber	Well thats just fucking nice :D
+2019-12-20 15:52:26	FromDiscord	<mratsim> benefits of formal verification 😉
+2019-12-20 15:52:39	FromDiscord	<mratsim> I know that naked wait + wake are enough
+2019-12-20 15:53:08	clyybber	Why is it only enabled on linux though?
+2019-12-20 15:53:09	FromDiscord	<mratsim> locks and condvars have a lots of if/else/if/else to avoid race conditions and misuses
+2019-12-20 15:53:20	FromDiscord	<mratsim> Only Linux and Windows have futex
+2019-12-20 15:53:23	dom96	shashlick, oh, I see. that's awesome.
+2019-12-20 15:53:28	FromDiscord	<mratsim> MacOS and BSD don't have them
+2019-12-20 15:53:35	clyybber	Thats a shame
+2019-12-20 15:53:43	clyybber	well, at least they don't have that bug
+2019-12-20 15:53:48	shashlick	Nimarchive used in choosenim is a nimterop based wrapper
+2019-12-20 15:54:04	FromDiscord	<mratsim> here is an intro: https://eli.thegreenplace.net/2018/basics-of-futexes/
+2019-12-20 15:54:26	-->	gour_ (~gour@unaffiliated/gour) has joined #nim
+2019-12-20 15:54:26	dom96	shashlick, how mature is it? What are the chances it will just work (TM) if I throw any header file at it?
+2019-12-20 15:56:17	dom96	also, does it support C/C++/ObjC equally well?
+2019-12-20 15:57:07	clyybber	mratsim: Hmm, I'm pretty sure BSD has futex
+2019-12-20 15:57:22	clyybber	at least OpenBSD, and then probably Free and Dragonfly too
+2019-12-20 15:57:57	<--	gour (~gour@unaffiliated/gour) has quit (Ping timeout: 258 seconds)
+2019-12-20 16:00:14	FromDiscord	<mratsim> seems like it's from 2016
+2019-12-20 16:05:14	<--	pbb (~quassel@2a0f:4ac0::4) has quit (Read error: Connection reset by peer)
+2019-12-20 16:06:32	-->	pbb (~quassel@2a0f:4ac0::4) has joined #nim
+2019-12-20 16:07:46	FromDiscord	<niv> dom96: hi!    can i do await sleepAsync(0) as a valid "yield to scheduler" thing?
+2019-12-20 16:07:55	<--	solitudesf (~solitudes@195.114.148.15) has quit (Ping timeout: 258 seconds)
+2019-12-20 16:08:22	dom96	niv: sure. that will work, but what is your use case?
+2019-12-20 16:08:26	FromDiscord	<mratsim> you can do cpuRelax() if you compile with threads:on
+2019-12-20 16:09:06	FromDiscord	<niv> im calling into a C lib in a while loop, so i need to yield once in a while to allow other fibers to run
+2019-12-20 16:09:38	FromDiscord	<niv> while true:  { mydata = recv(timeout=5);  handle(myadata); await sleepAsync(0) }
+2019-12-20 16:09:59	FromDiscord	<mratsim> oh, don't use cpuRelax then 😉
+2019-12-20 16:10:01	shashlick	dom96: it only supports C, and restricts to header files only, no implementation
+2019-12-20 16:10:03	FromDiscord	<niv> yeah!
+2019-12-20 16:10:07	dom96	yes, that will work, but it's not ideal: it'll busy loop your CPU
+2019-12-20 16:10:25	FromDiscord	<niv> no, it wont.  the recv call sleeps on a cv/lock until the timeout has passed
+2019-12-20 16:10:29	FromDiscord	<niv> so sleepAsync gets called every 5ms
+2019-12-20 16:10:40	shashlick	dom96: it works well enough since it only wraps what it recognizes
+2019-12-20 16:10:51	shashlick	dom96: so you don't error out
+2019-12-20 16:10:53	dom96	niv: isn't `recv` awaited?
+2019-12-20 16:10:57	FromDiscord	<niv> seems to work fine in testing.  can i do sleepAsync(0) or is there something that will short-circuit it on some platforms to "do nothing"?
+2019-12-20 16:11:16	FromDiscord	<niv> dom: its not actually recv, its a custom function that's just named like that but doesnt use sockets underneath
+2019-12-20 16:11:35	FromDiscord	<niv> its a wrapper around openssl DTLS.  its somewhat hairy.
+2019-12-20 16:11:55	FromDiscord	<niv> i wouldnt mind making it async itself, but i havent had a chance to really dig into what would be needed to do that on the C side
+2019-12-20 16:12:54	dom96	sleepAsync(0) shouldn't be short circuited, but you might wish to use `1` instead to be certain
+2019-12-20 16:13:09	dom96	for future proofing :)
+2019-12-20 16:13:21	FromDiscord	<niv> ok! thanks.
+2019-12-20 16:13:34	FromDiscord	<niv> how do i make something awaitable from the C side? where can i start looking?
+2019-12-20 16:14:43	dom96	https://github.com/nim-lang/Nim/blob/devel/lib/pure/asyncdispatch.nim#L1339-L1367
+2019-12-20 16:15:12	FromDiscord	<niv> ok, i guess i can do that.  thanks.  it's been a very long day so far
+2019-12-20 16:15:25	dom96	it could be tough depending on what you're doing
+2019-12-20 16:15:55	FromDiscord	<niv> the mentioned recv call just blocks on a condition_var until a queue can cough up one or more packets, then it returns them
+2019-12-20 16:16:07	dom96	the basic approach is: register an FD with the underlying selector, call `addRead`/`addWrite` to get a callback when the FD is readable/writeable, wrap that in a proc which handles the callback and completes the future appropriately
+2019-12-20 16:16:20	FromDiscord	<niv> i dont get access to the fd unfortunately. i'd have to fake it
+2019-12-20 16:16:36	FromDiscord	<niv> DTLS abstracts all of that pretty much away, best i can tell
+2019-12-20 16:16:46	dom96	you might be able to use the condition var, it's possible that epoll/kqueue gives readiness info for it
+2019-12-20 16:17:19	FromDiscord	<niv> i'll look into it next year.  for now, this should be enough not to suck too badly perf wise
+2019-12-20 16:17:38	dom96	sure
+2019-12-20 16:18:40	FromDiscord	<niv> i am excited to see how well this will perform :)
+2019-12-20 16:20:13	FromDiscord	<niv> are you on discord perchance, where i could brazenly PM you?
+2019-12-20 16:20:47	dom96	yeah, I'm there but don't open it very often
+2019-12-20 16:21:03	FromDiscord	<niv> i'll tell you a bit about what this is for, you might get a kick out of it
+2019-12-20 16:21:27	<--	pbb (~quassel@2a0f:4ac0::4) has quit (Ping timeout: 246 seconds)
+2019-12-20 16:34:46	<--	Vladar (~Vladar@46.162.2.53) has quit (Remote host closed the connection)
+2019-12-20 16:36:55	-->	hexeratops (~hexeratop@xplr-208-114-128-16.xplornet.com) has joined #nim
+2019-12-20 16:40:50	-->	gangstacat (~gangstaca@unaffiliated/gangstacat) has joined #nim
+2019-12-20 17:03:24	<--	clyybber (~clyybber@ipbcc24ae1.dynamic.kabel-deutschland.de) has quit (Quit: WeeChat 2.7)
+2019-12-20 17:15:19	-->	Hideki (~hideki@fs96f9c5f3.knge002.ap.nuro.jp) has joined #nim
+2019-12-20 17:15:43	--	Hideki is now known as Guest13999
+2019-12-20 17:20:32	<--	gour_ (~gour@unaffiliated/gour) has quit (Remote host closed the connection)
+2019-12-20 17:26:43	FromDiscord	<speckledlemon> Is it expected that the contents of `result` are immutable?
+2019-12-20 17:27:13	FromDiscord	<speckledlemon> Say, if I've done `result = deepCopy(mylist)` where `mylist` is a sequence of tuples
+2019-12-20 17:28:41	-->	endragor (~endragor@176.51.228.191) has joined #nim
+2019-12-20 17:29:47	<--	gangstacat (~gangstaca@unaffiliated/gangstacat) has quit (Quit: Ĝis!)
+2019-12-20 17:35:52	-->	pbb (~quassel@2a0f:4ac0::4) has joined #nim
+2019-12-20 17:44:03	shashlick	you can write to result multiple times
+2019-12-20 17:45:46	FromDiscord	<speckledlemon> Sorry, it was a result of doing `for b in result: ...` and attempting to modify `b`, so I misunderstood the issue
+2019-12-20 17:46:23	shashlick	no problem
+2019-12-20 17:52:58	<--	Guest13999 (~hideki@fs96f9c5f3.knge002.ap.nuro.jp) has quit (Remote host closed the connection)
+2019-12-20 17:58:51	FromDiscord	<slymilano> Is this the official nim package repository? https://nimble.directory/
+2019-12-20 17:59:07	FromGitter	<bung87> sure
+2019-12-20 18:05:41	-->	gangstacat (~gangstaca@unaffiliated/gangstacat) has joined #nim
+2019-12-20 18:07:43	<--	leorize (~leorize@gateway/tor-sasl/leorize) has quit (Ping timeout: 240 seconds)
+2019-12-20 18:09:17	-->	leorize (~leorize@gateway/tor-sasl/leorize) has joined #nim
+2019-12-20 18:17:25	<--	Jjp137 (~Jjp137@cpe-75-83-16-81.socal.res.rr.com) has quit (Quit: Leaving)
+2019-12-20 18:17:33	-->	Jjp137 (~Jjp137@cpe-75-83-16-81.socal.res.rr.com) has joined #nim
+2019-12-20 18:30:53	zedeus	@speckledlemon: you should be able to do `for b in result.mitems:`
+2019-12-20 18:36:01	<--	endragor (~endragor@176.51.228.191) has quit (Remote host closed the connection)
+2019-12-20 18:45:45	-->	silvernode (~quassel@160-2-241-248.cpe.sparklight.net) has joined #nim
+2019-12-20 18:46:50	<--	hexeratops (~hexeratop@xplr-208-114-128-16.xplornet.com) has quit (Quit: Leaving)
+2019-12-20 18:56:33	<--	exelotl (~geckojsc@2001:1c00:f20:4100:5d7e:4cda:274d:a461) has quit (Ping timeout: 245 seconds)
+2019-12-20 19:31:40	-->	endragor (~endragor@176.51.228.191) has joined #nim
+2019-12-20 19:31:50	leorize	disruptek: that plugin is totally out of nim.nvim scope
+2019-12-20 19:32:44	leorize	there should be plenty of coverage tool for vim though
+2019-12-20 19:32:52	leorize	I could help with adding nim support to them
+2019-12-20 19:34:01	-->	moduledge (~moduledge@ip72-203-78-184.oc.oc.cox.net) has joined #nim
+2019-12-20 19:36:50	<--	endragor (~endragor@176.51.228.191) has quit (Ping timeout: 258 seconds)
+2019-12-20 19:39:26	moduledge	Hi folks, I started using nim today (and enjoying it!) and I was wondering is there a way to collect iterators into a list?
+2019-12-20 19:40:30	zedeus	moduledge: Welcome :) I think you mean this https://nim-lang.github.io/Nim/sequtils.html#toSeq.t%2Cuntyped
+2019-12-20 19:42:16	moduledge	zedeus: perfect, yes. Thank you.
+2019-12-20 19:42:44	disruptek	leorize: first i have to make coco work.
+2019-12-20 19:42:57	disruptek	couldn't find anything for vim.
+2019-12-20 19:44:36	leorize	https://github.com/ruanyl/coverage.vim
+2019-12-20 19:45:33	disruptek	coco produces lcov output.
+2019-12-20 19:46:40	FromDiscord	<speckledlemon> D’oh thank you zedeus
+2019-12-20 19:47:02	disruptek	i mean, i guess i don't care what it is as long as it works against nim code.  🤷
+2019-12-20 19:48:21	leorize	https://github.com/google/vim-coverage
+2019-12-20 19:49:31	disruptek	neither that or maktaba tell me anything useful.
+2019-12-20 19:49:40	disruptek	i'm too old for this shit.
+2019-12-20 19:49:52	leorize	looks like it only supports python coverage tools
+2019-12-20 19:50:24	disruptek	it creeps up on you.
+2019-12-20 19:50:32	leorize	haizz, guess someone would have to invent a plugin
+2019-12-20 19:50:48	disruptek	one day someone says something and you realize you're just an old moron.
+2019-12-20 19:54:35	disruptek	!repo vim gcov
+2019-12-20 19:54:37	disbot	https://github.com/m42e/vim-gcov-marker -- vim-gcov-marker: A Simple way to display gcov coverate within vim  7⭐ 5🍴  & 7 more...
+2019-12-20 19:54:45	disruptek	whaddya know
+2019-12-20 19:55:03	disruptek	!repo vim lcov
+2019-12-20 19:55:04	disbot	https://github.com/umaumax/vim-lcov -- vim-lcov:   0⭐ 0🍴  & 2 more...
+2019-12-20 19:55:06	leorize	there's a vim plugin for most things :P
+2019-12-20 19:59:07	<--	mal`` (~mal``@static.38.6.217.95.clients.your-server.de) has quit (Quit: Leaving)
+2019-12-20 20:02:27	disruptek	oh it's too dumb.
+2019-12-20 20:18:03	-->	mal`` (~mal``@static.38.6.217.95.clients.your-server.de) has joined #nim
+2019-12-20 20:26:16	disruptek	the compiler adds generated_not_to_break_here lines which blow up the coverage analysis.
+2019-12-20 21:02:30	-->	seerix (~seerix@188.24.161.186) has joined #nim
+2019-12-20 21:11:48	-->	endragor (~endragor@176.51.228.191) has joined #nim
+2019-12-20 21:17:43	<--	endragor (~endragor@176.51.228.191) has quit (Ping timeout: 265 seconds)
+2019-12-20 21:23:00	<--	chemist69 (~apl@2a02:560:41e1:ed00:56f:5aa0:1d9d:375e) has quit (Ping timeout: 248 seconds)
+2019-12-20 21:25:10	-->	chemist69 (~apl@2a02:560:416e:8200:1d77:175c:57d6:e9a0) has joined #nim
+2019-12-20 21:36:29	-->	endragor (~endragor@176.51.228.191) has joined #nim
+2019-12-20 22:11:41	<--	NimBot (~NimBot@mail.nim-lang.org) has quit (Remote host closed the connection)
+2019-12-20 22:11:55	-->	NimBot (~NimBot@mail.nim-lang.org) has joined #nim
+2019-12-20 22:38:49	<--	njoseph (~quassel@static.207.158.216.95.clients.your-server.de) has quit (Quit: http://quassel-irc.org - Chat comfortably. Anywhere.)
+2019-12-20 22:38:59	-->	njoseph (~quassel@static.207.158.216.95.clients.your-server.de) has joined #nim
+2019-12-20 22:50:14	<--	silvernode (~quassel@160-2-241-248.cpe.sparklight.net) has quit (Quit: https://quassel-irc.org - Chat comfortably. Anywhere.)
+2019-12-20 23:13:13	-->	sagax (~sagax_nb@213.138.71.146) has joined #nim
+2019-12-20 23:23:22	-->	gour (~gour@unaffiliated/gour) has joined #nim
+2019-12-20 23:24:29	-->	nsf (~nsf@jiss.convex.ru) has joined #nim

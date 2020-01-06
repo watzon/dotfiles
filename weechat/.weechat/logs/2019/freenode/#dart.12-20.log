@@ -1,0 +1,43 @@
+2019-12-20 02:33:03	-->	watzon (~watzon@2601:681:5180:f4e0::ad92) has joined #dart
+2019-12-20 02:33:03	--	Topic for #dart is "Talk with other Dart developers || See also: https://dart.dev, https://goo.gl/hxqm5 (group), https://google.com/+dartlang (G+), https://goo.gl/pBeMw (G+ community), https://goo.gl/D2EXv (stackoverflow)"
+2019-12-20 02:33:03	--	Topic set by sortie (~Sortie@D4709781.rev.sefiber.dk) on Sat, 25 May 2019 17:37:00
+2019-12-20 02:33:03	--	Channel #dart: 19 nicks (0 ops, 0 voices, 19 normals)
+2019-12-20 02:33:29	--	Channel created on Thu, 08 Sep 2011 13:36:57
+2019-12-20 03:02:41	-->	Jackneill (~Jackneill@unaffiliated/jackneill) has joined #dart
+2019-12-20 03:11:36	<--	Jackneill (~Jackneill@unaffiliated/jackneill) has quit (Remote host closed the connection)
+2019-12-20 04:12:34	-->	xkapastel (uid17782@gateway/web/irccloud.com/x-wvycwejabaumxylg) has joined #dart
+2019-12-20 07:25:52	-->	Pacane (~joel@192.222.150.216) has joined #dart
+2019-12-20 08:01:56	<--	xkapastel (uid17782@gateway/web/irccloud.com/x-wvycwejabaumxylg) has quit (Quit: Connection closed for inactivity)
+2019-12-20 09:39:31	-->	beholders_eye (~weechat@node-1w7jr9qsq4i9010mp3shsg85j.ipv6.telus.net) has joined #dart
+2019-12-20 12:54:53	<--	beholders_eye (~weechat@node-1w7jr9qsq4i9010mp3shsg85j.ipv6.telus.net) has quit (Ping timeout: 245 seconds)
+2019-12-20 13:24:47	-->	LKoen (~LKoen@lfbn-idf2-1-334-110.w82-123.abo.wanadoo.fr) has joined #dart
+2019-12-20 13:42:31	<--	LKoen (~LKoen@lfbn-idf2-1-334-110.w82-123.abo.wanadoo.fr) has quit (Remote host closed the connection)
+2019-12-20 13:49:11	<--	sagax (~sagax_nb@213.138.71.146) has quit (Ping timeout: 265 seconds)
+2019-12-20 13:54:07	-->	sagax (~sagax_nb@213.138.71.146) has joined #dart
+2019-12-20 13:55:37	<--	aaronbond (~shrewdy@2a03:2880:11ff:14::face:b00c) has quit (Remote host closed the connection)
+2019-12-20 13:56:03	-->	beholders_eye (~weechat@node-1w7jr9qsq4i9010mp3shsg85j.ipv6.telus.net) has joined #dart
+2019-12-20 13:56:09	-->	aaronbond (~shrewdy@2a03:2880:11ff:f::face:b00c) has joined #dart
+2019-12-20 14:05:25	-->	sortie (~sortie@D4709781.rev.sefiber.dk) has joined #dart
+2019-12-20 14:05:25	--	Mode #dart [+o sortie] by ChanServ
+2019-12-20 14:59:34	-->	LKoen (~LKoen@2a01cb0407597a005d7d5238d1b93f58.ipv6.abo.wanadoo.fr) has joined #dart
+2019-12-20 15:21:10	<--	sagax (~sagax_nb@213.138.71.146) has quit (Ping timeout: 268 seconds)
+2019-12-20 15:36:27	-->	GostLy (~GostLy@64.42.179.59) has joined #dart
+2019-12-20 16:08:20	<--	beholders_eye (~weechat@node-1w7jr9qsq4i9010mp3shsg85j.ipv6.telus.net) has quit (Ping timeout: 248 seconds)
+2019-12-20 16:16:26	-->	beholders_eye (~weechat@node-1w7jr9qsq4i9010mp3shsg85j.ipv6.telus.net) has joined #dart
+2019-12-20 16:43:49	<--	sortie (~sortie@D4709781.rev.sefiber.dk) has quit (Quit: Leaving)
+2019-12-20 16:47:06	-->	sortie (~Sortie@D4709781.rev.sefiber.dk) has joined #dart
+2019-12-20 16:47:06	--	Mode #dart [+o sortie] by ChanServ
+2019-12-20 16:54:58	<--	LKoen (~LKoen@2a01cb0407597a005d7d5238d1b93f58.ipv6.abo.wanadoo.fr) has quit (Quit: “It’s only logical. First you learn to talk, then you learn to think. Too bad it’s not the other way round.”)
+2019-12-20 16:57:24	<--	beholders_eye (~weechat@node-1w7jr9qsq4i9010mp3shsg85j.ipv6.telus.net) has quit (Ping timeout: 248 seconds)
+2019-12-20 17:31:14	-->	beholders_eye (~weechat@node-1w7jr9qsq4i9010mp3shsg85j.ipv6.telus.net) has joined #dart
+2019-12-20 18:07:01	<--	sortie (~Sortie@D4709781.rev.sefiber.dk) has quit (Quit: Leaving)
+2019-12-20 19:08:24	<--	beholders_eye (~weechat@node-1w7jr9qsq4i9010mp3shsg85j.ipv6.telus.net) has quit (Ping timeout: 246 seconds)
+2019-12-20 20:26:20	-->	beholders_eye (~weechat@node-1w7jr9qsq4i9010mp3shsg85j.ipv6.telus.net) has joined #dart
+2019-12-20 21:08:52	-->	taelore (~taylorrr@unaffiliated/taylorrr) has joined #dart
+2019-12-20 21:36:47	<--	beholders_eye (~weechat@node-1w7jr9qsq4i9010mp3shsg85j.ipv6.telus.net) has quit (Ping timeout: 260 seconds)
+2019-12-20 21:45:39	-->	beholders_eye (~weechat@node-1w7jr9qsq4i9010mp3shsg85j.ipv6.telus.net) has joined #dart
+2019-12-20 22:12:28	<--	taelore (~taylorrr@unaffiliated/taylorrr) has quit (Ping timeout: 258 seconds)
+2019-12-20 22:19:57	<--	beholders_eye (~weechat@node-1w7jr9qsq4i9010mp3shsg85j.ipv6.telus.net) has quit (Ping timeout: 260 seconds)
+2019-12-20 22:31:06	-->	beholders_eye (~weechat@node-1w7jr9qsq4i9010mp3shsg85j.ipv6.telus.net) has joined #dart
+2019-12-20 23:04:18	<--	beholders_eye (~weechat@node-1w7jr9qsq4i9010mp3shsg85j.ipv6.telus.net) has quit (Ping timeout: 246 seconds)
+2019-12-20 23:13:13	-->	sagax (~sagax_nb@213.138.71.146) has joined #dart

@@ -1,0 +1,93 @@
+2019-12-19 19:04:39	-->	watzon (~watzon@2601:681:5180:f4e0::808a) has joined #nim
+2019-12-19 19:04:39	--	Topic for #nim is "👑 Nim programming language - http://nim-lang.org/ | https://github.com/nim-lang/Nim/wiki/IRC-guidelines | Latest version: 1.0.0 - https://nim-lang.org/install.html | Forum: http://forum.nim-lang.org/ | IRC logs: http://irclogs.nim-lang.org/ | See also #nim-offtopic #nim-nologs | git.io/gHZGCg"
+2019-12-19 19:04:39	--	Topic set by dom96 (~dom96@unaffiliated/dom96) on Mon, 23 Sep 2019 14:13:13
+2019-12-19 19:04:39	--	Channel #nim: 166 nicks (0 ops, 0 voices, 166 normals)
+2019-12-19 19:04:50	--	Channel created on Fri, 29 Jan 2010 22:58:29
+2019-12-19 19:06:00	russellb	multi threading would be great in this era of multi-core processors
+2019-12-19 19:06:23	russellb	But for an evolving stage it should be O.K.
+2019-12-19 19:06:57	russellb	How do you people forsee the nim's position in next 3-5 years?
+2019-12-19 19:07:18	russellb	Is it being used in production somewhere?
+2019-12-19 19:07:35	disruptek	production?  sure.
+2019-12-19 19:07:46	leorize[m]	!repo nimbus
+2019-12-19 19:07:47	disbot	https://github.com/status-im/nimbus -- nimbus: Nimbus: an Ethereum 1.0 & 2.0 Client for Resource-Restricted Devices  311⭐ 41🍴  & 7 more...
+2019-12-19 19:08:34	leorize[m]	!repo reelvalley
+2019-12-19 19:08:34	disbot	no results 😢
+2019-12-19 19:09:59	leorize[m]	!repo nimforum
+2019-12-19 19:09:59	disbot	https://github.com/nim-lang/nimforum -- nimforum: Lightweight alternative to Discourse written in Nim  438⭐ 35🍴  & 1 more...
+2019-12-19 19:10:29	watzon	I'm fairly certain every semi-popular language is being used in production somewhere. I just got done working for a company that was using Crystal in production
+2019-12-19 19:11:01	russellb	Crystal in production?
+2019-12-19 19:11:08	russellb	That's interesting
+2019-12-19 19:11:20	watzon	Yep. NeuraLegion uses Crystal for pretty much their whole stack
+2019-12-19 19:11:26	russellb	nimbus sounds like a serious project
+2019-12-19 19:11:59	russellb	watzon: that's interesting and inspiring to hear
+2019-12-19 19:14:49	watzon	I'd say there's definitely hope for Nim in that area. It's a great language, and a lot of people love the Pythonic syntax.
+2019-12-19 19:14:56	watzon	Not to mention it's fast
+2019-12-19 19:15:47	disruptek	more go than go.
+2019-12-19 19:16:00	disruptek	and less google.
+2019-12-19 19:17:17	disruptek	this is pretty exciting:
+2019-12-19 19:17:19	disruptek	!repo nlvm
+2019-12-19 19:17:20	disbot	https://github.com/arnetheduck/nlvm -- nlvm: LLVM-based compiler for the Nim language  245⭐ 18🍴  & 1 more...
+2019-12-19 19:20:57	russellb	that's nice.
+2019-12-19 19:21:04	russellb	disruptek: Have you tried this?
+2019-12-19 19:21:30	disruptek	yeah, but i need to follow devel/1.0 for now.
+2019-12-19 19:22:00	disruptek	i'm hoping to run nim/nlvm in graalvm.
+2019-12-19 19:23:41	russellb	o.k
+2019-12-19 19:24:05	russellb	post your experiences, best through a blog
+2019-12-19 19:25:02	disruptek	i don't really understand blogs.
+2019-12-19 19:25:10	disruptek	who has time to search out content like that?
+2019-12-19 19:25:37	disruptek	i'd rather write code.  but, i'm old.
+2019-12-19 19:25:45	disruptek	only a few more years left, if i'm lucky.
+2019-12-19 19:26:35	russellb	!!
+2019-12-19 19:27:31	disruptek	i'm working on this:
+2019-12-19 19:27:33	disruptek	!repo nimph
+2019-12-19 19:27:34	disbot	https://github.com/disruptek/nimph -- nimph: a nim package hierarchy manager from the future 🧚  22⭐ 1🍴  & 1 more...
+2019-12-19 19:28:57	russellb	lemme check this out
+2019-12-19 20:12:56	<--	icebattle (~wayne@159.153.136.97) has quit (Ping timeout: 268 seconds)
+2019-12-19 20:14:19	FromGitter	<iffy> Since I didn't find a library for this already: https://github.com/iffy/nim-keyring I'll work on Linux when I next get a chance
+2019-12-19 20:33:28	<--	endragor (~endragor@176.51.228.191) has quit (Remote host closed the connection)
+2019-12-19 20:35:04	-->	endragor (~endragor@176.51.228.191) has joined #nim
+2019-12-19 20:39:54	<--	endragor (~endragor@176.51.228.191) has quit (Ping timeout: 258 seconds)
+2019-12-19 20:43:17	<--	russellb (~arkansas@117.241.93.181) has left #nim ("WeeChat 2.7")
+2019-12-19 20:56:42	-->	kevinchau (~user@120.50.43.137) has joined #nim
+2019-12-19 20:59:04	<--	kevinchau (~user@120.50.43.137) has quit (Client Quit)
+2019-12-19 21:11:55	-->	voltist (~voltist@2407:7000:9d30:f100:69fc:9c27:bd17:b1da) has joined #nim
+2019-12-19 21:14:39	voltist	I find it very hard to believe that nothing has been said on this channel while I have been away. Something must be wrong with my ZNC server...
+2019-12-19 21:23:48	<--	chemist69 (~apl@2a02:560:4153:4a00:5482:f693:6168:7ec8) has quit (Ping timeout: 252 seconds)
+2019-12-19 21:25:56	-->	chemist69 (~apl@2a02:560:41e1:ed00:56f:5aa0:1d9d:375e) has joined #nim
+2019-12-19 21:26:28	shashlick	its been quiet for the last hour at best
+2019-12-19 21:28:55	-->	endragor (~endragor@212.164.228.99) has joined #nim
+2019-12-19 21:37:31	-->	nsf (~nsf@jiss.convex.ru) has joined #nim
+2019-12-19 22:06:39	<--	oculux (~oculux@79.142.76.244) has quit (Ping timeout: 246 seconds)
+2019-12-19 22:07:21	-->	oculux (~oculux@128.127.105.184) has joined #nim
+2019-12-19 22:23:32	disruptek	$ nimph downgrade sdl2_nim
+2019-12-19 22:23:37	disruptek	rolled sdl2_nim from 2.0.10 to v0.95
+2019-12-19 22:23:50	disruptek	i swear this person hates me.
+2019-12-19 22:24:26	disruptek	rolled sdl2_nim from 0.95.0 to v2.0.10.0
+2019-12-19 22:24:36	disruptek	it's madness, is what it is.  sheer madness.
+2019-12-19 22:27:18	shashlick	someone's got to disrupt you too buddy
+2019-12-19 22:41:25	<--	voltist (~voltist@2407:7000:9d30:f100:69fc:9c27:bd17:b1da) has quit (Quit: Leaving)
+2019-12-19 22:51:27	FromGitter	<zacharycarter>  (https://files.gitter.im/nim-lang/Nim/nrIm/image.png)
+2019-12-19 22:51:33	FromGitter	<zacharycarter> starting to look pretty good I think
+2019-12-19 22:52:10	FromGitter	<zacharycarter> it doesn't look as tiled anymore
+2019-12-19 22:59:05	FromGitter	<juancarlospaco> New choosenim is not updating?. Info: Already up to date at version 0.4.0
+2019-12-19 23:01:28	-->	marmotini_ (~marmotini@41.80.94.97) has joined #nim
+2019-12-19 23:06:23	shashlick	looks like it is not updated on http://nim-lang.org website, need to ping dom96
+2019-12-19 23:07:12	watzon	Hmm mine says version 0.5.0
+2019-12-19 23:08:27	shashlick	https://nim-lang.org/choosenim/stable still shows 0.4.0
+2019-12-19 23:09:04	shashlick	also unclear where it downloads the binaries from
+2019-12-19 23:09:21	shashlick	when you update or run the init.sh script
+2019-12-19 23:14:50	<--	marmotini_ (~marmotini@41.80.94.97) has quit (Ping timeout: 265 seconds)
+2019-12-19 23:19:11	-->	gour (~gour@unaffiliated/gour) has joined #nim
+2019-12-19 23:29:06	<--	actuallybatman (~sam@S010664777dafd303.cg.shawcable.net) has quit (Quit: leaving)
+2019-12-19 23:39:42	-->	voltist (~voltist@2407:7000:9d30:f100:69fc:9c27:bd17:b1da) has joined #nim
+2019-12-19 23:40:04	<--	voltist (~voltist@2407:7000:9d30:f100:69fc:9c27:bd17:b1da) has quit (Client Quit)
+2019-12-19 23:40:29	-->	solitudesf (~solitudes@195.114.148.15) has joined #nim
+2019-12-19 23:44:00	<--	sealmove (~sealmove@2a02:587:7d0f:8500:feaa:14ff:fe22:5dd) has quit (Quit: WeeChat 2.6)
+2019-12-19 23:44:53	<--	disbot (~disbot@c-73-233-65-168.hsd1.pa.comcast.net) has quit (Ping timeout: 245 seconds)
+2019-12-19 23:45:17	<--	disruptek (~disruptek@c-73-233-65-168.hsd1.pa.comcast.net) has quit (Ping timeout: 265 seconds)
+2019-12-19 23:46:19	-->	marmotini_ (~marmotini@41.80.94.97) has joined #nim
+2019-12-19 23:46:41	<--	marmotini_ (~marmotini@41.80.94.97) has quit (Remote host closed the connection)
+2019-12-19 23:46:56	-->	marmotini_ (~marmotini@41.80.94.97) has joined #nim
+2019-12-19 23:51:40	-->	marmotin_ (~marmotini@41.80.94.97) has joined #nim
+2019-12-19 23:52:26	<--	marmotini_ (~marmotini@41.80.94.97) has quit (Ping timeout: 240 seconds)
+2019-12-19 23:53:42	<--	dddddd (~dddddd@unaffiliated/dddddd) has quit (Ping timeout: 268 seconds)

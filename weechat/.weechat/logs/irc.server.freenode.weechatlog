@@ -1,0 +1,737 @@
+2019-12-15 22:32:16	--	irc: connecting to server chat.freenode.net/7000 (SSL)...
+2019-12-15 22:32:16	--	gnutls: connected using 2048-bit Diffie-Hellman shared secret exchange
+2019-12-15 22:32:16	--	gnutls: receiving 2 certificates
+2019-12-15 22:32:16	--	 - certificate[1] info:
+2019-12-15 22:32:16	--	   - subject `CN=adams.freenode.net', issuer `CN=Let's Encrypt Authority X3,O=Let's Encrypt,C=US', serial 0x03ba895ef53773b51aee514136cc802f66af, RSA key 4096 bits, signed using RSA-SHA256, activated `2019-11-25 05:02:04 UTC', expires `2020-02-23 05:02:04 UTC', pin-sha256="WXu8USfiHQt4RHvXQ5FsEanHAnt5GTERZ3bqIOKeh9Q="
+2019-12-15 22:32:16	--	 - certificate[2] info:
+2019-12-15 22:32:16	--	   - subject `CN=Let's Encrypt Authority X3,O=Let's Encrypt,C=US', issuer `CN=DST Root CA X3,O=Digital Signature Trust Co.', serial 0x0a0141420000015385736a0b85eca708, RSA key 2048 bits, signed using RSA-SHA256, activated `2016-03-17 16:40:46 UTC', expires `2021-03-17 16:40:46 UTC', pin-sha256="YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg="
+2019-12-15 22:32:16	--	gnutls: peer's certificate is trusted
+2019-12-15 22:32:16	--	irc: connected to chat.freenode.net/7000 (2a01:270:0:666f::1)
+2019-12-15 22:32:16	--	adams.freenode.net: *** Looking up your hostname...
+2019-12-15 22:32:16	--	adams.freenode.net: *** Checking Ident
+2019-12-15 22:32:16	--	adams.freenode.net: *** Couldn't look up your hostname
+2019-12-15 22:32:23	--	adams.freenode.net: *** No Ident response
+2019-12-15 22:32:23	--	Welcome to the freenode Internet Relay Chat Network watzon
+2019-12-15 22:32:23	--	Your host is adams.freenode.net[2a01:270:0:666f::1/7000], running version ircd-seven-1.1.8
+2019-12-15 22:32:23	--	This server was created Sun Sep 8 2019 at 20:14:07 UTC
+2019-12-15 22:32:23	--	adams.freenode.net ircd-seven-1.1.8 DOQRSZaghilopsuwz CFILMPQSbcefgijklmnopqrstuvz bkloveqjfI
+2019-12-15 22:32:24	--	CHANTYPES=# EXCEPTS INVEX CHANMODES=eIbq,k,flj,CFLMPQScgimnprstuz CHANLIMIT=#:120 PREFIX=(ov)@+ MAXLIST=bqeI:100 MODES=4 NETWORK=freenode STATUSMSG=@+ CALLERID=g CASEMAPPING=rfc1459 :are supported by this server
+2019-12-15 22:32:24	--	CHARSET=ascii NICKLEN=16 CHANNELLEN=50 TOPICLEN=390 DEAF=D FNC TARGMAX=NAMES:1,LIST:1,KICK:1,WHOIS:1,PRIVMSG:4,NOTICE:4,ACCEPT:,MONITOR: EXTBAN=$,ajrxz CLIENTVER=3.0 CPRIVMSG CNOTICE ETRACE :are supported by this server
+2019-12-15 22:32:24	--	KNOCK SAFELIST ELIST=CTU WHOX :are supported by this server
+2019-12-15 22:32:24	--	There are 82 users and 76029 invisible on 29 servers
+2019-12-15 22:32:24	--	32 :IRC Operators online
+2019-12-15 22:32:24	--	33 :unknown connection(s)
+2019-12-15 22:32:24	--	48659 :channels formed
+2019-12-15 22:32:24	--	I have 8504 clients and 1 servers
+2019-12-15 22:32:24	--	8504 9623 :Current local users 8504, max 9623
+2019-12-15 22:32:24	--	76111 92604 :Current global users 76111, max 92604
+2019-12-15 22:32:24	--	Highest connection count: 9624 (9623 clients) (1098537 connections received)
+2019-12-15 22:32:24	--	- adams.freenode.net Message of the Day - 
+2019-12-15 22:32:24	--	- Welcome to adams.freenode.net. Thanks to ATW Internet Kft 
+2019-12-15 22:32:24	--	- (http://www.atw.hu) for sponsoring this server!
+2019-12-15 22:32:24	--	-  
+2019-12-15 22:32:24	--	- ADAMS, DOUGLAS (1952-2001).  Author of The Hitch Hikers Guide
+2019-12-15 22:32:24	--	- to the Galaxy and many other witty and humourous books,
+2019-12-15 22:32:24	--	- portrayed in his uniquely British irony. He is sorely missed
+2019-12-15 22:32:24	--	- by many millions of devoted fans. "So long and thanks for all
+2019-12-15 22:32:24	--	- the books!"
+2019-12-15 22:32:24	--	-  
+2019-12-15 22:32:24	--	- Welcome to freenode - supporting the free and open source
+2019-12-15 22:32:24	--	- software communities since 1998.
+2019-12-15 22:32:24	--	-  
+2019-12-15 22:32:24	--	- By connecting to freenode you indicate that you have read and
+2019-12-15 22:32:24	--	- accept our policies and guidelines as set out on https://freenode.net
+2019-12-15 22:32:24	--	-  
+2019-12-15 22:32:24	--	- In the event that you observe behaviour that contravenes our policies,
+2019-12-15 22:32:24	--	- please notify a volunteer staff member via private message, or send us an
+2019-12-15 22:32:24	--	- e-mail to complaints@freenode.net -- we will do our best to address the
+2019-12-15 22:32:24	--	- situation within a reasonable period of time, and we may request further
+2019-12-15 22:32:24	--	- information or, as appropriate, involve other parties such as channel operators 
+2019-12-15 22:32:24	--	- Group Contacts representing an on-topic group.
+2019-12-15 22:32:24	--	-  
+2019-12-15 22:32:24	--	- freenode runs an open proxy scanner.
+2019-12-15 22:32:24	--	-  
+2019-12-15 22:32:24	--	- If you are looking for assistance, you may be able to find a list of 
+2019-12-15 22:32:24	--	- volunteer staff on '/stats p' (shows only on-call staff) or by joining 
+2019-12-15 22:32:24	--	- #freenode and using the '/who freenode/staff/*' command. You may message
+2019-12-15 22:32:24	--	- any of us at any time. Please note that freenode predominantly provides 
+2019-12-15 22:32:24	--	- assistance via private message, and while we have a network channel the 
+2019-12-15 22:32:24	--	- primary venue for support requests is via private message to a member 
+2019-12-15 22:32:24	--	- of the volunteer staff team.
+2019-12-15 22:32:24	--	-  
+2019-12-15 22:32:24	--	- From time to time, volunteer staff may send server-wide notices relating to
+2019-12-15 22:32:24	--	- the project, or the communities that we host. The majority of such notices
+2019-12-15 22:32:24	--	- will be sent as wallops, and you can '/mode <yournick> +w' to ensure that you
+2019-12-15 22:32:24	--	- do not miss them. Important messages relating to the freenode project, including
+2019-12-15 22:32:24	--	- notices of upcoming maintenance and other scheduled downtime will be issued as
+2019-12-15 22:32:24	--	- global notices.
+2019-12-15 22:32:24	--	-  
+2019-12-15 22:32:24	--	- Representing an on-topic project? Don't forget to register, more information
+2019-12-15 22:32:24	--	- can be found on the https://freenode.net website under "Group Registration".
+2019-12-15 22:32:24	--	-  
+2019-12-15 22:32:24	--	- Thank you also to our server sponsors for the sustained support in keeping the
+2019-12-15 22:32:24	--	- network going for close to two decades.
+2019-12-15 22:32:24	--	-  
+2019-12-15 22:32:24	--	- Thank you to all of our attendees, sponsors, speakers, exhibitors, helpers,
+2019-12-15 22:32:24	--	- and everyone else who made this year's freenode #live conference amazing.
+2019-12-15 22:32:24	--	- https://freenode.net/news/live-2018
+2019-12-15 22:32:24	--	-  
+2019-12-15 22:32:24	--	- Thank you for using freenode!
+2019-12-15 22:32:24	--	End of /MOTD command.
+2019-12-15 22:32:24	--	User mode [+Zi] by watzon
+2019-12-15 22:32:24	--	NickServ (NickServ@services.): This nickname is registered. Please choose a different nickname, or identify via /msg NickServ identify <password>.
+2019-12-15 22:32:24	--	freenode-connect (frigg@freenode/utility-bot/frigg): Welcome to freenode. To protect the network all new connections will be scanned for vulnerabilities. This will not harm your computer, and vulnerable hosts will be notified.
+2019-12-15 22:32:24	--	CTCP requested by freenode-connect: VERSION
+2019-12-15 22:32:24	--	CTCP reply to freenode-connect: VERSION WeeChat 2.7 (Dec 13 2019 20:54:54)
+2019-12-15 22:34:02	--	irc: disconnected from server
+2019-12-15 22:34:30	--	irc: connecting to server chat.freenode.net/7000 (SSL)...
+2019-12-15 22:34:31	--	gnutls: connected using 2048-bit Diffie-Hellman shared secret exchange
+2019-12-15 22:34:31	--	gnutls: receiving 2 certificates
+2019-12-15 22:34:31	--	 - certificate[1] info:
+2019-12-15 22:34:31	--	   - subject `CN=wolfe.freenode.net', issuer `CN=Let's Encrypt Authority X3,O=Let's Encrypt,C=US', serial 0x03a6faf56263d7ca1e1aa06ce70c10edf97a, RSA key 4096 bits, signed using RSA-SHA256, activated `2019-12-09 05:01:17 UTC', expires `2020-03-08 05:01:17 UTC', pin-sha256="AqN5ELLbUmYnkmOq4cUW+lzecvnmU4Y+Mg7DQ4p3Kow="
+2019-12-15 22:34:31	--	 - certificate[2] info:
+2019-12-15 22:34:31	--	   - subject `CN=Let's Encrypt Authority X3,O=Let's Encrypt,C=US', issuer `CN=DST Root CA X3,O=Digital Signature Trust Co.', serial 0x0a0141420000015385736a0b85eca708, RSA key 2048 bits, signed using RSA-SHA256, activated `2016-03-17 16:40:46 UTC', expires `2021-03-17 16:40:46 UTC', pin-sha256="YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg="
+2019-12-15 22:34:31	--	gnutls: peer's certificate is trusted
+2019-12-15 22:34:31	--	irc: connected to chat.freenode.net/7000 (2001:948:7:7::140)
+2019-12-15 22:34:31	--	wolfe.freenode.net: *** Looking up your hostname...
+2019-12-15 22:34:31	--	wolfe.freenode.net: *** Checking Ident
+2019-12-15 22:34:31	--	wolfe.freenode.net: *** Couldn't look up your hostname
+2019-12-15 22:34:40	--	wolfe.freenode.net: *** No Ident response
+2019-12-15 22:34:40	--	Welcome to the freenode Internet Relay Chat Network watzon
+2019-12-15 22:34:40	--	Your host is wolfe.freenode.net[2001:948:7:7::140/7000], running version ircd-seven-1.1.7
+2019-12-15 22:34:40	--	This server was created Sat Sep 1 2018 at 18:07:18 UTC
+2019-12-15 22:34:40	--	wolfe.freenode.net ircd-seven-1.1.7 DOQRSZaghilopsuwz CFILMPQSbcefgijklmnopqrstuvz bkloveqjfI
+2019-12-15 22:34:40	--	CHANTYPES=# EXCEPTS INVEX CHANMODES=eIbq,k,flj,CFLMPQScgimnprstuz CHANLIMIT=#:120 PREFIX=(ov)@+ MAXLIST=bqeI:100 MODES=4 NETWORK=freenode STATUSMSG=@+ CALLERID=g CASEMAPPING=rfc1459 :are supported by this server
+2019-12-15 22:34:40	--	CHARSET=ascii NICKLEN=16 CHANNELLEN=50 TOPICLEN=390 DEAF=D FNC TARGMAX=NAMES:1,LIST:1,KICK:1,WHOIS:1,PRIVMSG:4,NOTICE:4,ACCEPT:,MONITOR: EXTBAN=$,ajrxz CLIENTVER=3.0 KNOCK SAFELIST ELIST=CTU :are supported by this server
+2019-12-15 22:34:40	--	WHOX CPRIVMSG CNOTICE ETRACE :are supported by this server
+2019-12-15 22:34:40	--	There are 81 users and 76041 invisible on 29 servers
+2019-12-15 22:34:40	--	32 :IRC Operators online
+2019-12-15 22:34:40	--	20 :unknown connection(s)
+2019-12-15 22:34:40	--	48663 :channels formed
+2019-12-15 22:34:40	--	I have 8500 clients and 1 servers
+2019-12-15 22:34:40	--	8500 10508 :Current local users 8500, max 10508
+2019-12-15 22:34:40	--	76122 94773 :Current global users 76122, max 94773
+2019-12-15 22:34:40	--	Highest connection count: 10509 (10508 clients) (1723394 connections received)
+2019-12-15 22:34:40	--	- wolfe.freenode.net Message of the Day - 
+2019-12-15 22:34:40	--	- Welcome to wolfe.freenode.net in Stockholm, SE.
+2019-12-15 22:34:40	--	- Thanks to http://nordu.net/ for sponsoring
+2019-12-15 22:34:40	--	- this server!
+2019-12-15 22:34:40	--	-  
+2019-12-15 22:34:40	--	- WOLFE, GENE [1931-2019].  Prolific writer of short stories
+2019-12-15 22:34:40	--	- and novels. His best-known work is the multi-volume novel The
+2019-12-15 22:34:40	--	- Book of the New Sun. He has won multiple awards including
+2019-12-15 22:34:40	--	- the Nebula Award, the World Fantasy Award, The Campell
+2019-12-15 22:34:40	--	- Memorial Award and the Locus Award. He was awarded the World
+2019-12-15 22:34:40	--	- Fantasy Award for lifetime achievement in 1996.
+2019-12-15 22:34:40	--	-  
+2019-12-15 22:34:40	--	- Welcome to freenode - supporting the free and open source
+2019-12-15 22:34:40	--	- software communities since 1998.
+2019-12-15 22:34:40	--	-  
+2019-12-15 22:34:40	--	- By connecting to freenode you indicate that you have read and
+2019-12-15 22:34:40	--	- accept our policies and guidelines as set out on https://freenode.net
+2019-12-15 22:34:40	--	-  
+2019-12-15 22:34:40	--	- In the event that you observe behaviour that contravenes our policies,
+2019-12-15 22:34:40	--	- please notify a volunteer staff member via private message, or send us an
+2019-12-15 22:34:40	--	- e-mail to complaints@freenode.net -- we will do our best to address the
+2019-12-15 22:34:40	--	- situation within a reasonable period of time, and we may request further
+2019-12-15 22:34:40	--	- information or, as appropriate, involve other parties such as channel operators 
+2019-12-15 22:34:40	--	- Group Contacts representing an on-topic group.
+2019-12-15 22:34:40	--	-  
+2019-12-15 22:34:40	--	- freenode runs an open proxy scanner.
+2019-12-15 22:34:40	--	-  
+2019-12-15 22:34:40	--	- If you are looking for assistance, you may be able to find a list of 
+2019-12-15 22:34:40	--	- volunteer staff on '/stats p' (shows only on-call staff) or by joining 
+2019-12-15 22:34:40	--	- #freenode and using the '/who freenode/staff/*' command. You may message
+2019-12-15 22:34:40	--	- any of us at any time. Please note that freenode predominantly provides 
+2019-12-15 22:34:40	--	- assistance via private message, and while we have a network channel the 
+2019-12-15 22:34:40	--	- primary venue for support requests is via private message to a member 
+2019-12-15 22:34:40	--	- of the volunteer staff team.
+2019-12-15 22:34:40	--	-  
+2019-12-15 22:34:40	--	- From time to time, volunteer staff may send server-wide notices relating to
+2019-12-15 22:34:40	--	- the project, or the communities that we host. The majority of such notices
+2019-12-15 22:34:40	--	- will be sent as wallops, and you can '/mode <yournick> +w' to ensure that you
+2019-12-15 22:34:40	--	- do not miss them. Important messages relating to the freenode project, including
+2019-12-15 22:34:40	--	- notices of upcoming maintenance and other scheduled downtime will be issued as
+2019-12-15 22:34:40	--	- global notices.
+2019-12-15 22:34:40	--	-  
+2019-12-15 22:34:40	--	- Representing an on-topic project? Don't forget to register, more information
+2019-12-15 22:34:40	--	- can be found on the https://freenode.net website under "Group Registration".
+2019-12-15 22:34:40	--	-  
+2019-12-15 22:34:40	--	- Thank you also to our server sponsors for the sustained support in keeping the
+2019-12-15 22:34:40	--	- network going for close to two decades.
+2019-12-15 22:34:40	--	-  
+2019-12-15 22:34:40	--	- Thank you to all of our attendees, sponsors, speakers, exhibitors, helpers,
+2019-12-15 22:34:40	--	- and everyone else who made this year's freenode #live conference amazing.
+2019-12-15 22:34:40	--	- https://freenode.net/news/live-2018
+2019-12-15 22:34:40	--	-  
+2019-12-15 22:34:40	--	- Thank you for using freenode!
+2019-12-15 22:34:40	--	End of /MOTD command.
+2019-12-15 22:34:40	--	User mode [+Zi] by watzon
+2019-12-15 22:34:40	--	NickServ (NickServ@services.): This nickname is registered. Please choose a different nickname, or identify via /msg NickServ identify <password>.
+2019-12-15 22:34:40	--	freenode-connect (frigg@freenode/utility-bot/frigg): Welcome to freenode. To protect the network all new connections will be scanned for vulnerabilities. This will not harm your computer, and vulnerable hosts will be notified.
+2019-12-15 22:34:40	--	CTCP requested by freenode-connect: VERSION
+2019-12-15 22:34:40	--	CTCP reply to freenode-connect: VERSION WeeChat 2.7 (Dec 13 2019 20:54:54)
+2019-12-15 22:35:35	--	irc: disconnected from server
+2019-12-15 22:35:45	--	irc: connecting to server chat.freenode.net/7000 (SSL)...
+2019-12-15 22:35:45	--	gnutls: connected using 2048-bit Diffie-Hellman shared secret exchange
+2019-12-15 22:35:45	--	gnutls: receiving 2 certificates
+2019-12-15 22:35:45	--	 - certificate[1] info:
+2019-12-15 22:35:45	--	   - subject `CN=sinisalo.freenode.net', issuer `CN=Let's Encrypt Authority X3,O=Let's Encrypt,C=US', serial 0x039b232ea62f1fde683ce44678c61aeda047, RSA key 4096 bits, signed using RSA-SHA256, activated `2019-11-04 05:02:52 UTC', expires `2020-02-02 05:02:52 UTC', pin-sha256="nM7Ei/iV1oNERfssS6jOLmikH05AS1ROC4Ivf4VO0BI="
+2019-12-15 22:35:45	--	 - certificate[2] info:
+2019-12-15 22:35:45	--	   - subject `CN=Let's Encrypt Authority X3,O=Let's Encrypt,C=US', issuer `CN=DST Root CA X3,O=Digital Signature Trust Co.', serial 0x0a0141420000015385736a0b85eca708, RSA key 2048 bits, signed using RSA-SHA256, activated `2016-03-17 16:40:46 UTC', expires `2021-03-17 16:40:46 UTC', pin-sha256="YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg="
+2019-12-15 22:35:45	--	gnutls: peer's certificate is trusted
+2019-12-15 22:35:45	--	irc: connected to chat.freenode.net/7000 (2a00:1a28:1100:11::42)
+2019-12-15 22:35:45	--	sinisalo.freenode.net: *** Looking up your hostname...
+2019-12-15 22:35:45	--	sinisalo.freenode.net: *** Checking Ident
+2019-12-15 22:35:45	--	sinisalo.freenode.net: *** Couldn't look up your hostname
+2019-12-15 22:35:54	--	sinisalo.freenode.net: *** No Ident response
+2019-12-15 22:35:54	--	irc: client capability, server supports: extended-join multi-prefix identify-msg account-notify sasl
+2019-12-15 22:35:54	--	irc: client capability, requesting: sasl
+2019-12-15 22:35:54	--	irc: client capability, enabled: sasl
+2019-12-15 22:35:55	--	You are now logged in as dev0urer. (watzon!watzon@2601:681:5180:f4e0::2b79)
+2019-12-15 22:35:55	--	SASL authentication successful
+2019-12-15 22:35:56	--	Welcome to the freenode Internet Relay Chat Network watzon
+2019-12-15 22:35:56	--	Your host is sinisalo.freenode.net[2a00:1a28:1100:11::42/7000], running version ircd-seven-1.1.7
+2019-12-15 22:35:56	--	This server was created Tue Aug 21 2018 at 18:43:36 UTC
+2019-12-15 22:35:56	--	sinisalo.freenode.net ircd-seven-1.1.7 DOQRSZaghilopsuwz CFILMPQSbcefgijklmnopqrstuvz bkloveqjfI
+2019-12-15 22:35:56	--	CHANTYPES=# EXCEPTS INVEX CHANMODES=eIbq,k,flj,CFLMPQScgimnprstuz CHANLIMIT=#:120 PREFIX=(ov)@+ MAXLIST=bqeI:100 MODES=4 NETWORK=freenode STATUSMSG=@+ CALLERID=g CASEMAPPING=rfc1459 :are supported by this server
+2019-12-15 22:35:56	--	CHARSET=ascii NICKLEN=16 CHANNELLEN=50 TOPICLEN=390 DEAF=D FNC TARGMAX=NAMES:1,LIST:1,KICK:1,WHOIS:1,PRIVMSG:4,NOTICE:4,ACCEPT:,MONITOR: EXTBAN=$,ajrxz CLIENTVER=3.0 WHOX KNOCK ETRACE :are supported by this server
+2019-12-15 22:35:56	--	SAFELIST ELIST=CTU CPRIVMSG CNOTICE :are supported by this server
+2019-12-15 22:35:56	--	There are 81 users and 76041 invisible on 29 servers
+2019-12-15 22:35:56	--	32 :IRC Operators online
+2019-12-15 22:35:56	--	19 :unknown connection(s)
+2019-12-15 22:35:56	--	48665 :channels formed
+2019-12-15 22:35:56	--	I have 8540 clients and 1 servers
+2019-12-15 22:35:56	--	8540 12000 :Current local users 8540, max 12000
+2019-12-15 22:35:56	--	76122 94773 :Current global users 76122, max 94773
+2019-12-15 22:35:56	--	Highest connection count: 12001 (12000 clients) (1102809 connections received)
+2019-12-15 22:35:56	--	- sinisalo.freenode.net Message of the Day - 
+2019-12-15 22:35:56	--	- Welcome to sinisalo.freenode.net in Stockholm, SE.
+2019-12-15 22:35:56	--	- Thanks to http://www.portlane.com/ for sponsoring
+2019-12-15 22:35:56	--	- this server!
+2019-12-15 22:35:56	--	-  
+2019-12-15 22:35:56	--	-  
+2019-12-15 22:35:56	--	- SINISALO, (ANNA) JOHANNA (1958-), a Finnish science fiction
+2019-12-15 22:35:56	--	- and fantasy novelist and a script writer. Her novel 'Not
+2019-12-15 22:35:56	--	- Before Sundown' (orig. 'Ennen päivänlaskua ei voi'
+2019-12-15 22:35:56	--	- published in Finnish in 2000, when it also won the biggest
+2019-12-15 22:35:56	--	- literature award of Finland) was awarded The James Tiptree
+2019-12-15 22:35:56	--	- Jr. award in 2004.  She was nominated for a Nebula award in
+2019-12-15 22:35:56	--	- 2009 for her short story Baby Doll.  Their most recent work
+2019-12-15 22:35:56	--	- includes screenwriting for the film 'Iron Sky'.
+2019-12-15 22:35:56	--	-  
+2019-12-15 22:35:56	--	- Welcome to freenode - supporting the free and open source
+2019-12-15 22:35:56	--	- software communities since 1998.
+2019-12-15 22:35:56	--	-  
+2019-12-15 22:35:56	--	- By connecting to freenode you indicate that you have read and
+2019-12-15 22:35:56	--	- accept our policies and guidelines as set out on https://freenode.net
+2019-12-15 22:35:56	--	-  
+2019-12-15 22:35:56	--	- In the event that you observe behaviour that contravenes our policies,
+2019-12-15 22:35:56	--	- please notify a volunteer staff member via private message, or send us an
+2019-12-15 22:35:56	--	- e-mail to complaints@freenode.net -- we will do our best to address the
+2019-12-15 22:35:56	--	- situation within a reasonable period of time, and we may request further
+2019-12-15 22:35:56	--	- information or, as appropriate, involve other parties such as channel operators 
+2019-12-15 22:35:56	--	- Group Contacts representing an on-topic group.
+2019-12-15 22:35:56	--	-  
+2019-12-15 22:35:56	--	- freenode runs an open proxy scanner.
+2019-12-15 22:35:56	--	-  
+2019-12-15 22:35:56	--	- If you are looking for assistance, you may be able to find a list of 
+2019-12-15 22:35:56	--	- volunteer staff on '/stats p' (shows only on-call staff) or by joining 
+2019-12-15 22:35:56	--	- #freenode and using the '/who freenode/staff/*' command. You may message
+2019-12-15 22:35:56	--	- any of us at any time. Please note that freenode predominantly provides 
+2019-12-15 22:35:56	--	- assistance via private message, and while we have a network channel the 
+2019-12-15 22:35:56	--	- primary venue for support requests is via private message to a member 
+2019-12-15 22:35:56	--	- of the volunteer staff team.
+2019-12-15 22:35:56	--	-  
+2019-12-15 22:35:56	--	- From time to time, volunteer staff may send server-wide notices relating to
+2019-12-15 22:35:56	--	- the project, or the communities that we host. The majority of such notices
+2019-12-15 22:35:56	--	- will be sent as wallops, and you can '/mode <yournick> +w' to ensure that you
+2019-12-15 22:35:56	--	- do not miss them. Important messages relating to the freenode project, including
+2019-12-15 22:35:56	--	- notices of upcoming maintenance and other scheduled downtime will be issued as
+2019-12-15 22:35:56	--	- global notices.
+2019-12-15 22:35:56	--	-  
+2019-12-15 22:35:56	--	- Representing an on-topic project? Don't forget to register, more information
+2019-12-15 22:35:56	--	- can be found on the https://freenode.net website under "Group Registration".
+2019-12-15 22:35:56	--	-  
+2019-12-15 22:35:56	--	- Thank you also to our server sponsors for the sustained support in keeping the
+2019-12-15 22:35:56	--	- network going for close to two decades.
+2019-12-15 22:35:56	--	-  
+2019-12-15 22:35:56	--	- Thank you to all of our attendees, sponsors, speakers, exhibitors, helpers,
+2019-12-15 22:35:56	--	- and everyone else who made this year's freenode #live conference amazing.
+2019-12-15 22:35:56	--	- https://freenode.net/news/live-2018
+2019-12-15 22:35:56	--	-  
+2019-12-15 22:35:56	--	- Thank you for using freenode!
+2019-12-15 22:35:56	--	End of /MOTD command.
+2019-12-15 22:35:56	--	User mode [+Zi] by watzon
+2019-12-15 22:35:56	--	freenode-connect (frigg@freenode/utility-bot/frigg): Welcome to freenode. To protect the network all new connections will be scanned for vulnerabilities. This will not harm your computer, and vulnerable hosts will be notified.
+2019-12-15 22:35:56	--	CTCP requested by freenode-connect: VERSION
+2019-12-15 22:35:56	--	CTCP reply to freenode-connect: VERSION WeeChat 2.7 (Dec 13 2019 20:54:54)
+2019-12-15 22:37:12	--	irc: disconnected from server
+2019-12-15 22:37:24	--	irc: connecting to server chat.freenode.net/7000 (SSL)...
+2019-12-15 22:37:25	--	gnutls: connected using 2048-bit Diffie-Hellman shared secret exchange
+2019-12-15 22:37:25	--	gnutls: receiving 2 certificates
+2019-12-15 22:37:25	--	 - certificate[1] info:
+2019-12-15 22:37:25	--	   - subject `CN=wolfe.freenode.net', issuer `CN=Let's Encrypt Authority X3,O=Let's Encrypt,C=US', serial 0x03a6faf56263d7ca1e1aa06ce70c10edf97a, RSA key 4096 bits, signed using RSA-SHA256, activated `2019-12-09 05:01:17 UTC', expires `2020-03-08 05:01:17 UTC', pin-sha256="AqN5ELLbUmYnkmOq4cUW+lzecvnmU4Y+Mg7DQ4p3Kow="
+2019-12-15 22:37:25	--	 - certificate[2] info:
+2019-12-15 22:37:25	--	   - subject `CN=Let's Encrypt Authority X3,O=Let's Encrypt,C=US', issuer `CN=DST Root CA X3,O=Digital Signature Trust Co.', serial 0x0a0141420000015385736a0b85eca708, RSA key 2048 bits, signed using RSA-SHA256, activated `2016-03-17 16:40:46 UTC', expires `2021-03-17 16:40:46 UTC', pin-sha256="YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg="
+2019-12-15 22:37:25	--	gnutls: peer's certificate is trusted
+2019-12-15 22:37:25	--	irc: connected to chat.freenode.net/7000 (2001:948:7:7::140)
+2019-12-15 22:37:25	--	wolfe.freenode.net: *** Looking up your hostname...
+2019-12-15 22:37:25	--	wolfe.freenode.net: *** Checking Ident
+2019-12-15 22:37:25	--	wolfe.freenode.net: *** Couldn't look up your hostname
+2019-12-15 22:37:35	--	wolfe.freenode.net: *** No Ident response
+2019-12-15 22:37:35	--	irc: client capability, server supports: extended-join multi-prefix identify-msg account-notify sasl
+2019-12-15 22:37:35	--	irc: client capability, requesting: sasl
+2019-12-15 22:37:36	--	irc: client capability, enabled: sasl
+2019-12-15 22:37:36	--	You are now logged in as dev0urer. (watzon!watzon@2601:681:5180:f4e0::2b79)
+2019-12-15 22:37:37	--	SASL authentication successful
+2019-12-15 22:37:37	--	Welcome to the freenode Internet Relay Chat Network watzon
+2019-12-15 22:37:37	--	Your host is wolfe.freenode.net[2001:948:7:7::140/7000], running version ircd-seven-1.1.7
+2019-12-15 22:37:37	--	This server was created Sat Sep 1 2018 at 18:07:18 UTC
+2019-12-15 22:37:37	--	wolfe.freenode.net ircd-seven-1.1.7 DOQRSZaghilopsuwz CFILMPQSbcefgijklmnopqrstuvz bkloveqjfI
+2019-12-15 22:37:37	--	CHANTYPES=# EXCEPTS INVEX CHANMODES=eIbq,k,flj,CFLMPQScgimnprstuz CHANLIMIT=#:120 PREFIX=(ov)@+ MAXLIST=bqeI:100 MODES=4 NETWORK=freenode STATUSMSG=@+ CALLERID=g CASEMAPPING=rfc1459 :are supported by this server
+2019-12-15 22:37:37	--	CHARSET=ascii NICKLEN=16 CHANNELLEN=50 TOPICLEN=390 DEAF=D FNC TARGMAX=NAMES:1,LIST:1,KICK:1,WHOIS:1,PRIVMSG:4,NOTICE:4,ACCEPT:,MONITOR: EXTBAN=$,ajrxz CLIENTVER=3.0 KNOCK SAFELIST ELIST=CTU :are supported by this server
+2019-12-15 22:37:37	--	WHOX CPRIVMSG CNOTICE ETRACE :are supported by this server
+2019-12-15 22:37:37	--	There are 81 users and 76059 invisible on 29 servers
+2019-12-15 22:37:37	--	32 :IRC Operators online
+2019-12-15 22:37:37	--	20 :unknown connection(s)
+2019-12-15 22:37:37	--	48662 :channels formed
+2019-12-15 22:37:37	--	I have 8501 clients and 1 servers
+2019-12-15 22:37:37	--	8501 10508 :Current local users 8501, max 10508
+2019-12-15 22:37:37	--	76140 94773 :Current global users 76140, max 94773
+2019-12-15 22:37:37	--	Highest connection count: 10509 (10508 clients) (1723416 connections received)
+2019-12-15 22:37:37	--	- wolfe.freenode.net Message of the Day - 
+2019-12-15 22:37:37	--	- Welcome to wolfe.freenode.net in Stockholm, SE.
+2019-12-15 22:37:37	--	- Thanks to http://nordu.net/ for sponsoring
+2019-12-15 22:37:37	--	- this server!
+2019-12-15 22:37:37	--	-  
+2019-12-15 22:37:37	--	- WOLFE, GENE [1931-2019].  Prolific writer of short stories
+2019-12-15 22:37:37	--	- and novels. His best-known work is the multi-volume novel The
+2019-12-15 22:37:37	--	- Book of the New Sun. He has won multiple awards including
+2019-12-15 22:37:37	--	- the Nebula Award, the World Fantasy Award, The Campell
+2019-12-15 22:37:37	--	- Memorial Award and the Locus Award. He was awarded the World
+2019-12-15 22:37:37	--	- Fantasy Award for lifetime achievement in 1996.
+2019-12-15 22:37:37	--	-  
+2019-12-15 22:37:37	--	- Welcome to freenode - supporting the free and open source
+2019-12-15 22:37:37	--	- software communities since 1998.
+2019-12-15 22:37:37	--	-  
+2019-12-15 22:37:37	--	- By connecting to freenode you indicate that you have read and
+2019-12-15 22:37:37	--	- accept our policies and guidelines as set out on https://freenode.net
+2019-12-15 22:37:37	--	-  
+2019-12-15 22:37:37	--	- In the event that you observe behaviour that contravenes our policies,
+2019-12-15 22:37:37	--	- please notify a volunteer staff member via private message, or send us an
+2019-12-15 22:37:37	--	- e-mail to complaints@freenode.net -- we will do our best to address the
+2019-12-15 22:37:37	--	- situation within a reasonable period of time, and we may request further
+2019-12-15 22:37:37	--	- information or, as appropriate, involve other parties such as channel operators 
+2019-12-15 22:37:37	--	- Group Contacts representing an on-topic group.
+2019-12-15 22:37:37	--	-  
+2019-12-15 22:37:37	--	- freenode runs an open proxy scanner.
+2019-12-15 22:37:37	--	-  
+2019-12-15 22:37:37	--	- If you are looking for assistance, you may be able to find a list of 
+2019-12-15 22:37:37	--	- volunteer staff on '/stats p' (shows only on-call staff) or by joining 
+2019-12-15 22:37:37	--	- #freenode and using the '/who freenode/staff/*' command. You may message
+2019-12-15 22:37:37	--	- any of us at any time. Please note that freenode predominantly provides 
+2019-12-15 22:37:37	--	- assistance via private message, and while we have a network channel the 
+2019-12-15 22:37:37	--	- primary venue for support requests is via private message to a member 
+2019-12-15 22:37:37	--	- of the volunteer staff team.
+2019-12-15 22:37:37	--	-  
+2019-12-15 22:37:37	--	- From time to time, volunteer staff may send server-wide notices relating to
+2019-12-15 22:37:37	--	- the project, or the communities that we host. The majority of such notices
+2019-12-15 22:37:37	--	- will be sent as wallops, and you can '/mode <yournick> +w' to ensure that you
+2019-12-15 22:37:37	--	- do not miss them. Important messages relating to the freenode project, including
+2019-12-15 22:37:37	--	- notices of upcoming maintenance and other scheduled downtime will be issued as
+2019-12-15 22:37:37	--	- global notices.
+2019-12-15 22:37:37	--	-  
+2019-12-15 22:37:37	--	- Representing an on-topic project? Don't forget to register, more information
+2019-12-15 22:37:37	--	- can be found on the https://freenode.net website under "Group Registration".
+2019-12-15 22:37:37	--	-  
+2019-12-15 22:37:37	--	- Thank you also to our server sponsors for the sustained support in keeping the
+2019-12-15 22:37:37	--	- network going for close to two decades.
+2019-12-15 22:37:37	--	-  
+2019-12-15 22:37:37	--	- Thank you to all of our attendees, sponsors, speakers, exhibitors, helpers,
+2019-12-15 22:37:37	--	- and everyone else who made this year's freenode #live conference amazing.
+2019-12-15 22:37:37	--	- https://freenode.net/news/live-2018
+2019-12-15 22:37:37	--	-  
+2019-12-15 22:37:37	--	- Thank you for using freenode!
+2019-12-15 22:37:37	--	End of /MOTD command.
+2019-12-15 22:37:37	--	User mode [+Zi] by watzon
+2019-12-15 22:37:38	--	freenode-connect (frigg@freenode/utility-bot/frigg): Welcome to freenode. To protect the network all new connections will be scanned for vulnerabilities. This will not harm your computer, and vulnerable hosts will be notified.
+2019-12-15 22:37:38	--	CTCP requested by freenode-connect: VERSION
+2019-12-15 22:37:38	--	CTCP reply to freenode-connect: VERSION WeeChat 2.7 (Dec 13 2019 20:54:54)
+2019-12-15 22:41:11	--	irc: disconnected from server
+2019-12-15 22:41:17	--	irc: connecting to server chat.freenode.net/7000 (SSL)...
+2019-12-15 22:41:17	--	gnutls: connected using 2048-bit Diffie-Hellman shared secret exchange
+2019-12-15 22:41:17	--	gnutls: receiving 2 certificates
+2019-12-15 22:41:17	--	 - certificate[1] info:
+2019-12-15 22:41:17	--	   - subject `CN=wolfe.freenode.net', issuer `CN=Let's Encrypt Authority X3,O=Let's Encrypt,C=US', serial 0x03a6faf56263d7ca1e1aa06ce70c10edf97a, RSA key 4096 bits, signed using RSA-SHA256, activated `2019-12-09 05:01:17 UTC', expires `2020-03-08 05:01:17 UTC', pin-sha256="AqN5ELLbUmYnkmOq4cUW+lzecvnmU4Y+Mg7DQ4p3Kow="
+2019-12-15 22:41:17	--	 - certificate[2] info:
+2019-12-15 22:41:17	--	   - subject `CN=Let's Encrypt Authority X3,O=Let's Encrypt,C=US', issuer `CN=DST Root CA X3,O=Digital Signature Trust Co.', serial 0x0a0141420000015385736a0b85eca708, RSA key 2048 bits, signed using RSA-SHA256, activated `2016-03-17 16:40:46 UTC', expires `2021-03-17 16:40:46 UTC', pin-sha256="YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg="
+2019-12-15 22:41:17	--	gnutls: peer's certificate is trusted
+2019-12-15 22:41:17	--	irc: connected to chat.freenode.net/7000 (2001:948:7:7::140)
+2019-12-15 22:41:18	--	wolfe.freenode.net: *** Looking up your hostname...
+2019-12-15 22:41:18	--	wolfe.freenode.net: *** Checking Ident
+2019-12-15 22:41:18	--	wolfe.freenode.net: *** Couldn't look up your hostname
+2019-12-15 22:41:25	--	wolfe.freenode.net: *** No Ident response
+2019-12-15 22:41:25	--	irc: client capability, server supports: extended-join multi-prefix identify-msg account-notify sasl
+2019-12-15 22:41:25	--	irc: client capability, requesting: sasl
+2019-12-15 22:41:25	--	irc: client capability, enabled: sasl
+2019-12-15 22:41:26	--	You are now logged in as dev0urer. (watzon!watzon@2601:681:5180:f4e0::2b79)
+2019-12-15 22:41:26	--	SASL authentication successful
+2019-12-15 22:41:26	--	Welcome to the freenode Internet Relay Chat Network watzon
+2019-12-15 22:41:26	--	Your host is wolfe.freenode.net[2001:948:7:7::140/7000], running version ircd-seven-1.1.7
+2019-12-15 22:41:26	--	This server was created Sat Sep 1 2018 at 18:07:18 UTC
+2019-12-15 22:41:26	--	wolfe.freenode.net ircd-seven-1.1.7 DOQRSZaghilopsuwz CFILMPQSbcefgijklmnopqrstuvz bkloveqjfI
+2019-12-15 22:41:26	--	CHANTYPES=# EXCEPTS INVEX CHANMODES=eIbq,k,flj,CFLMPQScgimnprstuz CHANLIMIT=#:120 PREFIX=(ov)@+ MAXLIST=bqeI:100 MODES=4 NETWORK=freenode STATUSMSG=@+ CALLERID=g CASEMAPPING=rfc1459 :are supported by this server
+2019-12-15 22:41:26	--	CHARSET=ascii NICKLEN=16 CHANNELLEN=50 TOPICLEN=390 DEAF=D FNC TARGMAX=NAMES:1,LIST:1,KICK:1,WHOIS:1,PRIVMSG:4,NOTICE:4,ACCEPT:,MONITOR: EXTBAN=$,ajrxz CLIENTVER=3.0 KNOCK SAFELIST ELIST=CTU :are supported by this server
+2019-12-15 22:41:26	--	WHOX CPRIVMSG CNOTICE ETRACE :are supported by this server
+2019-12-15 22:41:26	--	There are 81 users and 76084 invisible on 29 servers
+2019-12-15 22:41:26	--	32 :IRC Operators online
+2019-12-15 22:41:26	--	39 :unknown connection(s)
+2019-12-15 22:41:26	--	48668 :channels formed
+2019-12-15 22:41:26	--	I have 8514 clients and 1 servers
+2019-12-15 22:41:26	--	8514 10508 :Current local users 8514, max 10508
+2019-12-15 22:41:26	--	76165 94773 :Current global users 76165, max 94773
+2019-12-15 22:41:26	--	Highest connection count: 10509 (10508 clients) (1723452 connections received)
+2019-12-15 22:41:26	--	- wolfe.freenode.net Message of the Day - 
+2019-12-15 22:41:26	--	- Welcome to wolfe.freenode.net in Stockholm, SE.
+2019-12-15 22:41:26	--	- Thanks to http://nordu.net/ for sponsoring
+2019-12-15 22:41:26	--	- this server!
+2019-12-15 22:41:26	--	-  
+2019-12-15 22:41:26	--	- WOLFE, GENE [1931-2019].  Prolific writer of short stories
+2019-12-15 22:41:26	--	- and novels. His best-known work is the multi-volume novel The
+2019-12-15 22:41:26	--	- Book of the New Sun. He has won multiple awards including
+2019-12-15 22:41:26	--	- the Nebula Award, the World Fantasy Award, The Campell
+2019-12-15 22:41:26	--	- Memorial Award and the Locus Award. He was awarded the World
+2019-12-15 22:41:26	--	- Fantasy Award for lifetime achievement in 1996.
+2019-12-15 22:41:26	--	-  
+2019-12-15 22:41:26	--	- Welcome to freenode - supporting the free and open source
+2019-12-15 22:41:26	--	- software communities since 1998.
+2019-12-15 22:41:26	--	-  
+2019-12-15 22:41:26	--	- By connecting to freenode you indicate that you have read and
+2019-12-15 22:41:26	--	- accept our policies and guidelines as set out on https://freenode.net
+2019-12-15 22:41:26	--	-  
+2019-12-15 22:41:26	--	- In the event that you observe behaviour that contravenes our policies,
+2019-12-15 22:41:26	--	- please notify a volunteer staff member via private message, or send us an
+2019-12-15 22:41:26	--	- e-mail to complaints@freenode.net -- we will do our best to address the
+2019-12-15 22:41:26	--	- situation within a reasonable period of time, and we may request further
+2019-12-15 22:41:26	--	- information or, as appropriate, involve other parties such as channel operators 
+2019-12-15 22:41:26	--	- Group Contacts representing an on-topic group.
+2019-12-15 22:41:26	--	-  
+2019-12-15 22:41:26	--	- freenode runs an open proxy scanner.
+2019-12-15 22:41:26	--	-  
+2019-12-15 22:41:26	--	- If you are looking for assistance, you may be able to find a list of 
+2019-12-15 22:41:26	--	- volunteer staff on '/stats p' (shows only on-call staff) or by joining 
+2019-12-15 22:41:26	--	- #freenode and using the '/who freenode/staff/*' command. You may message
+2019-12-15 22:41:26	--	- any of us at any time. Please note that freenode predominantly provides 
+2019-12-15 22:41:26	--	- assistance via private message, and while we have a network channel the 
+2019-12-15 22:41:26	--	- primary venue for support requests is via private message to a member 
+2019-12-15 22:41:26	--	- of the volunteer staff team.
+2019-12-15 22:41:26	--	-  
+2019-12-15 22:41:26	--	- From time to time, volunteer staff may send server-wide notices relating to
+2019-12-15 22:41:26	--	- the project, or the communities that we host. The majority of such notices
+2019-12-15 22:41:26	--	- will be sent as wallops, and you can '/mode <yournick> +w' to ensure that you
+2019-12-15 22:41:26	--	- do not miss them. Important messages relating to the freenode project, including
+2019-12-15 22:41:26	--	- notices of upcoming maintenance and other scheduled downtime will be issued as
+2019-12-15 22:41:26	--	- global notices.
+2019-12-15 22:41:26	--	-  
+2019-12-15 22:41:26	--	- Representing an on-topic project? Don't forget to register, more information
+2019-12-15 22:41:26	--	- can be found on the https://freenode.net website under "Group Registration".
+2019-12-15 22:41:26	--	-  
+2019-12-15 22:41:26	--	- Thank you also to our server sponsors for the sustained support in keeping the
+2019-12-15 22:41:26	--	- network going for close to two decades.
+2019-12-15 22:41:26	--	-  
+2019-12-15 22:41:26	--	- Thank you to all of our attendees, sponsors, speakers, exhibitors, helpers,
+2019-12-15 22:41:26	--	- and everyone else who made this year's freenode #live conference amazing.
+2019-12-15 22:41:26	--	- https://freenode.net/news/live-2018
+2019-12-15 22:41:26	--	-  
+2019-12-15 22:41:26	--	- Thank you for using freenode!
+2019-12-15 22:41:26	--	End of /MOTD command.
+2019-12-15 22:41:26	--	User mode [+Zi] by watzon
+2019-12-15 22:41:27	--	freenode-connect (frigg@freenode/utility-bot/frigg): Welcome to freenode. To protect the network all new connections will be scanned for vulnerabilities. This will not harm your computer, and vulnerable hosts will be notified.
+2019-12-15 22:41:27	--	CTCP requested by freenode-connect: VERSION
+2019-12-15 22:41:27	--	CTCP reply to freenode-connect: VERSION WeeChat 2.7 (Dec 13 2019 20:54:54)
+2019-12-15 22:46:21	--	Channel Users  Name
+2019-12-15 22:46:21	--	wolfe.freenode.net: Invalid parameters for /LIST
+2019-12-15 22:46:21	--	End of /LIST
+2019-12-15 22:46:43	--	Channel Users  Name
+2019-12-15 22:46:43	--	wolfe.freenode.net: Invalid parameters for /LIST
+2019-12-15 22:46:43	--	End of /LIST
+2019-12-15 22:47:40	--	MSG(alis): LIST *furry*
+2019-12-15 22:47:40	--	alis (alis@services.): Returning maximum of 60 channel names matching '*furry*'
+2019-12-15 22:47:41	--	alis (alis@services.): ##furry                                             29 :The fuzziest place on Freenode! || A place for sophisticated tech discussion... and femboi foxes!
+2019-12-15 22:47:41	--	alis (alis@services.): ##furry18+                                           3
+2019-12-15 22:47:41	--	alis (alis@services.): #furry                                               0 :This channel has nothing to do with furries. Furries are not welcome here. Go away. This means you.
+2019-12-15 22:47:41	--	alis (alis@services.): End of output
+2019-12-15 22:47:57	--	#furry: ##furry :Forwarding to another channel
+2019-12-15 22:48:14	--	MSG(alis): LIST *python*
+2019-12-15 22:48:15	--	alis (alis@services.): Returning maximum of 60 channel names matching '*python*'
+2019-12-15 22:48:15	--	alis (alis@services.): #!/usr/bin/python                                    1
+2019-12-15 22:48:15	--	alis (alis@services.): ##courserapython                                     1
+2019-12-15 22:48:15	--	alis (alis@services.): ##python                                            37 :Welcome to ##python! This channel is currently inactive; for python help visit #python. | *!* If you wish to take over this channel or have a view as to who should, please /msg njan. Thanks! *!*
+2019-12-15 22:48:15	--	alis (alis@services.): ##python-code-quality                                8
+2019-12-15 22:48:15	--	alis (alis@services.): ##python-friendly                                   24 :We're like #python, but friendlier. | Ask, don't ask to ask. | 2.x or 3.x? You've had more than 10 years: use 3. 2.7 is EOL’d Jan 1st. | https://docs.python.org/3/tutorial/ | FAQ: http://effbot.org/pyfaq/ | New programmer? http://bit.ly/40CBHF | Register your nick to chat; /msg nickserv help. https://freenode.net/news/spambot-attack
+2019-12-15 22:48:15	--	alis (alis@services.): ##python-offtopic                                    2
+2019-12-15 22:48:15	--	alis (alis@services.): ##python-telegram-bot                                2
+2019-12-15 22:48:15	--	alis (alis@services.): ##python-uncensored                                  2
+2019-12-15 22:48:15	--	alis (alis@services.): ##python.de                                          1
+2019-12-15 22:48:15	--	alis (alis@services.): ##python.pl                                         45 :hakuna matata
+2019-12-15 22:48:15	--	alis (alis@services.): #bbx-python                                          2
+2019-12-15 22:48:15	--	alis (alis@services.): #biopython                                           1 :http://biopython.org/wiki/Main_Page
+2019-12-15 22:48:15	--	alis (alis@services.): #blenderpython                                      27 :Welcome to the Blender Python channel. Be sure to take a look at https://blender.chat/channel/python, there's more people there.
+2019-12-15 22:48:15	--	alis (alis@services.): #bostonpython                                        8 :Welcome to the Boston Python user group! http://bostonpython.com/ | Not from Boston?  #python may be a better bet.
+2019-12-15 22:48:15	--	alis (alis@services.): #bpython                                            11 :bpython 0.18 -- http://www.bpython-interpreter.org/ | git clone https://github.com/bpython/bpython | https://bpaste.net/
+2019-12-15 22:48:15	--	alis (alis@services.): #chat_python_cn                                      1
+2019-12-15 22:48:15	--	alis (alis@services.): #circuitpython                                       2
+2019-12-15 22:48:15	--	alis (alis@services.): #cpython                                             1
+2019-12-15 22:48:15	--	alis (alis@services.): #dcpython                                            6 :Welcome to DC Python · https://dcpython.org
+2019-12-15 22:48:15	--	alis (alis@services.): #dfwpython                                           1
+2019-12-15 22:48:15	--	alis (alis@services.): #diveintopython                                      1
+2019-12-15 22:48:15	--	alis (alis@services.): #europython                                          5 :EuroPython 2015 will take place in Bilbao, Spain, from July 20-26. Please see https://ep2015.europython.eu/ for more infos. Twitter: @europython
+2019-12-15 22:48:15	--	alis (alis@services.): #freebsd-python                                     31 :Daemons & Serpents: The FreeBSD Python Team | More Info: https://wiki.freebsd.org/Python | Open Issues: http://bit.ly/1xBJVjJ | Ports Policy: https://wiki.freebsd.org/Python/PortsPolicy
+2019-12-15 22:48:15	--	alis (alis@services.): #fuel-python                                         2 :Fuel python misc talks
+2019-12-15 22:48:15	--	alis (alis@services.): #gentoo-python                                      66 :Set e.g. PYTHON_TARGETS: python2_7 python3_5 python3_6 in /etc/portage/package.use if you want to install Python modules for multiple Python versions. | https://wiki.gentoo.org/wiki/Project:Python#Documentation
+2019-12-15 22:48:15	--	alis (alis@services.): #geopython                                           3 :geospatial and Python | http://geopython.github.io | paste snippets via http://dpaste.de
+2019-12-15 22:48:15	--	alis (alis@services.): #ipython                                            31 :Welcome to the IPython IRC channel. You must be registered with freenode to speak, see https://freenode.net/kb/answer/registration. If no one answers your question don't leave, sometimes it can take hours or days to get an answer. https://ipython.org/
+2019-12-15 22:48:15	--	alis (alis@services.): #ironpython                                          3 :Unofficial IronPython channel - This is a rather quiet channel, so if it's urgent ask on the mailing-list instead. Random discussions are welcome.
+2019-12-15 22:48:15	--	alis (alis@services.): #learnpython                                        14
+2019-12-15 22:48:15	--	alis (alis@services.): #learnpythonnyc                                      1
+2019-12-15 22:48:15	--	alis (alis@services.): #ljpython                                            2
+2019-12-15 22:48:15	--	alis (alis@services.): #macpython                                           1
+2019-12-15 22:48:15	--	alis (alis@services.): #makinacorpus-scrumpython                            2 :http://twitpic.com/1rpa9h
+2019-12-15 22:48:15	--	alis (alis@services.): #micropython                                        60
+2019-12-15 22:48:15	--	alis (alis@services.): #micropython-fr                                      4 :Micropython mainline, wasm/js and loboris for french users, for official support please see forums/github issues.
+2019-12-15 22:48:15	--	alis (alis@services.): #micropython-nrf                                     2
+2019-12-15 22:48:15	--	alis (alis@services.): #montrealpython                                      3 :Follow us on http://mtlpy.org, on twitter @mtlpy and at the Benelux
+2019-12-15 22:48:15	--	alis (alis@services.): #nycpython                                           7 :NYC Python | http://nycpython.org | https://botbot.me/freenode/nycpython/
+2019-12-15 22:48:15	--	alis (alis@services.): #opensuse-python                                     7 :Trello for Python-related tasks https://trello.com/b/WsskhdXA/opensuse-python
+2019-12-15 22:48:15	--	alis (alis@services.): #pdxpython                                           8 :Portland Python!
+2019-12-15 22:48:15	--	alis (alis@services.): #positivepython                                     41 :Welcome. Stay positive. Can’t talk? See http://bit.ly/positivepython
+2019-12-15 22:48:15	--	alis (alis@services.): #python                                            1528 :Anything about Python is on-topic. Don't paste, use https://bpaste.net/+python | bit.ly/psf-survey-2019 | Be nice: https://j.mp/psf-coc | Tutorial: https://j.mp/MCAhYx | New programmer? https://j.mp/23X7emF | Local user groups: https://j.mp/1Mq06bF | #python-fr #python.de #python-uk #python-es #python.tw #python-br #python-nl #python-ir #python.it #python-ro #python-india #python-hu
+2019-12-15 22:48:15	--	alis (alis@services.): #python-apac                                         2
+2019-12-15 22:48:15	--	alis (alis@services.): #python-babel                                        2
+2019-12-15 22:48:15	--	alis (alis@services.): #python-beginners                                    1
+2019-12-15 22:48:15	--	alis (alis@services.): #python-br                                          15 :Bem vindo ao #python-br - http://www.python.org.br | Para colar código use http://bpaste.net | Versões atuais: Python 2.7.17 e Python 3.8.0 | Download: https://www.python.org/downloads/ | Para tirar dúvidas, diga qual é sua dúvida e seja paciente pela resposta
+2019-12-15 22:48:15	--	alis (alis@services.): #python-ca                                           1
+2019-12-15 22:48:15	--	alis (alis@services.): #python-cs                                           7 :Vitejte v mistnosti o programovacim jazyce Python | http://python.cz | Logy: http://irc.python.cz  | Vice nez 5 radku textu vkladejte napr. pres http://dpaste.com/
+2019-12-15 22:48:15	--	alis (alis@services.): #python-dev                                        152 :Python core development discussion | Read the devguide at https://devguide.python.org/
+2019-12-15 22:48:15	--	alis (alis@services.): #python-diamond                                      5 :This channel is a mirror of https://gitter.im/python-diamond/Diamond. Please use gitter directly for communication.
+2019-12-15 22:48:15	--	alis (alis@services.): #python-dk                                           5 :Website in building. < www.codepython.net > For rules and Code of Conduct, read: www.python.org/psf/codeofconduct/
+2019-12-15 22:48:15	--	alis (alis@services.): #python-doc                                          8
+2019-12-15 22:48:15	--	alis (alis@services.): #python-docs                                         2
+2019-12-15 22:48:15	--	alis (alis@services.): #python-docs-fr                                      2 :Traduction de la documentation de Python en français — Prochain atelier le 20 juin https://www.meetup.com/Python-AFPY-Paris/events/262128214/ — https://github.com/python/python-docs-fr — https://docs.python.org/fr/
+2019-12-15 22:48:15	--	alis (alis@services.): #python-es                                           9 :Bienvenidos(as) al canal de Python en español/castellano | ¡Estamos vivos! Solo ten un poco de paciencia | Para compartir código usa https://bpaste.net/+python (o algo similar) | Contribuye a la doc en español https://github.com/raulcd/python-docs-es
+2019-12-15 22:48:15	--	alis (alis@services.): #python-etcd3                                        1
+2019-12-15 22:48:15	--	alis (alis@services.): #python-eve                                          2
+2019-12-15 22:48:15	--	alis (alis@services.): #python-fa                                           1
+2019-12-15 22:48:15	--	alis (alis@services.): #python-forum                                        9 :Welcome to #python-forum, the offtopic IRC channel for python-forum.io (formerly python-forum.org) | Need Python support? Try #python | Register your info for the stats page: http://bunburya.netsoc.ie/ircstats/pum.cgi
+2019-12-15 22:48:15	--	alis (alis@services.): #python-fr                                         122 :Développement Python | On cherche des lieux pour faire des AFPyro ou des ateliers, contacter mdk, seluj78 ou deronnax | https://docs.python.org/fr | https://afpy.org | https://pycon.fr | #django-fr | https://pythonbooks.revolunet.com | #python-docs-fr pour la traduction de la doc Python
+2019-12-15 22:48:15	--	alis (alis@services.): Maximum channel output reached
+2019-12-15 22:48:15	--	alis (alis@services.): End of output
+2019-12-15 22:52:33	--	MSG(alis): LIST *loli*
+2019-12-15 22:52:33	--	alis (alis@services.): Returning maximum of 60 channel names matching '*loli*'
+2019-12-15 22:52:33	--	alis (alis@services.): ##loli                                               2
+2019-12-15 22:52:33	--	alis (alis@services.): #alolise                                             4 :Bienvenue sur l'IRC d'Alolise. Vous avez le droit de garder le silence. Tout ce que vous direz ici pourra être retenu contre vous. #mirandaRights
+2019-12-15 22:52:33	--	alis (alis@services.): #aloliseca                                           2
+2019-12-15 22:52:33	--	alis (alis@services.): #amarillolinux                                       4 :WE WANT OUR DOMAIN BACK!
+2019-12-15 22:52:33	--	alis (alis@services.): #loli                                                2 :For loli lovers.
+2019-12-15 22:52:33	--	alis (alis@services.): #lolica                                              2
+2019-12-15 22:52:33	--	alis (alis@services.): #loligag                                             1
+2019-12-15 22:52:33	--	alis (alis@services.): #loligrub                                            4
+2019-12-15 22:52:33	--	alis (alis@services.): #lolis                                               1
+2019-12-15 22:52:33	--	alis (alis@services.): #lolita                                              1
+2019-12-15 22:52:33	--	alis (alis@services.): #tiflolinux                                          1 :Grupo de Usuarios Ciegos y Deficientes visuales de GNU/Linux (http://www.tiflolinux.org)
+2019-12-15 22:52:33	--	alis (alis@services.): End of output
+2019-12-16 16:32:57	--	MSG(alis): LIST *kitty*
+2019-12-16 16:32:57	--	alis (alis@services.): Returning maximum of 60 channel names matching '*kitty*'
+2019-12-16 16:32:58	--	alis (alis@services.): ##evilkitty                                          1 :Safe space... say anything you want as long as its humanly acceptable.
+2019-12-16 16:32:58	--	alis (alis@services.): ##HelenaKitty                                        3 :HelenaKitty doesn't use IRC much anymore however she is not one to leave behind whoever she's ever known. Her email address is kaffe@helenabolan.me.uk for those who miss her truely.
+2019-12-16 16:32:58	--	alis (alis@services.): #cloudkitty                                         17 :Rating component for OpenStack https://wiki.openstack.org/wiki/CloudKitty
+2019-12-16 16:32:58	--	alis (alis@services.): #helenakitty                                         1
+2019-12-16 16:32:58	--	alis (alis@services.): #kitty                                               5 :Kitty - the free fuzzing framework || https://github.com/cisco-sas/kitty || https://kitty.readthedocs.io
+2019-12-16 16:32:58	--	alis (alis@services.): End of output
+2019-12-17 13:15:29	--	irc: disconnected from server
+2019-12-17 17:47:17	--	irc: connecting to server chat.freenode.net/7000 (SSL)...
+2019-12-17 17:47:17	--	gnutls: connected using 2048-bit Diffie-Hellman shared secret exchange
+2019-12-17 17:47:17	--	gnutls: receiving 2 certificates
+2019-12-17 17:47:17	--	 - certificate[1] info:
+2019-12-17 17:47:17	--	   - subject `CN=sinisalo.freenode.net', issuer `CN=Let's Encrypt Authority X3,O=Let's Encrypt,C=US', serial 0x039b232ea62f1fde683ce44678c61aeda047, RSA key 4096 bits, signed using RSA-SHA256, activated `2019-11-04 05:02:52 UTC', expires `2020-02-02 05:02:52 UTC', pin-sha256="nM7Ei/iV1oNERfssS6jOLmikH05AS1ROC4Ivf4VO0BI="
+2019-12-17 17:47:17	--	 - certificate[2] info:
+2019-12-17 17:47:17	--	   - subject `CN=Let's Encrypt Authority X3,O=Let's Encrypt,C=US', issuer `CN=DST Root CA X3,O=Digital Signature Trust Co.', serial 0x0a0141420000015385736a0b85eca708, RSA key 2048 bits, signed using RSA-SHA256, activated `2016-03-17 16:40:46 UTC', expires `2021-03-17 16:40:46 UTC', pin-sha256="YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg="
+2019-12-17 17:47:17	--	gnutls: peer's certificate is trusted
+2019-12-17 17:47:18	--	irc: connected to chat.freenode.net/7000 (2a00:1a28:1100:11::42)
+2019-12-17 17:47:18	--	sinisalo.freenode.net: *** Looking up your hostname...
+2019-12-17 17:47:18	--	sinisalo.freenode.net: *** Checking Ident
+2019-12-17 17:47:18	--	sinisalo.freenode.net: *** Couldn't look up your hostname
+2019-12-17 17:47:24	--	sinisalo.freenode.net: *** No Ident response
+2019-12-17 17:47:24	--	irc: client capability, server supports: extended-join multi-prefix identify-msg account-notify sasl
+2019-12-17 17:47:24	--	irc: client capability, requesting: sasl
+2019-12-17 17:47:24	--	irc: client capability, enabled: sasl
+2019-12-17 17:47:25	--	You are now logged in as dev0urer. (watzon!watzon@2601:681:5180:f4e0::2b79)
+2019-12-17 17:47:25	--	SASL authentication successful
+2019-12-17 17:47:25	--	Welcome to the freenode Internet Relay Chat Network watzon
+2019-12-17 17:47:25	--	Your host is sinisalo.freenode.net[2a00:1a28:1100:11::42/7000], running version ircd-seven-1.1.7
+2019-12-17 17:47:25	--	This server was created Tue Aug 21 2018 at 18:43:36 UTC
+2019-12-17 17:47:25	--	sinisalo.freenode.net ircd-seven-1.1.7 DOQRSZaghilopsuwz CFILMPQSbcefgijklmnopqrstuvz bkloveqjfI
+2019-12-17 17:47:25	--	CHANTYPES=# EXCEPTS INVEX CHANMODES=eIbq,k,flj,CFLMPQScgimnprstuz CHANLIMIT=#:120 PREFIX=(ov)@+ MAXLIST=bqeI:100 MODES=4 NETWORK=freenode STATUSMSG=@+ CALLERID=g CASEMAPPING=rfc1459 :are supported by this server
+2019-12-17 17:47:25	--	CHARSET=ascii NICKLEN=16 CHANNELLEN=50 TOPICLEN=390 DEAF=D FNC TARGMAX=NAMES:1,LIST:1,KICK:1,WHOIS:1,PRIVMSG:4,NOTICE:4,ACCEPT:,MONITOR: EXTBAN=$,ajrxz CLIENTVER=3.0 WHOX KNOCK ETRACE :are supported by this server
+2019-12-17 17:47:25	--	SAFELIST ELIST=CTU CPRIVMSG CNOTICE :are supported by this server
+2019-12-17 17:47:25	--	There are 97 users and 83749 invisible on 27 servers
+2019-12-17 17:47:25	--	35 :IRC Operators online
+2019-12-17 17:47:25	--	39 :unknown connection(s)
+2019-12-17 17:47:25	--	50397 :channels formed
+2019-12-17 17:47:26	--	I have 10328 clients and 1 servers
+2019-12-17 17:47:26	--	10328 12000 :Current local users 10328, max 12000
+2019-12-17 17:47:26	--	83846 94773 :Current global users 83846, max 94773
+2019-12-17 17:47:26	--	Highest connection count: 12001 (12000 clients) (1116634 connections received)
+2019-12-17 17:47:26	--	- sinisalo.freenode.net Message of the Day - 
+2019-12-17 17:47:26	--	- Welcome to sinisalo.freenode.net in Stockholm, SE.
+2019-12-17 17:47:26	--	- Thanks to http://www.portlane.com/ for sponsoring
+2019-12-17 17:47:26	--	- this server!
+2019-12-17 17:47:26	--	-  
+2019-12-17 17:47:26	--	-  
+2019-12-17 17:47:26	--	- SINISALO, (ANNA) JOHANNA (1958-), a Finnish science fiction
+2019-12-17 17:47:26	--	- and fantasy novelist and a script writer. Her novel 'Not
+2019-12-17 17:47:26	--	- Before Sundown' (orig. 'Ennen päivänlaskua ei voi'
+2019-12-17 17:47:26	--	- published in Finnish in 2000, when it also won the biggest
+2019-12-17 17:47:26	--	- literature award of Finland) was awarded The James Tiptree
+2019-12-17 17:47:26	--	- Jr. award in 2004.  She was nominated for a Nebula award in
+2019-12-17 17:47:26	--	- 2009 for her short story Baby Doll.  Their most recent work
+2019-12-17 17:47:26	--	- includes screenwriting for the film 'Iron Sky'.
+2019-12-17 17:47:26	--	-  
+2019-12-17 17:47:26	--	- Welcome to freenode - supporting the free and open source
+2019-12-17 17:47:26	--	- software communities since 1998.
+2019-12-17 17:47:26	--	-  
+2019-12-17 17:47:26	--	- By connecting to freenode you indicate that you have read and
+2019-12-17 17:47:26	--	- accept our policies and guidelines as set out on https://freenode.net
+2019-12-17 17:47:26	--	-  
+2019-12-17 17:47:26	--	- In the event that you observe behaviour that contravenes our policies,
+2019-12-17 17:47:26	--	- please notify a volunteer staff member via private message, or send us an
+2019-12-17 17:47:26	--	- e-mail to complaints@freenode.net -- we will do our best to address the
+2019-12-17 17:47:26	--	- situation within a reasonable period of time, and we may request further
+2019-12-17 17:47:26	--	- information or, as appropriate, involve other parties such as channel operators 
+2019-12-17 17:47:26	--	- Group Contacts representing an on-topic group.
+2019-12-17 17:47:26	--	-  
+2019-12-17 17:47:26	--	- freenode runs an open proxy scanner.
+2019-12-17 17:47:26	--	-  
+2019-12-17 17:47:26	--	- If you are looking for assistance, you may be able to find a list of 
+2019-12-17 17:47:26	--	- volunteer staff on '/stats p' (shows only on-call staff) or by joining 
+2019-12-17 17:47:26	--	- #freenode and using the '/who freenode/staff/*' command. You may message
+2019-12-17 17:47:26	--	- any of us at any time. Please note that freenode predominantly provides 
+2019-12-17 17:47:26	--	- assistance via private message, and while we have a network channel the 
+2019-12-17 17:47:26	--	- primary venue for support requests is via private message to a member 
+2019-12-17 17:47:26	--	- of the volunteer staff team.
+2019-12-17 17:47:26	--	-  
+2019-12-17 17:47:26	--	- From time to time, volunteer staff may send server-wide notices relating to
+2019-12-17 17:47:26	--	- the project, or the communities that we host. The majority of such notices
+2019-12-17 17:47:26	--	- will be sent as wallops, and you can '/mode <yournick> +w' to ensure that you
+2019-12-17 17:47:26	--	- do not miss them. Important messages relating to the freenode project, including
+2019-12-17 17:47:26	--	- notices of upcoming maintenance and other scheduled downtime will be issued as
+2019-12-17 17:47:26	--	- global notices.
+2019-12-17 17:47:26	--	-  
+2019-12-17 17:47:26	--	- Representing an on-topic project? Don't forget to register, more information
+2019-12-17 17:47:26	--	- can be found on the https://freenode.net website under "Group Registration".
+2019-12-17 17:47:26	--	-  
+2019-12-17 17:47:26	--	- Thank you also to our server sponsors for the sustained support in keeping the
+2019-12-17 17:47:26	--	- network going for close to two decades.
+2019-12-17 17:47:26	--	-  
+2019-12-17 17:47:26	--	- Thank you to all of our attendees, sponsors, speakers, exhibitors, helpers,
+2019-12-17 17:47:26	--	- and everyone else who made this year's freenode #live conference amazing.
+2019-12-17 17:47:26	--	- https://freenode.net/news/live-2018
+2019-12-17 17:47:26	--	-  
+2019-12-17 17:47:26	--	- Thank you for using freenode!
+2019-12-17 17:47:26	--	End of /MOTD command.
+2019-12-17 17:47:26	--	User mode [+Zi] by watzon
+2019-12-17 17:47:26	--	freenode-connect (frigg@freenode/utility-bot/frigg): Welcome to freenode. To protect the network all new connections will be scanned for vulnerabilities. This will not harm your computer, and vulnerable hosts will be notified.
+2019-12-17 17:47:26	--	CTCP requested by freenode-connect: VERSION
+2019-12-17 17:47:26	--	CTCP reply to freenode-connect: VERSION WeeChat 2.7 (Dec 13 2019 20:54:54)
+2019-12-17 17:58:58	--	irc: disconnected from server
+2019-12-17 18:04:49	--	irc: connecting to server chat.freenode.net/7000 (SSL)...
+2019-12-17 18:04:49	--	gnutls: connected using 2048-bit Diffie-Hellman shared secret exchange
+2019-12-17 18:04:49	--	gnutls: receiving 2 certificates
+2019-12-17 18:04:49	--	 - certificate[1] info:
+2019-12-17 18:04:49	--	   - subject `CN=rajaniemi.freenode.net', issuer `CN=Let's Encrypt Authority X3,O=Let's Encrypt,C=US', serial 0x03cde41446783eb34fe871e134166c721a8a, RSA key 4096 bits, signed using RSA-SHA256, activated `2019-12-16 05:03:40 UTC', expires `2020-03-15 05:03:40 UTC', pin-sha256="ENCUobfCbhPJ6mt1kVY4pT+43PJu/6lwcgZrsBRFwuc="
+2019-12-17 18:04:49	--	 - certificate[2] info:
+2019-12-17 18:04:49	--	   - subject `CN=Let's Encrypt Authority X3,O=Let's Encrypt,C=US', issuer `CN=DST Root CA X3,O=Digital Signature Trust Co.', serial 0x0a0141420000015385736a0b85eca708, RSA key 2048 bits, signed using RSA-SHA256, activated `2016-03-17 16:40:46 UTC', expires `2021-03-17 16:40:46 UTC', pin-sha256="YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg="
+2019-12-17 18:04:49	--	gnutls: peer's certificate is trusted
+2019-12-17 18:04:50	--	irc: connected to chat.freenode.net/7000 (2001:708:40:2001::f5ee:d0de)
+2019-12-17 18:04:50	--	rajaniemi.freenode.net: *** Looking up your hostname...
+2019-12-17 18:04:50	--	rajaniemi.freenode.net: *** Checking Ident
+2019-12-17 18:04:50	--	rajaniemi.freenode.net: *** Couldn't look up your hostname
+2019-12-17 18:04:58	--	rajaniemi.freenode.net: *** No Ident response
+2019-12-17 18:04:58	--	irc: client capability, server supports: extended-join multi-prefix identify-msg account-notify sasl
+2019-12-17 18:04:58	--	irc: client capability, requesting: sasl
+2019-12-17 18:04:59	--	irc: client capability, enabled: sasl
+2019-12-17 18:04:59	--	You are now logged in as dev0urer. (watzon!watzon@2601:681:5180:f4e0::2b79)
+2019-12-17 18:05:00	--	SASL authentication successful
+2019-12-17 18:05:00	--	Welcome to the freenode Internet Relay Chat Network watzon
+2019-12-17 18:05:00	--	Your host is rajaniemi.freenode.net[2001:708:40:2001::f5ee:d0de/7000], running version ircd-seven-1.1.7
+2019-12-17 18:05:00	--	This server was created Tue Sep 25 2018 at 13:21:15 UTC
+2019-12-17 18:05:00	--	rajaniemi.freenode.net ircd-seven-1.1.7 DOQRSZaghilopsuwz CFILMPQSbcefgijklmnopqrstuvz bkloveqjfI
+2019-12-17 18:05:00	--	CHANTYPES=# EXCEPTS INVEX CHANMODES=eIbq,k,flj,CFLMPQScgimnprstuz CHANLIMIT=#:120 PREFIX=(ov)@+ MAXLIST=bqeI:100 MODES=4 NETWORK=freenode STATUSMSG=@+ CALLERID=g CASEMAPPING=rfc1459 :are supported by this server
+2019-12-17 18:05:00	--	CHARSET=ascii NICKLEN=16 CHANNELLEN=50 TOPICLEN=390 DEAF=D FNC TARGMAX=NAMES:1,LIST:1,KICK:1,WHOIS:1,PRIVMSG:4,NOTICE:4,ACCEPT:,MONITOR: EXTBAN=$,ajrxz CLIENTVER=3.0 WHOX SAFELIST ELIST=CTU :are supported by this server
+2019-12-17 18:05:00	--	KNOCK CPRIVMSG CNOTICE ETRACE :are supported by this server
+2019-12-17 18:05:00	--	There are 98 users and 83669 invisible on 28 servers
+2019-12-17 18:05:00	--	35 :IRC Operators online
+2019-12-17 18:05:00	--	36 :unknown connection(s)
+2019-12-17 18:05:00	--	50424 :channels formed
+2019-12-17 18:05:00	--	I have 7752 clients and 1 servers
+2019-12-17 18:05:00	--	7752 8295 :Current local users 7752, max 8295
+2019-12-17 18:05:00	--	83767 92604 :Current global users 83767, max 92604
+2019-12-17 18:05:00	--	Highest connection count: 8296 (8295 clients) (106345 connections received)
+2019-12-17 18:05:00	--	- rajaniemi.freenode.net Message of the Day - 
+2019-12-17 18:05:00	--	- Welcome to rajaniemi.freenode.net in Helsinki, Finland.  Our thanks to
+2019-12-17 18:05:00	--	- Aalto University for sponsoring this server!
+2019-12-17 18:05:00	--	-  
+2019-12-17 18:05:00	--	- RAJANIEMI, Hannu  (1978-). Born in Ylivieska, Finland, Rajaniemi is the
+2019-12-17 18:05:00	--	- author of two novels and several short stories, and his debut novel 'The
+2019-12-17 18:05:00	--	- Quantum Thief' was nominated for the 2011 Locus Award for Best First
+2019-12-17 18:05:00	--	- Novel.  Rajaniemi lives in Edinburgh, Scotland where he is founding
+2019-12-17 18:05:00	--	- director of ThinkTank Maths, a commercial research organisation.
+2019-12-17 18:05:00	--	-  
+2019-12-17 18:05:00	--	-  
+2019-12-17 18:05:00	--	- Welcome to freenode - supporting the free and open source
+2019-12-17 18:05:00	--	- software communities since 1998.
+2019-12-17 18:05:00	--	-  
+2019-12-17 18:05:00	--	- By connecting to freenode you indicate that you have read and
+2019-12-17 18:05:00	--	- accept our policies and guidelines as set out on https://freenode.net
+2019-12-17 18:05:00	--	-  
+2019-12-17 18:05:00	--	- In the event that you observe behaviour that contravenes our policies,
+2019-12-17 18:05:00	--	- please notify a volunteer staff member via private message, or send us an
+2019-12-17 18:05:00	--	- e-mail to complaints@freenode.net -- we will do our best to address the
+2019-12-17 18:05:00	--	- situation within a reasonable period of time, and we may request further
+2019-12-17 18:05:00	--	- information or, as appropriate, involve other parties such as channel operators 
+2019-12-17 18:05:00	--	- Group Contacts representing an on-topic group.
+2019-12-17 18:05:00	--	-  
+2019-12-17 18:05:00	--	- freenode runs an open proxy scanner.
+2019-12-17 18:05:00	--	-  
+2019-12-17 18:05:00	--	- If you are looking for assistance, you may be able to find a list of 
+2019-12-17 18:05:00	--	- volunteer staff on '/stats p' (shows only on-call staff) or by joining 
+2019-12-17 18:05:00	--	- #freenode and using the '/who freenode/staff/*' command. You may message
+2019-12-17 18:05:00	--	- any of us at any time. Please note that freenode predominantly provides 
+2019-12-17 18:05:00	--	- assistance via private message, and while we have a network channel the 
+2019-12-17 18:05:00	--	- primary venue for support requests is via private message to a member 
+2019-12-17 18:05:00	--	- of the volunteer staff team.
+2019-12-17 18:05:00	--	-  
+2019-12-17 18:05:00	--	- From time to time, volunteer staff may send server-wide notices relating to
+2019-12-17 18:05:00	--	- the project, or the communities that we host. The majority of such notices
+2019-12-17 18:05:00	--	- will be sent as wallops, and you can '/mode <yournick> +w' to ensure that you
+2019-12-17 18:05:00	--	- do not miss them. Important messages relating to the freenode project, including
+2019-12-17 18:05:00	--	- notices of upcoming maintenance and other scheduled downtime will be issued as
+2019-12-17 18:05:00	--	- global notices.
+2019-12-17 18:05:00	--	-  
+2019-12-17 18:05:00	--	- Representing an on-topic project? Don't forget to register, more information
+2019-12-17 18:05:00	--	- can be found on the https://freenode.net website under "Group Registration".
+2019-12-17 18:05:00	--	-  
+2019-12-17 18:05:00	--	- Thank you also to our server sponsors for the sustained support in keeping the
+2019-12-17 18:05:00	--	- network going for close to two decades.
+2019-12-17 18:05:00	--	-  
+2019-12-17 18:05:00	--	- Thank you to all of our attendees, sponsors, speakers, exhibitors, helpers,
+2019-12-17 18:05:00	--	- and everyone else who made this year's freenode #live conference amazing.
+2019-12-17 18:05:00	--	- https://freenode.net/news/live-2018
+2019-12-17 18:05:00	--	-  
+2019-12-17 18:05:00	--	- Thank you for using freenode!
+2019-12-17 18:05:00	--	End of /MOTD command.
+2019-12-17 18:05:00	--	User mode [+Zi] by watzon
+2019-12-17 18:05:01	--	freenode-connect (frigg@freenode/utility-bot/frigg): Welcome to freenode. To protect the network all new connections will be scanned for vulnerabilities. This will not harm your computer, and vulnerable hosts will be notified.
+2019-12-17 18:05:01	--	CTCP requested by freenode-connect: VERSION
+2019-12-17 18:05:01	--	CTCP reply to freenode-connect: VERSION WeeChat 2.7 (Dec 13 2019 20:54:54)

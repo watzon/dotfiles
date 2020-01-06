@@ -1,0 +1,30 @@
+2019-12-22 02:12:19	-->	xkapastel (uid17782@gateway/web/irccloud.com/x-ekricwvkgbcnuswo) has joined #dart
+2019-12-22 04:15:56	-->	sortie (~Sortie@D4709781.rev.sefiber.dk) has joined #dart
+2019-12-22 04:15:56	--	Mode #dart [+o sortie] by ChanServ
+2019-12-22 04:23:25	<--	sortie (~Sortie@D4709781.rev.sefiber.dk) has quit (Quit: Leaving)
+2019-12-22 04:23:58	-->	sortie (~Sortie@D4709781.rev.sefiber.dk) has joined #dart
+2019-12-22 04:23:59	--	Mode #dart [+o sortie] by ChanServ
+2019-12-22 06:37:58	<--	sortie (~Sortie@D4709781.rev.sefiber.dk) has quit (Read error: Connection reset by peer)
+2019-12-22 07:13:46	-->	daveaway (~kvirc@unaffiliated/daveace) has joined #dart
+2019-12-22 07:13:50	daveaway	is method overloading not supported?
+2019-12-22 07:44:38	<--	xkapastel (uid17782@gateway/web/irccloud.com/x-ekricwvkgbcnuswo) has quit (Quit: Connection closed for inactivity)
+2019-12-22 08:15:44	-->	LKoen (~LKoen@2a01cb0407597a00d9608d1ceab40a48.ipv6.abo.wanadoo.fr) has joined #dart
+2019-12-22 08:22:15	<--	LKoen (~LKoen@2a01cb0407597a00d9608d1ceab40a48.ipv6.abo.wanadoo.fr) has quit (Remote host closed the connection)
+2019-12-22 08:31:33	-->	LKoen (~LKoen@2a01cb0407597a0055d3a3770a21bf5a.ipv6.abo.wanadoo.fr) has joined #dart
+2019-12-22 08:31:34	-->	xkapastel (uid17782@gateway/web/irccloud.com/x-fsywnyiofihscmvb) has joined #dart
+2019-12-22 09:33:38	-->	beholders_eye (~weechat@node-1w7jr9qsq4i9010mp3shsg85j.ipv6.telus.net) has joined #dart
+2019-12-22 10:24:06	daveaway	anyone know whatthe latest solution is for checking if two maps have the same values ?
+2019-12-22 10:27:20	daveaway	cool i see it's recently been added?
+2019-12-22 10:39:50	<--	xkapastel (uid17782@gateway/web/irccloud.com/x-fsywnyiofihscmvb) has quit (Quit: Connection closed for inactivity)
+2019-12-22 11:15:46	-->	xkapastel (uid17782@gateway/web/irccloud.com/x-ppjqanivwdxxbsom) has joined #dart
+2019-12-22 11:36:43	<--	LKoen (~LKoen@2a01cb0407597a0055d3a3770a21bf5a.ipv6.abo.wanadoo.fr) has quit (Remote host closed the connection)
+2019-12-22 12:33:22	<--	daveaway (~kvirc@unaffiliated/daveace) has quit (Quit: KVIrc 4.2.0 Equilibrium http://www.kvirc.net/)
+2019-12-22 12:48:31	-->	sortie (~Sortie@D4709781.rev.sefiber.dk) has joined #dart
+2019-12-22 12:48:31	--	Mode #dart [+o sortie] by ChanServ
+2019-12-22 13:41:17	<--	beholders_eye (~weechat@node-1w7jr9qsq4i9010mp3shsg85j.ipv6.telus.net) has quit (Ping timeout: 260 seconds)
+2019-12-22 13:45:27	<--	xkapastel (uid17782@gateway/web/irccloud.com/x-ppjqanivwdxxbsom) has quit (Quit: Connection closed for inactivity)
+2019-12-22 15:31:54	-->	LKoen (~LKoen@2a01cb0407597a00083817e4c31841b8.ipv6.abo.wanadoo.fr) has joined #dart
+2019-12-22 17:22:44	<--	sortie (~Sortie@D4709781.rev.sefiber.dk) has quit (Quit: Leaving)
+2019-12-22 18:39:20	-->	xkapastel (uid17782@gateway/web/irccloud.com/x-tkkslfthenuxtits) has joined #dart
+2019-12-22 19:05:27	<--	LKoen (~LKoen@2a01cb0407597a00083817e4c31841b8.ipv6.abo.wanadoo.fr) has quit (Quit: “It’s only logical. First you learn to talk, then you learn to think. Too bad it’s not the other way round.”)
+2019-12-22 21:07:41	<--	xkapastel (uid17782@gateway/web/irccloud.com/x-tkkslfthenuxtits) has quit (Quit: Connection closed for inactivity)

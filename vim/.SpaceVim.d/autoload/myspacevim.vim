@@ -17,12 +17,14 @@ function! myspacevim#before() abort
   vnoremap ,p "+p
   nnoremap ,y "+y
   vnoremap ,y "+y
+  
+  let g:vimfiler_ignore_pattern = '^\%(\.git\|\.DS_Store\)$'
 endfunction
 
 function! myspacevim#after() abort
   let g:github_dashboard = { 'username': 'watzon', 'password': $GITHUB_TOKEN }
   let g:gista#client#default_username = 'watzon'
-  
+
   call SpaceVim#logger#info('myspacevim.vim loaded')
 endfunction
 

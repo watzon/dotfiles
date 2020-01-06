@@ -1,0 +1,10 @@
+export EDITOR="vim"
+export XDG_CONFIG_HOME="$HOME/.config"
+export ERL_AFLAGS="-kernel shell_history enabled"
+export CHROME_EXECUTABLE="/usr/bin/chromium"
+
+export PATH="$HOME/.nimble/bin:$PATH"
+export PATH=$PATH:"$HOME/.local/scripts"
+export PATH=$PATH:"$HOME/.local/bin"
+export PATH=$PATH:"$HOME/.cargo/bin"
+export PATH=$PATH:"$HOME/.pub-cache/bin"

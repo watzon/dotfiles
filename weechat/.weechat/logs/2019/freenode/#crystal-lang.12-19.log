@@ -1,0 +1,159 @@
+2019-12-19 00:08:56	<--	ht_ (~Thunderbi@ip-213-127-87-68.ip.prioritytelecom.net) has quit (Remote host closed the connection)
+2019-12-19 00:10:13	FromGitter	<dscottboggs_gitlab> > he biggest one is the nesting limitation: only 2 levels ⏎  ⏎ TOML has unlimited nesting but it's kinda awkward. Personally I think it depends on the use case. There are a lot of cases where you could just use `some_str.split(delim).map &.split(other_delim)` but there are also cases where config files get really complicated and I don't think anything beats YAML for that.
+2019-12-19 00:10:54	FromGitter	<dscottboggs_gitlab> JSON and MediaPack are great for transport but not great for config files
+2019-12-19 00:38:55	-->	ur5us_ (~ur5us@2406:e002:6b2c:e401:159d:33a3:c47:596) has joined #crystal-lang
+2019-12-19 00:45:22	<--	lvmbdv (~lvmbdv@176.240.165.0) has quit (Quit: Leaving)
+2019-12-19 01:09:32	-->	lvmbdv (~lvmbdv@176.240.165.0) has joined #crystal-lang
+2019-12-19 01:27:10	<--	lvmbdv (~lvmbdv@176.240.165.0) has quit (Remote host closed the connection)
+2019-12-19 01:29:22	-->	lvmbdv (~lvmbdv@176.240.165.0) has joined #crystal-lang
+2019-12-19 01:32:48	<--	ur5us_ (~ur5us@2406:e002:6b2c:e401:159d:33a3:c47:596) has quit (Ping timeout: 245 seconds)
+2019-12-19 01:35:12	FromGitter	<absolutejam_gitlab> I find TOML really hard to grok
+2019-12-19 01:35:39	FromGitter	<absolutejam_gitlab> I'm not a fan of deeply nested yaml, I feel like JSON may have the advantage there
+2019-12-19 01:35:51	FromGitter	<absolutejam_gitlab> maybe I need a better indent highlighter for vscode
+2019-12-19 02:20:47	-->	watzon (~watzon@2601:681:5180:f4e0::808a) has joined #crystal-lang
+2019-12-19 02:20:47	--	Topic for #crystal-lang is "The Crystal programming language | http://crystal-lang.org | Crystal 0.32.1 | Fund Crystal's development: http://is.gd/X7PRtI | GH: https://github.com/crystal-lang/crystal | Docs: http://crystal-lang.org/docs/ | API: http://crystal-lang.org/api/ | Gitter: https://gitter.im/crystal-lang/crystal"
+2019-12-19 02:20:47	--	Topic set by bcardiff on Wed, 18 Dec 2019 13:23:36
+2019-12-19 02:20:47	--	Channel #crystal-lang: 68 nicks (0 ops, 0 voices, 68 normals)
+2019-12-19 02:20:51	--	Channel created on Sun, 08 Sep 2013 22:01:00
+2019-12-19 02:28:16	FromGitter	<j8r> JSON for config is good, if not changed often
+2019-12-19 02:28:42	FromGitter	<j8r> YAML configuration can become very complicated, it's hard to track the nesting
+2019-12-19 02:36:59	FromGitter	<j8r> The worst is in K8S, with dicts and lists on each other: https://raw.githubusercontent.com/kubernetes/website/master/content/en/examples/application/wordpress/wordpress-deployment.yaml
+2019-12-19 02:38:00	FromGitter	<j8r> So easy to don't see this little `-` inside this mess
+2019-12-19 02:41:58	<--	alexherbo2 (~alexherbo@aputeaux-651-1-261-138.w86-249.abo.wanadoo.fr) has quit (Quit: The Lounge - https://thelounge.chat)
+2019-12-19 02:42:27	-->	alexherbo2 (~alexherbo@aputeaux-651-1-261-138.w86-249.abo.wanadoo.fr) has joined #crystal-lang
+2019-12-19 04:21:03	<--	alexherbo2 (~alexherbo@aputeaux-651-1-261-138.w86-249.abo.wanadoo.fr) has quit (Quit: The Lounge - https://thelounge.chat)
+2019-12-19 04:21:37	-->	alexherbo2 (~alexherbo@aputeaux-651-1-261-138.w86-249.abo.wanadoo.fr) has joined #crystal-lang
+2019-12-19 05:06:37	<--	lvmbdv (~lvmbdv@176.240.165.0) has quit (Ping timeout: 268 seconds)
+2019-12-19 05:57:31	<--	Human_G33k (~HumanG33k@62.147.242.8) has quit (Remote host closed the connection)
+2019-12-19 05:58:40	-->	Human_G33k (~HumanG33k@62.147.242.8) has joined #crystal-lang
+2019-12-19 06:04:10	-->	lvmbdv (~lvmbdv@176.240.165.0) has joined #crystal-lang
+2019-12-19 06:24:18	-->	HumanGeek (~HumanG33k@62.147.242.8) has joined #crystal-lang
+2019-12-19 06:27:39	<--	Human_G33k (~HumanG33k@62.147.242.8) has quit (Ping timeout: 240 seconds)
+2019-12-19 06:28:27	<--	lvmbdv (~lvmbdv@176.240.165.0) has quit (Ping timeout: 268 seconds)
+2019-12-19 07:09:58	-->	lvmbdv (~lvmbdv@176.240.165.0) has joined #crystal-lang
+2019-12-19 07:15:46	<--	lvmbdv (~lvmbdv@176.240.165.0) has quit (Quit: Leaving)
+2019-12-19 07:29:25	FromGitter	<randiaz95> Wow, does anyone know a guy named D1ceWard?
+2019-12-19 07:29:49	FromGitter	<randiaz95> he is a beast, created this nifty shard I read this morning called xlsx-parser
+2019-12-19 08:02:56	Yxhuvud	never heard about him
+2019-12-19 08:03:08	Yxhuvud	(or her, whatever)
+2019-12-19 08:04:41	FromGitter	<randiaz95> they*
+2019-12-19 08:04:42	FromGitter	<randiaz95> lol
+2019-12-19 08:04:46	FromGitter	<randiaz95> sorry for the gender
+2019-12-19 08:05:11	FromGitter	<randiaz95> Im using it for a microservice that reconciles something at work
+2019-12-19 08:43:19	FromGitter	<alehander92> it's a he, dont be sorry for using normal language
+2019-12-19 08:43:28	FromGitter	<alehander92> it seems there is info on his github
+2019-12-19 08:43:32	FromGitter	<alehander92> if you need to contact him
+2019-12-19 09:46:26	-->	ht_ (~Thunderbi@2a02:a210:9501:ad80:d925:7fe6:a746:2cff) has joined #crystal-lang
+2019-12-19 09:53:53	<--	return0e_ (~return0e@host81-159-131-253.range81-159.btcentralplus.com) has quit (Ping timeout: 250 seconds)
+2019-12-19 09:56:07	-->	return0e_ (~return0e@host81-159-131-253.range81-159.btcentralplus.com) has joined #crystal-lang
+2019-12-19 09:57:25	FromGitter	<randiaz95> I might just fork his repo and help him out
+2019-12-19 10:04:31	-->	duane (~duane@173.226.27.229) has joined #crystal-lang
+2019-12-19 10:07:02	<--	alexherbo2 (~alexherbo@aputeaux-651-1-261-138.w86-249.abo.wanadoo.fr) has quit (Quit: The Lounge - https://thelounge.chat)
+2019-12-19 10:46:55	FromGitter	<j8r> How can I type when an API returns `{}`, in JSON
+2019-12-19 10:47:36	FromGitter	<Blacksmoke16> an obj where all properties are nilable?
+2019-12-19 10:47:40	FromGitter	<tenebrousedge> that looks like an empty struct to me
+2019-12-19 10:47:57	FromGitter	<j8r> `Hash(String, Nil)` works, is there any better?
+2019-12-19 10:48:20	FromGitter	<Blacksmoke16> is there a case where it should also handle if there are values?
+2019-12-19 10:48:33	FromGitter	<j8r> no
+2019-12-19 10:48:44	FromGitter	<Blacksmoke16> Nil, Nil then?
+2019-12-19 10:49:02	FromGitter	<j8r> Tried, but Nil JSON keys are always strings
+2019-12-19 10:49:45	FromGitter	<Blacksmoke16> ah true true
+2019-12-19 10:50:36	FromGitter	<j8r> as said by  @tenebrousedge , I can use `struct Empty; end`
+2019-12-19 10:51:14	FromGitter	<Blacksmoke16> might be the better optoin
+2019-12-19 10:52:32	FromGitter	<tenebrousedge> my mostly-uninformed opinion is that JSON is better represented in Crystal as Structs than Hashes
+2019-12-19 11:01:31	FromGitter	<j8r> yes, unless the content is dynamic
+2019-12-19 11:02:39	FromGitter	<j8r> In this case, having `Hash(String, Nil)` implicitly suppose that the dict may not be empty. ⏎ I choose the struct option, thanks :)
+2019-12-19 11:07:29	FromGitter	<tenebrousedge> :plus1:
+2019-12-19 11:28:52	-->	alexherbo2 (~alexherbo@aputeaux-651-1-261-138.w86-249.abo.wanadoo.fr) has joined #crystal-lang
+2019-12-19 11:33:28	<--	dostoyevsky (~sck@unaffiliated/dostoyevsky) has quit (Ping timeout: 252 seconds)
+2019-12-19 11:58:35	<--	alexherbo2 (~alexherbo@aputeaux-651-1-261-138.w86-249.abo.wanadoo.fr) has quit (Quit: The Lounge - https://thelounge.chat)
+2019-12-19 11:59:06	-->	alexherbo2 (~alexherbo@aputeaux-651-1-261-138.w86-249.abo.wanadoo.fr) has joined #crystal-lang
+2019-12-19 12:14:24	<--	alexherbo2 (~alexherbo@aputeaux-651-1-261-138.w86-249.abo.wanadoo.fr) has quit (Ping timeout: 268 seconds)
+2019-12-19 12:32:01	-->	alexherbo2 (~alexherbo@aputeaux-651-1-261-138.w86-249.abo.wanadoo.fr) has joined #crystal-lang
+2019-12-19 12:32:02	FromGitter	<randiaz95> Guys, is there normally a rule of thumb when it comes to IO over 2 programming languages? ⏎  ⏎ For example: Should I run an executable from my api gateway with some sort of child process crystal executable or should I send a post request over localhost on a server that is listening in crystal?
+2019-12-19 12:33:41	FromGitter	<tenebrousedge> probably the former is better for small projects and the latter for large ones
+2019-12-19 12:34:15	FromGitter	<randiaz95> Is it because the benefits of large programs are that it can be run over 2 different computers or servers?
+2019-12-19 12:34:40	FromGitter	<randiaz95> I was thinking performance could be faster for http server because the overhead of booting up a language is still a little there in terms of an executable.
+2019-12-19 12:34:53	FromGitter	<randiaz95> also, I can keep long term variables and datastructs
+2019-12-19 12:35:53	FromGitter	<tenebrousedge> as a compiled language Crystal has minimal run-time initialization
+2019-12-19 12:36:27	FromGitter	<tenebrousedge> it's not Ruby :)
+2019-12-19 12:36:53	FromGitter	<tenebrousedge> even PHP boots in a few dozen milliseconds or so
+2019-12-19 12:38:00	FromGitter	<tenebrousedge> but yes, on the large scale, you may end up with different machines for the different processes, and for that you'd want an API
+2019-12-19 12:38:26	FromGitter	<tenebrousedge> you could split the difference and use some sort of job queue that would invoke a Crystal binary
+2019-12-19 12:39:02	FromGitter	<tenebrousedge> something like beanstalkd
+2019-12-19 13:05:06	<--	Nazral (~tyruiop@tyruiop.org) has quit (*.net *.split)
+2019-12-19 13:13:44	FromGitter	<randiaz95> Dang, I am going to look for a beanstalkd equivalent in Python
+2019-12-19 13:14:06	FromGitter	<randiaz95> I can make a web server with auth in postgres in 5 minutes, so I think I should use it for a gateway.
+2019-12-19 13:14:14	FromGitter	<randiaz95> make my requests and response with requests library.
+2019-12-19 13:15:07	FromGitter	<randiaz95> If there was a django in crystal, I would hit it up, but I don't think its too productive to relearn another framework just yet.
+2019-12-19 13:15:14	<--	duane (~duane@173.226.27.229) has quit (Ping timeout: 258 seconds)
+2019-12-19 13:16:16	FromGitter	<tenebrousedge> there's a few beanstalkd clients for Python https://github.com/beanstalkd/beanstalkd/wiki/Client-Libraries
+2019-12-19 13:17:03	FromGitter	<tenebrousedge> there are also other job and message queues that might be suitable
+2019-12-19 13:17:25	FromGitter	<absolutejam_gitlab> never heard of beanstalkd
+2019-12-19 13:18:03	FromGitter	<randiaz95> oo django beanstalkd
+2019-12-19 13:18:41	FromGitter	<absolutejam_gitlab> I normally use RabbitMQ
+2019-12-19 13:18:45	FromGitter	<randiaz95> Wait, isn't beanstalkd the client?
+2019-12-19 13:19:09	Yxhuvud	doesn't sidekiq exist for crystal, if you want a job queue?
+2019-12-19 13:19:23	FromGitter	<randiaz95> I mean... :'( je suis tres confuse
+2019-12-19 13:19:47	FromGitter	<randiaz95> django-beanstalkd is a server side
+2019-12-19 13:20:00	FromGitter	<Blacksmoke16> https://github.com/robacarp/mosquito is also pretty good, ive used it in the past
+2019-12-19 13:20:44	FromGitter	<absolutejam_gitlab> anyone ever browse Dribbble?
+2019-12-19 13:20:49	FromGitter	<absolutejam_gitlab> Get some serious UX envy
+2019-12-19 13:22:53	FromGitter	<tenebrousedge> a client here is something that interacts with the job queue service
+2019-12-19 13:24:00	FromGitter	<tenebrousedge> you'll usually have one service creating jobs, the job queue managing them, and a pool of workers executing the jobs
+2019-12-19 13:24:46	FromGitter	<absolutejam_gitlab> You ever get stuck up on what backend language/framework to use?
+2019-12-19 13:24:49	FromGitter	<absolutejam_gitlab> I know I shouldn't but the grass is always greener
+2019-12-19 13:25:11	FromGitter	<Blacksmoke16> we adopted a pattern using rabbitmq with dockerized workers consuming from a specific queue
+2019-12-19 13:25:34	FromGitter	<Blacksmoke16> uses some go lib under the hood
+2019-12-19 13:25:56	FromGitter	<absolutejam_gitlab> we're a Laravel shop and we use RabbitMQ and dedicated workers per queue
+2019-12-19 13:25:58	FromGitter	<absolutejam_gitlab> In k8s
+2019-12-19 13:26:12	FromGitter	<absolutejam_gitlab> Custom RabbitMQ driver that uses the C extension so it's nice and fast
+2019-12-19 13:26:59	FromGitter	<absolutejam_gitlab> with a 3 node RabbitMQ statefulset
+2019-12-19 13:27:18	FromGitter	<absolutejam_gitlab> It's nice because it's amqp so there's generally a lib for it in any language
+2019-12-19 13:28:44	FromGitter	<wontruefree> @randiaz95  I have not tried this yet but I plan on implementing an SQS queue for my next project https://github.com/sdogruyol/aws
+2019-12-19 13:41:12	-->	ur5us_ (~ur5us@2406:e002:6b2c:e401:159d:33a3:c47:596) has joined #crystal-lang
+2019-12-19 13:49:50	<--	alexherbo2 (~alexherbo@aputeaux-651-1-261-138.w86-249.abo.wanadoo.fr) has quit (Quit: The Lounge - https://thelounge.chat)
+2019-12-19 13:58:28	FromGitter	<randiaz95> @absolutejam_gitlab  interesting, it seems like just outsourcing the front end ux is best..
+2019-12-19 14:00:55	FromGitter	<randiaz95> once i have more than 100 lines of html my projects always die... lol
+2019-12-19 14:01:02	FromGitter	<randiaz95> I need to modularize my html more.
+2019-12-19 14:27:34	-->	duane (~duane@c-24-11-247-240.hsd1.tn.comcast.net) has joined #crystal-lang
+2019-12-19 19:04:38	-->	watzon (~watzon@2601:681:5180:f4e0::808a) has joined #crystal-lang
+2019-12-19 19:04:38	--	Topic for #crystal-lang is "The Crystal programming language | http://crystal-lang.org | Crystal 0.32.1 | Fund Crystal's development: http://is.gd/X7PRtI | GH: https://github.com/crystal-lang/crystal | Docs: http://crystal-lang.org/docs/ | API: http://crystal-lang.org/api/ | Gitter: https://gitter.im/crystal-lang/crystal"
+2019-12-19 19:04:38	--	Topic set by bcardiff on Wed, 18 Dec 2019 13:23:36
+2019-12-19 19:04:38	--	Channel #crystal-lang: 68 nicks (0 ops, 0 voices, 68 normals)
+2019-12-19 19:04:39	--	Channel created on Sun, 08 Sep 2013 22:01:00
+2019-12-19 19:05:03	watzon	Wow is there really no simple, built in way to open a file as a Bytes instance?
+2019-12-19 19:05:07	watzon	I thought there was
+2019-12-19 19:06:03	FromGitter	<Blacksmoke16> well if you open the file you have access to IO methods
+2019-12-19 19:06:11	FromGitter	<Blacksmoke16> so could do https://crystal-lang.org/api/master/IO.html#read_bytes(type,format:IO::ByteFormat=IO::ByteFormat::SystemEndian)-instance-method ?
+2019-12-19 19:07:15	watzon	Doesn't read_bytes just read the bytes as an Int?
+2019-12-19 19:08:07	watzon	There's also read_fully and such, but they read the bytes __into__ a Slice
+2019-12-19 19:08:49	watzon	I thought for sure File had a to_slice method, but it doesn't
+2019-12-19 19:11:43	FromGitter	<Blacksmoke16> :shrug:
+2019-12-19 19:12:26	watzon	I guess there's `gets_to_end` and then `to_slice`
+2019-12-19 19:12:37	watzon	Not really ideal, but I guess it works
+2019-12-19 19:12:57	FromGitter	<Blacksmoke16> isnt that what to_slice on file would do internally?
+2019-12-19 19:13:05	FromGitter	<Blacksmoke16> since the contents are just a string
+2019-12-19 19:14:09	watzon	I feel like `to_slice` usually just returns a pointer to the internal buffer, but idk
+2019-12-19 20:02:25	<--	Vexatos (~Vexatos@iscute.moe) has quit (Quit: ZNC Quit)
+2019-12-19 20:39:28	-->	f1refly (~f1refly@2001:16b8:17e8:b700:225:22ff:fe85:e4ce) has joined #crystal-lang
+2019-12-19 20:39:48	<--	f1reflyylmao (~f1refly@2001:16b8:1793:db00:225:22ff:fe85:e4ce) has quit (Ping timeout: 252 seconds)
+2019-12-19 21:00:03	<--	_whitelogger (~whitelogg@uruz.whitequark.org) has quit (Remote host closed the connection)
+2019-12-19 21:01:16	-->	_whitelogger (~whitelogg@uruz.whitequark.org) has joined #crystal-lang
+2019-12-19 21:45:52	<--	ur5us_ (~ur5us@2406:e002:6b2c:e401:159d:33a3:c47:596) has quit (Ping timeout: 260 seconds)
+2019-12-19 21:57:02	<--	_whitelogger (~whitelogg@uruz.whitequark.org) has quit (Remote host closed the connection)
+2019-12-19 21:58:15	-->	_whitelogger (~whitelogg@uruz.whitequark.org) has joined #crystal-lang
+2019-12-19 22:07:16	<--	commavir (~vir@23.226.237.192) has quit (Ping timeout: 248 seconds)
+2019-12-19 22:08:26	-->	commavir (~vir@23.226.237.192) has joined #crystal-lang
+2019-12-19 22:18:48	-->	lvmbdv (~lvmbdv@176.240.165.0) has joined #crystal-lang
+2019-12-19 22:36:34	-->	ht_ (~Thunderbi@2a02:a210:9501:ad80:f192:ba39:880:ae74) has joined #crystal-lang
+2019-12-19 23:15:01	-->	lvmbdv_ (~lvmbdv@209.250.251.108) has joined #crystal-lang
+2019-12-19 23:17:43	<--	lvmbdv (~lvmbdv@176.240.165.0) has quit (Ping timeout: 260 seconds)
+2019-12-19 23:19:23	<--	lvmbdv_ (~lvmbdv@209.250.251.108) has quit (Read error: Connection reset by peer)
+2019-12-19 23:21:36	-->	lvmbdv (~lvmbdv@176.240.165.0) has joined #crystal-lang
+2019-12-19 23:27:38	<--	ht_ (~Thunderbi@2a02:a210:9501:ad80:f192:ba39:880:ae74) has quit (Quit: ht_)
+2019-12-19 23:29:18	-->	lvmbdv_ (~lvmbdv@209.250.251.108) has joined #crystal-lang
+2019-12-19 23:32:01	<--	lvmbdv (~lvmbdv@176.240.165.0) has quit (Ping timeout: 258 seconds)
+2019-12-19 23:35:13	<--	lvmbdv_ (~lvmbdv@209.250.251.108) has quit (Quit: Leaving)
+2019-12-19 23:43:17	-->	lvmbdv (~lvmbdv@176.240.165.0) has joined #crystal-lang
+2019-12-19 23:50:23	<--	lvmbdv (~lvmbdv@176.240.165.0) has quit (Quit: Leaving)

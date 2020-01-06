@@ -1,0 +1,1 @@
+("~/.dotfiles/" "~/Projects/clones/gramjs/" "~/Projects/personal/tidal.cr/" "~/Projects/personal/xio/")

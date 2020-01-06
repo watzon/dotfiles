@@ -1,0 +1,14 @@
+*~
+/emacs/.emacs.d/.*
+/emacs/.emacs.d/elpa
+/emacs/.emacs.d/auto-save-list/
+/emacs/.emacs.d/places
+/emacs/.emacs.d/emojis/
+/emacs/.emacs.d/eshell/
+/emacs/.emacs.d/to-be-dumped.el
+/emacs/.emacs.d/transient/
+/emacs/.emacs.d/url/
+/emacs/.emacs.d/var/
+
+/weechat/.weechat/logs/*
+

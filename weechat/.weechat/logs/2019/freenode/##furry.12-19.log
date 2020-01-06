@@ -1,0 +1,88 @@
+2019-12-19 00:05:39	<--	Wolfi (~Wolfi@ip4-188-74-6-193.dyn.netcomnetz.de) has quit (Disconnected by services)
+2019-12-19 00:05:39	-->	Wolfi|Awoo (~Wolfi@ip4-188-74-31-28.dyn.netcomnetz.de) has joined ##furry
+2019-12-19 00:06:53	--	Wolfi|Awoo is now known as Wolfi
+2019-12-19 01:00:04	<--	Gustavo6046 (~Gustavo60@unaffiliated/gustavo6046) has quit (Ping timeout: 248 seconds)
+2019-12-19 02:20:47	-->	watzon (~watzon@2601:681:5180:f4e0::808a) has joined ##furry
+2019-12-19 02:20:47	--	Topic for ##furry is "The fuzziest place on Freenode! || A place for sophisticated tech discussion... and femboi foxes!"
+2019-12-19 02:20:47	--	Topic set by WildyLion (~simba@mail.koshaq.net) on Wed, 11 Dec 2019 11:00:25
+2019-12-19 02:20:47	--	Channel ##furry: 28 nicks (1 op, 0 voices, 27 normals)
+2019-12-19 02:21:03	--	Channel created on Sun, 23 Sep 2007 08:53:41
+2019-12-19 02:28:19	<--	findlayr (~findlayr@alpha.zenoc.net) has quit (Read error: Connection reset by peer)
+2019-12-19 02:40:18	-->	findlayr (~findlayr@alpha.zenoc.net) has joined ##furry
+2019-12-19 02:40:42	<--	findlayr (~findlayr@alpha.zenoc.net) has quit (Read error: Connection reset by peer)
+2019-12-19 02:41:39	-->	findlayr (~findlayr@alpha.zenoc.net) has joined ##furry
+2019-12-19 03:50:54	<--	yrlf (~yrlf@core.recodex.at) has quit (Quit: The Lounge - https://thelounge.chat)
+2019-12-19 03:59:56	-->	yrlf (~yrlf@core.recodex.at) has joined ##furry
+2019-12-19 04:45:10	-->	gqrter543 (def4@177.24.29.97) has joined ##furry
+2019-12-19 04:50:27	agris	furrywolf has enough natural gas to last us the next decade
+2019-12-19 06:07:29	-->	Leonhardt (uid340349@gateway/web/irccloud.com/x-rkxvawndrjjojvpb) has joined ##furry
+2019-12-19 06:10:43	<--	Starhowl (~starhowl@p508D4FAB.dip0.t-ipconnect.de) has quit (Ping timeout: 250 seconds)
+2019-12-19 06:26:45	-->	Starhowl (~starhowl@p508D5260.dip0.t-ipconnect.de) has joined ##furry
+2019-12-19 07:22:27	-->	octav1a (~Rboreal_F@rcb-fwall-00-users2.pmacs.upenn.edu) has joined ##furry
+2019-12-19 07:24:11	-->	Gustavo6046 (~Gustavo60@unaffiliated/gustavo6046) has joined ##furry
+2019-12-19 08:35:12	octav1a	Good morning..
+2019-12-19 08:49:25	-->	furrywolf (~furrywolf@172.58.92.204) has joined ##furry
+2019-12-19 08:51:05	<--	gqrter543 (def4@177.24.29.97) has quit (Ping timeout: 268 seconds)
+2019-12-19 08:54:55	-->	gqrter543 (def4@191.22.1.124) has joined ##furry
+2019-12-19 08:59:03	furrywolf	https://www.youtube.com/watch?v=XcsHqQiJbJU  ok, that is by far the scariest thing garage54 has ever built.
+2019-12-19 08:59:17	furrywolf	I wouldn't stand within 100ft of that.
+2019-12-19 08:59:42	octav1a	oh man I love that guy
+2019-12-19 09:00:35	furrywolf	he seems to be trying to kill himself.  :P
+2019-12-19 09:03:21	furrywolf	a firetube boiler is not something that should be constructed that haphazardly.  heh.
+2019-12-19 09:05:03	furrywolf	"Looks like we have zero carbon emissions...  we'll have to burn some more coal!"  lol
+2019-12-19 09:07:05	furrywolf	that's the first thing I've seen him build with the actual potential to kill the entire crew.  heh.
+2019-12-19 09:17:35	octav1a	I was always curious when he did those 4 lada engines together, at first they had one cooling system, and then later it had no cooling system. I guess it was never intended to be used for more than a few minutes lol
+2019-12-19 09:19:48	furrywolf	that's true of most of his projects.
+2019-12-19 09:23:50	-->	Trapa (Trapa@2600:3c00::f03c:91ff:fef1:7a60) has joined ##furry
+2019-12-19 09:24:06	octav1a	^^
+2019-12-19 09:24:31	octav1a	So much effort, just for a little video
+2019-12-19 09:25:08	furrywolf	and lots of money.
+2019-12-19 09:27:09	octav1a	What is the main disadvantage of steam compared to gas in general? I know it is supposed to convert the fuel very efficiently in power plants. Does that advantage get lost at the scale of a car?
+2019-12-19 09:27:48	octav1a	numbers I have heard in the past were like 30% thermal efficiency for gas and somewhere around 80% for steam in power plants.
+2019-12-19 09:30:54	WildyLio1	omg this's a scary day
+2019-12-19 09:31:14	WildyLio1	ok, fuck that
+2019-12-19 09:31:34	WildyLio1	but yes, lots of shit happened in Moscow right now, active shooter right in the KGB (now FSB) HQ
+2019-12-19 09:32:21	WildyLio1	riiiiiight after a major presidential press conference. coincidence? yes, of course, i totally believe it
+2019-12-19 09:32:41	furrywolf	steam responds slowly to load changes, is very hard to use efficiently at varying throttle positions (adjustable cutoff needed, etc), needs condensing or replenishing of water, scaling and all the other boiler issues, difficuly with lubrication, weight,...
+2019-12-19 09:32:50	<--	Gustavo6046 (~Gustavo60@unaffiliated/gustavo6046) has quit (Ping timeout: 268 seconds)
+2019-12-19 09:32:55	WildyLio1	aaand they're announced an annual 'drill' testing the new internet isolation systems, guess what... literally plainly stated they'd try sniffing traffic and cutting off access
+2019-12-19 09:33:00	WildyLio1	but that's old news
+2019-12-19 09:33:08	furrywolf	hard to run it at high enough temperatures to get efficiency in small setups
+2019-12-19 09:33:11	-->	Gustavo6046 (~Gustavo60@unaffiliated/gustavo6046) has joined ##furry
+2019-12-19 09:33:15	WildyLio1	sorry guys, just needed to vent
+2019-12-19 09:35:28	furrywolf	steam is good for big things that run continuously at high power
+2019-12-19 09:35:36	 *	furrywolf randomly sits on WildyLio1 
+2019-12-19 09:37:30	 *	WildyLio1 suddenly finds something big and fluffy to gnaw on
+2019-12-19 09:38:55	furrywolf	meep!
+2019-12-19 09:40:34	<--	wolfshappen (~waff@irc.furworks.de) has quit (Ping timeout: 258 seconds)
+2019-12-19 09:40:47	 *	WildyLio1 snuggles
+2019-12-19 09:42:12	furrywolf	:)
+2019-12-19 09:42:56	-->	wolfshappen (~waff@irc.furworks.de) has joined ##furry
+2019-12-19 09:43:14	WildyLio1	furrywolf: if you find me a large enough box i'd be a pretty happy cat XD
+2019-12-19 09:43:16	furrywolf	a wolf has happened!
+2019-12-19 09:43:52	furrywolf	hrmm.  I have a large moving box that something I bought on ebay got shipped to me in.  can't remember what.  about a 2ft cube...
+2019-12-19 09:44:30	WildyLio1	can i sit in it? :P
+2019-12-19 09:44:35	furrywolf	yes.  :)
+2019-12-19 09:44:58	 *	WildyLio1 :[=*^_^*=]
+2019-12-19 09:47:17	furrywolf	alas, I need to go do morning things...  you can keep the box, though.  :)
+2019-12-19 09:47:19	furrywolf	bbl
+2019-12-19 10:05:47	<--	Leonhardt (uid340349@gateway/web/irccloud.com/x-rkxvawndrjjojvpb) has quit (Quit: Connection closed for inactivity)
+2019-12-19 10:43:16	-->	Leonhardt (uid340349@gateway/web/irccloud.com/x-ekdmtrsuynkeexil) has joined ##furry
+2019-12-19 12:44:18	<--	smiba (~smiba@woof.tech) has quit (*.net *.split)
+2019-12-19 12:45:10	-->	smiba (~smiba@woof.tech) has joined ##furry
+2019-12-19 12:55:47	<--	Leonhardt (uid340349@gateway/web/irccloud.com/x-ekdmtrsuynkeexil) has quit (Quit: Connection closed for inactivity)
+2019-12-19 13:05:06	<--	smiba (~smiba@woof.tech) has quit (*.net *.split)
+2019-12-19 13:05:13	-->	smiba (~smiba@woof.tech) has joined ##furry
+2019-12-19 19:04:39	-->	watzon (~watzon@2601:681:5180:f4e0::808a) has joined ##furry
+2019-12-19 19:04:39	--	Topic for ##furry is "The fuzziest place on Freenode! || A place for sophisticated tech discussion... and femboi foxes!"
+2019-12-19 19:04:39	--	Topic set by WildyLion (~simba@mail.koshaq.net) on Wed, 11 Dec 2019 11:00:25
+2019-12-19 19:04:39	--	Channel ##furry: 30 nicks (1 op, 0 voices, 29 normals)
+2019-12-19 19:05:02	 *	furrywolf seems to have chased pikapika off.  :(
+2019-12-19 19:05:10	--	Channel created on Sun, 23 Sep 2007 08:53:41
+2019-12-19 19:10:50	furrywolf	I'm liking their Concentration and Gilt albums a lot.  I might subject everyone at work to them tomorrow.
+2019-12-19 19:23:35	-->	Ringtailed-Fox (~User@unaffiliated/ringtailedfox) has joined ##furry
+2019-12-19 19:23:38	<--	RingtailedFox (~User@unaffiliated/ringtailedfox) has quit (Read error: Connection reset by peer)
+2019-12-19 19:24:23	 *	furrywolf subjects RingtailedFox to listening to those albums too
+2019-12-19 19:32:21	furrywolf	ok, using up bandwidth nicely...  downloading some destroy all monsters, guilty gear soundtracks, mankind is obsolete, skold, american head charge (did you tell me to get them?  I don't remember), chiasm, the last black sabbath album (realized I never got it), a couple va compilations,...
+2019-12-19 22:27:14	<--	Gustavo6046 (~Gustavo60@unaffiliated/gustavo6046) has quit (Ping timeout: 240 seconds)
+2019-12-19 22:40:26	<--	furrywolf (~furrywolf@172.58.92.204) has quit (Ping timeout: 240 seconds)

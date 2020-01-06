@@ -72,33 +72,6 @@ plugins=(git node zsh-autosuggestions ruby)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-#list
 alias ls='ls --color=auto'
 alias la='ls -a'
 alias ll='ls -la'
@@ -227,21 +200,42 @@ alias adbscreencap="adb shell screencap -p > screen.png"
 alias adbscreenrecord="adb exec-out screenrecord --output-format=h264 - > screen.mp4"
 
 alias cls='printf "\033c" && clear'
+alias todo="todo.sh"
 
-export XDG_CONFIG_HOME="$HOME/.config"
-export ERL_AFLAGS="-kernel shell_history enabled"
-export CHROME_EXECUTABLE="/usr/bin/chromium"
+# GUIX stuff
+# Arrange so that ~/.config/guix/current paths end up first in
+# the particular path list.
+for profile in "$HOME/.guix-profile" "$HOME/.config/guix/current"
+do
+  if [ -f "$profile/etc/profile" ]
+  then
+    # Load the user profile's settings.
+    GUIX_PROFILE="$profile" ; \
+    . "$profile/etc/profile"
+  else
+    # At least define this one so that basic things just work
+    # when the user installs their first package.
+    export PATH="$profile/bin${PATH:+:$PATH}"
+    export INFOPATH="$profile/share/info${INFOPATH:+:$INFOPATH}"
+  fi
+done
+unset profile
 
-export PATH="$HOME/.nimble/bin:$PATH"
-export PATH=$PATH:"$HOME/.local/scripts"
-export PATH=$PATH:"$HOME/.local/bin"
-export PATH=$PATH:"$HOME/.cargo/bin"
+export GUIX_LOCPATH=$HOME/.guix-profile/lib/locale
 
-. $HOME/.asdf/asdf.sh
-
-. $HOME/.asdf/completions/asdf.bash
-
+source $HOME/.zshenv
+source $HOME/.asdf/asdf.sh
+source $HOME/.asdf/completions/asdf.bash
 source ~/.zshrc.d/secrets.zsh
+
+autoload -Uz compinit
+compinit
+
+# Completion for kitty
+kitty + complete setup zsh | source /dev/stdin
+
+# opam configuration
+test -r /home/watzon/.opam/opam-init/init.zsh && . /home/watzon/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 cls
 neofetch

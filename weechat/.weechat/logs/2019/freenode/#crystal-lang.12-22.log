@@ -1,0 +1,313 @@
+2019-12-22 01:01:26	<--	mooe (uid80022@gateway/web/irccloud.com/x-nacygbglufoenynx) has quit (Quit: Connection closed for inactivity)
+2019-12-22 01:14:17	-->	return0e_ (~return0e@host81-159-131-253.range81-159.btcentralplus.com) has joined #crystal-lang
+2019-12-22 01:14:56	<--	return0e (~return0e@host81-159-131-253.range81-159.btcentralplus.com) has quit (Ping timeout: 268 seconds)
+2019-12-22 02:09:21	-->	mooe (uid80022@gateway/web/irccloud.com/x-zaxkdkitltviibpf) has joined #crystal-lang
+2019-12-22 03:39:38	-->	ht_ (~Thunderbi@2a02:a210:9501:ad80:d478:d642:7db5:703) has joined #crystal-lang
+2019-12-22 03:53:25	<--	return0e_ (~return0e@host81-159-131-253.range81-159.btcentralplus.com) has quit (Ping timeout: 265 seconds)
+2019-12-22 03:56:38	-->	return0e (~return0e@host81-159-131-253.range81-159.btcentralplus.com) has joined #crystal-lang
+2019-12-22 04:11:26	<--	mooe (uid80022@gateway/web/irccloud.com/x-zaxkdkitltviibpf) has quit (Quit: Connection closed for inactivity)
+2019-12-22 05:05:22	-->	alexherbo2 (~alexherbo@aputeaux-651-1-261-138.w86-249.abo.wanadoo.fr) has joined #crystal-lang
+2019-12-22 05:33:16	FromGitter	<Daniel-Worrall> hmm, can you have a generic class with a default?
+2019-12-22 05:33:43	FromGitter	<Daniel-Worrall> Like `class Foo(T = Int32) ... Foo.new`
+2019-12-22 06:22:12	<--	DTZUZO (~DTZUZO@S0106bcd165662a4d.vs.shawcable.net) has quit (Read error: Connection reset by peer)
+2019-12-22 06:24:57	-->	Human_G33k (~HumanG33k@62.147.242.8) has joined #crystal-lang
+2019-12-22 06:25:21	-->	DTZUZO (~DTZUZO@S0106bcd165662a4d.vs.shawcable.net) has joined #crystal-lang
+2019-12-22 06:28:49	<--	HumanG33k (~HumanG33k@62.147.242.8) has quit (Ping timeout: 268 seconds)
+2019-12-22 06:39:56	Yxhuvud	No
+2019-12-22 07:37:31	raz	jesus freakin christ... crystal has ruined me... i can't handle javascript anymore
+2019-12-22 07:46:07	FromGitter	<tenebrousedge> you could always use typescript, if sanity isn't a big priority for you
+2019-12-22 08:07:43	<--	alexherbo2 (~alexherbo@aputeaux-651-1-261-138.w86-249.abo.wanadoo.fr) has quit (Quit: The Lounge - https://thelounge.chat)
+2019-12-22 08:47:03	f1refly	Honestly any other language will ruin javascript for you
+2019-12-22 08:47:13	f1refly	even javascrip will ruin javascript for you
+2019-12-22 08:47:22	FromGitter	<grkek> Crystal ruined me as well
+2019-12-22 08:47:33	FromGitter	<grkek> and I fucking love it
+2019-12-22 08:59:33	raz	yep, you're all correct. i just had to whine for a moment. sorry.
+2019-12-22 09:07:56	FromGitter	<tenebrousedge> whining to a sympathetic audience is wonderfully cathartic
+2019-12-22 09:10:55	FromGitter	<grkek> I went up and rewrote parts of Kemal framework to be more handler class oriented, rn the readme, specs and samples need updating but the source changed check it out if you guys have time for it :) https://github.com/grkek/grip
+2019-12-22 09:12:35	FromGitter	<grkek> It is still a WIP tho
+2019-12-22 09:13:20	FromGitter	<tenebrousedge> > Installation ⏎  ⏎ Add this to your application's shard.yml: ⏎  ⏎ dependencies: ... [https://gitter.im/crystal-lang/crystal?at=5dff9620e0131f50c98a1614]
+2019-12-22 09:13:22	FromGitter	<Daniel-Worrall> readme should be a top priority. I have no idea what you've changed/will change or how to use or judge
+2019-12-22 09:13:39	FromGitter	<tenebrousedge> ditto for that for me
+2019-12-22 09:14:21	FromGitter	<grkek> Currently I am learning elixir as well with it so I don't really have time for it but I have an example
+2019-12-22 09:14:57	FromGitter	<tenebrousedge> you should fix the obviously incorrect installation instructions at the very least
+2019-12-22 09:15:25	FromGitter	<Daniel-Worrall> Name, installation, note of WIP
+2019-12-22 09:15:28	FromGitter	<Daniel-Worrall> and logo
+2019-12-22 09:16:23	FromGitter	<grkek> https://play.crystal-lang.org/#/r/891c
+2019-12-22 09:16:27	FromGitter	<grkek> this is how it looks now
+2019-12-22 09:16:47	FromGitter	<grkek> from sinatra like parts I only left before_all after_all and the error macro
+2019-12-22 09:18:08	FromGitter	<tenebrousedge> you should definitely put that example in your readme
+2019-12-22 09:18:16	FromGitter	<grkek> Do you like it ?
+2019-12-22 09:19:13	FromGitter	<grkek> dependencies: ⏎ kemal: ⏎ github: grkek/grip
+2019-12-22 09:19:18	FromGitter	<grkek> whopse
+2019-12-22 09:19:19	FromGitter	<grkek> wait
+2019-12-22 09:19:27	FromGitter	<grkek> dependencies: ⏎ grip: ⏎ github: grkek/grip
+2019-12-22 09:19:33	FromGitter	<tenebrousedge> I suspect it would be better for large projects to use defined methods rather than `get 'route' do`
+2019-12-22 09:19:46	FromGitter	<grkek> here is how you install it, sorry for the readme messup will fix it up later
+2019-12-22 09:20:22	FromGitter	<grkek> I didnt like the sinatra way and I didnt like the monolithic amber framework I just wanted my classes to have functions like this
+2019-12-22 09:21:45	FromGitter	<grkek> thank you for the feedback, I feel very happy now :D
+2019-12-22 09:22:26	FromGitter	<tenebrousedge> :plus1:
+2019-12-22 09:28:10	FromGitter	<Blacksmoke16> this setup is how athena works
+2019-12-22 09:28:19	FromGitter	<Blacksmoke16> using methods on a controller class where each method is bound to a route
+2019-12-22 09:29:01	FromGitter	<Blacksmoke16> you could use a macro to auto supply the array of handlers as well
+2019-12-22 09:29:40	FromGitter	<Blacksmoke16> assuming each controller wouldn't have any arguments that the use would have to supply
+2019-12-22 09:32:38	FromGitter	<grkek> I could supply the handlers using a macro but, the handlers might want some arguments
+2019-12-22 09:32:45	FromGitter	<grkek> that is why I left them this way
+2019-12-22 09:33:52	FromGitter	<tenebrousedge> I'm wary of athena's reliance on macros. Not that I have any relevant experience on the matter
+2019-12-22 09:34:14	FromGitter	<Daniel-Worrall> macros are great and you should submit to them
+2019-12-22 09:34:27	FromGitter	<Blacksmoke16> to be fair it doesnt use as many macros as you think
+2019-12-22 09:34:40	FromGitter	<Blacksmoke16> is mainly just the 1 file that registers all the routes
+2019-12-22 09:34:58	FromGitter	<tenebrousedge> but my not-macros 😢
+2019-12-22 09:35:20	FromGitter	<tenebrousedge> I just want them to be like metaprogramming in Ruby :(
+2019-12-22 09:36:14	FromGitter	<Daniel-Worrall> they're not like metaprogramming, they're more like code writing automation
+2019-12-22 09:36:30	FromGitter	<Daniel-Worrall> ruby metaprogramming in crystal isn't achievable
+2019-12-22 09:36:31	FromGitter	<tenebrousedge> ...that's what metaprogramming is
+2019-12-22 09:36:41	FromGitter	<Daniel-Worrall> wellllll
+2019-12-22 09:36:43	FromGitter	<tenebrousedge> I know it's not achievable, that's why I'm sad
+2019-12-22 09:37:30	FromGitter	<tenebrousedge> macros are metaprogramming because their output is code
+2019-12-22 09:37:47	FromGitter	<Daniel-Worrall> Yeah, sorry, I phrased my wording badly
+2019-12-22 09:37:57	FromGitter	<Daniel-Worrall> They are metaprogramming, but they're not ruby-style metaprogramming
+2019-12-22 09:38:14	FromGitter	<Daniel-Worrall> because ruby style is all runtime
+2019-12-22 09:38:25	FromGitter	<Daniel-Worrall> it's like a pre-processor
+2019-12-22 09:38:32	FromGitter	<tenebrousedge> I know :( there is no perfect language
+2019-12-22 09:48:03	<--	_whitelogger (~whitelogg@uruz.whitequark.org) has quit (Remote host closed the connection)
+2019-12-22 09:49:15	-->	_whitelogger (~whitelogg@uruz.whitequark.org) has joined #crystal-lang
+2019-12-22 10:07:01	FromGitter	<j8r> is there any compile-time safe language with meta-programing?
+2019-12-22 10:07:20	FromGitter	<tenebrousedge> Crystal
+2019-12-22 10:08:46	FromGitter	<grkek> https://github.com/grkek/grip
+2019-12-22 10:08:49	FromGitter	<grkek> Updated the readme
+2019-12-22 10:08:58	FromGitter	<grkek> still needs docs they will come soon
+2019-12-22 10:09:14	FromGitter	<grkek> I also plan on changing up the websocket handlers to class oriented ones
+2019-12-22 10:13:00	FromGitter	<tenebrousedge> :plus1:
+2019-12-22 10:13:13	FromGitter	<grkek> <3
+2019-12-22 10:31:06	FromGitter	<j8r> @tenebrousedge I mean, dynamic meta-programing?
+2019-12-22 10:31:31	FromGitter	<tenebrousedge> maybe typescript
+2019-12-22 10:32:22	FromGitter	<tenebrousedge> and isn't there a typed version of python ?
+2019-12-22 10:33:30	raz	@Daniel-Worrall fwiw, i also missed some rubyisms early on (reflection, more flexible Hashes). but over time you discover more and more advantages in the rigidity that crystal has over ruby. the tasks for which i reach to ruby have become increasingly sparse. more often than not i'll try something out in pry. and then write it in crystal :D
+2019-12-22 10:34:37	FromGitter	<tenebrousedge> `icr` is a reasonable replacement for pry for "Does this work the way I think it does?"
+2019-12-22 10:35:05	raz	ah thx, i've yet to try that one out.
+2019-12-22 12:02:04	FromGitter	<randiaz95> Hey guys, how are you guys feeling this holiday season
+2019-12-22 12:07:06	FromGitter	<grkek> I am already ill @randiaz95 how about you :?
+2019-12-22 12:07:37	FromGitter	<randiaz95> dang, lol
+2019-12-22 12:07:43	FromGitter	<randiaz95> I feel bad and lethargic when I drink
+2019-12-22 12:07:48	FromGitter	<randiaz95> so also ill lol
+2019-12-22 12:08:10	FromGitter	<randiaz95> I am learning crystal while growing my dart programming skills
+2019-12-22 12:08:44	FromGitter	<grkek> Want to see something interesting ?
+2019-12-22 12:21:56	FromGitter	<randiaz95> ya
+2019-12-22 12:22:01	FromGitter	<randiaz95> aslong as its not genitals
+2019-12-22 12:34:15	FromGitter	<grkek> @randiaz95 https://github.com/grkek/grip its this :)
+2019-12-22 12:39:14	FromGitter	<randiaz95> Wow! very nice
+2019-12-22 12:40:07	FromGitter	<randiaz95> Dude that is pretty
+2019-12-22 12:42:28	FromGitter	<grkek> thank you very much !
+2019-12-22 12:42:47	FromGitter	<grkek> appreciated a lot
+2019-12-22 12:44:15	FromGitter	<j8r> one little point: by using classes, it will puts more pressure on the GC
+2019-12-22 12:45:09	FromGitter	<j8r> in this case structs may be better
+2019-12-22 12:48:19	FromGitter	<grkek> Keep in mind that it is a class oriented
+2019-12-22 12:48:25	FromGitter	<grkek> framework :)
+2019-12-22 12:48:29	FromGitter	<randiaz95> lol
+2019-12-22 12:48:56	FromGitter	<randiaz95> I think the benefits is that one can then have a controller object controlling those api objects
+2019-12-22 12:49:35	FromGitter	<randiaz95> or maybe other types of patterns
+2019-12-22 12:50:36	FromGitter	<Blacksmoke16> i mean it would work the same, just the memory of your controller objects would be allocated on the stack versus the heap
+2019-12-22 12:52:04	FromGitter	<randiaz95> interesting to see how one can observe all the handler objects
+2019-12-22 12:52:26	FromGitter	<Blacksmoke16> hm?
+2019-12-22 12:52:39	FromGitter	<randiaz95> like an observer pattern
+2019-12-22 12:53:05	FromGitter	<randiaz95> https://i-love-ruby.gitlab.io/#_observer_pattern
+2019-12-22 12:53:37	FromGitter	<Blacksmoke16> but would you really want multiple methods listening on the same route?
+2019-12-22 12:54:36	FromGitter	<grkek> @Blacksmoke16 Why not ?
+2019-12-22 12:54:48	FromGitter	<randiaz95> it seems like you can track at a more detailed level
+2019-12-22 12:54:52	FromGitter	<grkek> What if I want a get and a post on the same method ?
+2019-12-22 12:56:04	FromGitter	<Blacksmoke16> i feel like that would be a bad practice
+2019-12-22 12:56:27	FromGitter	<grkek> @Blacksmoke16 many frameworks do so, pick flask or django
+2019-12-22 12:56:28	FromGitter	<grkek> for example
+2019-12-22 12:57:53	FromGitter	<Blacksmoke16> is there actually a valid reason to want to do that versus "just because i can"
+2019-12-22 12:58:14	FromGitter	<grkek> Readability
+2019-12-22 12:58:20	FromGitter	<grkek> and also comfyness
+2019-12-22 12:58:32	FromGitter	<randiaz95> no I think we are confused as to what we are talking about
+2019-12-22 12:58:40	FromGitter	<randiaz95> are you saying the library itself or the observer pattern on the class
+2019-12-22 12:59:09	FromGitter	<Blacksmoke16> im saying  why would you want 1 method to handle both say POST and GET requests?
+2019-12-22 12:59:24	FromGitter	<grkek> It is not in one method
+2019-12-22 12:59:26	FromGitter	<randiaz95> Well, this library doesn't do that
+2019-12-22 12:59:26	FromGitter	<grkek> it is distributed
+2019-12-22 12:59:35	FromGitter	<randiaz95> exactly, there is a separate method for each type
+2019-12-22 13:00:04	FromGitter	<Blacksmoke16> https://gitter.im/crystal-lang/crystal?at=5dffca0cc0c8ef301bf85acc
+2019-12-22 13:00:36	FromGitter	<grkek> Sorry I worded that wrongly, I meant the same route
+2019-12-22 13:00:38	FromGitter	<grkek> :)
+2019-12-22 13:01:02	FromGitter	<grkek> English is not my main language so it is no surprise I made a mistake
+2019-12-22 13:01:09	FromGitter	<Blacksmoke16> np, that clears it up
+2019-12-22 13:01:27	FromGitter	<randiaz95> ll
+2019-12-22 13:01:33	FromGitter	<Blacksmoke16> mixing the logic of two separate routes in one method would be bad
+2019-12-22 13:01:39	FromGitter	<grkek> You are the author of the athena framework
+2019-12-22 13:01:44	FromGitter	<grkek> thats nice
+2019-12-22 13:01:53	FromGitter	<randiaz95> He has Ethos
+2019-12-22 13:01:56	FromGitter	<grkek> its in one class
+2019-12-22 13:01:56	FromGitter	<randiaz95> and logos
+2019-12-22 13:02:05	FromGitter	<grkek> not in one method
+2019-12-22 13:02:14	FromGitter	<Blacksmoke16> yea for sure
+2019-12-22 13:02:25	FromGitter	<Blacksmoke16> `GET /post` and `POST /post`
+2019-12-22 13:02:31	FromGitter	<Blacksmoke16> as an example
+2019-12-22 13:03:02	FromGitter	<grkek> If you define a post method for the /post it will execute the POST handler
+2019-12-22 13:03:14	FromGitter	<grkek> I really don't understand what you mean by that
+2019-12-22 13:04:15	FromGitter	<Blacksmoke16> was just finishing my thought that separate routes should be handled in separate methods, like how it works currently, versus having one method be executed on both routes
+2019-12-22 13:05:09	FromGitter	<grkek> Oh nice, so far it has been slowly coming into shape, currently adding a way to handle the /:something/:someone
+2019-12-22 13:05:20	FromGitter	<grkek> type of a situation with routes, how do you handle something like that ?
+2019-12-22 13:05:40	FromGitter	<Blacksmoke16> in athena?
+2019-12-22 13:05:52	FromGitter	<grkek> yeah
+2019-12-22 13:06:06	FromGitter	<Blacksmoke16> athena uses https://github.com/amberframework/amber-router for routing
+2019-12-22 13:06:26	FromGitter	<grkek> Kemal had its own but currently I am unable to implement it because of my laziness
+2019-12-22 13:07:02	FromGitter	<grkek> Oh that is a nice router I must say
+2019-12-22 13:07:12	FromGitter	<Blacksmoke16> https://github.com/Blacksmoke16/athena/blob/rewrite/src/routing/route_resolver.cr#L109
+2019-12-22 13:07:25	FromGitter	<Blacksmoke16> athena just adds routes to amber router
+2019-12-22 13:07:53	FromGitter	<Blacksmoke16> where the payload of the route is an obj that stores metadata about the route https://github.com/Blacksmoke16/athena/blob/rewrite/src/routing.cr#L70
+2019-12-22 13:08:31	FromGitter	<grkek> I like the way you built it
+2019-12-22 13:08:31	FromGitter	<Blacksmoke16> the route action is stored within the obj as well after being converted to a proc
+2019-12-22 13:09:10	FromGitter	<Blacksmoke16> thanks :)
+2019-12-22 13:09:32	FromGitter	<Blacksmoke16> amber router supports some stuff radix tree one kemal uses doesnt
+2019-12-22 13:09:42	FromGitter	<Blacksmoke16> namely constraints and optional route sections
+2019-12-22 13:10:15	FromGitter	<randiaz95> amber has cli stuff too that is more productive after the initial investment
+2019-12-22 13:10:30	FromGitter	<Blacksmoke16> example being if you had a route `GET /user/:id`
+2019-12-22 13:10:43	FromGitter	<Blacksmoke16> `GET /user/19` and `GET /user/foo` would both match
+2019-12-22 13:10:56	FromGitter	<grkek> true
+2019-12-22 13:11:08	FromGitter	<grkek> you want type checking with it ?
+2019-12-22 13:11:15	FromGitter	<Blacksmoke16> but if you did like `GET /user/:id, constraints: {"id" => /\d+/}`
+2019-12-22 13:11:29	FromGitter	<Blacksmoke16> `GET /user/19` would match while `GET /user/foo` would 404
+2019-12-22 13:11:40	FromGitter	<grkek> oh that is a great idea
+2019-12-22 13:12:20	FromGitter	<Blacksmoke16> i agree, is why i added it :)
+2019-12-22 13:12:47	FromGitter	<Blacksmoke16> allows separate methods to "listen" on the same route, but handle diff cases
+2019-12-22 13:12:59	FromGitter	<Blacksmoke16> for legacy reasons or whatever
+2019-12-22 13:16:48	FromGitter	<Blacksmoke16> also supports optional segments
+2019-12-22 13:17:07	FromGitter	<Blacksmoke16> so like `GET /posts(/:page)`
+2019-12-22 13:17:23	FromGitter	<Blacksmoke16> would match both `GET /posts` and `GET /posts/2`
+2019-12-22 13:27:45	FromGitter	<grkek> that is a bit weird
+2019-12-22 13:27:55	FromGitter	<grkek> () does this even belong in the route side ?
+2019-12-22 13:28:19	FromGitter	<Blacksmoke16> it just denotes that part of the route is optional in the router
+2019-12-22 13:35:19	FromGitter	<grkek> oh lovely
+2019-12-22 13:39:39	FromGitter	<randiaz95> do we just impeach people we don't like?
+2019-12-22 13:40:24	FromGitter	<Blacksmoke16> lets not get started on that, way off topic and not the place to discuss it
+2019-12-22 13:58:37	FromGitter	<Blacksmoke16> need to think how i want to handle configuration/parameters in athena
+2019-12-22 14:01:48	FromGitter	<grkek> I am still stuck with the router
+2019-12-22 14:02:31	FromGitter	<Blacksmoke16> going to switch from radix?
+2019-12-22 14:02:44	FromGitter	<grkek> probably to amber router
+2019-12-22 14:02:49	FromGitter	<grkek> what do you think ?
+2019-12-22 14:03:43	FromGitter	<Blacksmoke16> prob doesnt matter either way
+2019-12-22 14:04:19	FromGitter	<Blacksmoke16> if you want the extra 2 features of amber's router sure go for it
+2019-12-22 14:06:00	FromGitter	<grkek> I am unable to connect the kemal router for sinatra like routes to the class router type
+2019-12-22 14:07:10	FromGitter	<Blacksmoke16> would have to do something like define the route/methods in a class/instance method that can then be used to add the routes to the router
+2019-12-22 14:07:29	FromGitter	<Blacksmoke16> like in your `add_handlers` thing
+2019-12-22 14:11:00	FromGitter	<grkek> Thank you
+2019-12-22 14:11:34	FromGitter	<Blacksmoke16> oh sorry, think i read that wrong
+2019-12-22 14:12:01	FromGitter	<Blacksmoke16> you want to also support like
+2019-12-22 14:12:10	FromGitter	<Blacksmoke16> ```get "/path" do ⏎   # do stuff? ⏎ end``` [https://gitter.im/crystal-lang/crystal?at=5dffdc2ac0c8ef301bf8d6e3]
+2019-12-22 14:14:29	FromGitter	<grkek> No I want to get rid of that
+2019-12-22 14:14:45	FromGitter	<grkek> but it has the /:id resoultion protocol
+2019-12-22 14:14:57	FromGitter	<grkek> which is not present in the classed methods
+2019-12-22 14:15:09	FromGitter	<Blacksmoke16> ah, radix tree should handle that for you?
+2019-12-22 14:15:27	FromGitter	<Blacksmoke16> when a route gets matched there should be a like `params` obj on the payload iirc
+2019-12-22 14:17:15	FromGitter	<grkek> I am currently trying to implement that
+2019-12-22 14:18:48	FromGitter	<Blacksmoke16> :th\
+2019-12-22 14:19:00	FromGitter	<Blacksmoke16> 👍
+2019-12-22 14:45:01	FromGitter	<grkek> @Blacksmoke16 ```Which expanded to: ⏎  ⏎ >  7 |         # @@routes.add class_name_method + "/", '/' + method_downcase + "/" ⏎  >  8 |  ⏎  >  9 |         Grip::RouteHandler::INSTANCE.add_route(method.upcase, "/", { |env| call(env) }) ... [https://gitter.im/crystal-lang/crystal?at=5dffe3dd49314a1d45c29512]
+2019-12-22 14:45:07	FromGitter	<grkek> what does that even mean
+2019-12-22 14:45:13	FromGitter	<grkek> sorry for the crappy formatting
+2019-12-22 14:46:51	<--	ht_ (~Thunderbi@2a02:a210:9501:ad80:d478:d642:7db5:703) has quit (Remote host closed the connection)
+2019-12-22 14:48:09	FromGitter	<Blacksmoke16> maybe have an extra `}` at the end there?
+2019-12-22 14:48:23	FromGitter	<Blacksmoke16> nvm thats a `)`
+2019-12-22 14:48:48	FromGitter	<grkek> macro route(path, methods = ["GET"]) ⏎  ⏎ ```code paste, see link``` [https://gitter.im/crystal-lang/crystal?at=5dffe4c0c62fdf33f738a0aa]
+2019-12-22 14:49:07	FromGitter	<Blacksmoke16> does `add_route` have a block?
+2019-12-22 14:49:19	FromGitter	<grkek> yeah it takes in a block
+2019-12-22 14:49:24	FromGitter	<grkek> it had &block before
+2019-12-22 14:49:44	FromGitter	<Blacksmoke16> try like `.add_block(method.upcase, {{path}}) { |env| self.call(env) }`
+2019-12-22 14:51:00	FromGitter	<grkek> def add_route(method : String, path : String, &handler : HTTP::Server::Context -> _) ⏎  ⏎ ```code paste, see link``` [https://gitter.im/crystal-lang/crystal?at=5dffe5448897197969df8fdf]
+2019-12-22 14:51:05	FromGitter	<grkek> here is the add_route function itself
+2019-12-22 14:52:06	FromGitter	<grkek> what am I doing wrong tho
+2019-12-22 14:59:09	FromGitter	<Blacksmoke16> try what i suggested
+2019-12-22 14:59:16	FromGitter	<Blacksmoke16> sorry it should be `.add_route(`
+2019-12-22 14:59:28	FromGitter	<Blacksmoke16> think the issue is the comma after `{{path}}`
+2019-12-22 15:00:11	FromGitter	<grkek> Are you sure ?
+2019-12-22 15:00:21	FromGitter	<Blacksmoke16> no, but worth a shot :p
+2019-12-22 15:00:54	FromGitter	<grkek> not working still
+2019-12-22 15:01:03	FromGitter	<Blacksmoke16> what does it look like now/whats the error?
+2019-12-22 15:01:40	FromGitter	<grkek> Which expanded to: ⏎  ⏎ > 2 | ["GET"].each do |method| ⏎  > 3 |   @@handler_methods.push(method) ⏎  > 4 |   Grip::RouteHandler::INSTANCE.add_route(method.upcase, "/", {|env| call(env)}) ... [https://gitter.im/crystal-lang/crystal?at=5dffe7c30cb24d1d44050279]
+2019-12-22 15:01:44	FromGitter	<grkek> that is the error still
+2019-12-22 15:01:55	FromGitter	<Blacksmoke16> doesnt look like you changed anything?
+2019-12-22 15:01:57	FromGitter	<grkek> if I do what you said it just doesnt compile and throws a syntax error
+2019-12-22 15:02:08	FromGitter	<Blacksmoke16> whats the error?
+2019-12-22 15:02:16	FromGitter	<Blacksmoke16> `Grip::RouteHandler::INSTANCE.add_route(method.upcase, {{path}}) { |env| self.call(env) }`
+2019-12-22 15:03:02	FromGitter	<grkek> Error: undefined method 'call' for IndexHandler.class
+2019-12-22 15:03:09	FromGitter	<grkek> oh my now it seems to be working right ?
+2019-12-22 15:03:40	FromGitter	<Blacksmoke16> the `self.call` might be not the right thing
+2019-12-22 15:04:26	FromGitter	<grkek> I have a function in the class
+2019-12-22 15:04:30	FromGitter	<grkek> which I want to execute
+2019-12-22 15:04:39	FromGitter	<grkek> how do I do that without moving everything around ?
+2019-12-22 15:04:54	FromGitter	<Blacksmoke16> when your macro expands you're not in an instance context so `self` refers to the class
+2019-12-22 15:05:45	FromGitter	<grkek> Okay so when the macro expands I am out of the instance ?
+2019-12-22 15:05:46	FromGitter	<grkek> oh my
+2019-12-22 15:05:54	FromGitter	<Blacksmoke16> idk, im not familiar enough with how your thing works
+2019-12-22 15:06:14	FromGitter	<Blacksmoke16> yes because the macro just expands into the class body
+2019-12-22 15:06:19	FromGitter	<grkek> thank you for the help
+2019-12-22 15:07:27	FromGitter	<Blacksmoke16> np
+2019-12-22 15:10:39	FromGitter	<grkek> One quick question @Blacksmoke16 how do I access class instance variables from a macro ?
+2019-12-22 15:11:48	FromGitter	<Blacksmoke16> you cant, would have to be accessed at runtime after the macro expands
+2019-12-22 15:13:03	FromGitter	<grkek> oh my that sounds interesting
+2019-12-22 15:13:33	FromGitter	<Blacksmoke16> to be clear in your example `@@handler_path = {{path}}` is setting a class var
+2019-12-22 15:13:44	FromGitter	<Blacksmoke16> but its happening at runtime
+2019-12-22 15:15:08	FromGitter	<grkek> I'll just move the add route to init that should be fine for it right ?
+2019-12-22 15:15:37	FromGitter	<grkek> Oh no tons of recursions
+2019-12-22 15:18:23	FromGitter	<Blacksmoke16> 😬
+2019-12-22 18:35:59	FromGitter	<Blacksmoke16> back to the configuration discussion i started a few days ago
+2019-12-22 18:36:23	FromGitter	<Blacksmoke16> how annoying would it be to have to include a yaml file along with a binary
+2019-12-22 18:37:02	FromGitter	<Blacksmoke16> trying to think of a nice in code configuration method and im coming up blank...
+2019-12-22 19:43:43	-->	ur5us (~ur5us@2406:e002:6b2c:e401:159d:33a3:c47:596) has joined #crystal-lang
+2019-12-22 20:19:51	FromGitter	<randiaz95> Guys, who wants to work on front end stuff while working with crystal as back end: ⏎  ⏎ https://gitter.im/DartProgramming/community?utm_source=share-link&utm_medium=link&utm_campaign=share-link
+2019-12-22 20:19:58	FromGitter	<randiaz95> Dart Programming lang!!
+2019-12-22 20:29:28	FromGitter	<Blacksmoke16> 🤔
+2019-12-22 20:36:04	-->	f1reflyylmao (~f1refly@2001:16b8:17ea:a000:225:22ff:fe85:e4ce) has joined #crystal-lang
+2019-12-22 20:36:04	<--	f1refly (~f1refly@2001:16b8:1794:cd00:225:22ff:fe85:e4ce) has quit (Ping timeout: 248 seconds)
+2019-12-22 20:49:42	-->	yukai (~prog@86.102.75.66) has joined #crystal-lang
+2019-12-22 20:52:03	FromGitter	<thetrung> so ppl mostly use Crystal for Amber ?
+2019-12-22 20:52:17	FromGitter	<randiaz95> For shizzzle
+2019-12-22 20:52:36	FromGitter	<Blacksmoke16> amber/lucky/kemal are popular choices if building a webapp but deff arent the only things crystal can do
+2019-12-22 20:53:02	FromGitter	<randiaz95> Crystal is good for fast probability computation because of simple data structure apis and methods like permutations
+2019-12-22 20:53:21	FromGitter	<randiaz95> Crystal also has the best syntax for the runtime performance
+2019-12-22 20:59:57	<--	ur5us (~ur5us@2406:e002:6b2c:e401:159d:33a3:c47:596) has quit (Ping timeout: 260 seconds)
+2019-12-22 21:08:25	FromGitter	<kinxer> I can't give any specifics, but the company I work for uses Crystal for non-web applications that require heavy computation and network communication.
+2019-12-22 21:08:48	FromGitter	<kinxer> So it's definitely not only for web stuff.
+2019-12-22 21:09:03	<--	DTZUZO (~DTZUZO@S0106bcd165662a4d.vs.shawcable.net) has quit (Read error: Connection reset by peer)
+2019-12-22 21:13:59	<--	return0e (~return0e@host81-159-131-253.range81-159.btcentralplus.com) has quit (Read error: Connection reset by peer)
+2019-12-22 21:14:29	-->	return0e (~return0e@host81-159-131-253.range81-159.btcentralplus.com) has joined #crystal-lang
+2019-12-22 21:16:10	FromGitter	<thetrung> ya
+2019-12-22 21:16:20	FromGitter	<thetrung> anyone know this dev ? https://github.com/veelenga/awesome-crystal/compare/master...thetrung:patch-1
+2019-12-22 21:16:48	FromGitter	<thetrung> want to ask him about where the game engine on Crystal may go..
+2019-12-22 21:19:53	FromGitter	<thetrung> remind me so much of chingu/ruby
+2019-12-22 21:20:10	FromGitter	<thetrung> a fun time that I had before
+2019-12-22 21:21:02	FromGitter	<thetrung> @kinxer that's really fun to take advantage of new stuff in company
+2019-12-22 21:21:30	FromGitter	<thetrung> @Blacksmoke16 ya, mostly, web stuff
+2019-12-22 21:21:42	FromGitter	<yorci> @kinxer +1
+2019-12-22 21:21:44	FromGitter	<randiaz95> I got a bug on the demo project for that game engine
+2019-12-22 21:21:53	FromGitter	<randiaz95> :(
+2019-12-22 21:27:00	FromGitter	<thetrung> hey me too
+2019-12-22 21:27:07	FromGitter	<thetrung> ```run -s -p examples/demo/main.cr```
+2019-12-22 21:27:10	FromGitter	<thetrung> then
+2019-12-22 21:28:59	FromGitter	<thetrung> ```code paste, see link``` [https://gitter.im/crystal-lang/crystal?at=5e00428b84c21677094bd3a9]
+2019-12-22 21:29:30	FromGitter	<thetrung> i submitted the issue ```https://github.com/tfcat/Leafgem/issues/28```
+2019-12-22 21:30:22	FromGitter	<randiaz95> thanks Nguyen!
+2019-12-22 21:30:29	FromGitter	<randiaz95> same error as me
+2019-12-22 21:30:49	FromGitter	<thetrung> you use chingu/gem before ?
+2019-12-22 21:31:07	FromGitter	<randiaz95> idk wut that is
+2019-12-22 21:31:11	FromGitter	<randiaz95> I know gem install
+2019-12-22 21:31:22	FromGitter	<thetrung> it's pretty similar to this Leafgem
+2019-12-22 21:31:32	FromGitter	<thetrung> but on Ruby
+2019-12-22 21:31:46	FromGitter	<thetrung> :P
+2019-12-22 21:31:52	FromGitter	<randiaz95> lol
+2019-12-22 21:32:04	FromGitter	<thetrung> There's another solution that I see more viable, it's Love2D
+2019-12-22 21:36:14	FromGitter	<thetrung> have you tried `crsfml` @randiaz95
+2019-12-22 22:13:02	-->	DTZUZO (~DTZUZO@S0106bcd165662a4d.vs.shawcable.net) has joined #crystal-lang
+2019-12-22 22:21:16	<--	return0e (~return0e@host81-159-131-253.range81-159.btcentralplus.com) has quit (Read error: Connection reset by peer)
+2019-12-22 22:21:39	-->	return0e (~return0e@host81-159-131-253.range81-159.btcentralplus.com) has joined #crystal-lang
+2019-12-22 22:40:49	<--	DTZUZO (~DTZUZO@S0106bcd165662a4d.vs.shawcable.net) has quit (Ping timeout: 258 seconds)
+2019-12-22 22:42:16	-->	DTZUZO (~DTZUZO@S0106bcd165662a4d.vs.shawcable.net) has joined #crystal-lang
+2019-12-22 23:22:27	FromGitter	<randiaz95> nope :(
+2019-12-22 23:22:40	FromGitter	<randiaz95> guys.. what the heck is this? ⏎  ⏎ ```code paste, see link``` [https://gitter.im/crystal-lang/crystal?at=5e005d30b1701e50ca6f9225]
+2019-12-22 23:25:52	FromGitter	<vlazar> https://crystal-lang.org/reference/syntax_and_semantics/capturing_blocks.html
+2019-12-22 23:26:35	FromGitter	<randiaz95> lol
+2019-12-22 23:26:36	FromGitter	<randiaz95> I read that
+2019-12-22 23:26:49	FromGitter	<randiaz95> all I got there was: `return and break can't be used inside a captured block. next can be used and will exit and give the value of the captured block.`
+2019-12-22 23:28:07	FromGitter	<randiaz95> oh crud I found: https://crystal-lang.org/reference/syntax_and_semantics/next.html

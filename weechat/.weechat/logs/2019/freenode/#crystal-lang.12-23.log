@@ -1,0 +1,680 @@
+2019-12-23 00:36:46	FromGitter	<wontruefree> is there an upsert for lucky?
+2019-12-23 00:51:23	FromGitter	<grkek> Hello
+2019-12-23 01:08:08	<--	yukai (~prog@86.102.75.66) has quit (Ping timeout: 260 seconds)
+2019-12-23 02:00:08	-->	ht_ (~Thunderbi@2a02:a210:9501:ad80:ace1:10db:d14c:1817) has joined #crystal-lang
+2019-12-23 02:49:21	<--	ht_ (~Thunderbi@2a02:a210:9501:ad80:ace1:10db:d14c:1817) has quit (Quit: ht_)
+2019-12-23 03:02:53	-->	return0__ (~return0e@host81-159-131-253.range81-159.btcentralplus.com) has joined #crystal-lang
+2019-12-23 03:03:38	FromGitter	<grkek> @Blacksmoke16 I finally got it to work, it has the same capabilities as the dsl of the kemal framework had but it gets the path from the route() macro, I also updated the readme it is really nice, I love crystal
+2019-12-23 03:04:13	<--	return0e (~return0e@host81-159-131-253.range81-159.btcentralplus.com) has quit (Ping timeout: 260 seconds)
+2019-12-23 03:45:02	<--	_whitelogger (~whitelogg@uruz.whitequark.org) has quit (Remote host closed the connection)
+2019-12-23 03:46:15	-->	_whitelogger (~whitelogg@uruz.whitequark.org) has joined #crystal-lang
+2019-12-23 04:26:28	<--	DTZUZO (~DTZUZO@S0106bcd165662a4d.vs.shawcable.net) has quit (Ping timeout: 260 seconds)
+2019-12-23 04:52:47	FromGitter	<Blacksmoke16> 👍
+2019-12-23 04:52:49	FromGitter	<Blacksmoke16> nice one
+2019-12-23 04:53:47	FromGitter	<grkek> Thank you ! <3
+2019-12-23 04:57:18	FromGitter	<Blacksmoke16> i also slept on my yaml config idea and realized i can just include the string content at compile time, but not process it until you run it so that it can handle picking up env vars etc
+2019-12-23 04:58:08	FromGitter	<grkek> sleep makes everything better
+2019-12-23 05:36:14	FromGitter	<Daniel-Worrall> Yes storing defaults in the app and then overriding with an optional config file is a common good practice
+2019-12-23 05:39:35	FromGitter	<kingsleyh> Does anyone know why on JSON::Any there is no `as_u64` or any other as_u for that matter - but when using JSON.mapping you can set a field as UInt64 and it works fine?   And also if you JSON.parse(json)["value"].as_s.to_u64 - although it seems fine - when you come to use it it throws a cast exception - so the only way to do it is to use the JSON.mapping way?
+2019-12-23 05:41:11	FromGitter	<Daniel-Worrall> What does it give with as_i?
+2019-12-23 05:47:04	-->	vitalyster (~vitalyste@x.juick.com) has joined #crystal-lang
+2019-12-23 05:53:40	<--	FromGitter (~bridge@pryp.in) has quit (Read error: Connection reset by peer)
+2019-12-23 05:53:58	-->	FromGitter (~bridge@pryp.in) has joined #crystal-lang
+2019-12-23 05:57:34	-->	DTZUZO (~DTZUZO@S0106bcd165662a4d.vs.shawcable.net) has joined #crystal-lang
+2019-12-23 06:02:59	FromGitter	<j8r> @kingsleyh Because JSON spec doesn't have unsigned ints
+2019-12-23 06:03:48	FromGitter	<j8r> as  @Daniel-Worrall  said, you can use `as_i.to_u64`
+2019-12-23 06:04:16	FromGitter	<kingsleyh> Yes works with as_i thanks
+2019-12-23 06:04:42	FromGitter	<kingsleyh> Is that how Json mapping does it under the hood?
+2019-12-23 06:05:03	<--	DTZUZO (~DTZUZO@S0106bcd165662a4d.vs.shawcable.net) has quit (Ping timeout: 260 seconds)
+2019-12-23 06:05:51	FromGitter	<j8r> more or less https://github.com/crystal-lang/crystal/blob/master/src/json/from_json.cr#L80
+2019-12-23 06:12:38	<--	duane (~duane@c-24-11-247-240.hsd1.tn.comcast.net) has quit (Ping timeout: 260 seconds)
+2019-12-23 06:22:31	<--	vitalyster (~vitalyste@x.juick.com) has left #crystal-lang
+2019-12-23 06:25:17	-->	HumanGeek (~HumanG33k@62.147.242.8) has joined #crystal-lang
+2019-12-23 06:26:03	<--	HumanGeek (~HumanG33k@62.147.242.8) has quit (Remote host closed the connection)
+2019-12-23 06:26:30	-->	HumanGeek (~HumanG33k@62.147.242.8) has joined #crystal-lang
+2019-12-23 06:28:19	-->	duane (~duane@c-68-52-89-28.hsd1.tn.comcast.net) has joined #crystal-lang
+2019-12-23 06:28:29	<--	Human_G33k (~HumanG33k@62.147.242.8) has quit (Ping timeout: 258 seconds)
+2019-12-23 06:35:31	<--	return0__ (~return0e@host81-159-131-253.range81-159.btcentralplus.com) has quit (Ping timeout: 268 seconds)
+2019-12-23 06:35:40	<--	f1reflyylmao (~f1refly@2001:16b8:17ea:a000:225:22ff:fe85:e4ce) has quit (Quit: bye fags)
+2019-12-23 06:35:55	-->	f1refly (~f1refly@92.116.33.172) has joined #crystal-lang
+2019-12-23 06:48:44	-->	return0e (~return0e@host81-159-131-253.range81-159.btcentralplus.com) has joined #crystal-lang
+2019-12-23 07:13:12	-->	edr (~edr@pdpc/supporter/professional/edr) has joined #crystal-lang
+2019-12-23 08:02:14	<--	Flipez (~Flipez@brauser.io) has quit (Read error: Connection reset by peer)
+2019-12-23 08:02:19	-->	Flipez3 (~Flipez@brauser.io) has joined #crystal-lang
+2019-12-23 08:03:55	--	Flipez3 is now known as Flipez
+2019-12-23 08:17:12	<--	duane (~duane@c-68-52-89-28.hsd1.tn.comcast.net) has quit (Ping timeout: 260 seconds)
+2019-12-23 09:29:02	FromGitter	<j8r> Wow, I have a very nasty bug with `JSON::Serializable`
+2019-12-23 09:30:16	-->	duane (~duane@172.58.139.54) has joined #crystal-lang
+2019-12-23 09:31:34	FromGitter	<j8r> On one hand, I am happy that's not my code and it is working with `JSON.mapping`. ⏎ On the other hand, hard to isolate
+2019-12-23 09:32:46	FromGitter	<j8r> forget, still occurring 💀
+2019-12-23 09:34:51	FromGitter	<tenebrousedge> can you isolate it and put it in a play for us?
+2019-12-23 09:35:30	FromGitter	<j8r> i really wish I could
+2019-12-23 09:35:41	FromGitter	<j8r> trying to do it
+2019-12-23 09:36:45	FromGitter	<j8r> does `forall U` known to be buggy? ⏎ I have a method `def parse_response(klass : U.class, response) : Success(U) | Error forall U`
+2019-12-23 09:43:08	FromGitter	<tenebrousedge> I think I've heard something to that effect
+2019-12-23 09:43:38	FromGitter	<tenebrousedge> but I couldn't be sure
+2019-12-23 09:43:54	FromGitter	<j8r> me too, I know generics are kinda limited
+2019-12-23 09:44:21	FromGitter	<j8r> for example better avoiding abstract classes with generics with macros
+2019-12-23 09:45:55	FromGitter	<j8r> I make it compiling by replacing a type to `JSON::Any`, definitely a JSON issue. ⏎ I have to look to the macro
+2019-12-23 09:50:37	FromGitter	<j8r> hooooo
+2019-12-23 09:50:39	FromGitter	<j8r> found it
+2019-12-23 09:51:30	FromGitter	<j8r> if you put a type as `Nil`, but it is not - this will return an invalid memory access
+2019-12-23 09:52:38	FromGitter	<tenebrousedge> that does sound like a bug
+2019-12-23 09:53:21	FromGitter	<j8r> Yes, I am trying to reproducing it
+2019-12-23 09:57:22	FromGitter	<grkek> I get segfaults sometimes when I code spaghetti as well lmao
+2019-12-23 09:58:02	<--	duane (~duane@172.58.139.54) has quit (Ping timeout: 240 seconds)
+2019-12-23 09:58:48	FromGitter	<tenebrousedge> mmmm, spaghetti 😄
+2019-12-23 10:02:04	FromGitter	<Blacksmoke16> i had that last night
+2019-12-23 10:02:07	FromGitter	<Blacksmoke16> 🍝
+2019-12-23 10:09:20	FromGitter	<j8r> I am able to reproduce it, and that's even no spaghetti :)
+2019-12-23 10:10:41	FromGitter	<Blacksmoke16> @Daniel-Worrall  ☝️ December 23, 2019 7:36 AM (https://gitter.im/crystal-lang/crystal?at=5e00b4bec5a23938b46abdca) thats the plan.  have a parent struct that controls the sections, with other structs defining the options for a specific feature.  this way defaults/documentation can be added, otherwise it would fail when going to do the `from_yaml`
+2019-12-23 10:11:50	FromGitter	<Blacksmoke16> can also read in the yaml when building the binary so it doesn't actually have to be present to run.  I.e. `read_file` macro then process the dynamic content at runtime when the binary starts so that env vars will be set correctly etc
+2019-12-23 10:13:49	FromGitter	<grkek> mmmm, grip framework which handles lots of requests/s
+2019-12-23 10:13:52	FromGitter	<grkek> https://github.com/grkek/grip
+2019-12-23 10:14:47	FromGitter	<grkek> shilling time
+2019-12-23 10:15:34	FromGitter	<j8r> Oh, that's because of `getter class : String`
+2019-12-23 10:15:49	FromGitter	<j8r> https://carc.in/#/r/89cb
+2019-12-23 10:16:56	FromGitter	<j8r> Further reduced https://carc.in/#/r/89ce
+2019-12-23 10:17:42	-->	DTZUZO (~DTZUZO@S0106bcd165662a4d.vs.shawcable.net) has joined #crystal-lang
+2019-12-23 10:19:06	FromGitter	<jwoertink> Anyone see what I'm missing here? https://play.crystal-lang.org/#/r/89ch
+2019-12-23 10:19:14	FromGitter	<jwoertink> I don't understand the error message
+2019-12-23 10:19:36	FromGitter	<grkek> code maybe ?
+2019-12-23 10:19:49	FromGitter	<grkek> oh there it is
+2019-12-23 10:19:51	FromGitter	<Blacksmoke16> i think you have to use `next` to skip the block
+2019-12-23 10:20:01	FromGitter	<Blacksmoke16> since you're using separate if statements
+2019-12-23 10:20:02	FromGitter	<tenebrousedge> but why not? https://play.crystal-lang.org/#/r/89cl
+2019-12-23 10:20:17	FromGitter	<Blacksmoke16> https://play.crystal-lang.org/#/r/89ck
+2019-12-23 10:20:23	FromGitter	<Blacksmoke16> @tenebrousedge would be the better option
+2019-12-23 10:20:25	FromGitter	<jwoertink> I'm not using the spaceship operator
+2019-12-23 10:20:37	FromGitter	<jwoertink> ah, ok next is what I need
+2019-12-23 10:20:50	FromGitter	<jwoertink> thanks
+2019-12-23 10:20:58	FromGitter	<tenebrousedge> not using it because?
+2019-12-23 10:21:31	FromGitter	<jwoertink> My actual code is a lot more complicated than that example
+2019-12-23 10:21:44	FromGitter	<tenebrousedge> k
+2019-12-23 10:21:44	FromGitter	<jwoertink> I was just making sure sort worked the way I expected it to
+2019-12-23 10:21:47	FromGitter	<jwoertink> and then it didn't
+2019-12-23 10:22:03	FromGitter	<Blacksmoke16> comparing objects?
+2019-12-23 10:22:10	FromGitter	<jwoertink> yeah
+2019-12-23 10:22:27	FromGitter	<Blacksmoke16> could always define `<=>` and include https://crystal-lang.org/api/master/Comparable.html
+2019-12-23 10:22:28	FromGitter	<jwoertink> actually... comparing type declarations in a macro
+2019-12-23 10:22:28	FromGitter	<jwoertink> lol
+2019-12-23 10:22:32	FromGitter	<Blacksmoke16> ah fair enough
+2019-12-23 10:22:37	FromGitter	<Blacksmoke16> then yea that wont work
+2019-12-23 10:23:27	FromGitter	<firejox> with..yield statement
+2019-12-23 10:29:40	FromGitter	<grkek> u guys better checc out my friggin repo
+2019-12-23 10:29:42	FromGitter	<grkek> > :(
+2019-12-23 10:29:47	FromGitter	<grkek> > :(
+2019-12-23 10:29:59	FromGitter	<grkek> I wanted to create an angry face but the markdown ruins it all :(
+2019-12-23 10:30:07	FromGitter	<tenebrousedge> use \
+2019-12-23 10:30:08	FromGitter	<Blacksmoke16> 😠
+2019-12-23 10:30:13	FromGitter	<Blacksmoke16> `😠`
+2019-12-23 10:30:13	FromGitter	<tenebrousedge> \>:(
+2019-12-23 10:30:27	FromGitter	<Blacksmoke16> thats a good one as well
+2019-12-23 10:31:37	FromGitter	<grkek> :angery:
+2019-12-23 10:31:42	FromGitter	<grkek> :spooky:
+2019-12-23 10:31:44	FromGitter	<grkek> :aaaaaaaaaaa:
+2019-12-23 10:31:55	FromGitter	<grkek> :oOOoOOooOOO: :booga booga booga:
+2019-12-23 10:32:11	FromGitter	<j8r> never seen this ones
+2019-12-23 10:33:02	FromGitter	<grkek> use imagination
+2019-12-23 10:33:02	FromGitter	<grkek> thx
+2019-12-23 10:33:19	FromGitter	<grkek> legend says that you can see them if you check out my repo
+2019-12-23 10:33:27	FromGitter	<tenebrousedge> 😠 👻 😱
+2019-12-23 10:33:31	FromGitter	<grkek> bruh its like check out my soundcloud
+2019-12-23 10:33:34	FromGitter	<grkek> but now its repo
+2019-12-23 10:34:30	FromGitter	<grkek> is 9.7k requests/s good ?
+2019-12-23 10:34:39	FromGitter	<Blacksmoke16> single threaded?
+2019-12-23 10:34:55	FromGitter	<grkek> yeah
+2019-12-23 10:35:04	FromGitter	<Blacksmoke16> ehh, bit on the low end
+2019-12-23 10:35:15	FromGitter	<grkek> so it is horrible ?
+2019-12-23 10:35:26	FromGitter	<Blacksmoke16> not horrible, but not the fastest either
+2019-12-23 10:35:36	FromGitter	<grkek> How much does yours bench
+2019-12-23 10:35:45	FromGitter	<grkek> probably a 50k
+2019-12-23 10:35:48	FromGitter	<grkek> or more
+2019-12-23 10:35:51	FromGitter	<grkek> what a beast
+2019-12-23 10:35:59	FromGitter	<tenebrousedge> once upon a time, web servers had a "c10k" competition
+2019-12-23 10:36:50	FromGitter	<grkek> W8 let me try the same thing with kemal
+2019-12-23 10:37:53	Yxhuvud	Now it is more like c1M.
+2019-12-23 10:38:05	Yxhuvud	or even greater.
+2019-12-23 10:38:37	FromGitter	<grkek> I hate internet
+2019-12-23 10:38:41	Yxhuvud	I should continue on my bindings for liburing.
+2019-12-23 10:38:52	FromGitter	<Blacksmoke16> ☝️ December 13, 2019 10:44 PM (https://gitter.im/crystal-lang/crystal?at=5df45a9555d9392300091379) got it up to 340k.  granted this is with 6 worker threads, so ~56k single threaded?
+2019-12-23 10:39:32	FromGitter	<Blacksmoke16> granted i have a good pc and there wasnt really anything going on in the route, just returns `"Hello world"` so i wouldnt call it official numbers ha
+2019-12-23 10:40:38	FromGitter	<grkek> Damn that is strong as hell
+2019-12-23 10:41:00	FromGitter	<grkek> I still havent figured how can I run workers with kemal
+2019-12-23 10:41:10	FromGitter	<grkek> do you have some ideas about that ?
+2019-12-23 10:41:12	FromGitter	<Blacksmoke16> each request is handled in its own fiber
+2019-12-23 10:41:23	FromGitter	<Blacksmoke16> so you should just be able to enable MT mode and set the workers you want, defaults to 4
+2019-12-23 10:41:57	FromGitter	<grkek> is there a cli command for that for the crystal compiler ?
+2019-12-23 10:42:16	FromGitter	<Blacksmoke16> `crystal build -Dpreview_mt my_app.cr`
+2019-12-23 10:42:28	FromGitter	<Blacksmoke16> oh, did you use the `--release` flag @grkek ?
+2019-12-23 10:42:32	FromGitter	<Blacksmoke16> when testing your thing
+2019-12-23 10:42:59	FromGitter	<grkek> yup
+2019-12-23 10:43:05	FromGitter	<Blacksmoke16> 👍 cool
+2019-12-23 10:43:07	FromGitter	<grkek> it increases a ton
+2019-12-23 10:43:24	FromGitter	<grkek> at least I can be proud that it shtomped the django speeds
+2019-12-23 10:44:02	FromGitter	<grkek> interesting default kemal seems to be achieving the same speed
+2019-12-23 10:44:31	FromGitter	<grkek> @Blacksmoke16 after compiling it with multi threading how do you specify workers ? using an env variable ?
+2019-12-23 10:45:02	FromGitter	<Blacksmoke16> yea `CRYSTAL_WORKERS`
+2019-12-23 10:45:04	FromGitter	<Blacksmoke16> defaults to 5
+2019-12-23 10:45:07	FromGitter	<Blacksmoke16> 4*
+2019-12-23 10:45:17	FromGitter	<grkek> okay let me add some adjustments to my code
+2019-12-23 10:46:36	<--	olbat[m] (olbatmatri@gateway/shell/matrix.org/x-jskouypngszizysg) has quit (Quit: killed)
+2019-12-23 10:46:42	<--	erdnaxeli (erdnaxelic@gateway/shell/matrix.org/x-rlqqbonqicufkkxw) has quit (Quit: killed)
+2019-12-23 10:46:48	<--	ternarysolo (lawrencesy@gateway/shell/matrix.org/x-ujztmxfthghkjjyc) has quit (Quit: killed)
+2019-12-23 10:46:50	<--	beepdog (beepdogkow@sourcemage/elder/dkowis) has quit (Quit: killed)
+2019-12-23 10:53:10	FromGitter	<grkek> It somehow got worse speeds now lol
+2019-12-23 10:53:42	FromGitter	<Blacksmoke16> is possible, extra workers is extra overhead
+2019-12-23 10:54:52	FromGitter	<grkek> Interesting
+2019-12-23 10:55:31	FromGitter	<j8r> if you want to scale a lot more, make it stateless
+2019-12-23 10:55:42	FromGitter	<j8r> then spawn a lot of them around
+2019-12-23 10:55:58	FromGitter	<j8r> on multiple hosts
+2019-12-23 11:00:09	FromGitter	<grkek> the more workers I use the worse it gets
+2019-12-23 11:00:28	FromGitter	<Blacksmoke16> unless you have the computer that can handle more workers, that makes sense
+2019-12-23 11:00:39	FromGitter	<kinxer> How many cores does your processor have?
+2019-12-23 11:01:08	FromGitter	<grkek> 4 i think
+2019-12-23 11:01:10	FromGitter	<grkek> or 8
+2019-12-23 11:01:12	FromGitter	<grkek> 4
+2019-12-23 11:01:14	FromGitter	<grkek> yeah
+2019-12-23 11:01:50	FromGitter	<Blacksmoke16> prob dont want to run more than 4 then
+2019-12-23 11:03:10	FromGitter	<grkek> that is interesting
+2019-12-23 11:04:03	FromGitter	<Blacksmoke16> usually you want 1 worker per cpu core
+2019-12-23 11:04:57	FromGitter	<kinxer> Does the scheduler use its own process?
+2019-12-23 11:06:10	FromGitter	<grkek> I can use the reuse port feature of kemal to run multiple instances hehe
+2019-12-23 11:07:02	FromGitter	<Blacksmoke16> that is also an option, but i would imagine the overhead of separate processes would be more than MT mode?
+2019-12-23 11:07:24	FromGitter	<grkek> 11176
+2019-12-23 11:07:29	FromGitter	<grkek> yay performance increase
+2019-12-23 11:07:40	FromGitter	<grkek> 4 processes
+2019-12-23 11:08:11	FromGitter	<kinxer> Er, in its own thread, I meant.
+2019-12-23 11:09:08	FromGitter	<Blacksmoke16> :shrug:
+2019-12-23 11:09:46	FromGitter	<grkek> 2 processes
+2019-12-23 11:09:48	FromGitter	<grkek> still 11k
+2019-12-23 11:09:50	FromGitter	<grkek> interesting
+2019-12-23 11:10:35	FromGitter	<Blacksmoke16> what does kemal proper get?
+2019-12-23 11:11:14	FromGitter	<grkek> same probably
+2019-12-23 11:11:21	FromGitter	<grkek> let me test
+2019-12-23 11:14:29	FromGitter	<jwoertink> So I have this code where there's a macro method that takes a type declaration then shoves that in to an array. I want to sort that array where the nillable type declarations are at the end
+2019-12-23 11:14:33	FromGitter	<jwoertink> https://play.crystal-lang.org/#/r/89e3
+2019-12-23 11:14:50	FromGitter	<jwoertink> but it fails to compile
+2019-12-23 11:14:58	FromGitter	<grkek> seems like both perform the same
+2019-12-23 11:14:59	FromGitter	<Blacksmoke16> oo i remember running into this
+2019-12-23 11:15:18	FromGitter	<grkek> 11k on both
+2019-12-23 11:15:57	FromGitter	<grkek> well I must say its about same as crystal but more of an object oriented approach
+2019-12-23 11:16:14	FromGitter	<grkek> kemal*
+2019-12-23 11:19:47	FromGitter	<Blacksmoke16> @jwoertink i remember this but i cant remember what i did :/
+2019-12-23 11:20:42	FromGitter	<grkek> @Blacksmoke16 does your framework support unix sockets ?
+2019-12-23 11:20:50	FromGitter	<jwoertink> ah. no worries. I'll keep hammering away
+2019-12-23 11:20:58	<--	return0e (~return0e@host81-159-131-253.range81-159.btcentralplus.com) has quit (Read error: Connection reset by peer)
+2019-12-23 11:21:22	FromGitter	<jwoertink> I know I can break them out in to 2 separate arrays using `reject` and `select`, but the code got super verbose real quick. Maybe that's the best way though?
+2019-12-23 11:21:57	-->	return0e (~return0e@host81-159-131-253.range81-159.btcentralplus.com) has joined #crystal-lang
+2019-12-23 11:22:06	FromGitter	<Blacksmoke16> oo nvm i figured it out
+2019-12-23 11:22:34	FromGitter	<Blacksmoke16> `ASSIGNS.sort_by { |dec| dec.type.resolve.nilable? ? 1 : 0 }`
+2019-12-23 11:22:35	FromGitter	<Blacksmoke16> try that
+2019-12-23 11:22:56	FromGitter	<Blacksmoke16> @grkek dunno tbh
+2019-12-23 11:23:06	FromGitter	<grkek> Mine does, ayyyy
+2019-12-23 11:23:17	FromGitter	<Blacksmoke16> cant say i ever tried
+2019-12-23 11:23:38	FromGitter	<grkek> using unix sockets I think you can bind it to nginx
+2019-12-23 11:23:46	FromGitter	<grkek> that is really nice
+2019-12-23 11:24:17	FromGitter	<jwoertink> oh shit! That worked 😂
+2019-12-23 11:24:24	FromGitter	<jwoertink> and SO much cleaner
+2019-12-23 11:24:29	FromGitter	<Blacksmoke16> actually no, currently it only allows binding `tcp` and `tls`
+2019-12-23 11:24:31	FromGitter	<Blacksmoke16> 👍
+2019-12-23 11:24:37	FromGitter	<jwoertink> thanks!
+2019-12-23 11:24:38	FromGitter	<Blacksmoke16> np
+2019-12-23 11:24:50	FromGitter	<grkek> really ?
+2019-12-23 11:24:58	FromGitter	<grkek> I thought it allowed binding unix sockets as well
+2019-12-23 11:25:07	FromGitter	<Blacksmoke16> https://github.com/Blacksmoke16/athena/blob/rewrite/src/routing.cr#L161-L171
+2019-12-23 11:25:24	FromGitter	<Blacksmoke16> would be doable in that allow `host` to be a `Socket::UNIXAddress`
+2019-12-23 11:25:44	FromGitter	<Blacksmoke16> and if its a socket, call `bind_unix` otherwise do the current logic
+2019-12-23 11:26:59	FromGitter	<grkek> That would be a nice addition to your framework
+2019-12-23 11:27:09	FromGitter	<grkek> I wonder how much requests can nginx bench
+2019-12-23 11:27:16	FromGitter	<grkek> via the distributor
+2019-12-23 11:27:19	FromGitter	<grkek> probably same
+2019-12-23 11:27:21	FromGitter	<Blacksmoke16> ideally you would have these frameworks behind nginx
+2019-12-23 11:27:28	FromGitter	<Blacksmoke16> or something similar
+2019-12-23 11:27:36	FromGitter	<grkek> varnish and nginx
+2019-12-23 11:27:44	FromGitter	<Blacksmoke16> and yea probably, ill wait for it to be requested tho
+2019-12-23 11:28:13	FromGitter	<Blacksmoke16> goal is to keep things simple and iterate as needed, otherwise my brain hurts trying to solve all problems up front
+2019-12-23 11:29:19	FromGitter	<grkek> the less complicated it is the better
+2019-12-23 11:29:25	FromGitter	<Blacksmoke16> indee
+2019-12-23 11:30:08	FromGitter	<grkek> Can you show me an example of your code >?
+2019-12-23 11:30:14	FromGitter	<grkek> an example of
+2019-12-23 11:30:18	FromGitter	<grkek> a handler
+2019-12-23 11:30:22	FromGitter	<grkek> in athena
+2019-12-23 11:30:26	FromGitter	<Blacksmoke16> handler for what?
+2019-12-23 11:30:28	FromGitter	<grkek> like an api
+2019-12-23 11:30:43	FromGitter	<grkek> https://github.com/grkek/grip
+2019-12-23 11:30:49	FromGitter	<grkek> like the one in the readme
+2019-12-23 11:31:00	FromGitter	<Blacksmoke16> sure sec
+2019-12-23 11:34:46	FromGitter	<Blacksmoke16> rendering as HTML is still TBD, currently the rewrite only handles JSON
+2019-12-23 11:34:58	FromGitter	<Blacksmoke16> so leaving out the document class, it would be something like
+2019-12-23 11:35:00	FromGitter	<Blacksmoke16> ```code paste, see link``` [https://gitter.im/crystal-lang/crystal?at=5e0108d349314a1d45ca1f46]
+2019-12-23 11:35:32	FromGitter	<grkek> So nice and lovely
+2019-12-23 11:35:48	FromGitter	<grkek> I like the way you handle the route included information
+2019-12-23 11:36:03	FromGitter	<Blacksmoke16> thanks :)
+2019-12-23 11:36:20	FromGitter	<Blacksmoke16> the method return value just gets invoked with `.to_json` atm
+2019-12-23 11:36:22	FromGitter	<grkek> how do you get json variables
+2019-12-23 11:36:28	FromGitter	<grkek> same here
+2019-12-23 11:36:38	FromGitter	<grkek> but in a different way
+2019-12-23 11:36:47	FromGitter	<grkek> using a render function
+2019-12-23 11:36:51	FromGitter	<Blacksmoke16> like `id` from `"/:id"`?
+2019-12-23 11:37:02	FromGitter	<grkek> no like a post
+2019-12-23 11:37:05	FromGitter	<grkek> json body
+2019-12-23 11:37:13	FromGitter	<Blacksmoke16> ah, two ways
+2019-12-23 11:37:20	FromGitter	<Blacksmoke16> if you want access to the raw request body you can do like
+2019-12-23 11:38:24	FromGitter	<Blacksmoke16> ```code paste, see link``` ⏎  ⏎ where you just type an argument as `HTTP::Request` [https://gitter.im/crystal-lang/crystal?at=5e0109a044e1fb33f6176db1]
+2019-12-23 11:38:27	FromGitter	<grkek> also how do you return status codes >?
+2019-12-23 11:38:33	FromGitter	<grkek> oh that is nice
+2019-12-23 11:39:32	FromGitter	<Blacksmoke16> the other, more preferable option are param converters
+2019-12-23 11:39:48	FromGitter	<Groogy> Yo! Long time no see o/
+2019-12-23 11:40:45	FromGitter	<Blacksmoke16> ```code paste, see link``` [https://gitter.im/crystal-lang/crystal?at=5e010a2cd2dadb389367fd7f]
+2019-12-23 11:41:19	FromGitter	<Blacksmoke16> er `RequestBody` converter
+2019-12-23 11:41:28	FromGitter	<grkek> Hello @Groogy
+2019-12-23 11:41:43	FromGitter	<grkek> > also how do you return status codes >?
+2019-12-23 11:41:53	FromGitter	<Blacksmoke16> ```code paste, see link``` [https://gitter.im/crystal-lang/crystal?at=5e010a703e3f133894e5e689]
+2019-12-23 11:42:07	FromGitter	<grkek> where is the status code tho ?
+2019-12-23 11:42:08	FromGitter	<Blacksmoke16> where the content is `.from_json`'d into an objt
+2019-12-23 11:42:21	FromGitter	<Blacksmoke16> thats still a TODO :p
+2019-12-23 11:42:25	FromGitter	<grkek> yeah I understood that it would go to json
+2019-12-23 11:42:26	FromGitter	<grkek> oh my
+2019-12-23 11:42:28	FromGitter	<grkek> well
+2019-12-23 11:42:31	FromGitter	<grkek> you lost my friend
+2019-12-23 11:42:35	FromGitter	<grkek> I am a winner
+2019-12-23 11:42:50	FromGitter	<grkek> :p
+2019-12-23 11:42:50	FromGitter	<grkek> hehe
+2019-12-23 11:44:06	-->	erdnaxeli (erdnaxelic@gateway/shell/matrix.org/x-qwgztzovhzagpnop) has joined #crystal-lang
+2019-12-23 11:44:07	-->	ternarysolo (lawrencesy@gateway/shell/matrix.org/x-ojyvwpfkxcfthzhf) has joined #crystal-lang
+2019-12-23 11:44:07	-->	beepdog (beepdogkow@sourcemage/elder/dkowis) has joined #crystal-lang
+2019-12-23 11:44:14	-->	olbat[m] (olbatmatri@gateway/shell/matrix.org/x-zjakqsgrqxjihwyk) has joined #crystal-lang
+2019-12-23 11:44:22	FromGitter	<Blacksmoke16> havent thought of how i want to handle it yet
+2019-12-23 11:44:33	FromGitter	<grkek> "content", 200
+2019-12-23 11:44:38	FromGitter	<grkek> "content", 500
+2019-12-23 11:44:40	FromGitter	<Blacksmoke16> naw i dont like that
+2019-12-23 11:45:04	FromGitter	<grkek> damn
+2019-12-23 11:45:10	FromGitter	<grkek> how are you going to handle it then
+2019-12-23 11:45:17	FromGitter	<grkek> you would have to return it with the content right ?
+2019-12-23 11:45:26	FromGitter	<Blacksmoke16> i have error codes working
+2019-12-23 11:45:28	FromGitter	<grkek> in the right context for it to be relevant and not just some random number
+2019-12-23 11:45:34	FromGitter	<Blacksmoke16> just not the ability to say, 201
+2019-12-23 11:45:50	FromGitter	<grkek> "WHOAH I CREATED SOMETHING", 201
+2019-12-23 11:45:56	FromGitter	<grkek> why does that look bad for you ?
+2019-12-23 11:46:23	FromGitter	<grkek> or you could make an enum
+2019-12-23 11:46:36	FromGitter	<grkek> "Hi", ART::StatusCodes::Created
+2019-12-23 11:48:54	FromGitter	<Blacksmoke16> would be one option
+2019-12-23 11:49:12	FromGitter	<grkek> but which is better
+2019-12-23 11:49:23	FromGitter	<grkek> > "Hi", ART::StatusCodes::Created ⏎  ⏎ or  ⏎  ⏎ > "Hi", 201 [https://gitter.im/crystal-lang/crystal?at=5e010c32e0131f50c993f0dd]
+2019-12-23 11:49:34	FromGitter	<grkek> both could be an option
+2019-12-23 11:49:38	FromGitter	<Blacksmoke16> well fwiw, id use enum symbol autocasting and do `"Hi", :created`
+2019-12-23 11:49:39	FromGitter	<grkek> cuz it is an enum ?
+2019-12-23 11:49:52	FromGitter	<grkek> that might be one as well
+2019-12-23 11:50:01	FromGitter	<grkek> do it like
+2019-12-23 11:50:03	FromGitter	<grkek> elixir
+2019-12-23 11:50:09	FromGitter	<grkek> :ok, "Muh content"
+2019-12-23 11:50:15	FromGitter	<grkek> :created, "ohoy"
+2019-12-23 11:50:24	FromGitter	<grkek> :not_found, "sowwy"
+2019-12-23 11:51:19	FromGitter	<Blacksmoke16> i still up in the air, however i think im missing a layer
+2019-12-23 11:51:48	FromGitter	<Blacksmoke16> is*
+2019-12-23 11:52:47	FromGitter	<grkek> do you have a response object as well ?
+2019-12-23 11:53:07	FromGitter	<Blacksmoke16> no thats the part that im still debating
+2019-12-23 11:53:27	FromGitter	<Blacksmoke16> in that like the response is supplied via the `HTTP::Server::Context`
+2019-12-23 11:54:05	FromGitter	<Blacksmoke16> so one option would be like have my own `Response` object that can be returned that gets returned directly, otherwise have a view layer to handle the conversion of the return value into a `Response`
+2019-12-23 11:55:04	FromGitter	<grkek> kemal is using HTTP::Server::Context directly so I went with it
+2019-12-23 11:55:09	FromGitter	<grkek> comfy af
+2019-12-23 11:56:10	FromGitter	<mattrberry> Hey! Sorry for interrupting, not sure if there's a way to have threaded conversation on gitter... ⏎  ⏎ Is there a way to create a macro that would automatically define a constructor for all properties on a class? I'd like all classes inheriting from a Parent class to have their constructors automatically defined. I was looking at the the `inherited` macro hook, but I'm a little confused at the minute. I
+2019-12-23 11:56:10	FromGitter	... figured that with ⏎  ⏎ ```code paste, see link``` ... [https://gitter.im/crystal-lang/crystal?at=5e010dcac62fdf33f7406033]
+2019-12-23 11:57:32	FromGitter	<Blacksmoke16> `@type.instance_vars` only works in context of a method
+2019-12-23 11:58:51	FromGitter	<grkek> rip
+2019-12-23 12:00:09	FromGitter	<mattrberry> Is there a way to do what I'm looking for? Could I maybe define a catch-all `initialize` method that could then parse out the values given to it inside the of the constructor?
+2019-12-23 12:00:11	FromGitter	<Blacksmoke16> @grkek sorry if i didnt make it clear before, but when im saying "doesnt support x yet" im talking about the rewrite of athena
+2019-12-23 12:00:41	FromGitter	<Blacksmoke16> its possible in the latest release, just not in master/my WIP branch
+2019-12-23 12:01:35	FromGitter	<Blacksmoke16> @mattrberry got a better example of what you're trying to achieve? just to save yourself from having to manually add an initializer?
+2019-12-23 12:02:27	FromGitter	<grkek> that is a whole new level of programming
+2019-12-23 12:02:39	FromGitter	<grkek> fuck initializers who need those
+2019-12-23 12:02:55	FromGitter	<grkek> fuck it lets take it out of crystal
+2019-12-23 12:03:04	FromGitter	<Blacksmoke16> you would make a macro that makes defining them easier, but otherwise you're out of luck
+2019-12-23 12:03:06	FromGitter	<Blacksmoke16> could*
+2019-12-23 12:03:40	FromGitter	<tenebrousedge> I feel like this should be possible <___<
+2019-12-23 12:04:08	FromGitter	<Blacksmoke16> https://github.com/crystal-lang/crystal/issues/7504 dont we all
+2019-12-23 12:04:43	FromGitter	<tenebrousedge> but I suspect that the answer to this is "use a struct instead"
+2019-12-23 12:05:36	FromGitter	<Groogy> I finally have time to look over my old libraries to make sure they are up to date to the latestest versions and now I have mentions on awesome-crystal and I don't understand at all what they are talking about
+2019-12-23 12:06:12	FromGitter	<Blacksmoke16> you just need to setup periodic CI builds (assuming your project is testable, if not i can add it to the exempt list)
+2019-12-23 12:06:34	FromGitter	<Groogy> Ah I don't do specs really but think I might have done some for the memory profiler
+2019-12-23 12:06:52	FromGitter	<Groogy> Boleite I have not written specs for though since I use contract programming instead
+2019-12-23 12:07:46	FromGitter	<Blacksmoke16> awesome-crystal is going thru some cleanup atm removing shards that dont have CI setup
+2019-12-23 12:08:06	FromGitter	<Blacksmoke16> the goal being to ensure all the shards compile and work as intended
+2019-12-23 12:08:07	FromGitter	<Groogy> Alright so Boleite and Trashman is sort of real hard to write specs for so I haven't put in the time to do that
+2019-12-23 12:08:18	FromGitter	<Groogy> but I could probably set it up for crystal-clear but right now it does not have that
+2019-12-23 12:08:49	FromGitter	<Blacksmoke16> doesn't *have* to be specs
+2019-12-23 12:08:58	FromGitter	<Blacksmoke16> an example program to ensure it still compiles would be fine
+2019-12-23 12:09:21	FromGitter	<Groogy> Hmm will see what I can do over my vacation
+2019-12-23 12:09:27	FromGitter	<Blacksmoke16> 👍
+2019-12-23 12:09:30	FromGitter	<Groogy> Boleite will be up to date to the latest version at least
+2019-12-23 12:09:36	FromGitter	<Groogy> I am fixing all of the // problems
+2019-12-23 12:09:47	FromGitter	<mattrberry> Essentially, I'd just like to not have to define a constructor, ==, hash, or a handful of other methods in each class, since the classes are primarly used as dataclasses. I'm coming from a project that used Python's dataclasses extensively, and I'd like to do something similar here. I've found lbarasti/dataclass (https://github.com/lbarasti/dataclass), but I don't love the syntax. @Blacksmoke16  do you think
+2019-12-23 12:09:47	FromGitter	... it's possible to do something similar with just a @[dataclass] annotation on a class?
+2019-12-23 12:10:09	FromGitter	<Blacksmoke16> https://github.com/veelenga/awesome-crystal/pull/457#issuecomment-552223501
+2019-12-23 12:10:12	FromGitter	<mattrberry> If it's possible, I'll just hack around until I get it to work / get familiar with the Crystal macro system
+2019-12-23 12:10:26	FromGitter	<Blacksmoke16> its not anything personal, see my response there and the rest of the thread for the reasoning
+2019-12-23 12:11:22	FromGitter	<Groogy> Yeah I get it Blacksmoke don't worry
+2019-12-23 12:11:29	FromGitter	<Blacksmoke16> ❤️
+2019-12-23 12:11:29	<--	sagax (~sagax_nb@213.138.71.146) has quit (Read error: Connection reset by peer)
+2019-12-23 12:11:47	FromGitter	<Blacksmoke16> @mattrberry im assuming you cant use inheritance or something?
+2019-12-23 12:11:49	FromGitter	<Groogy> I have like 3 jobs at same time at work right now otherwise I'd devoted more time to keeping track of crystals development
+2019-12-23 12:11:57	FromGitter	<Blacksmoke16> or a module that defines the common logic that can be included into each type
+2019-12-23 12:12:03	FromGitter	<Blacksmoke16> no worries bud
+2019-12-23 12:12:19	FromGitter	<Groogy> So now I am "relaxing" by coding some crystal :D
+2019-12-23 12:12:41	FromGitter	<Groogy> Drinking Spanish wine on my sisters balcony and being glad I don't have to deal with the Swedish misery of a winter
+2019-12-23 12:13:01	FromGitter	<grkek> @Blacksmoke16 damn you evil
+2019-12-23 12:13:06	FromGitter	<grkek> you be like
+2019-12-23 12:13:15	FromGitter	<grkek> lets clap these bunch of repos
+2019-12-23 12:13:17	FromGitter	<grkek> for no reason
+2019-12-23 12:13:19	FromGitter	<Groogy> Oh dear god, so many warnings after getting things to compile
+2019-12-23 12:13:24	FromGitter	<Blacksmoke16> :S
+2019-12-23 12:13:25	FromGitter	<Groogy> is it now required to have a return type all the time?
+2019-12-23 12:13:35	FromGitter	<Groogy> @grkek nah I get it
+2019-12-23 12:13:44	FromGitter	<Blacksmoke16> for abstract defs, the children must have the same/stricter type set
+2019-12-23 12:13:45	FromGitter	<Groogy> keeping a clean list for people to look over to find things that actually work and is maintained is important
+2019-12-23 12:14:01	FromGitter	<grkek> yeah but its a bit rude to the creators
+2019-12-23 12:14:14	FromGitter	<grkek> creating something which makes you happy being clapped is kinda sad
+2019-12-23 12:14:16	FromGitter	<Groogy> Well if they don't want to put in the effort they can just opt out
+2019-12-23 12:14:18	FromGitter	<mattrberry> @Blacksmoke16 Right, the fields different for each class
+2019-12-23 12:14:25	FromGitter	<Blacksmoke16> > Well if they don't want to put in the effort they can just opt out ⏎  ⏎ this
+2019-12-23 12:14:39	FromGitter	<Groogy> I was just overwhelemd by how much have changed since I last touched my code base
+2019-12-23 12:14:59	FromGitter	<Groogy> luckily it seems memory profiler and the contract testing works as it should though
+2019-12-23 12:15:20	-->	duane (~duane@172.58.139.21) has joined #crystal-lang
+2019-12-23 12:15:33	FromGitter	<Blacksmoke16> nice one, if to start you just want to write like 1 spec to cover the happy path, that would be a good start
+2019-12-23 12:16:16	FromGitter	<dscottboggs_gitlab> I tend to notice mistakes a lot in that phase even on other paths
+2019-12-23 12:16:19	FromGitter	<Blacksmoke16> @mattrberry i suppose you could define your own macro like `record`
+2019-12-23 12:16:33	FromGitter	<Blacksmoke16> that creates what you want
+2019-12-23 12:16:40	FromGitter	<Blacksmoke16> similar to that dataclass shard
+2019-12-23 12:17:30	FromGitter	<tenebrousedge> I think `record` is the answer here
+2019-12-23 12:17:30	FromGitter	<Blacksmoke16> afk a bit, drivin home
+2019-12-23 12:17:54	FromGitter	<grkek> Go for it mate
+2019-12-23 12:17:57	FromGitter	<dscottboggs_gitlab> yeah @mattrberry , I don't think an annotation will help you here -- annotations don't work at all like they do in python here
+2019-12-23 12:19:20	FromGitter	<dscottboggs_gitlab> you could write a module that has  your macros in it and then `include` it. like ⏎  ⏎ ```code paste, see link``` [https://gitter.im/crystal-lang/crystal?at=5e011338c5a23938b46d7446]
+2019-12-23 12:19:48	FromGitter	<dscottboggs_gitlab> either that or just like  ⏎  ⏎ ```dataclass Data ⏎   property data : Type ⏎ end``` [https://gitter.im/crystal-lang/crystal?at=5e0113548dfce538b5f8a353]
+2019-12-23 12:20:58	-->	sagax (~sagax_nb@213.138.71.146) has joined #crystal-lang
+2019-12-23 12:22:08	FromGitter	<Groogy> So what's the best way to write like a property these days?
+2019-12-23 12:22:21	FromGitter	<dscottboggs_gitlab> the property macro?
+2019-12-23 12:22:21	FromGitter	<Groogy> property backend = Boleite::BackendConfiguration.new
+2019-12-23 12:22:28	FromGitter	<Groogy> would that remove the warning?
+2019-12-23 12:22:28	FromGitter	<dscottboggs_gitlab> yes, like that
+2019-12-23 12:22:31	FromGitter	<Groogy> nice thx
+2019-12-23 12:22:36	FromGitter	<dscottboggs_gitlab> which warning is that?
+2019-12-23 12:22:39	FromGitter	<mattrberry> Yeah i'm basically looking for the functionality of lbarasti/dataclass (https://github.com/lbarasti/dataclass) but with syntax closer to what you just shared @dscottboggs_gitlab! Do you think both of those are achievable? I'm still just trying to figure out how the crystal macro system works, so if those are things that *should* be achievable then I'll try to figure out how to do that!
+2019-12-23 12:23:05	FromGitter	<dscottboggs_gitlab> sorry spoke too soon @Groogy I didn't see you had a warning
+2019-12-23 12:23:13	FromGitter	<Groogy> The warning about that you should have explicit return types
+2019-12-23 12:23:30	FromGitter	<Groogy> I'm trying to update my frameworks to fit the latest version of crystal
+2019-12-23 12:24:04	FromGitter	<Groogy> What's the "prettiest" way to do this now?
+2019-12-23 12:24:17	FromGitter	<dscottboggs_gitlab> Hm, I still seem to be a version behind, so I'm not getting that error, but adding ` : Typename` is the way to add a type restriction to a property
+2019-12-23 12:24:40	FromGitter	<dscottboggs_gitlab> like `property backend : Boleite::BackendConfiguration`
+2019-12-23 12:25:56	FromGitter	<Groogy> I know but that would make it end up being `property backend : Boleite::BackendConfiguration = Boleite::BackendConfiguration.new`
+2019-12-23 12:26:06	FromGitter	<Groogy> and I am wondering if there's a prettier way to do this
+2019-12-23 12:26:08	<--	duane (~duane@172.58.139.21) has quit (Ping timeout: 258 seconds)
+2019-12-23 12:26:56	FromGitter	<Groogy> It's this warning: ```Please add an explicit return type (Bool or a subtype of it) to this method as well. ⏎  ⏎ The above warning will become an error in a future Crystal version.```
+2019-12-23 12:27:26	FromGitter	<tenebrousedge> you can usually do `property backend : BackendConfiguration = BackendConfiguration.new`
+2019-12-23 12:27:38	FromGitter	<dscottboggs_gitlab> that's what he's trying *not* to do
+2019-12-23 12:27:52	FromGitter	<Groogy> Well trying not to do is a bit strong, just wondering if there's a prettier way to do it
+2019-12-23 12:28:02	-->	duane (~duane@c-24-11-247-240.hsd1.tn.comcast.net) has joined #crystal-lang
+2019-12-23 12:28:10	FromGitter	<Groogy> I could have the assignment on the next line for clarity
+2019-12-23 12:28:12	FromGitter	<tenebrousedge> @dscottboggs_gitlab I'm saying you can omit the namespace
+2019-12-23 12:28:19	FromGitter	<dscottboggs_gitlab> ah
+2019-12-23 12:28:21	FromGitter	<grkek> @Groogy Your website is broken
+2019-12-23 12:28:28	FromGitter	<tenebrousedge> another option is to pass the default in the initializer
+2019-12-23 12:28:30	FromGitter	<grkek> http://groogy.se/mainsite/
+2019-12-23 12:28:31	FromGitter	<Groogy> groogy.se? Yes I know
+2019-12-23 12:28:36	FromGitter	<grkek> it has php erros
+2019-12-23 12:28:39	FromGitter	<grkek> errors*
+2019-12-23 12:28:44	FromGitter	<Groogy> I used that when I was a student and looking for a job :P
+2019-12-23 12:28:46	FromGitter	<grkek> is it in wordpress
+2019-12-23 12:28:48	FromGitter	<grkek> probably
+2019-12-23 12:28:48	FromGitter	<Groogy> not much point to maintain it
+2019-12-23 12:28:50	FromGitter	<Groogy> yeh
+2019-12-23 12:28:51	FromGitter	<dscottboggs_gitlab> @mattrberry, yep, I'm looking over the code for that shard now and it looks like it would be pretty trivial to create something based off of that which uses nested macros to build out the methods from the `@type` macro value inside the generated class.
+2019-12-23 12:28:53	FromGitter	<tenebrousedge> `initialize(@backend = BackendConfiguration.new)`
+2019-12-23 12:29:09	FromGitter	<grkek> Still it would be nice to have it up
+2019-12-23 12:29:09	FromGitter	<tenebrousedge> another option is to use aliases
+2019-12-23 12:29:13	FromGitter	<dscottboggs_gitlab> that said it's not a small project for someone not familiar with Crystal macros as it touches a lot of different concepts
+2019-12-23 12:29:14	FromGitter	<grkek> display your projects, etc
+2019-12-23 12:29:23	FromGitter	<tenebrousedge> `alias Config = BackendConfiguration`
+2019-12-23 12:29:25	FromGitter	<Groogy> @grkek I mean "my website" these days is paradoxplaza.com :P
+2019-12-23 12:29:58	FromGitter	<Groogy> But yah you are probably right I should probably get it just not show an error message at least
+2019-12-23 12:29:59	FromGitter	<dscottboggs_gitlab> nested macros, both kinds of macros, the `@type` special value, etc, etc
+2019-12-23 12:30:53	FromGitter	<grkek> Thats a cool website
+2019-12-23 12:30:55	FromGitter	<grkek> is it yours ?
+2019-12-23 12:32:45	FromGitter	<Groogy> Haha no not really. It's just where I work :D
+2019-12-23 12:33:11	FromGitter	<grkek> Aw nice
+2019-12-23 12:33:36	FromGitter	<grkek> dont you just hate it when you have a beard and you pull out each one of the hairs while you think about how to implement something
+2019-12-23 12:33:45	FromGitter	<grkek> it is a pretty horrible coping mechanism
+2019-12-23 12:33:47	FromGitter	<grkek> :D
+2019-12-23 12:33:50	FromGitter	<Groogy> For me it's gnawing on the nails
+2019-12-23 12:34:01	FromGitter	<Groogy> But yeah I should fix my website so I can link the stuff I've done on Crystal in it
+2019-12-23 12:34:04	FromGitter	<dscottboggs_gitlab> treat yo beard with respect lol
+2019-12-23 12:34:11	FromGitter	<grkek> I used to do that
+2019-12-23 12:34:26	FromGitter	<grkek> and now it went from nails to beard and eyebrows
+2019-12-23 12:34:40	FromGitter	<grkek> once I got so mad at myself i shaved both of them lmao
+2019-12-23 12:34:43	FromGitter	<grkek> and then got depressed
+2019-12-23 12:37:11	FromGitter	<Groogy> take care of yourself, even though I bite my nails I know it is a super bad stress induced behaviour
+2019-12-23 12:37:18	FromGitter	<Groogy> and try my best to get rid of it
+2019-12-23 12:37:42	FromGitter	<grkek> > stress
+2019-12-23 12:37:50	FromGitter	<grkek> that gave me baldspots on my head
+2019-12-23 12:38:03	FromGitter	<grkek> humans weren't designed to think
+2019-12-23 12:38:09	FromGitter	<grkek> something went wrong
+2019-12-23 12:38:21	FromGitter	<grkek> I should be running around woods rn screaming ooga booga
+2019-12-23 12:41:58	FromGitter	<bew> Lol, hey @Groogy welcome back!
+2019-12-23 12:42:42	FromGitter	<Groogy> Hey @bew thanks!
+2019-12-23 12:42:50	FromGitter	<Groogy> Got vacation so can finally try and update everything
+2019-12-23 12:43:37	FromGitter	<Groogy> I am also Twitch affiliate now and I have been pondering if I should do a Game Design/Programming in crystal stream
+2019-12-23 12:43:47	FromGitter	<grkek> I love talking to you guys, literally have no one to talk to about crystal or programming in general
+2019-12-23 12:44:07	FromGitter	<grkek> @Groogy that would be nice
+2019-12-23 12:44:15	FromGitter	<mattrberry> @dscottboggs_gitlab Alright well I'll dive in and give it a shot! I'm sure I'll have plenty of questions down the line. Thanks!
+2019-12-23 12:44:16	FromGitter	<Groogy> @grkek you working with programming or it's your hobby?
+2019-12-23 12:45:06	FromGitter	<grkek> Both
+2019-12-23 12:45:11	FromGitter	<dscottboggs_gitlab> I'll do my best to be available! I don't get on here too much but if you @ me I'll notice it within a day or so. @Blacksmoke16 is always here though ;D
+2019-12-23 12:45:20	FromGitter	<grkek> coworkers are always busy
+2019-12-23 12:45:28	FromGitter	<grkek> and I am just left out alone
+2019-12-23 12:45:56	FromGitter	<Groogy> eh sounds like boring place to work
+2019-12-23 12:46:10	FromGitter	<Groogy> Programming chats at my place are always filled with people disagreeing which is the "proper way" to code C++
+2019-12-23 12:46:37	FromGitter	<tenebrousedge> the best way to code C++ is to write Crystal instead :D
+2019-12-23 12:46:37	FromGitter	<mattrberry> Thanks again!
+2019-12-23 12:46:39	FromGitter	<grkek> C++ is horrible
+2019-12-23 12:46:46	FromGitter	<grkek> I hate it so much
+2019-12-23 12:46:50	FromGitter	<grkek> I prefer C
+2019-12-23 12:46:55	FromGitter	<dscottboggs_gitlab> ☝️ December 23, 2019 2:46 PM (https://gitter.im/crystal-lang/crystal?at=5e01199cc5a23938b46d9d35) this x 💯
+2019-12-23 12:47:15	FromGitter	<dscottboggs_gitlab> > I prefer C ⏎  ⏎ No.
+2019-12-23 12:47:21	raz	does anyone know from the top of their head which one is slower: `if foo == :bar` or `if foo.is_a? Bar`?
+2019-12-23 12:47:34	FromGitter	<dscottboggs_gitlab> nope
+2019-12-23 12:47:46	FromGitter	<dscottboggs_gitlab> wouldn't take long to benchmark thoug
+2019-12-23 12:47:55	raz	i know, just being lazy
+2019-12-23 12:48:01	FromGitter	<dscottboggs_gitlab> heh
+2019-12-23 12:48:25	FromGitter	<Groogy> I prefer Smalltalk derivative languages
+2019-12-23 12:48:36	FromGitter	<grkek> @dscottboggs_gitlab why not ? C is really nice
+2019-12-23 12:48:43	FromGitter	<Groogy> Hence I am so happy with crystal being sort of smalltalk deritative but can compete in my opinion with the more traditional ones
+2019-12-23 12:49:08	FromGitter	<dscottboggs_gitlab> Have you ever written low-level code in Crystal?
+2019-12-23 12:49:20	FromGitter	<grkek> So far nothing tops Crystal but still C is nice
+2019-12-23 12:49:25	FromGitter	<grkek> No I have not
+2019-12-23 12:49:34	FromGitter	<grkek> If you can provide an example
+2019-12-23 12:49:39	FromGitter	<grkek> it would be nice
+2019-12-23 12:49:43	FromGitter	<dscottboggs_gitlab> let me take a look
+2019-12-23 12:49:54	FromGitter	<Groogy> ugh it's been so long since I did my macro crazy stuff in Crystal
+2019-12-23 12:49:58	FromGitter	<Groogy> `def \{{name}}(\{{args.splat}}) \{{return_type ? ":" + return_type.stringify : "" }}`
+2019-12-23 12:50:05	FromGitter	<grkek> oof
+2019-12-23 12:50:10	FromGitter	<Groogy> I'm dding the last part to satisfy the warning
+2019-12-23 12:50:30	FromGitter	<Groogy> and this doesn't work because the contract generates method like this: `def done?(world : World) ":Bool"`
+2019-12-23 12:50:41	FromGitter	<Groogy> which somehow magically compiles
+2019-12-23 12:50:54	FromGitter	<Groogy> but it's not the end result I want :D
+2019-12-23 12:51:57	FromGitter	<grkek> Magic of crystal
+2019-12-23 12:59:19	FromGitter	<mattrberry> > either that or just like  ⏎ > ``` ⏎ > dataclass Data do ⏎ >   property data : Type ⏎ > end ... [https://gitter.im/crystal-lang/crystal?at=5e011c8fcf771f77081b015b]
+2019-12-23 12:59:19	FromGitter	<dscottboggs_gitlab> I found a snippet but I don't think I ever got the project working @grkek
+2019-12-23 12:59:51	FromGitter	<grkek> show it
+2019-12-23 13:00:40	FromGitter	<dscottboggs_gitlab> ```macro dataclass(typename, &body) ⏎   ... ⏎ end``` ⏎  ⏎ @mattrberry [https://gitter.im/crystal-lang/crystal?at=5e011ce8cf771f77081b0437]
+2019-12-23 13:00:49	FromGitter	<tenebrousedge> https://github.com/crystal-lang/crystal/blob/41bd18fbea4aec50aad33aa3beb7a0bf30544186/src/macros.cr#L60
+2019-12-23 13:00:54	FromGitter	<tenebrousedge> ^ relevant
+2019-12-23 13:01:04	FromGitter	<dscottboggs_gitlab> @grkek I'm working on it i haven't uploaded it yet
+2019-12-23 13:02:02	FromGitter	<grkek> waiting 4 it
+2019-12-23 13:03:10	FromGitter	<mattrberry> @dscottboggs_gitlab Thank you!
+2019-12-23 13:03:20	FromGitter	<mattrberry> I feel like I'll be thanking you a lot...
+2019-12-23 13:03:32	FromGitter	<mattrberry> And thanks @tenebrousedge
+2019-12-23 13:04:45	<--	hightower3 (~hightower@unaffiliated/hightower3) has quit (Ping timeout: 265 seconds)
+2019-12-23 13:04:59	FromGitter	<dscottboggs_gitlab> this was totally unnecessary of course, @grkek, there are abstractions that take care of this sort of thing, but here you go https://github.com/dscottboggs/radio/blob/b69b346c870cf250267bb6c227581ccb95b0a4ff/src/radio.cr#L17-L48
+2019-12-23 13:06:25	FromGitter	<dscottboggs_gitlab> also not super low-level, but I am working with pointers directly there
+2019-12-23 13:06:44	FromGitter	<Groogy> I don't understand why this won't work, not sure how it malformats the code so I get one "end" too few in the code
+2019-12-23 13:06:48	FromGitter	<Groogy> ```code paste, see link``` [https://gitter.im/crystal-lang/crystal?at=5e011e57260751301cfb01a9]
+2019-12-23 13:07:12	FromGitter	<dscottboggs_gitlab> there's no end there?
+2019-12-23 13:07:21	FromGitter	<Groogy> well no the end comes later
+2019-12-23 13:07:25	FromGitter	<grkek> pretty standard stuff @dscottboggs_gitlab easy to read and process, lovely code but one thing
+2019-12-23 13:07:39	FromGitter	<grkek> @dscottboggs_gitlab consider this https://github.com/grkek/grip
+2019-12-23 13:07:51	FromGitter	<Groogy> ```code paste, see link``` [https://gitter.im/crystal-lang/crystal?at=5e011e9744e1fb33f617f151]
+2019-12-23 13:07:56	FromGitter	<Groogy> there is a bigger context
+2019-12-23 13:08:06	FromGitter	<grkek> macro hell
+2019-12-23 13:08:28	FromGitter	<Groogy> If I only have it do the variant where it doesn't care about the return type it works perfectly fine
+2019-12-23 13:08:31	FromGitter	<Groogy> just the warning there
+2019-12-23 13:08:35	FromGitter	<dscottboggs_gitlab> oh wow thanks for the link @grkek I use kemal a lot and that might be a better way to organize my code
+2019-12-23 13:08:59	FromGitter	<Groogy> also it is not macro hell, it is beautiful in it's own special little way
+2019-12-23 13:09:13	FromGitter	<grkek> I mean macro hell for me to understand
+2019-12-23 13:09:15	FromGitter	<grkek> but it is beautiful
+2019-12-23 13:09:19	FromGitter	<grkek> since I am new to macros
+2019-12-23 13:09:20	Yxhuvud	groogy: I think macro expansions need to be self contained. ie, statements need to be contained in a macro, you can't do, eg part of a case statement inside a macro and part outside. All of it has to be in the macro, or none of it.
+2019-12-23 13:09:40	FromGitter	<Groogy> hmmm might be it
+2019-12-23 13:09:41	FromGitter	<grkek> also @dscottboggs_gitlab most of the dsl stuff is still there but yeah this will help you a lot
+2019-12-23 13:09:46	FromGitter	<grkek> thank you for the feedback
+2019-12-23 13:09:48	FromGitter	<Groogy> then I will need to do it with a ? : operator
+2019-12-23 13:09:49	FromGitter	<Groogy> somehow
+2019-12-23 13:10:03	FromGitter	<Groogy> I.e if Nop I want it to omit the ":" on the definition
+2019-12-23 13:11:35	FromGitter	<Blacksmoke16> bk
+2019-12-23 13:11:48	FromGitter	<grkek> also keep in mind that there is no performance hit what so ever since this does the same as the dsl used to do but it just keeps the whole package more organized and friendly
+2019-12-23 13:12:02	Yxhuvud	groogy: Can you use `Void` as a return type as a workaround?
+2019-12-23 13:12:30	FromGitter	<Blacksmoke16> unless you working with C bindings, `Nil` is the same
+2019-12-23 13:12:32	FromGitter	<Groogy> Well no it's a framework that's wrapping around your code, so I just want to mimick what you are doing.
+2019-12-23 13:12:41	FromGitter	<Groogy> If you wanna ignore the warnings, go ahead
+2019-12-23 13:12:59	FromGitter	<dscottboggs_gitlab> @Blacksmoke16  even in that case it's only a difference of convention
+2019-12-23 13:12:59	FromGitter	<Groogy> If I can get a stringliteral to be printed without the "" then I can make it work
+2019-12-23 13:13:07	FromGitter	<tenebrousedge> I want to ignore all the warnings. Full speed ahead! :D
+2019-12-23 13:13:12	FromGitter	<Blacksmoke16> @Groogy you can use `{% verbatim do %}`
+2019-12-23 13:13:20	FromGitter	<Blacksmoke16> then your macro code
+2019-12-23 13:13:24	FromGitter	<Blacksmoke16> then `{% end %}`
+2019-12-23 13:13:34	FromGitter	<Blacksmoke16> save from having to do `\{% ...` all the time
+2019-12-23 13:13:44	FromGitter	<dscottboggs_gitlab> oh wow that's convenient
+2019-12-23 13:13:48	FromGitter	<Blacksmoke16> call `.id` on the macro var
+2019-12-23 13:13:50	FromGitter	<dscottboggs_gitlab> and you could nest that too :O
+2019-12-23 13:14:23	FromGitter	<Groogy> eh not exactly sure what you mean Blacksmoke
+2019-12-23 13:14:35	FromGitter	<Blacksmoke16> `\{{return_type.id}}`
+2019-12-23 13:14:49	FromGitter	<Groogy> meant on the "verbatim do"
+2019-12-23 13:14:51	FromGitter	<Groogy> but I'll try that
+2019-12-23 13:15:04	FromGitter	<Blacksmoke16> like see how all your macro expressions are escaped with the `\`?
+2019-12-23 13:15:35	FromGitter	<Groogy> yeah
+2019-12-23 13:15:37	Yxhuvud	How does the full macro look like? Perhaps there is other things that can be done to improve the structure?
+2019-12-23 13:15:55	FromGitter	<Blacksmoke16> ```code paste, see link``` [https://gitter.im/crystal-lang/crystal?at=5e01207bcf771f77081b1faa]
+2019-12-23 13:15:59	FromGitter	<Blacksmoke16> could then do that
+2019-12-23 13:16:02	FromGitter	<Blacksmoke16> without all the `\`
+2019-12-23 13:16:06	FromGitter	<grkek> oh that is so much nicer
+2019-12-23 13:16:12	FromGitter	<grkek> gg @Blacksmoke16
+2019-12-23 13:16:30	FromGitter	<Groogy> Oh thanks Smoke
+2019-12-23 13:16:41	FromGitter	<Groogy> well I can show you the full thing on github
+2019-12-23 13:16:59	FromGitter	<Groogy> https://github.com/Groogy/crystal-clear/blob/master/src/crystal-clear/code_generator.cr
+2019-12-23 13:16:59	Yxhuvud	verbatim is default when using the macro keyword to define it, no?
+2019-12-23 13:17:20	FromGitter	<Groogy> I'm working on the method_added right now
+2019-12-23 13:17:24	FromGitter	<Blacksmoke16> `def {{name}}({{args.splat}}){% unless return_type.is_a?(Nop) %} : {{return_type.id}} {% end %}`
+2019-12-23 13:17:39	FromGitter	<Blacksmoke16> no need for if/else when the only thing that changes is the return type
+2019-12-23 13:17:58	FromGitter	<Blacksmoke16> good question, i think so?
+2019-12-23 13:18:16	FromGitter	<Blacksmoke16> verbatim is mainly helpful when using a macro within nested macro hooks
+2019-12-23 13:20:12	FromGitter	<Groogy> So when is types wanted as return type?
+2019-12-23 13:20:23	FromGitter	<Blacksmoke16> hm?
+2019-12-23 13:21:21	FromGitter	<dscottboggs_gitlab> (return) types are always inferred -- adding a restriction just produces a better error message if you make a mistake.
+2019-12-23 13:21:55	FromGitter	<Groogy> No I mean the warning I am getting
+2019-12-23 13:22:00	FromGitter	<dscottboggs_gitlab> oh
+2019-12-23 13:22:05	FromGitter	<Groogy> I want to satisfy it and trying to understand when return type is wanted
+2019-12-23 13:22:12	FromGitter	<Groogy> because it says it will become a future error
+2019-12-23 13:22:18	FromGitter	<Groogy> but does not say specifically what case
+2019-12-23 13:22:23	FromGitter	<Blacksmoke16> if you have a return type on an abstract def, the implementations of it must have the same or stricter return type
+2019-12-23 13:22:31	FromGitter	<Groogy> ```code paste, see link``` [https://gitter.im/crystal-lang/crystal?at=5e012206260751301cfb1827]
+2019-12-23 13:23:01	FromGitter	<dscottboggs_gitlab> looks like *when overloading*
+2019-12-23 13:23:01	FromGitter	<Groogy> alright cool
+2019-12-23 13:23:27	FromGitter	<Groogy> I am a bit worried if my libraries will mess with this and always force you to provide a type
+2019-12-23 13:23:32	FromGitter	<Groogy> though not sure if that is a bad thing inherently
+2019-12-23 13:23:59	FromGitter	<Blacksmoke16> if you dont want to have to do that you can remove the return type restriction on the parent abstract def
+2019-12-23 13:24:19	FromGitter	<grkek> Okay, guys I am off to sleep, cya tommorow
+2019-12-23 13:24:23	FromGitter	<grkek> good night
+2019-12-23 13:24:40	FromGitter	<Blacksmoke16> o/
+2019-12-23 13:24:59	FromGitter	<Groogy> Well my macro is overloading and then calling the previous definition
+2019-12-23 13:25:06	FromGitter	<Groogy> but if this is only on abstract ones
+2019-12-23 13:25:09	FromGitter	<Groogy> it's going to be fine
+2019-12-23 13:25:14	FromGitter	<Groogy> Good night @grkek
+2019-12-23 13:25:18	FromGitter	<Blacksmoke16> 👍
+2019-12-23 13:31:00	FromGitter	<Groogy> Alright after cleaning up the code with `verbatim do`
+2019-12-23 13:31:44	FromGitter	<Groogy> https://gist.github.com/Groogy/aa23d91a9c43dd22726151bac6598424
+2019-12-23 13:32:13	FromGitter	<Groogy> if you want to have a peak at my madness
+2019-12-23 13:32:14	FromGitter	<Blacksmoke16> prob could use some indents too :p
+2019-12-23 13:32:26	FromGitter	<Groogy> yeah well I found this was more readable to keep em on same level
+2019-12-23 13:32:27	 *	FromGitter * Blacksmoke16 wishes the formatter fixed macro code too
+2019-12-23 13:32:36	FromGitter	<Groogy> though probably should indent it properly
+2019-12-23 13:33:46	FromGitter	<Groogy> I am also doing all of this from my windows laptop in the WSL and I am surprised it even works
+2019-12-23 13:33:59	FromGitter	<Blacksmoke16> :p
+2019-12-23 13:34:38	FromGitter	<Groogy> since all development for the graphics framework etc was done on Linux
+2019-12-23 13:35:09	FromGitter	<Groogy> now I just got the memory profiler left
+2019-12-23 13:36:25	FromGitter	<dscottboggs_gitlab> did you guys see that someone made an OS in crystal?
+2019-12-23 13:36:40	FromGitter	<Blacksmoke16> yes
+2019-12-23 13:36:51	FromGitter	<dscottboggs_gitlab> well, Crystal-ish
+2019-12-23 13:36:58	FromGitter	<dscottboggs_gitlab> his compiler is heavily patched
+2019-12-23 13:40:21	FromGitter	<Groogy> Also "how much" of an OS is it?
+2019-12-23 13:40:28	Yxhuvud	I love how he (?) included a precise GC for crystal in that OS.
+2019-12-23 13:41:19	FromGitter	<dscottboggs_gitlab> > "how much" ⏎  ⏎ single-user, only uses FAT16, but it has a desktop and windowing environment
+2019-12-23 13:41:35	Yxhuvud	and multithreading, if I read it right.
+2019-12-23 13:41:46	Yxhuvud	*processing
+2019-12-23 13:42:01	FromGitter	<dscottboggs_gitlab> I mean it's its obviously not something that's going to replace your linux box but it's still really cool
+2019-12-23 13:45:16	FromGitter	<Groogy> Ah no I was just curious
+2019-12-23 13:45:20	FromGitter	<Groogy> How far gone
+2019-12-23 13:45:46	Yxhuvud	groogy: https://github.com/ffwff/lilith
+2019-12-23 13:46:04	Yxhuvud	https://news.ycombinator.com/item?id=21860713 for the lengthy HN discussion.
+2019-12-23 13:46:32	FromGitter	<tenebrousedge> a kernel in Crystal : https://github.com/lbguilherme/os-crystal
+2019-12-23 13:49:57	FromGitter	<Groogy> has anything with Shards and releases been changed?
+2019-12-23 13:50:06	FromGitter	<Groogy> or well you wouldn't know how long back this was for me so kind of dumb question
+2019-12-23 13:51:06	Yxhuvud	Uh, there was a release where they changed to a SAT based version resolver, but apart from that I havn't heard anything for a long time.
+2019-12-23 13:52:58	FromGitter	<Groogy> a SAT based version resolver?
+2019-12-23 13:55:29	Yxhuvud	basically upgrading all versions of everything to the globally best choice. Turns out to be NP complete in general. Basically what all modern package managers do, except for the one in Go.
+2019-12-23 13:55:56	FromGitter	<Groogy> alright cool
+2019-12-23 13:56:09	FromGitter	<Groogy> so then question becomes if it's 1.1.0 or 1.0.1 :D
+2019-12-23 13:56:19	FromGitter	<Groogy> in essence it's a patch but it sort of breaks things but is not any new features
+2019-12-23 13:57:17	FromGitter	<JohnLegrandRichards> Hey Guys! Looking to start contributing to Crystal. I read through the contribution guide. It told me I should maybe take a look at the newcomer label but those all seem to be handled. Anyone want to point me towards an Issue I could take a look at? Thanks!
+2019-12-23 14:02:28	FromGitter	<Blacksmoke16> best bet would be to just paruse the issues and see if there's anything you want to/can do
+2019-12-23 14:04:06	Yxhuvud	@JohnLegrandRichards: You could always look through the documentation and see if you can find something that needs improvements. That will teach you about the codebase and the process and perhaps give you an idea of what else might be feasible given what your skills have.
+2019-12-23 14:04:35	FromGitter	<Blacksmoke16> 👍
+2019-12-23 14:04:49	FromGitter	<Blacksmoke16> api doc improvements are always nice
+2019-12-23 14:07:40	Yxhuvud	what is really needed is more people knowing their way around the compiler, but the step to be productive there is pretty high
+2019-12-23 14:08:20	FromGitter	<Blacksmoke16> yea...
+2019-12-23 14:08:41	FromGitter	<Blacksmoke16> https://github.com/crystal-lang/crystal/issues/6996 fix this one first and ill buy you a ☕ :p
+2019-12-23 14:28:29	FromGitter	<Groogy> Hmm this problem is a bit weird...
+2019-12-23 14:30:09	FromGitter	<Groogy> https://gist.github.com/Groogy/5084a81ad42806ef5f2cf39d02d88e88
+2019-12-23 14:30:13	FromGitter	<Groogy> can't see what I am missing
+2019-12-23 14:34:30	FromGitter	<Blacksmoke16> ha how ironic
+2019-12-23 14:34:50	FromGitter	<Groogy> "Is not defined" I can clearly see it is though D:
+2019-12-23 14:35:00	FromGitter	<Groogy> welp maybe it's caused by the error "after" it
+2019-12-23 14:35:03	FromGitter	<Blacksmoke16> pretty sure its related to that issue i linked
+2019-12-23 14:35:15	FromGitter	<Groogy> Getting a too nested generic type
+2019-12-23 14:35:34	FromGitter	<Blacksmoke16> https://play.crystal-lang.org/#/r/89hc this seems to compile tho?
+2019-12-23 14:36:52	FromGitter	<Groogy> yeah so I am starting to suspect it is caused by the error that comes when I comment away that code
+2019-12-23 14:37:20	FromGitter	<Groogy> `Error: generic type too nested: Trashman::Record(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(
+2019-12-23 14:37:20	FromGitter	... Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Trashman::Ref(Array(Tra ... [https://gi
+2019-12-23 14:37:20	FromGitter	... tter.im/crystal-lang/crystal?at=5e013390cf771f77081bb358]
+2019-12-23 14:37:29	FromGitter	<Groogy> and god damn no idea how that happens
+2019-12-23 14:39:11	FromGitter	<Groogy> Ah right my checks to make sure this does not happen is in runtime
+2019-12-23 14:39:12	FromGitter	<Groogy> that's why
+2019-12-23 14:40:24	FromGitter	<Groogy> ```code paste, see link``` [https://gitter.im/crystal-lang/crystal?at=5e01344784c2167709526c90]
+2019-12-23 14:40:42	FromGitter	<Groogy> if I can solve that then yeah it should work just dandy again
+2019-12-23 14:47:32	FromGitter	<Groogy> Can I somehow have it not do the included if `@type == Array(Trashman::*)`?
+2019-12-23 14:47:52	FromGitter	<Blacksmoke16> hm?
+2019-12-23 14:48:42	FromGitter	<Groogy> Well problem is I am including Trashman into Array, and the profiler is using Array itself, and would be nice if I could just have it not run the included macro on anything that belogns to the Trashman Module
+2019-12-23 14:49:01	FromGitter	<Groogy> including an Array with Trashman objects in it
+2019-12-23 14:49:13	-->	wmoxam (~wmoxam@pdpc/supporter/active/wmoxam) has joined #crystal-lang
+2019-12-23 14:50:12	FromGitter	<Blacksmoke16> hmm
+2019-12-23 14:51:34	FromGitter	<Groogy> Like something `{% Trashman.includes?(@type) || @type.generic_args.includes?(Trashman.types) %}`
+2019-12-23 14:51:36	FromGitter	<Groogy> something like that?
+2019-12-23 14:52:40	FromGitter	<Blacksmoke16> https://crystal-lang.org/api/master/Crystal/Macros/TypeNode.html#%3C=(other:TypeNode):BoolLiteral-instance-method ?
+2019-12-23 14:53:01	FromGitter	<Groogy> will that also work on modules and the types within it?
+2019-12-23 14:53:13	FromGitter	<Blacksmoke16> i dont recall
+2019-12-23 14:53:18	FromGitter	<Blacksmoke16> maybe?
+2019-12-23 14:53:33	FromGitter	<Groogy> all_subclasses probably better
+2019-12-23 14:53:40	FromGitter	<Groogy> or wait no
+2019-12-23 14:57:51	FromGitter	<Groogy> can I somehow figure out the template arguments given to a class I am included into?
+2019-12-23 14:58:01	FromGitter	<Blacksmoke16> got an example?
+2019-12-23 14:58:08	FromGitter	<Blacksmoke16> playground link ideally
+2019-12-23 14:59:35	FromGitter	<Groogy> I'm gonna see if I can recreate it

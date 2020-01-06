@@ -1,0 +1,23 @@
+2019-12-23 00:58:41	-->	beholders_eye (~weechat@node-1w7jr9qsq4i9010mp3shsg85j.ipv6.telus.net) has joined #dart
+2019-12-23 02:37:09	-->	LKoen (~LKoen@2a01cb0407597a0079d573fb8dafe8a6.ipv6.abo.wanadoo.fr) has joined #dart
+2019-12-23 03:11:14	<--	LKoen (~LKoen@2a01cb0407597a0079d573fb8dafe8a6.ipv6.abo.wanadoo.fr) has quit (Remote host closed the connection)
+2019-12-23 03:12:21	-->	LKoen (~LKoen@2a01cb0407597a0025a9e900060979e3.ipv6.abo.wanadoo.fr) has joined #dart
+2019-12-23 04:13:34	<--	LKoen (~LKoen@2a01cb0407597a0025a9e900060979e3.ipv6.abo.wanadoo.fr) has quit (Remote host closed the connection)
+2019-12-23 04:21:09	-->	sortie (~Sortie@D4709781.rev.sefiber.dk) has joined #dart
+2019-12-23 04:21:09	--	Mode #dart [+o sortie] by ChanServ
+2019-12-23 04:46:37	-->	LKoen (~LKoen@lfbn-idf2-1-334-110.w82-123.abo.wanadoo.fr) has joined #dart
+2019-12-23 05:08:12	<--	beholders_eye (~weechat@node-1w7jr9qsq4i9010mp3shsg85j.ipv6.telus.net) has quit (Ping timeout: 260 seconds)
+2019-12-23 05:58:03	<--	LKoen (~LKoen@lfbn-idf2-1-334-110.w82-123.abo.wanadoo.fr) has quit (Ping timeout: 260 seconds)
+2019-12-23 06:10:22	<--	sortie (~Sortie@D4709781.rev.sefiber.dk) has quit (Quit: Leaving)
+2019-12-23 07:28:57	-->	LKoen (~LKoen@lfbn-idf2-1-334-110.w82-123.abo.wanadoo.fr) has joined #dart
+2019-12-23 08:22:35	-->	sortie (~sortie@D4709781.rev.sefiber.dk) has joined #dart
+2019-12-23 08:22:35	--	Mode #dart [+o sortie] by ChanServ
+2019-12-23 11:28:59	<--	LKoen (~LKoen@lfbn-idf2-1-334-110.w82-123.abo.wanadoo.fr) has quit (Remote host closed the connection)
+2019-12-23 12:11:29	<--	sagax (~sagax_nb@213.138.71.146) has quit (Read error: Connection reset by peer)
+2019-12-23 12:14:38	-->	LKoen (~LKoen@2a01cb0407597a0069658951da429991.ipv6.abo.wanadoo.fr) has joined #dart
+2019-12-23 12:20:58	-->	sagax (~sagax_nb@213.138.71.146) has joined #dart
+2019-12-23 12:53:46	-->	newbie (~kvirc@unaffiliated/daveace) has joined #dart
+2019-12-23 12:54:06	--	newbie is now known as daveaway
+2019-12-23 13:10:27	<--	LKoen (~LKoen@2a01cb0407597a0069658951da429991.ipv6.abo.wanadoo.fr) has quit (Remote host closed the connection)
+2019-12-23 14:23:26	<--	daveaway (~kvirc@unaffiliated/daveace) has quit (Quit: KVIrc 4.2.0 Equilibrium http://www.kvirc.net/)
+2019-12-23 14:24:26	-->	Pacane (~joel@192.222.150.216) has joined #dart
