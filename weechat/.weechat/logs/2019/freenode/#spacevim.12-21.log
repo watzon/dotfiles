@@ -1,9 +1,0 @@
-2019-12-21 06:11:03	<--	galaxie (~weechat@gateway/tor-sasl/galaxie) has quit (Ping timeout: 240 seconds)
-2019-12-21 06:14:18	-->	galaxie (~weechat@gateway/tor-sasl/galaxie) has joined #spacevim
-2019-12-21 08:03:25	SpaceVimBot	<paxsali> is it possible to customize the default VersionControl git-diff signs & colors in the sign column? There is no info available on this in the documentation. My current (default) SpaceVim shows changed lines with "~" instead of "|" and added lines with a black "+" (almost invisivle), instead of a green "+". Obviously this is not optimal and I'd like to know if I can change this.
-2019-12-21 08:28:25	SpaceVimBot	<fdidron> Hello, is there a way to disable / remove the tabline ?
-2019-12-21 16:14:44	<--	Akulen (~Akulen@sas.eleves.ens.fr) has quit (Ping timeout: 248 seconds)
-2019-12-21 17:43:13	-->	Akulen (~Akulen@sas.eleves.ens.fr) has joined #spacevim
-2019-12-21 19:03:05	<--	Akulen (~Akulen@sas.eleves.ens.fr) has quit (Ping timeout: 268 seconds)
-2019-12-21 23:47:07	SpaceVimBot	<kevinG73_gitlab> Hi
-2019-12-21 23:47:25	SpaceVimBot	<kevinG73_gitlab> someone use spacevim with Angular ?
