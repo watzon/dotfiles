@@ -8,7 +8,7 @@ export ZSH="/home/watzon/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="spaceship"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -199,8 +199,24 @@ alias sr="sudo reboot"
 alias adbscreencap="adb shell screencap -p > screen.png"
 alias adbscreenrecord="adb exec-out screenrecord --output-format=h264 - > screen.mp4"
 
+alias top='gotop'
+alias htop='gotop'
 alias cls='printf "\033c" && clear'
 alias todo="todo.sh"
+
+alias vim="nvim"
+
+lg()
+{
+    export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
+
+    lazygit "$@"
+
+    if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
+            cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
+            rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
+    fi
+}
 
 # GUIX stuff
 # Arrange so that ~/.config/guix/current paths end up first in
@@ -226,7 +242,7 @@ export GUIX_LOCPATH=$HOME/.guix-profile/lib/locale
 source $HOME/.zshenv
 source $HOME/.asdf/asdf.sh
 source $HOME/.asdf/completions/asdf.bash
-source ~/.zshrc.d/secrets.zsh
+source ~/.zprofile
 
 autoload -Uz compinit
 compinit
@@ -234,8 +250,8 @@ compinit
 # Completion for kitty
 kitty + complete setup zsh | source /dev/stdin
 
-# opam configuration
-test -r /home/watzon/.opam/opam-init/init.zsh && . /home/watzon/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+fpath=($fpath "/home/watzon/.zfunctions")
 
-cls
-neofetch
+# Set Spaceship ZSH as a prompt
+autoload -U promptinit; promptinit
+prompt spaceship

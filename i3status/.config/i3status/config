@@ -1,0 +1,28 @@
+icons = "awesome"
+
+[theme]
+name = "modern"
+
+[theme.overrides]
+separator = ""
+
+idle_bg = "#100e23"
+idle_fg = "#efefef"
+
+info_bg = "#65b2ff"
+info_fg = "#efefef"
+
+good_bg = "#95ffa4"
+good_fg = "#222222"
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "networkmanager"
+
+[[block]]
+block = "time"
+interval = 60
+format = "%a %d/%m %R"
+
