@@ -30,6 +30,11 @@ set complete-=i
 "Turn on smart tabs
 set smarttab
 
+"Set some default tab options 
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
 "Make sure neovim has a decent timeout
 if !has('nvim') && &ttimeoutlen == -1
   set ttimeout

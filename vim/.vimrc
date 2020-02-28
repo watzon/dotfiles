@@ -1,5 +1,5 @@
 "Source the default vimrc. It gives some nice defaults.
-source /etc/vimrc
+"source $XDG_CONFIG_HOME/nvim/init.vim 
 
 "Source custom config files from ~/.vim/config
 for f in glob('~/.vim/config/*.vim', 0, 1)

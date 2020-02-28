@@ -8,7 +8,7 @@ export ZSH="/home/watzon/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="spaceship"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -205,6 +205,7 @@ alias cls='printf "\033c" && clear'
 alias todo="todo.sh"
 
 alias vim="nvim"
+alias vmore="$HOME/.local/scripts/vmore.sh"
 
 lg()
 {
@@ -218,32 +219,11 @@ lg()
     fi
 }
 
-# GUIX stuff
-# Arrange so that ~/.config/guix/current paths end up first in
-# the particular path list.
-for profile in "$HOME/.guix-profile" "$HOME/.config/guix/current"
-do
-  if [ -f "$profile/etc/profile" ]
-  then
-    # Load the user profile's settings.
-    GUIX_PROFILE="$profile" ; \
-    . "$profile/etc/profile"
-  else
-    # At least define this one so that basic things just work
-    # when the user installs their first package.
-    export PATH="$profile/bin${PATH:+:$PATH}"
-    export INFOPATH="$profile/share/info${INFOPATH:+:$INFOPATH}"
-  fi
-done
-unset profile
-
-export GUIX_LOCPATH=$HOME/.guix-profile/lib/locale
-
 source $HOME/.zshenv
 source $HOME/.asdf/asdf.sh
 source $HOME/.asdf/completions/asdf.bash
-source ~/.zprofile
 
+compdef vman="man"
 autoload -Uz compinit
 compinit
 
@@ -252,6 +232,3 @@ kitty + complete setup zsh | source /dev/stdin
 
 fpath=($fpath "/home/watzon/.zfunctions")
 
-# Set Spaceship ZSH as a prompt
-autoload -U promptinit; promptinit
-prompt spaceship

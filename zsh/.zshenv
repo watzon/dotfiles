@@ -8,3 +8,6 @@ export PATH=$PATH:"$HOME/.local/scripts"
 export PATH=$PATH:"$HOME/.local/bin"
 export PATH=$PATH:"$HOME/.cargo/bin"
 export PATH=$PATH:"$HOME/.pub-cache/bin"
+export PATH="$PATH:$HOME/.vim/plugged/vim-superman/bin"
+
+export LIBRARY_PATH=".:$HOME/Libraries:/usr/local/lib"

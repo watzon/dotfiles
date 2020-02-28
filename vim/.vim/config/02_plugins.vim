@@ -21,8 +21,14 @@ endfunction
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
 
+"https://github.com/jez/vim-superman
+Plug 'jez/vim-superman'
+
 "https://github.com/challenger-deep-theme/vim
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+
+"https://github.com/chriskempson/base16-vim
+Plug 'chriskempson/base16-vim'
 
 "https://github.com/itchyny/lightline.vim
 Plug 'itchyny/lightline.vim'
@@ -47,6 +53,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 "https://github.com/vim-syntastic/syntastic
 Plug 'vim-syntastic/syntastic'
+
+"https://github.com/justinmk/vim-sneak
+Plug 'justinmk/vim-sneak'
 
 "https://github.com/tpope/vim-surround
 Plug 'tpope/vim-surround'
@@ -78,6 +87,9 @@ Plug 'mattn/emmet-vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Programming Languages
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"https://github.com/ziglang/zig.vim
+Plug 'ziglang/zig.vim'
 
 "https://github.com/rhysd/vim-crystal
 Plug 'rhysd/vim-crystal'

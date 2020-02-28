@@ -4,10 +4,6 @@
 "Use of this source code is governed by an MIT license
 "that can be found in the LICENSE file.
 
-"Close and save buffer instead of editor
-:cnoreabbrev wq w<bar>bd
-:cnoreabbrev q bd
-
 "Cycle through buffers
 :nnoremap <Tab> :bnext<CR>
 :nnoremap <S-Tab> :bprevious<CR>

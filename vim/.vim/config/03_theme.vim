@@ -5,7 +5,7 @@
 "that can be found in the LICENSE file.
 
 "Set the theme to challenger_deep
-colorscheme challenger_deep
+colorscheme base16-gruvbox-dark-hard
 
 "Set the lightline theme to challenger_deep
 let g:lightline = { 'colorscheme': 'challenger_deep'}
