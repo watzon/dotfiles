@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# fake slock to make xflock to use lightdm locker
+
+DMTOOL_AVAILABLE="$(which dm-tool)"
+
+if [ -n $DMTOOL_AVAILABLE ] ; then
+    dm-tool lock
+fi

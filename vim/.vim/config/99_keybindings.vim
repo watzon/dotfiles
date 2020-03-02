@@ -36,3 +36,11 @@ map <C-n> :NERDTreeToggle<CR>
 "NERDCommenter
 nmap <C-_>   <Plug>NERDCommenterToggle
 vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
+
+"AnyJump
+nnoremap <leader>j :AnyJump<CR>
+nnoremap <leader>ab :AnyJumpBack<CR>
+nnoremap <leader>al :AnyJumpLastResults<CR>
+
+"Tagbar
+nnoremap <leader>k :TagbarToggle<CR>

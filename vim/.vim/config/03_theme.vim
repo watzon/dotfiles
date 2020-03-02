@@ -7,8 +7,8 @@
 "Set the theme to challenger_deep
 colorscheme base16-gruvbox-dark-hard
 
-"Set the lightline theme to challenger_deep
-let g:lightline = { 'colorscheme': 'challenger_deep'}
+"Set the airline (status line) theme
+let g:airline_theme='base16_gruvbox_dark_hard'
 
 "Turn off mode indicator in status line
 set noshowmode

@@ -5,7 +5,7 @@
 "that can be found in the LICENSE file.
 
 "Synchronize the unnamed register with the system clipboard.
-set clipboard^=unnamed
+set clipboard+=unnamedplus
 
 "Important for syntax highlighting
 if has('autocmd')
@@ -16,6 +16,9 @@ endif
 if has('syntax') && !exists('g:syntax_on')
   syntax enable
 endif
+
+"Turn mouse support on
+set mouse=a
 
 "Keep indentation going
 set autoindent

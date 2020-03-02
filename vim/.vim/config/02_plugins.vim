@@ -21,17 +21,30 @@ endfunction
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
 
+"https://github.com/farmergreg/vim-lastplace
+Plug 'farmergreg/vim-lastplace'
+
+"https://github.com/pechorin/any-jump.nvim
+"Requires ripgrep or ag be installed.
+Plug 'pechorin/any-jump.nvim'
+
+"https://github.com/craigemery/vim-autotag
+Plug 'craigemery/vim-autotag'
+
+"https://github.com/majutsushi/tagbar
+Plug 'majutsushi/tagbar'
+
 "https://github.com/jez/vim-superman
 Plug 'jez/vim-superman'
-
-"https://github.com/challenger-deep-theme/vim
-Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 
 "https://github.com/chriskempson/base16-vim
 Plug 'chriskempson/base16-vim'
 
-"https://github.com/itchyny/lightline.vim
-Plug 'itchyny/lightline.vim'
+"https://github.com/vim-airline/vim-airline
+Plug 'vim-airline/vim-airline'
+
+"https://github.com/vim-airline/vim-airline-themes
+Plug 'vim-airline/vim-airline-themes'
 
 "https://github.com/antoyo/vim-licenses
 Plug 'antoyo/vim-licenses'

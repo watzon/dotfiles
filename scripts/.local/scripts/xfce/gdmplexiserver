@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# fake gdmplexiserver to make xflock to use lightdm locker
+# for user switching
+
+DMTOOL_AVAILABLE="$(which dm-tool)"
+
+if [ -n $DMTOOL_AVAILABLE ] ; then
+    dm-tool switch-to-greeter
+fi

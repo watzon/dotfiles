@@ -80,14 +80,9 @@ else
            ;;
 
        *)
-           error=true
-           ;;
+           echo "Error: unknown option ${1}."
+           exit 1
     esac
-
-    if [ "$error" == true ]; then
-        echo "Error: unknown option ${1}."
-        exit 1
-    fi
 
     eval "$cmd"
 fi
