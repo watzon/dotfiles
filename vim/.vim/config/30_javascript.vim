@@ -10,6 +10,9 @@ let g:javascript_plugin_jsdoc = 1
 "Enable syntax highlighing for Flow.
 let g:javascript_plugin_flow = 1
 
+"Disable hiding quotes in JSON files
+let g:vim_json_syntax_conceal = 0
+
 "Clean things up by hiding certain keywords behind a glyph.
 set conceallevel=1
 

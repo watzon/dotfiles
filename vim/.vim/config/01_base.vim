@@ -7,6 +7,9 @@
 "Synchronize the unnamed register with the system clipboard.
 set clipboard+=unnamedplus
 
+"Allow modifying file specific settings in ~/.vim/ftplugin
+filetype plugin indent on
+
 "Important for syntax highlighting
 if has('autocmd')
   filetype plugin indent on

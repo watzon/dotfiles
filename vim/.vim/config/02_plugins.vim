@@ -24,6 +24,9 @@ call plug#begin('~/.vim/plugged')
 "https://github.com/farmergreg/vim-lastplace
 Plug 'farmergreg/vim-lastplace'
 
+"https://github.com/brooth/far.vim
+Plug 'brooth/far.vim'
+
 "https://github.com/pechorin/any-jump.nvim
 "Requires ripgrep or ag be installed.
 Plug 'pechorin/any-jump.nvim'
@@ -49,11 +52,15 @@ Plug 'vim-airline/vim-airline-themes'
 "https://github.com/antoyo/vim-licenses
 Plug 'antoyo/vim-licenses'
 
-"https://github.com/ctrlpvim/ctrlp.vim
-Plug 'ctrlpvim/ctrlp.vim'
+"https://github.com/junegunn/fzf
+Plug 'junegunn/fzf'
 
 "https://github.com/preservim/nerdtree
 Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+"https://github.com/godlygeek/tabular
+Plug 'godlygeek/tabular'
 
 "https://github.com/ryanoasis/vim-devicons
 Plug 'ryanoasis/vim-devicons'
@@ -63,6 +70,12 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 "https://github.com/neoclide/coc.nvim
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+"https://github.com/ycm-core/YouCompleteMe
+" Plug 'ycm-core/YouCompleteMe'
+
+"https://github.com/yggdroot/indentline
+Plug 'yggdroot/indentline'
 
 "https://github.com/vim-syntastic/syntastic
 Plug 'vim-syntastic/syntastic'
@@ -92,7 +105,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 
 "https://github.com/ervandew/supertab
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 
 "https://github.com/mattn/emmet-vim
 Plug 'mattn/emmet-vim'
@@ -100,6 +113,12 @@ Plug 'mattn/emmet-vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Programming Languages
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"https://github.com/bfrg/vim-cpp-modern
+Plug 'bfrg/vim-cpp-modern'
+
+"https://github.com/zah/nim.vim
+Plug 'zah/nim.vim'
 
 "https://github.com/ziglang/zig.vim
 Plug 'ziglang/zig.vim'
@@ -109,19 +128,17 @@ Plug 'rhysd/vim-crystal'
 
 "https://vimawesome.com/plugin/python-mode
 Plug 'klen/python-mode'
-Plug 'neoclide/coc-python'
 
 "https://github.com/pangloss/vim-javascript
 Plug 'pangloss/vim-javascript'
+Plug 'elzr/vim-json'
 Plug 'Quramy/tsuquyomi'
-Plug 'neoclide/coc-tsserver'
 
 "https://github.com/moll/vim-node
 Plug 'moll/vim-node'
 
 "https://github.com/vim-ruby/vim-ruby
 Plug 'vim-ruby/vim-ruby'
-Plug 'neoclide/coc-solargraph'
 
 "https://github.com/tpope/vim-rails
 Plug 'tpope/vim-rails'

@@ -70,7 +70,7 @@ else
     case ${1} in
        -f)
            screen_size=$(xdpyinfo  | grep 'dimensions:' | awk 'match($0, /[0-9]{3,4}x[0-9]{3,4}/) { print substr( $0, RSTART, RLENGTH ) }')
-           cmd="$cmd -video_size $screen_size -framerate 24 -f mp4 -f x11grab -i :0.0+0,0 $file_path"
+           cmd="$cmd -video_size $screen_size -f x11grab -i :0.0+0,0 -an -c:v libx264 -crf 26 -pix_fmt yuv420p $file_path"
            eval "$cmd"
            exit 0
            ;;
@@ -81,7 +81,7 @@ else
            height=$(echo -e "$region" | gawk 'match($0, /([0-9]+)x([0-9]+);([0-9]+)x([0-9]+)/, arr) { print arr[2]}')
            pos_x=$(echo -e "$region" | gawk 'match($0, /([0-9]+)x([0-9]+);([0-9]+)x([0-9]+)/, arr) { print arr[3]}')
            pos_y=$(echo -e "$region" | gawk 'match($0, /([0-9]+)x([0-9]+);([0-9]+)x([0-9]+)/, arr) { print arr[4]}')
-           cmd="$cmd -video_size ${width}x${height} -framerate 24 -f mp4 -f x11grab -i :0.0+$pos_x,$pos_y  $file_path"
+           cmd="$cmd -video_size ${width}x${height} -f x11grab -i :0.0+$pos_x,$pos_y -an -c:v libx264 -crf 26 -pix_fmt yuv420p $file_path"
            eval "$cmd"
            exit 0
            ;;

@@ -13,5 +13,15 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-"Language specific
+"JavaScript
 let g:syntastic_javascript_checkers = ['eslint']
+
+"C++
+let g:syntastic_cpp_check_header = 1
+let g:syntastic_cpp_checkers = ["clang_check", "gcc", "cppcheck"]
+let g:syntastic_cpp_compiler = "clang"
+let g:syntastic_cpp_compiler_options = "-Wall -Wextra -Werror -pthread "
+let g:syntastic_cpp_compiler_options += "-std=c++2a -I. -g -fPIC fsanitize=address "
+let g:syntastic_cpp_clang_check_args = "-Wall -Wextra -Werror -pthread "
+let g:syntastic_cpp_clang_check_args += "-std=c++2a -I. -g -fPIC fsanitize=address "
+
