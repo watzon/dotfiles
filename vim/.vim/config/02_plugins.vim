@@ -110,9 +110,26 @@ Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 "https://github.com/mattn/emmet-vim
 Plug 'mattn/emmet-vim'
 
+"https://github.com/aquach/vim-http-client
+Plug 'aquach/vim-http-client'
+
+"https://github.com/tpope/vim-scriptease
+Plug 'tpope/vim-scriptease'
+
+"https://github.com/google/vim-codefmt
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Programming Languages
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"https://github.com/reasonml-editor/vim-reason-plus
+Plug 'reasonml-editor/vim-reason-plus'
+
+"https://github.com/rust-lang/rust.vim
+Plug 'rust-lang/rust.vim'
 
 "https://github.com/bfrg/vim-cpp-modern
 Plug 'bfrg/vim-cpp-modern'
@@ -136,6 +153,7 @@ Plug 'Quramy/tsuquyomi'
 
 "https://github.com/moll/vim-node
 Plug 'moll/vim-node'
+Plug '~/.vim/development/vim-edge-template'
 
 "https://github.com/vim-ruby/vim-ruby
 Plug 'vim-ruby/vim-ruby'

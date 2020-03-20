@@ -19,8 +19,8 @@ set timeout timeoutlen=1000 ttimeoutlen=100
 inoremap <nowait> jj <Esc>
 
 "Duplicate a line with <C-d>
-imap <C-d> <Esc>YPji
-nmap <C-d> YPj
+imap <C-S-d> <Esc>YPji
+nmap <C-S-d> YPj
 
 "Move the current line up and down
 nnoremap <A-j> :m .+1<CR>==
@@ -54,6 +54,23 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+"Emmet
+let g:user_emmet_expandabbr_key = '<A-e>,'
+let g:user_emmet_expandword_key = '<A-e>;'
+let g:user_emmet_update_tag = '<A-e>u'
+let g:user_emmet_balancetaginward_key = '<A-e>d'
+let g:user_emmet_balancetagoutward_key = '<A-e>D'
+let g:user_emmet_next_key = '<A-e>n'
+let g:user_emmet_prev_key = '<A-e>N'
+let g:user_emmet_imagesize_key = '<A-e>i'
+let g:user_emmet_togglecomment_key = '<A-e>/'
+let g:user_emmet_splitjointag_key = '<A-e>j'
+let g:user_emmet_removetag_key = '<A-e>k'
+let g:user_emmet_anchorizeurl_key = '<A-e>a'
+let g:user_emmet_anchorizesummary_key = '<A-e>A'
+let g:user_emmet_mergelines_key = '<A-e>m'
+let g:user_emmet_codepretty_key = '<A-e>c'
 
 "FZF
 nmap <silent> <C-p> :FZF<CR>

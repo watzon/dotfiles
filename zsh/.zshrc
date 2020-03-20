@@ -68,7 +68,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git node zsh-autosuggestions ruby)
+plugins=(git node ruby)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -221,7 +221,6 @@ lg()
 
 source $HOME/.zshenv
 source $HOME/.asdf/asdf.sh
-source $HOME/.asdf/completions/asdf.bash
 
 compdef vman="man"
 autoload -Uz compinit

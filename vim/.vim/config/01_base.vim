@@ -124,10 +124,19 @@ if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
 
-"Turn relative number mode on
-set relativenumber
+"Turn hybrid number mode on
+set number relativenumber
 
 "NERDCommenter needs it
 filetype plugin on
+
+"Some folding settings
+set foldlevel=10
+set foldlevelstart=10
+set foldmethod=syntax
+
+"Enable project specific config files
+set exrc
+set secure
 
 "vim:set ft=vim et sw=2:
