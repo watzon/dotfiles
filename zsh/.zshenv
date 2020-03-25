@@ -15,3 +15,5 @@ export PATH=$PATH:"$HOME/.pub-cache/bin"
 export PATH="$PATH:$HOME/.vim/plugged/vim-superman/bin"
 
 export LIBRARY_PATH=".:$HOME/Libraries:/usr/local/lib:/usr/lib"
+
+export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/rust/src

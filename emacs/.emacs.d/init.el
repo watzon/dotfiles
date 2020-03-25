@@ -1,76 +1,49 @@
-;;; init.el --- Emacs init file
-;;  Author: Chris Watson
-;;; Commentary:
-;;  This is my personal Emacs configuration
-;;; Code:
-(defvar file-name-handler-alist-original file-name-handler-alist)
+;;; init.el --- Spacemacs Initialization File
+;;
+;; Copyright (c) 2012-2018 Sylvain Benner & Contributors
+;;
+;; Author: Sylvain Benner <sylvain.benner@gmail.com>
+;; URL: https://github.com/syl20bnr/spacemacs
+;;
+;; This file is not part of GNU Emacs.
+;;
+;;; License: GPLv3
 
-(setq gc-cons-threshold most-positive-fixnum
-      gc-cons-percentage 0.6
-      file-name-handler-alist nil
-      site-run-file nil)
+;; Without this comment emacs25 adds (package-initialize) here
+;; (package-initialize)
 
-(defvar watzon/gc-cons-threshold 20000000)
+;; Avoid garbage collection during startup.
+;; see `SPC h . dotspacemacs-gc-cons' for more info
+(defconst emacs-start-time (current-time))
+(setq gc-cons-threshold 402653184 gc-cons-percentage 0.6)
+(load (concat (file-name-directory load-file-name)
+              "core/core-versions.el")
+      nil (not init-file-debug))
+(load (concat (file-name-directory load-file-name)
+              "core/core-load-paths.el")
+      nil (not init-file-debug))
+(load (concat spacemacs-core-directory "core-dumper.el")
+      nil (not init-file-debug))
 
-(add-hook 'emacs-startup-hook ; hook run after loading init files
-          #'(lambda ()
-              (setq gc-cons-threshold watzon/gc-cons-threshold
-                    gc-cons-percentage 0.1
-                    file-name-handler-alist file-name-handler-alist-original)))
-
-(add-hook 'minibuffer-setup-hook #'(lambda ()
-                                     (setq gc-cons-threshold (* watzon/gc-cons-threshold 2))))
-(add-hook 'minibuffer-exit-hook #'(lambda ()
-                                    (garbage-collect)
-                                    (setq gc-cons-threshold watzon/gc-cons-threshold)))
-
-(require 'package)
-(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
-(setq package-enable-at-startup nil)
-(package-initialize)
-
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(eval-and-compile
-  (setq use-package-always-ensure t
-        use-package-expand-minimally t))
-
-;;; Settings without corresponding packages
-(use-package emacs
-  :preface
-  (defvar watzon/indent-width 2)
-  :config
-  (setq user-full-name "Chris Watson"
-        frame-title-format '("Emacs")
-        ring-bell-function 'ignore
-        default-directory "~/Projects"
-        frame-resize-pixelwise t
-        scroll-conservatively 10000
-        scroll-preserve-screen-position t
-        auto-window-vscroll nil
-        load-prefer-newer t)
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (tool-bar-mode -1)
-  (menu-bar-mode -1)
-  (setq-default line-spacing 3
-                indent-tabs-mode nil
-                tab-width watzon/indent-width))
-
-(require 'load-relative)
-
-;;; Custom functions
-(load-relative "./custom-functions.el")
-
-;;; Packages
-(load-relative "./packages.el")
-
-;;; Keyboard shortcuts
-(load-relative "./keyboard-shortcuts.el")
-
-(fset 'mm-decode-coding-region 'decode-coding-region)
-
-(provide 'init)
-;;; init.el ends here
+(if (not (version<= spacemacs-emacs-min-version emacs-version))
+    (error (concat "Your version of Emacs (%s) is too old. "
+                   "Spacemacs requires Emacs version %s or above.")
+           emacs-version spacemacs-emacs-min-version)
+  ;; Disable file-name-handlers for a speed boost during init
+  (let ((file-name-handler-alist nil))
+    (require 'core-spacemacs)
+    (spacemacs/dump-restore-load-path)
+    (configuration-layer/load-lock-file)
+    (spacemacs/init)
+    (configuration-layer/stable-elpa-init)
+    (configuration-layer/load)
+    (spacemacs-buffer/display-startup-note)
+    (spacemacs/setup-startup-hook)
+    (spacemacs/dump-eval-delayed-functions)
+    (when (and dotspacemacs-enable-server (not (spacemacs-is-dumping-p)))
+      (require 'server)
+      (when dotspacemacs-server-socket-dir
+        (setq server-socket-dir dotspacemacs-server-socket-dir))
+      (unless (server-running-p)
+        (message "Starting a server...")
+        (server-start)))))

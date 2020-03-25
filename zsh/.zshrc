@@ -207,6 +207,8 @@ alias todo="todo.sh"
 alias vim="nvim"
 alias vmore="$HOME/.local/scripts/vmore.sh"
 
+alias emacs="emacsclient -nc -s instance1"
+
 lg()
 {
     export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
