@@ -207,7 +207,9 @@ alias todo="todo.sh"
 alias vim="nvim"
 alias vmore="$HOME/.local/scripts/vmore.sh"
 
-alias emacs="emacsclient -nc -s instance1"
+alias box="nsbox-edge"
+
+# alias emacs="emacsclient -nc -s instance1"
 
 lg()
 {
@@ -229,7 +231,17 @@ autoload -Uz compinit
 compinit
 
 # Completion for kitty
-kitty + complete setup zsh | source /dev/stdin
+# kitty + complete setup zsh | source /dev/stdin
 
 fpath=($fpath "/home/watzon/.zfunctions")
 
+source <(navi widget zsh)
+
+# Set Spaceship ZSH as a prompt
+autoload -U promptinit; promptinit
+prompt spaceship
+
+# opam configuration
+test -r /var/home/watzon/.opam/opam-init/init.zsh && . /var/home/watzon/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

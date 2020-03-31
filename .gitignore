@@ -12,4 +12,4 @@
 
 /weechat/.weechat/logs/*
 
-/vim/.vim/plugged/
+/nvim/.config/nvim/plugins
