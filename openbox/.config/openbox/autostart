@@ -1,0 +1,11 @@
+# required for xfce settings to work
+xfsettingsd &
+
+# Start the volume control daemon
+xfce4-volumed-pulse
+
+# start the panel
+tint2 &
+
+# load wallpaper
+nitrogen --restore &

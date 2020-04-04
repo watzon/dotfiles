@@ -9,7 +9,7 @@ font = Roboto Mono 12
 format = "%s\n%b"
 geometry = "300x10-25+62"
 horizontal_padding = 8
-icon_folders = /usr/share/icons/Papirus-Dark/16x16;/usr/share/icons/Papirus-Dark/48x48
+icon_folders = /usr/share/icons/ArchLabs-Dark/16x16;/usr/share/icons/ArchLabs-Dark/48x48
 icon_position = right
 idle_threshold = 120
 ignore_newline = no
@@ -38,19 +38,19 @@ context = ctrl+shift+period
 history = ctrl+grave
 
 [urgency_critical]
-background = "#2e3440"
-foreground = "#d8dee9"
+background = "#1b192c"
+foreground = "#c2b495"
 timeout = 0
 
 [urgency_low]
-background = "#2e3440"
-foreground = "#d8dee9"
-timeout = 11
+background = "#1b192c"
+foreground = "#c2b495"
+timeout = 15
 
 [urgency_normal]
-background = "#2e3440"
-foreground = "#d8dee9"
-timeout = 11
+background = "#1b192c"
+foreground = "#c2b495"
+timeout = 15
 
 [AN2Linux]
 appname = AN2Linux

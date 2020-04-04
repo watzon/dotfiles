@@ -8,7 +8,7 @@ export ZSH="/home/watzon/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="spaceship"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -237,11 +237,13 @@ fpath=($fpath "/home/watzon/.zfunctions")
 
 source <(navi widget zsh)
 
-# Set Spaceship ZSH as a prompt
-autoload -U promptinit; promptinit
-prompt spaceship
-
 # opam configuration
 test -r /var/home/watzon/.opam/opam-init/init.zsh && . /var/home/watzon/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# Completion for pipenv
+eval "$(pipenv --completion)"
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

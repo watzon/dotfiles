@@ -30,7 +30,8 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(html
+   '(csv
+     html
      ruby
      yaml
      ;; ----------------------------------------------------------------
@@ -38,8 +39,15 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     (auto-completion
+      :variables
+      auto-completion-enable-snippets-in-popup t
+      auto-completion-enable-help-tooltip t
+      auto-completion-enable-sort-by-usage t
+      auto-completion-complete-with-key-sequence (kbd "jk")
+      auto-completion-complete-with-key-sequence-delay 0.2)
+
      helm
-     auto-completion
      better-defaults
      emacs-lisp
      git
@@ -51,7 +59,10 @@ values."
      ;; spell-checking
      syntax-checking
      version-control
-     treemacs
+
+     (treemacs
+      :variables
+      treemacs-width 25)
 
      themes-megapack
 
@@ -71,7 +82,10 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(drag-stuff)
+   dotspacemacs-additional-packages '(
+     drag-stuff
+     pipenv
+   )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -327,6 +341,10 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  ;; Allow follow symlinks
+  (setq vc-follow-symlinks t)
+
+  ;; Enable and configure drag-stuff-mode
   (drag-stuff-mode t)
   (global-set-key (kbd "<M-up>")    'drag-stuff-up)
   (global-set-key (kbd "<M-down>")  'drag-stuff-down)
@@ -339,6 +357,13 @@ you should place your code here."
       (modify-syntax-entry ?_ "w" table)
       (with-syntax-table table
         ad-do-it)))
+
+  (add-hook 'python-mode-hook 'pipenv-mode)
+  (spacemacs|use-package-add-hook pipenv
+   :post-init
+   (setq
+    pipenv-projectile-after-switch-function
+    #'pipenv-projectile-after-switch-extended))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
