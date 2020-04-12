@@ -68,7 +68,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git node ruby)
+plugins=(node ruby)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -235,8 +235,6 @@ compinit
 
 fpath=($fpath "/home/watzon/.zfunctions")
 
-source <(navi widget zsh)
-
 # opam configuration
 test -r /var/home/watzon/.opam/opam-init/init.zsh && . /var/home/watzon/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
@@ -244,6 +242,5 @@ test -r /var/home/watzon/.opam/opam-init/init.zsh && . /var/home/watzon/.opam/op
 eval "$(pipenv --completion)"
 
 eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
