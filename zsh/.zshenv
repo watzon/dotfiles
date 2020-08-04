@@ -9,19 +9,21 @@ export N_PREFIX="$HOME/.n"
 
 export DENO_INSTALL="/home/watzon/.deno"
 
-export PATH="$DENO_INSTALL/bin:$PATH"
-export PATH="$HOME/.npm-global/bin":$PATH
+export PATH=$PATH:"$HOME/.asdf/shims"
+export PATH=$PATH:"$HOME/.pub-cache/bin"
+export PATH=$PATH:"$HOME/.pyenv/shims"
+export PATH=$PATH:"$N_PREFIX/bin"
+export PATH=$PATH:"$DENO_INSTALL/bin"
+export PATH=$PATH:"$HOME/.npm-global/bin"
 export PATH=$PATH:"$GOPATH/bin"
 export PATH=$PATH:"$HOME/.nimble/bin"
-export PATH="$HOME/.nimble/bin:$PATH"
+export PATH=$PATH:"$HOME/.nimble/bin"
 export PATH=$PATH:"$HOME/.local/scripts"
 export PATH=$PATH:"$HOME/.local/bin"
 export PATH=$PATH:"$HOME/.cargo/bin"
 export PATH=$PATH:"$HOME/.pub-cache/bin"
 export PATH=$PATH:"$HOME/.vim/plugged/vim-superman/bin"
 export PATH=$PATH:"$HOME/.asdf/installs/rust/nightly/bin"
-export PATH=$PATH:"$N_PREFIX/bin"
-export PATH="$HOME/.pyenv/shims":$PATH
 
 export NODE="$HOME/.n/bin/node"
 
