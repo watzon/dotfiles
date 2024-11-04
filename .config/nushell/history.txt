@@ -65,3 +65,15 @@ git config --global init.defaultBranch main
 mv ~/.gitconfig dotfiles/
 cd dotfiles/
 stow .
+git commit -am "add git config"
+cursor .
+git yolo
+cmd='git add -A && git commit -am "`curl -sL http://whatthecommit.com/index.txt`" && git push -f origin main'<\n>git config --$flag alias.yolo \!"$cmd"
+let cmd='git add -A && git commit -am "`curl -sL http://whatthecommit.com/index.txt`" && git push -f origin main'<\n>git config --$flag alias.yolo \!"$cmd"
+let cmd = 'git add -A && git commit -am "`curl -sL http://whatthecommit.com/index.txt`" && git push -f origin main'<\n>git config --$flag alias.yolo \!"$cmd"
+let cmd = 'git add -A && git commit -am "`curl -sL http://whatthecommit.com/index.txt`" && git push -f origin main'<\n>git config --global alias.yolo \!"$cmd"
+let $cmd = 'git add -A && git commit -am "`curl -sL http://whatthecommit.com/index.txt`" && git push -f origin main'<\n>git config --global alias.yolo \!"$cmd"
+curl -L https://raw.githubusercontent.com/atongen/yolo/main/install.sh | sudo bash
+curl -L https://raw.githubusercontent.com/atongen/yolo/main/install.sh | bash
+cls
+clear
