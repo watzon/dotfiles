@@ -77,3 +77,39 @@ curl -L https://raw.githubusercontent.com/atongen/yolo/main/install.sh | sudo ba
 curl -L https://raw.githubusercontent.com/atongen/yolo/main/install.sh | bash
 cls
 clear
+git yolo
+cls
+yay -S thefuck 
+fuck --help
+yay -S chaotic-aur/64gram-desktop-bin
+sudo pacman -Sy
+yay -S chaotic-aur/64gram-desktop
+cls
+yay -S discord 
+yay -S zen-browser-private-window-launcher 
+curl -fsSL https://bun.sh/install | bash
+yay -S betterdiscord-git 
+ls ~/.config/
+ls ~/.config/ | sort-by name
+betterdiscordctl
+yay -S betterdiscord-ctl
+yay -S betterdiscordctl
+betterdiscordctl -D /opt/BetterDiscord install
+mv ~/Downloads/*.js .
+cd ~/dotfiles/
+mv ~/.config/BetterDiscord/ .config
+stow .
+ls -la
+wget https://github.com/shvedes/discord-gruvbox/raw/refs/heads/main/gruvbox.theme.css
+cd ~/Downloads
+git clone https://github.com/indev29/telegram-gruvbox.git
+cd telegram-gruvbox/
+ls
+zip gruvbox.tdesktop-theme background.png colors.tdesktop-theme
+eza
+eza --json
+eza --long
+eza --icons --tree
+yay -s pulse
+cd dotfiles
+stow -D

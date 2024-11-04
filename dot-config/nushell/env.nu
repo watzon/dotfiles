@@ -30,12 +30,15 @@ $env.NU_PLUGIN_DIRS = [
     ($nu.default-config-dir | path join 'plugins') # add <nushell-config-dir>/plugins
 ]
 
+$env.BUN_INSTALL = ($env.HOME | path join .bun)
+
 $env.PATH = (
   $env.PATH
   | split row (char esep)
   | append /usr/local/bin
   # | append ($env.CARGO_HOME | path join bin)
   | append ($env.HOME | path join .local bin)
+  | append ($env.BUN_INSTALL | path join bin)
   | uniq # filter so the paths are unique
 )
 

@@ -24,6 +24,10 @@ $env.config = {
     keybindings: (get_keybindings)
 } | merge (get_plugin_config)
 
+# Source extras
+source ~/.config/nushell/config-files/aliases.nu
+source ~/.config/nushell/config-files/functions.nu
+
 # Load carapace to handle some completions
 source ~/.cache/carapace/init.nu
 
