@@ -1,0 +1,67 @@
+cd dotfiles/.config/nushell/
+vim
+ls ~/.config/nvim/
+yay -S ttf-jetbrains-mono-nerf
+yay -S ttf-jetbrains-mono-nerd
+yay -S carapace-bin
+nvim env.nu
+nvim config.nu
+cls
+clear
+yay -S treesitter ripgrep lazygit bottom python3 nodejs
+yay -S starship
+cd ~/.config/nushell
+ls
+vim env.nu
+vim config.nu 
+starship preset gruvbox-rainbow -o ~/.config/starship.toml
+mv ~/.config/starship.toml dotfiles/
+cd dotfiles/
+stow .
+mv starship.toml .config
+stow .
+rm ~/starship.toml
+fastfetch
+yya -S eza
+yay -S eza
+yay -S golang
+yay -S go
+yay -S gdu
+gdu
+cd ~/dotfiles/.config/nvim/lua/
+ls
+vim
+nvim
+cd ~/.config/nushell
+nvim
+cd ~/dotfiles/
+nvim .config/nvim/lua/plugins/user.lua 
+cd .config/nushell/
+nvim
+curl -fsSL https://raw.githubusercontent.com/watzon/cursor-linux-installer/main/install.sh | bash
+cursor .
+vim
+which cursor
+cursor
+which cursor
+cat ~/.config/nushell 
+cat ~/.config/nushell/env.nu 
+ls -la ~/.config/nushell/
+nvim
+cd dotfiles/.config/nushell/
+nvim
+cd dotfiles
+cursor .
+cd dotfiles/
+cd .config/nushell/
+cursor .
+cd dotfiles/
+git status
+git add --all
+git commit -am "split nushell config"
+ls
+git submodule add https://github.com/nushell/nu_scripts .config/nushell/nu_scripts
+git config --global init.defaultBranch main
+mv ~/.gitconfig dotfiles/
+cd dotfiles/
+stow .
