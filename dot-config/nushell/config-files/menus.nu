@@ -20,6 +20,5 @@ export def get_menus [] {
                 selected_match_text: { attr: ur }
             }
         }
-        # ... rest of menu configurations
     ]
 } 
