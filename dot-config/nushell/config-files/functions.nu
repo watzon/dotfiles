@@ -13,13 +13,10 @@ def --env y [...args] {
 def install_plugin [plugin_name: string, git_repository_url?: string, git_tag?: string] {
     mut cargo_install_flags = {}
 
-    # Git repository URL defaults to Nushell repository.
     if ($git_repository_url != null) {
         $cargo_install_flags = ($cargo_install_flags | insert "--git" $git_repository_url)
     }
 
-    # If the repository URL is the Nushell repository, the tag defaults to
-    # the current Nushell version.
     if $git_tag != null and $git_tag != "" {
         $cargo_install_flags = ($cargo_install_flags | insert "--tag" $git_tag)
     }
@@ -33,6 +30,7 @@ def install_plugin [plugin_name: string, git_repository_url?: string, git_tag?: 
     if (sys host | get name) == "Windows" {
         $plugin_path += ".exe"
     }
+    
     nu -c $"plugin add ($plugin_path)"
 }
 
@@ -54,25 +52,25 @@ def install_plugin [plugin_name: string, git_repository_url?: string, git_tag?: 
 #   # Pipe string directly
 #   "print('hello')" | inkify -l python | save code.png
 def inkify [
-    --language (-l): string     # The language for syntax highlighting
-    --theme (-t): string       # The theme to use (defaults to Dracula)
-    --font (-f): string        # The font to use
-    --shadow-color (-s): string # The shadow color
-    --background (-b): string  # The background color
-    --tab-width (-w): int      # Tab width (defaults to 4)
-    --line-pad (-p): int       # Line padding (defaults to 2)
-    --line-offset (-o): int    # Line offset (defaults to 1)
-    --window-title: string     # Window title (defaults to "Inkify")
-    --no-line-number          # Hide line numbers
-    --no-round-corner         # Disable rounded corners
-    --no-window-controls      # Hide window controls
-    --shadow-blur-radius: int  # Shadow blur radius
-    --shadow-offset-x: int     # Shadow X offset
-    --shadow-offset-y: int     # Shadow Y offset
-    --pad-horiz: int          # Horizontal padding (defaults to 80)
-    --pad-vert: int           # Vertical padding (defaults to 100)
-    --highlight-lines: string  # Lines to highlight
-    --background-image: string # Background image URL
+    --language (-l): string        # The language for syntax highlighting
+    --theme (-t): string           # The theme to use (defaults to Dracula)
+    --font (-f): string            # The font to use
+    --shadow-color (-s): string    # The shadow color
+    --background (-b): string      # The background color
+    --tab-width (-w): int          # Tab width (defaults to 4)
+    --line-pad (-p): int           # Line padding (defaults to 2)
+    --line-offset (-o): int        # Line offset (defaults to 1)
+    --window-title: string         # Window title (defaults to "Inkify")
+    --no-line-number               # Hide line numbers
+    --no-round-corner              # Disable rounded corners
+    --no-window-controls           # Hide window controls
+    --shadow-blur-radius: int      # Shadow blur radius
+    --shadow-offset-x: int         # Shadow X offset
+    --shadow-offset-y: int         # Shadow Y offset
+    --pad-horiz: int               # Horizontal padding (defaults to 80)
+    --pad-vert: int                # Vertical padding (defaults to 100)
+    --highlight-lines: string      # Lines to highlight
+    --background-image: string     # Background image URL
 ] {
     # Build the query parameters
     mut params = [
