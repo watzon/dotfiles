@@ -39,7 +39,6 @@
 	"hyprland/workspaces#kanji",
 	"custom/separator#dot-line",
 	"idle_inhibitor",	
-	"custom/hint",	
 	], 
 
 "modules-right": [

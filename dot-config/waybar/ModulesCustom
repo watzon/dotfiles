@@ -33,7 +33,7 @@
 
 "custom/browser": {
 	"format": " ",
-	"on-click": "firefox",
+	"on-click": "zen-browser",
 	"tooltip": true,
 	"tooltip-format": "Launch Browser",
 },
