@@ -1,5 +1,18 @@
+[core]
+	editor = nvim
+
 [init]
 	defaultBranch = main
+
+[pull]
+	rebase = false
+
 [user]
-	name = Chris Watson
 	email = cawatson1993@gmail.com
+	name = Chris Watson
+
+[color]
+	ui = auto
+	
+[alias]
+	yolo = !git add -A && git commit -am \"`curl -sL http://whatthecommit.com/index.txt`\" && git push -f origin main
