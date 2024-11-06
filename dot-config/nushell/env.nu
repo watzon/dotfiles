@@ -30,6 +30,9 @@ $env.NU_PLUGIN_DIRS = [
     ($nu.default-config-dir | path join 'plugins') # add <nushell-config-dir>/plugins
 ]
 
+$env.EDITOR = "nvim"
+$env.SUDO_EDITOR = "nvim"
+
 $env.CARGO_HOME = ($env.HOME | path join .cargo)
 $env.BUN_INSTALL = ($env.HOME | path join .bun)
 
@@ -48,6 +51,8 @@ $env.PATH = (
   | append ($paths | where (path exists))
   | uniq # filter so the paths are unique
 )
+
+$env.DOCKER_HOST = $"unix://($env.XDG_RUNTIME_DIR)/docker.sock"
 
 $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
 mkdir ~/.cache/carapace

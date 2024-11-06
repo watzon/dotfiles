@@ -34,6 +34,21 @@ def install_plugin [plugin_name: string, git_repository_url?: string, git_tag?: 
     nu -c $"plugin add ($plugin_path)"
 }
 
+# Nice little weather visualizer using wttr.in
+def weather [location?: string] {
+    let loc = if ($location | is-not-empty) {
+        ($location | url encode)
+    } else {
+        "Salt Lake City"
+    }
+    http get https://wttr.in?$loc?un
+}
+
+# Get the moon phase
+def moon-phase [] {
+    http get https://wttr.in/moon
+}
+
 # Create beautiful code screenshots using inkify (https://inkify.0x45.st/)
 # 
 # Examples:
@@ -112,4 +127,144 @@ def inkify [
     
     # Make the request
     http get $url
+}
+
+# Extract an archive (based on the oh-my-zsh extract plugin)
+def extract [
+    file?: path                     # The archive file to extract (optional if piping)
+    --remove(-r)                    # Remove archive after extracting
+] {
+    # Get the file path either from parameter or pipeline
+    let archive = if ($file != null) { 
+        $file | path expand
+    } else if ($in != null) {
+        $in | path expand
+    } else {
+        error make {msg: "No file provided. Either pipe a file or provide it as an argument"}
+    }
+
+    # Ensure file exists
+    if not ($archive | path exists) {
+        error make {msg: $"File '($archive)' does not exist"}
+    }
+
+    # Create extraction directory based on archive name
+    let extract_dir = ($archive | path parse).stem
+    let extract_dir = if ($extract_dir | str ends-with ".tar") {
+        ($extract_dir | path parse).stem
+    } else { 
+        $extract_dir 
+    }
+
+    # Add random suffix if directory already exists
+    let extract_dir = if ($extract_dir | path exists) {
+        let rnd = (random chars -l 5)
+        $"($extract_dir)-($rnd)"
+    } else {
+        $extract_dir
+    }
+
+    # Create and enter extraction directory
+    mkdir $extract_dir
+    cd $extract_dir
+
+    # Extract based on file extension
+    let result = match ($archive | str downcase) {
+        $path if ($path | str ends-with ".tar.gz") or ($path | str ends-with ".tgz") => { tar xvzf $archive }
+        $path if ($path | str ends-with ".tar.bz2") or ($path | str ends-with ".tbz") or ($path | str ends-with ".tbz2") => { tar xvjf $archive }
+        $path if ($path | str ends-with ".tar.xz") or ($path | str ends-with ".txz") => { tar xvJf $archive }
+        $path if ($path | str ends-with ".tar.zst") or ($path | str ends-with ".tzst") => { tar --zstd -xvf $archive }
+        $path if ($path | str ends-with ".tar") => { tar xvf $archive }
+        $path if ($path | str ends-with ".gz") => { gunzip -c $archive | save -f ($archive | path parse).stem }
+        $path if ($path | str ends-with ".bz2") => { bunzip2 -k $archive }
+        $path if ($path | str ends-with ".xz") => { unxz -k $archive }
+        $path if ($path | str ends-with ".zip") => { unzip $archive }
+        $path if ($path | str ends-with ".rar") => { unrar x $archive }
+        $path if ($path | str ends-with ".7z") => { 7z x $archive }
+        $path if ($path | str ends-with ".zst") => { unzstd $archive }
+        _ => { error make {msg: $"Unknown archive format for '($archive)'"} }
+    }
+
+    # Go back to original directory
+    cd ..
+
+    # Remove archive if requested
+    if $remove {
+        rm -f $archive
+    }
+
+    # Try to simplify directory structure if possible
+    let contents = (ls $extract_dir | length)
+    if $contents == 1 {
+        let item = (ls $extract_dir).name.0
+        let item_path = $"($extract_dir)/($item)"
+        if ($item != $extract_dir) and (not ($item | path exists)) {
+            mv $item_path $item
+            rmdir $extract_dir
+        }
+    } else if $contents == 0 {
+        rmdir $extract_dir
+    }
+}
+
+# Create an archive from files
+def compress [
+    output: path                    # The output archive name (with extension)
+    ...files: path                  # Files to compress (or from pipeline)
+    --format(-f): string           # Override the format (ignore output extension)
+] {
+    # Get files from either parameters or pipeline
+    let input_files = if ($files | is-empty) and ($in != null) { 
+        $in
+    } else { 
+        $files 
+    }
+
+    # Determine compression format
+    let format = if $format != null {
+        $format
+    } else {
+        match ($output | str downcase) {
+            $path if ($path | str ends-with ".tar.gz") or ($path | str ends-with ".tgz") => "tar.gz"
+            $path if ($path | str ends-with ".tar.bz2") or ($path | str ends-with ".tbz2") => "tar.bz2"
+            $path if ($path | str ends-with ".tar.xz") => "tar.xz"
+            $path if ($path | str ends-with ".tar.zst") => "tar.zst"
+            $path if ($path | str ends-with ".tar") => "tar"
+            $path if ($path | str ends-with ".gz") => "gz"
+            $path if ($path | str ends-with ".bz2") => "bz2"
+            $path if ($path | str ends-with ".xz") => "xz"
+            $path if ($path | str ends-with ".zip") => "zip"
+            $path if ($path | str ends-with ".7z") => "7z"
+            $path if ($path | str ends-with ".zst") => "zst"
+            _ => { error make {msg: $"Unknown archive format for '($output)'"} }
+        }
+    }
+
+    # Compress based on format
+    match $format {
+        "tar.gz" => { tar czf $output ...$input_files }
+        "tar.bz2" => { tar cjf $output ...$input_files }
+        "tar.xz" => { tar cJf $output ...$input_files }
+        "tar.zst" => { tar --zstd -cf $output ...$input_files }
+        "tar" => { tar cf $output ...$input_files }
+        "gz" => { 
+            if ($input_files | length) > 1 { error make {msg: "Can only gzip a single file"} }
+            gzip -c $input_files.0 | save -f $output 
+        }
+        "bz2" => {
+            if ($input_files | length) > 1 { error make {msg: "Can only bzip2 a single file"} }
+            bzip2 -c $input_files.0 | save -f $output
+        }
+        "xz" => {
+            if ($input_files | length) > 1 { error make {msg: "Can only xz a single file"} }
+            xz -c $input_files.0 | save -f $output
+        }
+        "zip" => { ^zip $output ...$input_files }
+        "7z" => { 7z a $output ...$input_files }
+        "zst" => {
+            if ($input_files | length) > 1 { error make {msg: "Can only zstd a single file"} }
+            zstd -c $input_files.0 | save -f $output
+        }
+        _ => { error make {msg: $"Unknown compression format '($format)'"} }
+    }
 }
