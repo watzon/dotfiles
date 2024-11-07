@@ -1,3 +1,6 @@
+# Load modules
+use modules/git/mod.nu *
+
 # Load modular configuration files
 use config-files/themes.nu *
 use config-files/hooks.nu *
