@@ -268,3 +268,66 @@ def compress [
         _ => { error make {msg: $"Unknown compression format '($format)'"} }
     }
 }
+
+# Upload files or shorten URLs using 0x45.st
+# 
+# Examples:
+#   # Upload a file
+#   p69 path/to/file.png
+#   
+#   # Upload from stdin
+#   echo "hello world" | p69
+#   
+#   # Upload with custom extension
+#   echo "<h1>Hello</h1>" | p69 --ext html
+#   
+#   # Shorten a URL
+#   p69 --shorten "https://very.long.url/path"
+#   
+#   # Upload with expiration
+#   p69 file.txt --expires 24
+def p69 [
+    file?: path          # File to upload (optional if piping content)
+    --ext: string        # File extension for content from stdin
+    --secret             # Generate a harder to guess URL
+    --shorten: string    # URL to shorten instead of uploading
+    --expires: int       # Expiration time in hours or epoch milliseconds
+    --url: string        # Remote URL to upload
+] {
+    let base_url = "https://0x45.st"
+    
+    # Prepare form data
+    mut form = {}
+    
+    if $shorten != null {
+        # Handle URL shortening
+        $form = ($form | insert shorten $shorten)
+    } else if $url != null {
+        # Handle remote URL upload
+        $form = ($form | insert url $url)
+    } else {
+        # Handle file or stdin upload
+        if $secret {
+            $form = ($form | insert secret "")
+        }
+        
+        if $expires != null {
+            $form = ($form | insert expires $expires)
+        }
+        
+        if $file != null {
+            # Upload local file
+            $form = ($form | insert file (open -r $file))
+        } else if ($in != null) {
+            # Upload from stdin
+            if $ext != null {
+                $form = ($form | insert ext $ext)
+            }
+            $form = ($form | insert file $in)
+        } else {
+            error make {msg: "No input provided. Either provide a file path or pipe content."}
+        }
+    }
+    
+    http post --content-type multipart/form-data $base_url $form
+}
