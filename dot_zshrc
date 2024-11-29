@@ -91,7 +91,7 @@ SUDOEDITOR="nvim"
 # PATH
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.npm_global/bin:$PATH"
+export PATH="$HOME/.npm-global/bin:$PATH"
 
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
