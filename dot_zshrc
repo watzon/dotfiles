@@ -85,8 +85,11 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 
 # Environment
-EDITOR="nvim"
-SUDOEDITOR="nvim"
+export EDITOR="nvim"
+export SUDOEDITOR="nvim"
+
+# Rootless Docker
+export DOCKER_HOST=unix:///run/user/1000/docker.sock
 
 # PATH
 export PATH="$HOME/.local/bin:$PATH"
