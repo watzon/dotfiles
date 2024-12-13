@@ -3,6 +3,7 @@ local user = vim.env.USER or "User"
 ---@type LazySpec
 return {
   "Shatur/neovim-ayu",
+  "watzon/obsidian-slab.nvim",
 
   {
     "watzon/goshot.nvim",
