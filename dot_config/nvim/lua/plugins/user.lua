@@ -60,6 +60,12 @@ return {
               },
             })
           end,
+          ollama = function()
+            return require("codecompanion.adapters").extend("ollama", {
+              name = "ollama",
+              env = {},
+            })
+          end,
         },
         strategies = {
           chat = {
