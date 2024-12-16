@@ -1,0 +1,4 @@
+[[cable_channel]]
+name = "dotfiles"
+source_command = 'fd -t f . $HOME/.local/share/chezmoi/'
+preview_command = 'bat -n --color=always {0}'

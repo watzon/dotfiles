@@ -1,0 +1,4 @@
+[[cable_channel]]
+name = "zshhistory"
+source_command = "fc -ln 1"
+preview_command = "echo '{0}' | pygmentize -l zsh -f terminal256"
